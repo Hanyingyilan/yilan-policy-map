@@ -300,7 +300,20 @@ html.xl .ov{--ps:1.4}
 .fzcat{display:inline-block;margin-top:2px;background:var(--cc);color:var(--ink);border-radius:10px;padding:0 10px;font-size:calc(12.5px*var(--ps,1));font-weight:900}
 .fzc h3{margin:8px 0 6px;font-size:calc(24px*var(--ps,1));line-height:1.25}
 .fzc p{margin:0;font-size:calc(15px*var(--ps,1));line-height:1.55}
-.fzst{position:absolute;right:12px;bottom:10px;border:3px solid #C8372D;color:#C8372D;border-radius:8px;padding:0 8px;font-weight:900;transform:rotate(-7deg);font-size:calc(15px*var(--ps,1));opacity:.9;background:rgba(255,244,214,.6)}
+.fzc{padding:16px 18px 14px}
+.fzgr{display:inline-block;background:#C8372D;color:#FFF4D6;border-radius:14px;padding:0 12px;margin-right:10px;font-size:calc(15px*var(--ps,1));letter-spacing:.08em;vertical-align:middle}
+.fzpoem{writing-mode:vertical-rl;text-orientation:upright;width:max-content;margin:12px auto 8px;padding:12px 18px;border:2px solid #3A1A10;border-radius:6px;background:rgba(255,255,255,.4);font-family:"Songti TC","Noto Serif TC","STSong","PMingLiU",serif;font-weight:900;font-size:min(calc(23px*var(--ps,1)),6.4vw);line-height:1.5;letter-spacing:.04em;color:#3A1A10}
+.fzpoem span{display:block}
+.fzpoem span+span{border-right:1px solid rgba(138,90,64,.45);padding-right:.3em;margin-right:.3em}
+.fzjie{border-top:1px dashed #C9A27F;margin-top:6px;padding-top:6px}
+.fznote{margin-top:8px;font-size:calc(11.5px*var(--ps,1));color:#8A5A40;text-align:center}
+.blh{margin:0 38px 4px 0;font-size:calc(20px*var(--ps,1));color:var(--lime)}
+.blf{display:block;margin-top:12px;font-weight:900;font-size:calc(14px*var(--ps,1));color:var(--txt)}
+.blf input{display:block;width:100%;margin-top:6px;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:10px;padding:9px 12px;font-size:calc(17px*var(--ps,1));font-family:inherit}
+.blf input:focus{outline:none;border-color:var(--lime)}
+.blw{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.blw button{border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:16px;padding:5px 12px;font-size:calc(14px*var(--ps,1));font-weight:900;cursor:pointer}
+.blw button[aria-pressed=true]{background:var(--lime);color:var(--ink);border-color:var(--lime)}
 .cta .cardbtn{display:block;margin:0;width:100%;border:2px solid var(--lime);background:var(--ink2);color:var(--lime);border-radius:14px;padding:10px;font-size:calc(15px*var(--ps,1));font-weight:900;cursor:pointer}
 .cta .cardbtn:hover{background:var(--ink3)}
 .lb.ic2{padding:0 4px;min-width:26px;text-align:center;border-radius:13px;font-size:calc(15px*var(--ps,1));line-height:26px;font-weight:900;box-shadow:0 1px 4px rgba(0,0,0,.4)}
@@ -1203,7 +1216,7 @@ function panel(){
     h+='<button class="back" type="button" data-back>← 全部政見</button>'+cardHTML(PBY[s.id],true);
   }else{
     if(!q){
-      h+='<button type="button" class="persbtn" data-bio>認識林國漳：30 年在宜蘭的經歷</button><button type="button" class="persbtn" data-fortune>🏮 抽一支政見籤</button>'+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
+      h+='<button type="button" class="persbtn" data-bio>認識林國漳：30 年在宜蘭的經歷</button><button type="button" class="persbtn" data-fortune>🏮 抽一支政見籤</button><button type="button" class="persbtn" data-bless>🧧 做一張「1定贏」祝福卡</button>'+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
       WALL.forEach(function(w){var p=PBY[w[0]];h+='<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'});
       h+='</div><button type="button" class="persbtn" data-wallcard>把重點數字存成圖卡</button>';
     }
@@ -1511,7 +1524,7 @@ function bind(){
 }
 $('#pbody').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
-  if('bio' in b.dataset)openBio();else if('fortune' in b.dataset)drawFortune();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
+  if('bio' in b.dataset)openBio();else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){clearSel();homeView()}
 });
 var qt=null;$('#q').addEventListener('input',function(e){
@@ -1675,15 +1688,16 @@ function drawFortune(){
   ovOpen('<div class="fzt'+(reduce?'':' shake')+'">'+TUBE+'</div><p class="fzh">'+(reduce?'':'搖一搖…')+'</p>','fz');
   setTimeout(function(){
     if(tok!==FZ.tok||OV.hidden)return;
-    var c=CATS[p.c],url=polURL(p.id),stamp=(typeof SLOGAN==='string'&&SLOGAN.split(' ')[1])||'1定贏';
-    var h='<div class="fzc" style="--cc:'+c.c+'"><div class="fzno">第<b>'+(i+1)+'</b>籤<small>共 '+cand.length+' 支</small></div>'+
-      '<span class="fzcat">'+esc(c.n)+'</span><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p><div class="fzst">'+esc(stamp)+'</div></div>'+
+    var c=CATS[p.c],url=polURL(p.id),po=fzPoem(p.id),gr=fzGrade(p.id);
+    var h='<div class="fzc" style="--cc:'+c.c+'"><div class="fzno"><span class="fzgr">'+gr+'</span>第<b>'+(i+1)+'</b>籤<small>共 '+cand.length+' 支</small></div>'+
+      '<div class="fzpoem" aria-label="籤詩">'+po.map(function(l){return '<span>'+esc(l)+'</span>'}).join('')+'</div>'+
+      '<div class="fzjie"><span class="fzcat">'+esc(c.n)+'</span><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p></div><div class="fznote">籤詩為創作，政見以內容為準</div></div>'+
       '<div class="ovb"><button type="button" class="pri" data-fzsee>看這項政見</button><button type="button" data-fzagain>再抽一支</button><button type="button" data-fzimg>存成籤紙圖</button></div>'+
-      '<div class="ovb"><a class="line" href="'+esc(lineHref('我抽到第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
+      '<div class="ovb"><a class="line" href="'+esc(lineHref('我抽到「'+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
     ovOpen(h,'fz');
     OV.querySelector('[data-fzsee]').onclick=function(){ovClose();selectPolicy(p.id);try{window.scrollTo({top:0})}catch(x){}};
     OV.querySelector('[data-fzagain]').onclick=drawFortune;
-    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length),'我抽到第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url,'林國漳-政見籤.png')};
+    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length),'我抽到「'+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url,'林國漳-政見籤.png')};
     var a=OV.querySelector('[data-fzagain]');if(a&&a.focus)a.focus();
   },reduce?0:1100);
 }
@@ -1804,29 +1818,87 @@ function drawPolCard(p){
   return cv;
 }
 function openPolCard(id){var p=PBY[id];if(p)openImg(drawPolCard(p),p.t+'｜林國漳政見地圖',polURL(id),'林國漳-'+id+'.png')}
+var FZP={"T01":["蘭陽大道向天開","一高二快送春來","東西貫通連山海","南北相通萬事諧"],"T02":["五站連環路路通","礁溪蘇澳到羅東","換車不必多回首","一程接過一程風"],"T03":["四縱六橫織作網","大路小巷盡通行","微血管裡添活水","鄉鎮相連一家親"],"T04":["鐵道高架如捷運","公車單車共一程","通勤一卡走四方","低碳出門心自輕"],"T05":["鐵道凌空向北行","頭城礁溪盼車聲","平交道前少等候","一路平安到天明"],"T06":["溫泉小鎮慢步行","街道還給走路人","湯煙裊裊閒情在","一步一景是天真"],"T08":["通學步道向前延","孩子放學平安還","高鐵特區走低碳","示範永續在宜蘭"],"T07":["高鐵不只路過站","接駁先行心不慌","人才預備居民護","特定區裡有保障"],"I01":["百工百業借智慧","雙北產業入蘭陽","山海運動成新市","健康生活富又康"],"I02":["蘭陽沃野水長流","不引煙囪惹人愁","設計研發生技起","青山綠水永相守"],"I03":["學子不必離故鄉","科系添設路更長","產學攜手栽英才","留在蘭陽展翅揚"],"I04":["綠地藍海業多元","青年回流笑開顏","山水田園能工作","移居首選是宜蘭"],"G01":["毒駕之害須防早","源頭把關最重要","各局合力織密網","平安回家路上好"],"G02":["老舊電線早換新","火苗不敢近家門","研議補助心安穩","歲歲平安度晨昏"],"G03":["烈火無情人有情","消防弟兄護蘭城","人力添足勤務簡","義消有保免憂驚"],"G04":["人行有道步步安","通學路上護童顏","偏鄉兒少平安返","零死願景手相攀"],"A01":["好農好米好蔬菜","品牌飄香到海外","首投保險有補貼","農藥減半土更愛"],"A02":["風雨無常田不愁","保險補助雙軌周","冷鏈物流鮮送達","員山好物上街頭"],"S01":["向海致敬意綿綿","漁民先顧最當前","海洋發展辦公室","三項承諾放心間"],"S02":["開蘭第一是頭城","烏石老街外澳風","帶狀觀光串山海","國際賽事浪頭紅"],"S03":["五漁村串海岸長","藍色公路向南航","山海遊樂皆可玩","運動首都在蘭陽"],"S04":["蘇澳港灣水波青","造船科技共前行","智慧海灣新藍圖","揚帆啟航向光明"],"C01":["四季皆宜遊蘭陽","雪山麓徑走一趟","三大觀光圈相連","歡聲笑語四方揚"],"C02":["八鄉淺山一線牽","雪山麓徑踏成篇","山海健行首都夢","綠道爭取第八連"],"C08":["一鄉一線走一天","歷史故事伴山川","在地產業嚐新鮮","八種風光賞不厭"],"C09":["端午鼓聲響四方","龍舟競渡水中央","三河一港齊相會","文化觀光齊飛揚"],"C03":["蘭陽自古文風揚","文化生活是日常","教育認同並治理","產業開花滿書香"],"C04":["溫泉清澈水長流","二龍河畔憶舊遊","污水接管水質好","跪姿龍舟逐浪頭"],"C05":["台七線上客家風","三山國王廟宇紅","詔安腔調傳後世","美食飄香滿山中"],"C06":["古蹟長存歲月深","歌仔一曲動人心","薪火相傳台上唱","蘭陽戲鄉傳至今"],"C07":["跑步騎車划舟來","全民運動樂開懷","人才培育賽事旺","健康一輩子精彩"],"E01":["三百微森綠意濃","高山平原到海風","生態廊道相連處","青天計畫樹影重"],"E02":["上中下游同治水","污水接管水更清","循環用水生新利","豐沛蘭陽樂太平"],"E03":["大雨來時心不慌","上中下游護家鄉","開發把關嚴且慎","水源清澈世代長"],"E04":["三道防線守餐桌","突擊稽查不放過","檢驗預防勤把關","吃得安心笑呵呵"],"W01":["每月一千暖心頭","累積年底不用愁","宜蘭在地好消費","長輩笑容樂悠悠"],"W02":["弱勢不被世間遺","津貼升級暖心扉","掛號午餐疫苗護","新住民也有依歸"],"N01":["遠道而來成一家","蘭陽處處綻新芽","補助之外更培力","共同決策話桑麻"],"W03":["頭城鄉親盼良醫","就近看病免奔馳","評估設置適當院","健康守護不遲疑"],"W04":["縣府大門為你開","鄉親有話直接來","定期見面零距離","民意直達最暢懷"],"W05":["勞工汗水值得尊","職人獎勵敬精神","採購薪資重公道","健檢職訓暖終身"],"K01":["女力撐起半邊天","幸福育兒不孤單","生育津貼三萬元","托育量能倍增添"],"K02":["五星童年樂陶陶","兒童夢土任逍遙","校園空間新面貌","醫療接送減煩惱"],"K06":["午餐飄香滿校園","在地食材最新鮮","吃飯讀冊都免錢","營養滿分笑開顏"],"K03":["蘭陽處處是學堂","大教室裡好風光","學生家長與老師","三方同心向前航"],"K04":["四箭齊發向青雲","青年有處好安身","婚育宅屋四百戶","數位遊牧也歡迎"],"K05":["毛孩快樂搖尾巴","寵物公園處處佳","夜間獸醫來守護","人與毛孩共一家"],"D01":["山林部落歷史深","開發先問族人心","基礎建設福利好","原鄉歲月永相親"],"V01":["全民縣長不分黨","桃花源裡好風光","乾淨選舉清如水","團結作伙拚宜蘭"],"X01":["大羅東水網相連","羅東之心換新顏","鐵路高架交通順","夜經濟裡笑聲喧"],"X02":["水水員山水源頭","童玩公園樂悠悠","山林慢旅尋幽處","好山好水解鄉愁"],"X03":["宜蘭舊城展新顏","宜蘭河岸縫兩邊","聯絡道路通四方","醫療交通更周全"],"X04":["大閘門前水波平","蘭陽大橋跨冬山","治水路網興文創","五十二甲濕地寬"],"X05":["安農溪畔水悠悠","林鐵蔥鄉共漫遊","東西路網添便利","溫泉地熱暖心頭"],"X06":["泰雅山徑入雲間","林下經濟有新天","原鄉文化代代傳","防災建設保平安"],"X07":["抽水站旁水路長","噶瑪蘭水映斜陽","軍事遺構青創起","濱海博覽展新章"],"X08":["蘇花改旁新門戶","碧候溫泉暖身軀","水資源足原鄉福","南澳歲月樂無虞"],"X09":["溫泉康養好安居","污水整治水清渠","路網暢通客來去","湯鄉歲月樂有餘"],"X10":["台六十二向頭城","交通重構順前程","數位衝浪五漁村","山海水岸煥新生"],"X11":["蘇澳溪畔分洪流","港灣觀光藍色遊","污水系統接管起","交通轉型行無憂"],"X12":["冬山河畔藍色路","交流道口迎行旅","治水路網更完善","水域觀光樂無虞"],"X13":["五十二甲濕地寬","保育治水兩相安","地主土地求正義","任內解決不拖延"]};
+var FZ_DEF=['蘭陽山海好風光','團結作伙拚向前','平安幸福齊到手','宜蘭一定贏得先'];
+var CV_S='"Songti TC","Noto Serif TC","STSong","PMingLiU",serif';
+function fzPoem(id){return FZP[id]||FZ_DEF}
+function fzGrade(id){var s=0;for(var i=0;i<id.length;i++)s+=id.charCodeAt(i);return ['上上籤','上吉籤','中吉籤'][s%3]}
 function drawFortuneImg(p,no,total){
-  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),cc=CATS[p.c],RED='#C8372D',BR='#3A1A10';
+  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),cc=CATS[p.c],RED='#C8372D',BR='#3A1A10',po=fzPoem(p.id),gr=fzGrade(p.id);
   c.fillStyle='#FFF4D6';c.fillRect(0,0,W,H);
   c.strokeStyle=RED;c.lineWidth=18;c.strokeRect(24,24,W-48,H-48);c.lineWidth=4;c.strokeRect(54,54,W-108,H-108);
   c.textBaseline='alphabetic';c.textAlign='center';
-  c.fillStyle=RED;c.font='900 44px '+CV_F;c.fillText('宜蘭政見籤',W/2,150);
-  c.font='900 150px '+CV_F;c.fillText('第 '+no+' 籤',W/2,330);
-  c.fillStyle='#8A5A40';c.font='700 34px '+CV_F;c.fillText('共 '+total+' 支',W/2,385);
-  c.font='900 34px '+CV_F;var cw=c.measureText(cc.n).width+48;
-  c.fillStyle=cc.c;rrect(c,W/2-cw/2,425,cw,56,28);c.fill();c.fillStyle='#0A1D38';c.fillText(cc.n,W/2,464);
-  c.fillStyle=BR;c.font='900 68px '+CV_F;
-  var tl=cvWrap(c,p.t,W-220,4);
-  tl.forEach(function(s,i){c.fillText(s,W/2,590+i*86)});
-  var sy=590+(tl.length-1)*86+80;
-  c.fillStyle='#5A3A28';c.font='600 38px '+CV_F;
-  cvWrap(c,p.s,W-240,4).forEach(function(s,i){c.fillText(s,W/2,sy+i*56)});
-  var stamp=(typeof SLOGAN==='string'&&SLOGAN.split(' ')[1])||'1定贏';
-  c.save();c.translate(W-260,1165);c.rotate(-.12);c.strokeStyle=RED;c.lineWidth=7;rrect(c,-170,-44,340,88,14);c.stroke();
-  c.fillStyle=RED;c.font='900 48px '+CV_F;c.fillText(stamp,0,16);c.restore();
-  c.fillStyle=BR;c.font='800 36px '+CV_F;c.fillText('林國漳政見地圖・縣長參選人'+(BALLOT_NO?' 號次 '+BALLOT_NO:''),W/2,1252);
+  c.fillStyle=RED;c.font='900 40px '+CV_F;c.fillText('宜蘭政見籤',W/2,130);
+  c.font='900 118px '+CV_S;c.fillText('第 '+no+' 籤',W/2,262);
+  c.font='900 38px '+CV_F;var gw=c.measureText(gr).width+64;
+  c.fillStyle=RED;rrect(c,W/2-gw/2,292,gw,60,30);c.fill();
+  c.fillStyle='#FFF4D6';c.fillText(gr,W/2,334);
+  c.fillStyle='#8A5A40';c.font='700 28px '+CV_F;c.textAlign='left';c.fillText('共 '+total+' 支',W/2+gw/2+24,334);c.textAlign='center';
+  var bx=270,by=384,bw=540,bh=500,cw=bw/4;
+  c.fillStyle='rgba(255,255,255,.45)';c.fillRect(bx,by,bw,bh);
+  c.strokeStyle=BR;c.lineWidth=4;c.strokeRect(bx,by,bw,bh);
+  c.lineWidth=2;c.strokeStyle='#C9A27F';
+  for(var k=1;k<4;k++){c.beginPath();c.moveTo(bx+k*cw,by+14);c.lineTo(bx+k*cw,by+bh-14);c.stroke()}
+  c.fillStyle=BR;c.font='900 60px '+CV_S;
+  po.forEach(function(line,i){
+    var x=bx+bw-cw/2-i*cw;
+    for(var j=0;j<line.length;j++)c.fillText(line[j],x,by+68+j*66);
+  });
+  c.fillStyle=cc.c;c.font='900 28px '+CV_F;var pw=c.measureText(cc.n).width+44;
+  rrect(c,W/2-pw/2,918,pw,48,24);c.fill();c.fillStyle='#0A1D38';c.fillText(cc.n,W/2,953);
+  c.fillStyle=BR;c.font='900 44px '+CV_F;
+  var tl=cvWrap(c,p.t,W-200,2);
+  tl.forEach(function(s,i){c.fillText(s,W/2,1030+i*54)});
+  var sy=1030+(tl.length-1)*54+56;
+  c.fillStyle='#5A3A28';c.font='600 30px '+CV_F;
+  cvWrap(c,p.s,W-240,2).forEach(function(s,i){c.fillText(s,W/2,sy+i*38)});
+  c.fillStyle='#8A5A40';c.font='600 22px '+CV_F;c.fillText('籤詩為創作，政見以內容為準',W/2,1208);
+  c.fillStyle=BR;c.font='800 36px '+CV_F;c.fillText('林國漳政見地圖・縣長參選人'+(BALLOT_NO?' 號次 '+BALLOT_NO:''),W/2,1248);
   c.fillStyle='#8A5A40';c.font='600 24px '+CV_F;
-  c.fillText('政見為候選人承諾，不是已核定的施政'+(SHARE_BASE?'　'+SHARE_BASE.replace(/^https?:\/\//,'').replace(/\/$/,''):''),W/2,1296);
+  c.fillText('政見為候選人承諾，不是已核定的施政'+(SHARE_BASE?'　'+SHARE_BASE.replace(/^https?:\/\//,'').replace(/\/$/,''):''),W/2,1282);
   return cv;
+}
+var BLESS_W=['平安順心','身體健康','事業順利','闔家幸福','生意興隆','金榜題名'];
+function drawBlessCard(name,wish){
+  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),GOLD='#FFD966';
+  var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#D63A2F');g.addColorStop(1,'#9E1F18');
+  c.fillStyle=g;c.fillRect(0,0,W,H);
+  c.strokeStyle=GOLD;c.lineWidth=14;c.strokeRect(28,28,W-56,H-56);c.lineWidth=3;c.strokeRect(54,54,W-108,H-108);
+  c.textBaseline='alphabetic';c.textAlign='center';
+  c.font='110px '+CV_F;c.fillText('🏮',150,230);c.fillText('🏮',W-150,230);
+  c.fillStyle=GOLD;c.font='900 44px '+CV_F;c.fillText('宜蘭　祝福你',W/2,160);
+  var fs=230,nm=name;
+  do{c.font='900 '+fs+'px '+CV_S;fs-=6}while(c.measureText(nm).width>W-200&&fs>70);
+  c.fillStyle='#FFF4D6';c.fillText(nm,W/2,560);
+  c.fillStyle=GOLD;c.font='900 290px '+CV_F;c.fillText('1定贏',W/2,860);
+  c.fillStyle='#FFF4D6';c.font='900 68px '+CV_S;
+  var wl=cvWrap(c,'祝　'+wish,W-200,2);
+  wl.forEach(function(s,i){c.fillText(s,W/2,985+i*84)});
+  c.fillStyle=GOLD;c.fillRect(90,1128,W-180,4);
+  c.font='900 52px '+CV_F;c.fillText(typeof SLOGAN==='string'&&SLOGAN?SLOGAN:'林國漳',W/2,1196);
+  c.fillStyle='#FFF4D6';c.font='700 30px '+CV_F;c.fillText('宜蘭縣長參選人 林國漳'+(BALLOT_NO?' 號次 '+BALLOT_NO:'')+'・投票日 2026/11/28',W/2,1244);
+  c.fillStyle='rgba(255,244,214,.75)';c.font='600 22px '+CV_F;
+  c.fillText('林國漳政見地圖'+(SHARE_BASE?'　'+SHARE_BASE.replace(/^https?:\/\//,'').replace(/\/$/,''):''),W/2,1282);
+  return cv;
+}
+function openBless(){
+  ovOpen('<h3 class="blh">🧧 「1定贏」祝福卡</h3><p class="ovn" style="margin-top:0">輸入名字，選一個祝福，做成圖卡傳給朋友。</p>'+
+    '<label class="blf">名字（最多 8 字）<input id="blname" maxlength="8" autocomplete="off" placeholder="例如：阿嬤、小明、全家"></label>'+
+    '<div class="blf">祝福<div class="blw">'+BLESS_W.map(function(w,i){return '<button type="button" data-bw="'+esc(w)+'" aria-pressed="'+(i===0?'true':'false')+'">'+esc(w)+'</button>'}).join('')+'</div></div>'+
+    '<label class="blf">或自己寫（最多 10 字）<input id="blwish" maxlength="10" autocomplete="off" placeholder="自己寫一句祝福"></label>'+
+    '<div class="ovb"><button type="button" class="pri" id="blgo">做成圖卡</button></div>','bless');
+  var wish=BLESS_W[0],ni=$('#blname'),wi=$('#blwish');
+  Array.prototype.forEach.call(OV.querySelectorAll('[data-bw]'),function(b){
+    b.onclick=function(){wish=b.dataset.bw;wi.value='';Array.prototype.forEach.call(OV.querySelectorAll('[data-bw]'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})};
+  });
+  wi.oninput=function(){if(wi.value)Array.prototype.forEach.call(OV.querySelectorAll('[data-bw]'),function(x){x.setAttribute('aria-pressed','false')})};
+  function go(){
+    var nm=(ni.value||'').trim()||'宜蘭人',w=(wi.value||'').trim()||wish;
+    openImg(drawBlessCard(nm,w),nm+' 1定贏！祝 '+w+'｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-1定贏祝福卡.png');
+  }
+  $('#blgo').onclick=go;
+  ni.onkeydown=wi.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();go()}};
+  try{ni.focus()}catch(x){}
 }
 function townURL(id){return SHARE_BASE?SHARE_BASE+'s/t-'+id+'/':location.href.split('#')[0]+'#t-'+id}
 function drawTownCard(id){
@@ -1874,7 +1946,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/27 第 37 版';
+var BUILD='10/27 第 38 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
