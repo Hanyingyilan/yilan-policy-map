@@ -1623,6 +1623,9 @@ function applyHash(){
     else if(ty==='l'&&PLACES[id])selectPin(id);
     else if(ty==='me')openPersona();
     else if(ty==='bio')openBio();
+    else if(ty==='f'&&PBY[id]&&!PBY[id].bg)drawFortune(false,id);
+    else if(ty==='quiz')openQuiz();
+    else if(ty==='bless')openBless();
     else if(ty==='c'&&CATS[id]){
       CATKEYS.forEach(function(k){S.cats[k]=(k===id)});
       $$('#chips button').forEach(function(b,j){b.setAttribute('aria-pressed',!!S.cats[CATKEYS[j]])});
@@ -1703,16 +1706,17 @@ var TUBE='<svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg" aria-hid
  '<rect x="20" y="58" width="80" height="12" rx="5" fill="#8E1F18" stroke="#3A1A10" stroke-width="3"/>'+
  '<circle cx="60" cy="104" r="21" fill="#FFF4D6" stroke="#3A1A10" stroke-width="2.5"/>'+
  '<text x="60" y="113" text-anchor="middle" font-size="26" font-weight="900" fill="#C8372D" font-family="sans-serif">籤</text></svg>';
-function drawFortune(daily){
+function drawFortune(daily,fid){
   daily=daily===true;
   var cand=candList(),tok=++FZ.tok,i;
   if(daily)i=dailyIdx(cand.length);
+  else if(fid){i=0;cand.forEach(function(q,k){if(q.id===fid)i=k})}
   else do{i=Math.floor(Math.random()*cand.length)}while(cand.length>1&&cand[i].id===FZ.last);
   var p=cand[i];FZ.last=p.id;
   ovOpen('<div class="fzt'+(reduce?'':' shake')+'">'+TUBE+'</div><p class="fzh">'+(reduce?'':'搖一搖…')+'</p>','fz');
   setTimeout(function(){
     if(tok!==FZ.tok||OV.hidden)return;
-    var c=CATS[p.c],url=polURL(p.id),po=fzPoem(p.id),gr=fzGrade(p.id);
+    var c=CATS[p.c],url=fzURL(p.id),po=fzPoem(p.id),gr=fzGrade(p.id);
     var h='<div class="fzc" style="--cc:'+c.c+'">'+(daily?'<div class="fzday">今日一籤　'+dayLabel()+'</div>':'')+'<div class="fzno"><span class="fzgr">'+gr+'</span>第<b>'+(i+1)+'</b>籤<small>共 '+cand.length+' 支</small></div>'+
       '<div class="fzpoem" aria-label="籤詩">'+po.map(function(l){return '<span>'+esc(l)+'</span>'}).join('')+'</div>'+
       '<div class="fzjie"><span class="fzcat">'+esc(c.n)+'</span><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p></div><div class="fznote">籤詩為創作，政見以內容為準</div></div>'+
@@ -1842,6 +1846,10 @@ function drawPolCard(p){
   return cv;
 }
 function openPolCard(id){var p=PBY[id];if(p)openImg(drawPolCard(p),p.t+'｜林國漳政見地圖',polURL(id),'林國漳-'+id+'.png')}
+function pageBase(){return location.href.split('#')[0]}
+function fzURL(id){return SHARE_BASE?SHARE_BASE+'s/f-'+id+'/':pageBase()+'#f-'+id}
+function qzURL(id){return SHARE_BASE?SHARE_BASE+'s/q-'+id+'/':pageBase()+'#quiz'}
+function blURL(){return SHARE_BASE?SHARE_BASE+'s/bless/':pageBase()+'#bless'}
 function todayKey(){var d=new Date(Date.now()+8*36e5);return d.getUTCFullYear()*10000+(d.getUTCMonth()+1)*100+d.getUTCDate()}
 function dayLabel(){var k=todayKey();return Math.floor(k/100)%100+'/'+k%100}
 function dailyIdx(n){
@@ -1968,7 +1976,7 @@ function showQuiz(){
 }
 function showQuizResult(){
   var id=quizResult(),t=TOWNS[TI[id]];
-  openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜林國漳政見地圖',townURL(id),'林國漳-我是'+qzShort(t)+'人.png',
+  openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜林國漳政見地圖',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
     '<button type="button" data-qzagain>再測一次</button><button type="button" data-qzsee>看'+esc(t.n)+'的政見</button>');
   OV.querySelector('[data-qzagain]').onclick=openQuiz;
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
@@ -2010,7 +2018,7 @@ function openBless(){
   wi.oninput=function(){if(wi.value)Array.prototype.forEach.call(OV.querySelectorAll('[data-bw]'),function(x){x.setAttribute('aria-pressed','false')})};
   function go(){
     var nm=(ni.value||'').trim()||'宜蘭人',w=(wi.value||'').trim()||wish;
-    openImg(drawBlessCard(nm,w),nm+' 1定贏！祝 '+w+'｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-1定贏祝福卡.png');
+    openImg(drawBlessCard(nm,w),nm+' 1定贏！祝 '+w+'｜林國漳政見地圖',blURL(),'林國漳-1定贏祝福卡.png');
   }
   $('#blgo').onclick=go;
   ni.onkeydown=wi.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();go()}};
@@ -2062,7 +2070,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/27 第 40 版';
+var BUILD='10/27 第 41 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
