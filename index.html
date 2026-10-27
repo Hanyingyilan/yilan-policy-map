@@ -315,6 +315,20 @@ html.xl .ov{--ps:1.4}
 .qzo button{text-align:left;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:12px;padding:11px 14px;font-size:calc(16px*var(--ps,1));font-weight:800;cursor:pointer;transition:background .12s,transform .1s}
 .qzo button:hover,.qzo button:focus-visible{background:var(--ink3);border-color:var(--lime)}
 .qzo button:active{transform:scale(.98)}
+.fun{margin:12px 16px 4px;padding:10px;border:2px solid var(--lime);border-radius:16px;background:var(--ink2)}
+.funh{display:flex;align-items:baseline;justify-content:space-between;margin:0 2px 8px;font-weight:900;color:var(--lime);font-size:calc(15px*var(--ps,1));letter-spacing:.06em}
+.funh small{font-size:calc(12px*var(--ps,1));color:var(--mut);letter-spacing:0;font-weight:700}
+.fday{position:relative;display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center;width:100%;margin:0;border:0;border-radius:12px;padding:10px 12px;background:var(--lime);color:var(--ink);text-align:left;cursor:pointer;transition:transform .1s}
+.fday:hover{transform:translateY(-1px)}
+.fday span{grid-row:1/3;font-size:calc(30px*var(--ps,1));line-height:1}
+.fday b{font-size:calc(18px*var(--ps,1));font-weight:900}
+.fday em{font-style:normal;font-size:calc(12.5px*var(--ps,1));font-weight:700;opacity:.8}
+.fnew{position:absolute;right:8px;top:-9px;background:#C8372D;color:#fff;border-radius:10px;padding:1px 9px;font-style:normal;font-size:calc(11.5px*var(--ps,1));font-weight:900;box-shadow:0 2px 0 rgba(0,0,0,.3)}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.fgrid button{display:flex;flex-direction:column;align-items:center;gap:2px;border:2px solid var(--edge);background:var(--ink3);color:var(--txt);border-radius:12px;padding:8px 4px;font-size:calc(13px*var(--ps,1));font-weight:900;cursor:pointer;transition:background .12s,transform .1s}
+.fgrid button:hover{border-color:var(--lime);transform:translateY(-1px)}
+.fgrid button span{font-size:calc(22px*var(--ps,1));line-height:1.1}
+.fzday{display:inline-block;margin-bottom:6px;background:#3A1A10;color:#FFF4D6;border-radius:8px;padding:1px 10px;font-weight:900;font-size:calc(13px*var(--ps,1));letter-spacing:.08em}
 .blh{margin:0 38px 4px 0;font-size:calc(20px*var(--ps,1));color:var(--lime)}
 .blf{display:block;margin-top:12px;font-weight:900;font-size:calc(14px*var(--ps,1));color:var(--txt)}
 .blf input{display:block;width:100%;margin-top:6px;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:10px;padding:9px 12px;font-size:calc(17px*var(--ps,1));font-family:inherit}
@@ -1224,7 +1238,7 @@ function panel(){
     h+='<button class="back" type="button" data-back>← 全部政見</button>'+cardHTML(PBY[s.id],true);
   }else{
     if(!q){
-      h+='<button type="button" class="persbtn" data-bio>認識林國漳：30 年在宜蘭的經歷</button><button type="button" class="persbtn" data-fortune>🏮 抽一支政見籤</button><button type="button" class="persbtn" data-bless>🧧 做一張「1定贏」祝福卡</button><button type="button" class="persbtn" data-quiz>🧭 測驗：你是哪個鄉鎮人？</button>'+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
+      h+='<button type="button" class="persbtn" data-bio>認識林國漳：30 年在宜蘭的經歷</button>'+funBox()+''+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
       WALL.forEach(function(w){var p=PBY[w[0]];h+='<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'});
       h+='</div><button type="button" class="persbtn" data-wallcard>把重點數字存成圖卡</button>';
     }
@@ -1532,7 +1546,7 @@ function bind(){
 }
 $('#pbody').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
-  if('bio' in b.dataset)openBio();else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
+  if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){clearSel();homeView()}
 });
 var qt=null;$('#q').addEventListener('input',function(e){
@@ -1689,27 +1703,29 @@ var TUBE='<svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg" aria-hid
  '<rect x="20" y="58" width="80" height="12" rx="5" fill="#8E1F18" stroke="#3A1A10" stroke-width="3"/>'+
  '<circle cx="60" cy="104" r="21" fill="#FFF4D6" stroke="#3A1A10" stroke-width="2.5"/>'+
  '<text x="60" y="113" text-anchor="middle" font-size="26" font-weight="900" fill="#C8372D" font-family="sans-serif">籤</text></svg>';
-function drawFortune(){
+function drawFortune(daily){
+  daily=daily===true;
   var cand=candList(),tok=++FZ.tok,i;
-  do{i=Math.floor(Math.random()*cand.length)}while(cand.length>1&&cand[i].id===FZ.last);
+  if(daily)i=dailyIdx(cand.length);
+  else do{i=Math.floor(Math.random()*cand.length)}while(cand.length>1&&cand[i].id===FZ.last);
   var p=cand[i];FZ.last=p.id;
   ovOpen('<div class="fzt'+(reduce?'':' shake')+'">'+TUBE+'</div><p class="fzh">'+(reduce?'':'搖一搖…')+'</p>','fz');
   setTimeout(function(){
     if(tok!==FZ.tok||OV.hidden)return;
     var c=CATS[p.c],url=polURL(p.id),po=fzPoem(p.id),gr=fzGrade(p.id);
-    var h='<div class="fzc" style="--cc:'+c.c+'"><div class="fzno"><span class="fzgr">'+gr+'</span>第<b>'+(i+1)+'</b>籤<small>共 '+cand.length+' 支</small></div>'+
+    var h='<div class="fzc" style="--cc:'+c.c+'">'+(daily?'<div class="fzday">今日一籤　'+dayLabel()+'</div>':'')+'<div class="fzno"><span class="fzgr">'+gr+'</span>第<b>'+(i+1)+'</b>籤<small>共 '+cand.length+' 支</small></div>'+
       '<div class="fzpoem" aria-label="籤詩">'+po.map(function(l){return '<span>'+esc(l)+'</span>'}).join('')+'</div>'+
       '<div class="fzjie"><span class="fzcat">'+esc(c.n)+'</span><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p></div><div class="fznote">籤詩為創作，政見以內容為準</div></div>'+
       '<div class="ovb"><button type="button" class="pri" data-fzsee>看這項政見</button><button type="button" data-fzagain>再抽一支</button><button type="button" data-fzimg>存成籤紙圖</button></div>'+
-      '<div class="ovb"><a class="line" href="'+esc(lineHref('我抽到「'+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
-    ovOpen(h,'fz');
+      '<div class="ovb"><a class="line" href="'+esc(lineHref((daily?'今日一籤「':'我抽到「')+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
+    ovOpen(h,'fz');if(daily)markDay();
     OV.querySelector('[data-fzsee]').onclick=function(){ovClose();selectPolicy(p.id);try{window.scrollTo({top:0})}catch(x){}};
-    OV.querySelector('[data-fzagain]').onclick=drawFortune;
-    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length),'我抽到「'+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url,'林國漳-政見籤.png')};
+    OV.querySelector('[data-fzagain]').onclick=function(){drawFortune()};
+    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length,daily?dayLabel():''),(daily?'今日一籤「':'我抽到「')+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url,'林國漳-政見籤.png')};
     var a=OV.querySelector('[data-fzagain]');if(a&&a.focus)a.focus();
   },reduce?0:1100);
 }
-$('#fortunebtn').onclick=drawFortune;
+$('#fortunebtn').onclick=function(){drawFortune()};
 
 var CV_F='"PingFang TC","Noto Sans TC","Microsoft JhengHei","Heiti TC",sans-serif';
 function cvEll(c,s,w){while(s.length>1&&c.measureText(s+'…').width>w)s=s.slice(0,-1);return s+'…'}
@@ -1826,17 +1842,32 @@ function drawPolCard(p){
   return cv;
 }
 function openPolCard(id){var p=PBY[id];if(p)openImg(drawPolCard(p),p.t+'｜林國漳政見地圖',polURL(id),'林國漳-'+id+'.png')}
+function todayKey(){var d=new Date(Date.now()+8*36e5);return d.getUTCFullYear()*10000+(d.getUTCMonth()+1)*100+d.getUTCDate()}
+function dayLabel(){var k=todayKey();return Math.floor(k/100)%100+'/'+k%100}
+function dailyIdx(n){
+  var dn=Math.floor((Date.now()+8*36e5)/864e5),cyc=Math.floor(dn/n),a=[],s=(cyc*2654435761+12345)>>>0,j,t,k;
+  for(k=0;k<n;k++)a.push(k);
+  for(k=n-1;k>0;k--){s=(Math.imul(s,1664525)+1013904223)>>>0;j=s%(k+1);t=a[k];a[k]=a[j];a[j]=t}
+  return a[dn%n];
+}
+function dayDone(){try{return localStorage.getItem('yl-fday')===String(todayKey())}catch(e){return false}}
+function markDay(){try{localStorage.setItem('yl-fday',String(todayKey()))}catch(e){}var n=document.querySelector('[data-daily] .fnew');if(n)n.remove()}
+function funBox(){
+  return '<div class="fun"><div class="funh">玩一玩<small>今天 '+dayLabel()+'</small></div>'+
+    '<button type="button" class="fday" data-daily><span>🏮</span><b>今日一籤</b><em>每天一支，全宜蘭同一支</em>'+(dayDone()?'':'<i class="fnew">今天還沒抽</i>')+'</button>'+
+    '<div class="fgrid"><button type="button" data-fortune><span>🎲</span>隨手抽一支</button><button type="button" data-bless><span>🧧</span>祝福卡</button><button type="button" data-quiz><span>🧭</span>鄉鎮測驗</button></div></div>';
+}
 var FZP={"T01":["蘭陽大道向天開","一高二快送春來","東西貫通連山海","南北相通萬事諧"],"T02":["五站連環路路通","礁溪蘇澳到羅東","換車不必多回首","一程接過一程風"],"T03":["四縱六橫織作網","大路小巷盡通行","微血管裡添活水","鄉鎮相連一家親"],"T04":["鐵道高架如捷運","公車單車共一程","通勤一卡走四方","低碳出門心自輕"],"T05":["鐵道凌空向北行","頭城礁溪盼車聲","平交道前少等候","一路平安到天明"],"T06":["溫泉小鎮慢步行","街道還給走路人","湯煙裊裊閒情在","一步一景是天真"],"T08":["通學步道向前延","孩子放學平安還","高鐵特區走低碳","示範永續在宜蘭"],"T07":["高鐵不只路過站","接駁先行心不慌","人才預備居民護","特定區裡有保障"],"I01":["百工百業借智慧","雙北產業入蘭陽","山海運動成新市","健康生活富又康"],"I02":["蘭陽沃野水長流","不引煙囪惹人愁","設計研發生技起","青山綠水永相守"],"I03":["學子不必離故鄉","科系添設路更長","產學攜手栽英才","留在蘭陽展翅揚"],"I04":["綠地藍海業多元","青年回流笑開顏","山水田園能工作","移居首選是宜蘭"],"G01":["毒駕之害須防早","源頭把關最重要","各局合力織密網","平安回家路上好"],"G02":["老舊電線早換新","火苗不敢近家門","研議補助心安穩","歲歲平安度晨昏"],"G03":["烈火無情人有情","消防弟兄護蘭城","人力添足勤務簡","義消有保免憂驚"],"G04":["人行有道步步安","通學路上護童顏","偏鄉兒少平安返","零死願景手相攀"],"A01":["好農好米好蔬菜","品牌飄香到海外","首投保險有補貼","農藥減半土更愛"],"A02":["風雨無常田不愁","保險補助雙軌周","冷鏈物流鮮送達","員山好物上街頭"],"S01":["向海致敬意綿綿","漁民先顧最當前","海洋發展辦公室","三項承諾放心間"],"S02":["開蘭第一是頭城","烏石老街外澳風","帶狀觀光串山海","國際賽事浪頭紅"],"S03":["五漁村串海岸長","藍色公路向南航","山海遊樂皆可玩","運動首都在蘭陽"],"S04":["蘇澳港灣水波青","造船科技共前行","智慧海灣新藍圖","揚帆啟航向光明"],"C01":["四季皆宜遊蘭陽","雪山麓徑走一趟","三大觀光圈相連","歡聲笑語四方揚"],"C02":["八鄉淺山一線牽","雪山麓徑踏成篇","山海健行首都夢","綠道爭取第八連"],"C08":["一鄉一線走一天","歷史故事伴山川","在地產業嚐新鮮","八種風光賞不厭"],"C09":["端午鼓聲響四方","龍舟競渡水中央","三河一港齊相會","文化觀光齊飛揚"],"C03":["蘭陽自古文風揚","文化生活是日常","教育認同並治理","產業開花滿書香"],"C04":["溫泉清澈水長流","二龍河畔憶舊遊","污水接管水質好","跪姿龍舟逐浪頭"],"C05":["台七線上客家風","三山國王廟宇紅","詔安腔調傳後世","美食飄香滿山中"],"C06":["古蹟長存歲月深","歌仔一曲動人心","薪火相傳台上唱","蘭陽戲鄉傳至今"],"C07":["跑步騎車划舟來","全民運動樂開懷","人才培育賽事旺","健康一輩子精彩"],"E01":["三百微森綠意濃","高山平原到海風","生態廊道相連處","青天計畫樹影重"],"E02":["上中下游同治水","污水接管水更清","循環用水生新利","豐沛蘭陽樂太平"],"E03":["大雨來時心不慌","上中下游護家鄉","開發把關嚴且慎","水源清澈世代長"],"E04":["三道防線守餐桌","突擊稽查不放過","檢驗預防勤把關","吃得安心笑呵呵"],"W01":["每月一千暖心頭","累積年底不用愁","宜蘭在地好消費","長輩笑容樂悠悠"],"W02":["弱勢不被世間遺","津貼升級暖心扉","掛號午餐疫苗護","新住民也有依歸"],"N01":["遠道而來成一家","蘭陽處處綻新芽","補助之外更培力","共同決策話桑麻"],"W03":["頭城鄉親盼良醫","就近看病免奔馳","評估設置適當院","健康守護不遲疑"],"W04":["縣府大門為你開","鄉親有話直接來","定期見面零距離","民意直達最暢懷"],"W05":["勞工汗水值得尊","職人獎勵敬精神","採購薪資重公道","健檢職訓暖終身"],"K01":["女力撐起半邊天","幸福育兒不孤單","生育津貼三萬元","托育量能倍增添"],"K02":["五星童年樂陶陶","兒童夢土任逍遙","校園空間新面貌","醫療接送減煩惱"],"K06":["午餐飄香滿校園","在地食材最新鮮","吃飯讀冊都免錢","營養滿分笑開顏"],"K03":["蘭陽處處是學堂","大教室裡好風光","學生家長與老師","三方同心向前航"],"K04":["四箭齊發向青雲","青年有處好安身","婚育宅屋四百戶","數位遊牧也歡迎"],"K05":["毛孩快樂搖尾巴","寵物公園處處佳","夜間獸醫來守護","人與毛孩共一家"],"D01":["山林部落歷史深","開發先問族人心","基礎建設福利好","原鄉歲月永相親"],"V01":["全民縣長不分黨","桃花源裡好風光","乾淨選舉清如水","團結作伙拚宜蘭"],"X01":["大羅東水網相連","羅東之心換新顏","鐵路高架交通順","夜經濟裡笑聲喧"],"X02":["水水員山水源頭","童玩公園樂悠悠","山林慢旅尋幽處","好山好水解鄉愁"],"X03":["宜蘭舊城展新顏","宜蘭河岸縫兩邊","聯絡道路通四方","醫療交通更周全"],"X04":["大閘門前水波平","蘭陽大橋跨冬山","治水路網興文創","五十二甲濕地寬"],"X05":["安農溪畔水悠悠","林鐵蔥鄉共漫遊","東西路網添便利","溫泉地熱暖心頭"],"X06":["泰雅山徑入雲間","林下經濟有新天","原鄉文化代代傳","防災建設保平安"],"X07":["抽水站旁水路長","噶瑪蘭水映斜陽","軍事遺構青創起","濱海博覽展新章"],"X08":["蘇花改旁新門戶","碧候溫泉暖身軀","水資源足原鄉福","南澳歲月樂無虞"],"X09":["溫泉康養好安居","污水整治水清渠","路網暢通客來去","湯鄉歲月樂有餘"],"X10":["台六十二向頭城","交通重構順前程","數位衝浪五漁村","山海水岸煥新生"],"X11":["蘇澳溪畔分洪流","港灣觀光藍色遊","污水系統接管起","交通轉型行無憂"],"X12":["冬山河畔藍色路","交流道口迎行旅","治水路網更完善","水域觀光樂無虞"],"X13":["五十二甲濕地寬","保育治水兩相安","地主土地求正義","任內解決不拖延"]};
 var FZ_DEF=['蘭陽山海好風光','團結作伙拚向前','平安幸福齊到手','宜蘭一定贏得先'];
 var CV_S='"Songti TC","Noto Serif TC","STSong","PMingLiU",serif';
 function fzPoem(id){return FZP[id]||FZ_DEF}
 function fzGrade(id){var s=0;for(var i=0;i<id.length;i++)s+=id.charCodeAt(i);return ['上上籤','上吉籤','中吉籤'][s%3]}
-function drawFortuneImg(p,no,total){
+function drawFortuneImg(p,no,total,day){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),cc=CATS[p.c],RED='#C8372D',BR='#3A1A10',po=fzPoem(p.id),gr=fzGrade(p.id);
   c.fillStyle='#FFF4D6';c.fillRect(0,0,W,H);
   c.strokeStyle=RED;c.lineWidth=18;c.strokeRect(24,24,W-48,H-48);c.lineWidth=4;c.strokeRect(54,54,W-108,H-108);
   c.textBaseline='alphabetic';c.textAlign='center';
-  c.fillStyle=RED;c.font='900 40px '+CV_F;c.fillText('宜蘭政見籤',W/2,130);
+  c.fillStyle=RED;c.font='900 40px '+CV_F;c.fillText(day?'宜蘭政見籤・今日一籤 '+day:'宜蘭政見籤',W/2,130);
   c.font='900 118px '+CV_S;c.fillText('第 '+no+' 籤',W/2,262);
   c.font='900 38px '+CV_F;var gw=c.measureText(gr).width+64;
   c.fillStyle=RED;rrect(c,W/2-gw/2,292,gw,60,30);c.fill();
@@ -2031,7 +2062,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/27 第 39 版';
+var BUILD='10/27 第 40 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
