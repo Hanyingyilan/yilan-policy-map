@@ -2012,18 +2012,15 @@ function drawBlessCard(name,wish,img,fx){
   c.strokeStyle=GOLD;c.lineWidth=14;c.strokeRect(28,28,W-56,H-56);c.lineWidth=3;c.strokeRect(54,54,W-108,H-108);
   c.textBaseline='alphabetic';c.textAlign='center';
   c.font='90px '+CV_F;c.fillText('🏮',140,168);c.fillText('🏮',W-140,168);
-  c.fillStyle=GOLD;c.font='900 64px '+CV_F;c.fillText('1定贏',W/2,162);
+  c.fillStyle=GOLD;c.font='900 44px '+CV_F;c.fillText('宜蘭縣長候選人　林國漳',W/2,152);
   var hd='林國漳　祝福　'+name,fs=64;
   while(fs>40){c.font='900 '+fs+'px '+CV_S;if(c.measureText(hd).width<=W-160)break;fs-=2}
   if(img){
-    var px=96,py=196,pw=W-192,ph=620,sw=img.naturalWidth,sh=img.naturalHeight,r=pw/ph,cw=sw,ch=sh;
+    var px=96,py=196,pw=W-192,ph=636,sw=img.naturalWidth,sh=img.naturalHeight,r=pw/ph,cw=sw,ch=sh;
     if(sw/sh>r)cw=sh*r;else ch=sw/r;
     var sx=Math.max(0,Math.min(sw-cw,sw*(fx==null?.5:fx)-cw/2)),sy=Math.max(0,Math.min(sh-ch,sh*.3-ch/2));
     c.save();rrect(c,px,py,pw,ph,26);c.clip();c.drawImage(img,sx,sy,cw,ch,px,py,pw,ph);c.restore();
     c.strokeStyle=GOLD;c.lineWidth=8;rrect(c,px,py,pw,ph,26);c.stroke();
-    var cap='宜蘭縣長候選人　林國漳';c.font='800 32px '+CV_F;var cwid=c.measureText(cap).width+44;
-    c.fillStyle='rgba(158,31,24,.9)';rrect(c,px+22,py+ph-72,cwid,50,25);c.fill();
-    c.fillStyle=CR;c.textAlign='left';c.fillText(cap,px+44,py+ph-37);c.textAlign='center';
     c.fillStyle=GOLD;c.font='900 '+fs+'px '+CV_S;c.fillText(hd,W/2,904);
     c.fillStyle=CR;c.font='900 60px '+CV_S;
     var wl=cvWrap(c,wish,W-200,2),y0=wl.length>1?996:1050;
@@ -2056,8 +2053,13 @@ function openBless(){
   var ni=$('#blname'),wi=$('#blwish');
   function go(){blGen((ni.value||'').trim()||'宜蘭人',(wi.value||'').trim())}
   $('#blgo').onclick=go;
-  ni.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();wi.focus()}};
-  wi.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();go()}};
+  [ni,wi].forEach(function(el){
+    el.addEventListener('compositionstart',function(){el._cp=1});
+    el.addEventListener('compositionend',function(){el._cp=0;el._ce=Date.now()});
+  });
+  function enterOK(e,el){return e.key==='Enter'&&!e.isComposing&&e.keyCode!==229&&!el._cp&&Date.now()-(el._ce||0)>200}
+  ni.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();if(enterOK(e,ni))wi.focus()}};
+  wi.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();if(enterOK(e,wi))go()}};
   try{ni.focus()}catch(x){}
 }
 function townURL(id){return SHARE_BASE?SHARE_BASE+'s/t-'+id+'/':location.href.split('#')[0]+'#t-'+id}
@@ -2106,7 +2108,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 48 版';
+var BUILD='10/28 第 49 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
