@@ -2009,47 +2009,12 @@ function showQuiz(){
     };
   });
 }
-var QSTAT=null;
-function statStart(){var b=Math.floor(Date.now()/6e5)%27,d=new Date(Date.UTC(2026,8,1+b));return d.toISOString().slice(0,10)}
-function statCount(path){
-  return fetch('https://'+STATS_CODE+'.goatcounter.com/counter/'+encodeURIComponent(path)+'.json?start='+statStart()).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){return parseInt(String(j.count).replace(/[^0-9]/g,''),10)||0});
-}
-function statCountAny(path){return statCount('/'+path).catch(function(){return statCount(path)}).catch(function(){return 0})}
-function loadQuizStats(cb){
-  if(!STATS_CODE||typeof fetch!=='function'){cb(null);return}
-  if(QSTAT&&Date.now()-QSTAT.t<600000){cb(QSTAT.v);return}
-  var ids=TOWNS.map(function(t){return t.id});
-  Promise.all([statCountAny('quiz/done'),statCountAny('TOTAL')].concat(ids.map(function(id){return statCountAny('quiz/result/'+id)}))).then(function(a){
-    var v={total:a[0],visits:a[1],town:{}};ids.forEach(function(id,i){v.town[id]=a[i+2]});
-    if(v.total||v.visits)QSTAT={t:Date.now(),v:v};cb(v);
-  }).catch(function(){cb(null)});
-}
-function quizStatsHTML(v,mine){
-  if(!v||!(v.total||v.visits))return '';
-  var n=function(x){return (x||0).toLocaleString('en-US')};
-  var h='<div class="qzpc"><p class="qzpt">目前累積</p><div class="qzbig"><div><b>'+n(Math.max(v.visits,v.total))+'</b>人次來訪</div><div><b>'+n(v.total)+'</b>人測過鄉鎮測驗</div></div>';
-  if(v.total>=10){
-    var rows=TOWNS.map(function(t){return {id:t.id,n:qzShort(t),c:v.town[t.id]||0}}).sort(function(a,b){return b.c-a.c}),mx=Math.max(1,rows[0].c);
-    h+='<p class="ovn" style="margin:0 0 4px">大家測出是哪裡人</p>'+rows.map(function(r){
-      return '<div class="qzr'+(r.id===mine?' me':'')+'"><span>'+esc(r.n)+'人</span><i style="--w:'+Math.round(r.c/mx*100)+'%"></i><em>'+n(r.c)+'</em></div>';
-    }).join('');
-  }
-  return h+'<p class="ovn" style="margin:8px 0 0">統計不使用 cookie、不記錄個人資料，數字約每 10 分鐘更新一次，僅供參考。</p><button type="button" class="qzx">知道了</button></div>';
-}
-function showStatsPop(v,mine){
-  var s=quizStatsHTML(v,mine),el=document.querySelector('.cardimg'),host=el&&el.closest('.ovc');
-  if(!s||!host||host.querySelector('.qzpop'))return;
-  var d=document.createElement('div');d.className='qzpop';d.innerHTML=s;host.appendChild(d);
-  function close(){if(d.parentNode)d.parentNode.removeChild(d)}
-  d.querySelector('.qzx').onclick=close;d.addEventListener('click',function(e){if(e.target===d)close()});
-}
 function showQuizResult(id0){
   var id=id0||quizResult(),t=TOWNS[TI[id]];
   if(!id0){stat('quiz/done','測驗完成');stat('quiz/result/'+id,'測驗結果：'+t.n)}
   openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜林國漳政見地圖',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
     '<button type="button" data-qzagain>再測一次</button><button type="button" data-qzsee>看'+esc(t.n)+'的政見</button>','qr-'+id);
   OV.querySelector('[data-qzagain]').onclick=openQuiz;
-  if(!id0)setTimeout(function(){loadQuizStats(function(v){showStatsPop(v,id)});},2500);
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
 }
 function openQuiz(){QS.i=0;QS.sc={};showQuiz()}
@@ -2193,7 +2158,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 65 版';
+var BUILD='10/28 第 66 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
