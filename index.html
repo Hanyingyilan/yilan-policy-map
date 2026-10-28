@@ -2070,7 +2070,7 @@ function blGen(nm,w){
 }
 function openBless(){
   ovOpen('<h3 class="blh">🧧 「1定贏」祝福卡</h3><p class="ovn" style="margin-top:0">輸入名字，隨機抽一張林國漳的照片，配上一句祝福，做成圖卡傳給朋友。</p>'+
-    '<label class="blf">名字（最多 8 字）<input id="blname" maxlength="8" autocomplete="off" enterkeyhint="next" placeholder="例如：阿嬤、小明、全家"></label>'+
+    '<label class="blf">名字（最多 8 字）<input id="blname" maxlength="8" autocomplete="off" enterkeyhint="next" placeholder="例如：阿嬤、阿公、全家"></label>'+
     '<label class="blf">想自己寫祝福的話（最多 14 字，不寫就隨機）<input id="blwish" maxlength="14" autocomplete="off" enterkeyhint="go" placeholder="例如：身體健康，天天開心"></label>'+
     '<div class="ovb"><button type="button" class="pri" id="blgo">抽一張祝福卡</button></div>','bless');
   var ni=$('#blname'),wi=$('#blwish');
@@ -2131,7 +2131,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 57 版';
+var BUILD='10/28 第 58 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
