@@ -369,14 +369,19 @@ html.xl .ov{--ps:1.4}
 .vg button[aria-pressed=true]{background:var(--lime);border-color:var(--lime);color:var(--ink)}
 .vg button[aria-pressed=true] span{color:var(--ink)}
 .vdesc{margin:10px 16px 8px;color:var(--mut);font-size:calc(13.5px*var(--ps,1));line-height:1.55}
-.vc{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--ink3);background:none;padding:10px 16px;color:var(--txt);cursor:pointer;transition:background .12s}
-.vc:hover,.vc:focus-visible{background:var(--ink2)}
-.vc .vp{flex:none;width:calc(64px*var(--ps,1));aspect-ratio:1;border-radius:14px;display:grid;place-items:center;background:linear-gradient(150deg,var(--vc),#0A1D38 165%)}
-.vc .vp svg{width:40%;height:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
-.vc .vt{min-width:0}
-.vc b{display:block;font-size:calc(14.5px*var(--ps,1));line-height:1.45;font-weight:700}
-.vc small{display:block;margin-top:2px;color:var(--mut);font-size:calc(12px*var(--ps,1))}
-.vc small i{font-style:normal;font-weight:800;color:var(--vc)}
+
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;padding:0 16px}
+.vcard{background:var(--ink2);border:2px solid var(--edge);border-radius:16px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
+.vcard iframe,.vcard .vph{display:block;width:100%;aspect-ratio:9/16;border:0;background:#000}
+.vph{display:grid;place-content:center;justify-items:center;gap:8px;background:linear-gradient(150deg,var(--vc),#0A1D38 170%);color:#fff;text-decoration:none;font-weight:800;font-size:calc(13px*var(--ps,1))}
+.vph svg{width:38px;height:auto}
+.vcard .vb{text-align:left;padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
+.vcard h3{margin:0;font-size:calc(14px*var(--ps,1));line-height:1.4;font-weight:800;min-height:2.8em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vcard .vm{font-size:calc(11.5px*var(--ps,1));color:var(--mut);line-height:1.5}
+.vcard .vm i{font-style:normal;font-weight:800;color:var(--vc)}
+.vcard .vm a{color:var(--lime);font-weight:700}
+.vpl2{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:calc(11.5px*var(--ps,1));color:var(--mut)}
+.vpl2 .who{font-size:calc(11.5px*var(--ps,1))}
 .vrel{display:flex;flex-direction:column;gap:5px;margin-top:10px}
 .vrel>span{font-size:calc(12px*var(--ps,1));color:var(--mut)}
 .vr{display:flex;align-items:flex-start;gap:8px;width:100%;text-align:left;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:12px;padding:6px 10px;font-size:calc(13px*var(--ps,1));font-weight:700;line-height:1.4;cursor:pointer}
@@ -1281,8 +1286,6 @@ function panel(){
     h+='<button class="back" type="button" data-back>← 全部政見</button><div class="head"><div class="kind">地點</div><h2>'+esc(pl[0])+'</h2><p class="lede">鎖定這個地點的政見與建設。</p></div>'+listCards(pp,pp.length<=2);
   }else if(s&&s.type==='bio'){
     h+=bioView();
-  }else if(s&&s.type==='videos'){
-    h+=videoView();
   }else if(s&&s.type==='persona'){
     h+=personaControls(false);
   }else if(s&&s.type==='aud'){
@@ -1296,7 +1299,7 @@ function panel(){
     h+='<button class="back" type="button" data-back>← 全部政見</button>'+cardHTML(PBY[s.id],true);
   }else{
     if(!q){
-      h+='<button type="button" class="persbtn" data-bio>認識林國漳：30 年在宜蘭的經歷</button><button type="button" class="persbtn" data-videos>看林國漳的影片（'+VID.length+' 支）</button>'+funBox()+''+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
+      h+='<button type="button" class="persbtn" data-bio>認識林國漳：30 年在宜蘭的經歷</button>'+funBox()+''+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
       WALL.forEach(function(w){var p=PBY[w[0]];h+='<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'});
       h+='</div><button type="button" class="persbtn" data-wallcard>把重點數字存成圖卡</button>';
     }
@@ -1311,6 +1314,7 @@ function panel(){
       h+='<div class="sec">主要幹道與軌道</div>';
       rm.forEach(function(k){var r=RMETA[k];h+='<button type="button" class="row" data-road="'+k+'" style="padding:7px 16px"><span class="sw" style="border-color:'+r.col+(r.dash?';border-top-style:dashed':'')+'"></span><span class="t">'+esc(r.n)+'<small>'+polForRoad(k).filter(match).length+' 項相關政見</small></span></button>'});
     }
+    if(!q)h+=videoSection();
     var any=false,tot=0;Object.keys(CATS).forEach(function(k){tot+=POL.filter(function(p){return p.c===k&&match(p)}).length});
     h+='<div class="sec">全部政見　'+tot+'</div>';
     Object.keys(CATS).forEach(function(k){
@@ -1747,19 +1751,29 @@ function vList(g){
   if(g==='hot')return VID.slice().sort(function(a,b){return b.n-a.n||a.i-b.i}).slice(0,10);
   return VID.filter(function(v){return v.g===g});
 }
-function vRow(v){
-  return '<button type="button" class="vc" data-vid="'+v.id+'" style="--vc:'+VGC[v.g]+'"><span class="vp">'+VPLAY+'</span><span class="vt"><b>'+esc(v.t)+'</b><small><i>'+esc(VGN[v.g])+'</i>　'+vN(v.n)+' 次觀看</small></span></button>';
+var VGS='new';
+function vShort(t){return t.split(/[：、，（]/)[0]}
+function vCard(v){
+  var fb='https://www.facebook.com/reel/'+v.id+'/',c=VGC[v.g];
+  var media=SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" title="'+esc(v.t)+'" loading="lazy" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>'
+   :'<a class="vph" href="'+fb+'" target="_blank" rel="noopener">'+VPLAY+'<span>在臉書觀看</span></a>';
+  var pl=v.pol.slice(0,2).map(function(p){return '<button type="button" class="who" data-pol="'+p+'">'+esc(vShort(PBY[p].t))+'</button>'}).join('');
+  return '<article class="vcard" style="--vc:'+c+'">'+media+'<div class="vb"><h3>'+esc(v.t)+'</h3><div class="vm"><i>'+esc(VGN[v.g])+'</i>　'+vN(v.n)+' 次觀看'+(SHARE_BASE?'　<a href="'+fb+'" target="_blank" rel="noopener">在臉書開啟</a>':'')+'</div>'+(pl?'<div class="vpl2">政見：'+pl+'</div>':'')+'</div></article>';
 }
-function videoView(){
-  var g=S.sel.g||'new',cur=VG.filter(function(x){return x[0]===g})[0]||VG[0];g=cur[0];
-  var h='<button class="back" type="button" data-back>← 回首頁</button><div class="head"><div class="kind">影片</div><h2>林國漳的影片</h2><p class="lede">共 '+VID.length+' 支短片，點一支就能播放。觀看次數是 '+VID_AS+' 當天的數字。</p></div>';
-  h+='<div class="aud vg">'+VG.map(function(x){return '<button type="button" data-vg="'+x[0]+'" aria-pressed="'+(x[0]===g)+'">'+esc(x[1])+'<span>'+vList(x[0]).length+'</span></button>'}).join('')+'</div>';
-  h+='<p class="vdesc">'+esc(cur[2])+'</p>'+vList(g).map(vRow).join('');
-  return h;
+function vInner(){
+  var cur=VG.filter(function(x){return x[0]===VGS})[0]||VG[0];
+  return '<div class="aud vg">'+VG.map(function(x){return '<button type="button" data-vg="'+x[0]+'" aria-pressed="'+(x[0]===cur[0])+'">'+esc(x[1])+'<span>'+vList(x[0]).length+'</span></button>'}).join('')+'</div>'+
+   '<p class="vdesc">'+esc(cur[2])+'</p><div class="vgrid">'+vList(cur[0]).map(vCard).join('')+'</div>';
 }
-function setVG(g){if(S.sel&&S.sel.type==='videos'){S.sel.g=g;panel()}}
+function videoSection(){
+  return '<div class="sec" id="vhd">短影音　'+VID.length+'</div><p class="vdesc" style="margin-top:0">林國漳的短影音，點一下就能播放。觀看次數是 '+VID_AS+' 當天的數字。</p><div id="vsec">'+vInner()+'</div>';
+}
+function setVG(g){VGS=g;var el=$('#vsec');if(el)el.innerHTML=vInner()}
 function openVideos(g){
-  S.sel={type:'videos',g:g||'new'};setHL();refresh();homeView();window.scrollTo&&window.scrollTo({top:0});
+  if(g&&VGN[g])VGS=g;
+  S.q='';var qi=$('#q');if(qi)qi.value='';
+  S.sel=null;setHL();refresh();homeView();
+  var el=$('#vhd');if(el&&el.scrollIntoView)el.scrollIntoView({block:'start'});
   stat('videos','影片');
 }
 function vidsFor(pid){return VID.filter(function(v){return v.pol.indexOf(pid)>-1}).sort(function(a,b){return b.n-a.n})}
@@ -2346,7 +2360,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 68 版';
+var BUILD='10/28 第 69 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
