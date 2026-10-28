@@ -371,7 +371,7 @@ html.xl .ov{--ps:1.4}
 .vdesc{margin:10px 16px 8px;color:var(--mut);font-size:calc(13.5px*var(--ps,1));line-height:1.55}
 
 .vh{margin:20px 16px 8px;padding-left:10px;border-left:4px solid var(--lime);font-size:calc(17px*var(--ps,1));font-weight:900;color:var(--txt)}
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;padding:0 16px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(max(170px,calc((100% - 28px)/3)),1fr));gap:14px;padding:0 16px}
 .vcard{background:var(--ink2);border:2px solid var(--edge);border-radius:16px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
 .vcard iframe,.vcard .vph{display:block;width:100%;aspect-ratio:9/16;border:0;background:#000}
 .vph{display:grid;place-content:center;justify-items:center;gap:8px;background:linear-gradient(150deg,var(--vc),#0A1D38 170%);color:#fff;text-decoration:none;font-weight:800;font-size:calc(13px*var(--ps,1))}
@@ -1761,14 +1761,14 @@ function vCard(v){
   var pl=v.pol.slice(0,2).map(function(p){return '<button type="button" class="who" data-pol="'+p+'">'+esc(vShort(PBY[p].t))+'</button>'}).join('');
   return '<article class="vcard" style="--vc:'+c+'">'+media+'<div class="vb"><h3>'+esc(v.t)+'</h3><div class="vm"><i>'+esc(VGN[v.g])+'</i>　'+vN(v.n)+' 次觀看'+(SHARE_BASE?'　<a href="'+fb+'" target="_blank" rel="noopener">在臉書開啟</a>':'')+'</div>'+(pl?'<div class="vpl2">政見：'+pl+'</div>':'')+'</div></article>';
 }
-var VMORE=4;
+var VMORE=3;
 function vSer(v){return /《還好有國漳》/.test(v.t)?'hao':(/^#237/.test(v.t)?'gai':'')}
 function vSecs(){
-  var hao=VID.filter(function(v){return vSer(v)==='hao'}),gai=VID.filter(function(v){return vSer(v)==='gai'});
+  var hao=VID.filter(function(v){return vSer(v)==='hao'}).slice(0,3),gai=VID.filter(function(v){return vSer(v)==='gai'}).slice(0,3);
   var used={};hao.concat(gai).forEach(function(v){used[v.id]=1});
   var pool=function(){return VID.filter(function(v){return !used[v.id]})};
-  var hot=pool().sort(function(a,b){return b.n-a.n||a.i-b.i}).slice(0,4);hot.forEach(function(v){used[v.id]=1});
-  var nw=pool().slice(0,4);nw.forEach(function(v){used[v.id]=1});
+  var hot=pool().sort(function(a,b){return b.n-a.n||a.i-b.i}).slice(0,3);hot.forEach(function(v){used[v.id]=1});
+  var nw=pool().slice(0,3);nw.forEach(function(v){used[v.id]=1});
   return {hot:hot,nw:nw,hao:hao,gai:gai,rest:pool()};
 }
 function vBlock(title,desc,arr){
@@ -1778,11 +1778,11 @@ function vMoreHTML(){
   var r=vSecs().rest,left=r.length-VMORE;
   return '<div class="vgrid">'+r.slice(0,VMORE).map(vCard).join('')+'</div>'+(left>0?'<button type="button" class="persbtn" data-vmore>看更多影片（還有 '+left+' 支）</button>':'');
 }
-function vMore(){VMORE+=4;var el=$('#vmb');if(el)el.innerHTML=vMoreHTML()}
+function vMore(){VMORE+=3;var el=$('#vmb');if(el)el.innerHTML=vMoreHTML()}
 function videoSection(){
   var s=vSecs();
   return '<div class="sec" id="vhd">短影音　'+VID.length+'</div><p class="vdesc" style="margin-top:0">林國漳的短影音，點一下就能播放。觀看次數是 '+VID_AS+' 當天的數字。</p>'+
-   '<div id="vsec">'+vBlock('熱門','觀看次數最多的 4 支。',s.hot)+vBlock('最新','最近發布的 4 支。',s.nw)+
+   '<div id="vsec">'+vBlock('熱門','觀看次數最多的 3 支。',s.hot)+vBlock('最新','最近發布的 3 支。',s.nw)+
    vBlock('《還好有國漳》系列','受過國漳協助的人，說他們眼中的國漳。',s.hao)+vBlock('#237 宜蘭蓋漳系列','走訪各鄉鎮市，跟鄉親面對面。',s.gai)+
    '<h3 class="vh">更多短片</h3><div id="vmb">'+vMoreHTML()+'</div></div>';
 }
@@ -2378,7 +2378,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 70 版';
+var BUILD='10/28 第 71 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
