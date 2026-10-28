@@ -1728,7 +1728,7 @@ function drawFortune(daily,fid){
       '<div class="fzjie"><span class="fzcat">'+esc(c.n)+'</span><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p></div><div class="fznote">籤詩為創作，政見以內容為準</div></div>'+
       '<div class="ovb"><button type="button" class="pri" data-fzsee>看這項政見</button><button type="button" data-fzagain>再抽一支</button><button type="button" data-fzimg>存成籤紙圖</button></div>'+
       '<div class="ovb"><a class="line" href="'+esc(lineHref((daily?'今日一籤「':'我抽到「')+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
-    ovOpen(h,'fz');if(daily)markDay();if(!fid)stat(daily?'fortune/daily':'fortune/draw',daily?'今日一籤':'抽籤');
+    ovOpen(h,'fz');if(daily)markDay();
     OV.querySelector('[data-fzsee]').onclick=function(){ovClose();selectPolicy(p.id);try{window.scrollTo({top:0})}catch(x){}};
     OV.querySelector('[data-fzagain]').onclick=function(){drawFortune()};
     OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length,daily?dayLabel():''),(daily?'今日一籤「':'我抽到「')+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url,'林國漳-政見籤.png',null,daily?'daily':'f-'+p.id)};
@@ -1994,7 +1994,7 @@ function showQuizResult(id0){
   OV.querySelector('[data-qzagain]').onclick=openQuiz;
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
 }
-function openQuiz(){QS.i=0;QS.sc={};stat('quiz/start','測驗開始');showQuiz()}
+function openQuiz(){QS.i=0;QS.sc={};showQuiz()}
 var BP=[['photos/b01.jpg',0.44],['photos/b02.jpg',0.38],['photos/b03.jpg',0.59],['photos/b05.jpg',0.39],['photos/b06.jpg',0.36],['photos/b07.jpg',0.69],['photos/b08.jpg',0.63],['photos/b09.jpg',0.42],['photos/b10.jpg',0.44],['photos/b11.jpg',0.51],['photos/b12.jpg',0.54],['photos/b13.jpg',0.51],['photos/b14.jpg',0.42],['photos/b15.jpg',0.57],['photos/b16.jpg',0.51]];
 var BL=['平安順心，1定贏！','身體健康，天天開心','好運來，萬事1定贏','家庭和樂，事事順利','工作順利，荷包滿滿','團結作伙拚，宜蘭1定贏','笑口常開，好運跟著來','出門平安，回家溫暖','今天也加油，你1定贏','心想事成，天天精彩','願你有好山好水好心情','平安喜樂，家人安康','生意興隆，客人滿門','你的努力，宜蘭看得見','辛苦了，給你大大的讚','歲歲平安，年年有餘'];
 var BPI={},BS={p:-1,w:-1};
@@ -2061,7 +2061,6 @@ function fontReady(txt,cb){
   }catch(e){fin()}
 }
 function blGen(nm,w){
-  stat('bless/make','祝福卡');
   var k=bpPick('p',BP.length),wish=w||BL[bpPick('w',BL.length)];
   bpLoad(k,function(img){fontReady('祝福'+nm+wish,function(){
     openImg(drawBlessCard(nm,wish,img,BP[k][1]),'林國漳祝福'+nm+'：'+wish+'｜林國漳政見地圖',blURL(),'林國漳-1定贏祝福卡.png','<button type="button" data-blagain>再抽一張</button>');
@@ -2131,7 +2130,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 58 版';
+var BUILD='10/28 第 59 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
