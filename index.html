@@ -364,6 +364,40 @@ html.xl .ov{--ps:1.4}
 @media (prefers-reduced-motion: reduce){.fzt.shake svg,.fzc{animation:none}}
 
 .go.alt{margin-left:8px;background:var(--ink3);color:var(--lime);box-shadow:0 3px 0 #0A1D38}
+/* ---- videos ---- */
+.vg{margin-bottom:2px}
+.vg button[aria-pressed=true]{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.vg button[aria-pressed=true] span{color:var(--ink)}
+.vdesc{margin:10px 16px 8px;color:var(--mut);font-size:calc(13.5px*var(--ps,1));line-height:1.55}
+.vc{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--ink3);background:none;padding:10px 16px;color:var(--txt);cursor:pointer;transition:background .12s}
+.vc:hover,.vc:focus-visible{background:var(--ink2)}
+.vc .vp{flex:none;width:calc(64px*var(--ps,1));aspect-ratio:1;border-radius:14px;display:grid;place-items:center;background:linear-gradient(150deg,var(--vc),#0A1D38 165%)}
+.vc .vp svg{width:40%;height:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.vc .vt{min-width:0}
+.vc b{display:block;font-size:calc(14.5px*var(--ps,1));line-height:1.45;font-weight:700}
+.vc small{display:block;margin-top:2px;color:var(--mut);font-size:calc(12px*var(--ps,1))}
+.vc small i{font-style:normal;font-weight:800;color:var(--vc)}
+.vrel{display:flex;flex-direction:column;gap:5px;margin-top:10px}
+.vrel>span{font-size:calc(12px*var(--ps,1));color:var(--mut)}
+.vr{display:flex;align-items:flex-start;gap:8px;width:100%;text-align:left;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:12px;padding:6px 10px;font-size:calc(13px*var(--ps,1));font-weight:700;line-height:1.4;cursor:pointer}
+.vr:hover,.vr:focus-visible{border-color:var(--lime)}
+.vr svg{flex:none;width:1em;height:1em;margin-top:.2em;fill:var(--lime)}
+.vr small{margin-left:auto;padding-left:6px;flex:none;color:var(--mut);font-weight:500;font-size:calc(11.5px*var(--ps,1))}
+.vmo{position:fixed;inset:0;z-index:98;display:grid;place-items:center;padding:12px;background:rgba(5,14,30,.95);overflow:auto;--ps:1.2}
+.vmc{position:relative;width:min(440px,100%);max-height:calc(100vh - 24px);overflow:auto;background:var(--ink2);border:2px solid var(--lime);border-radius:20px;padding:14px 14px 16px;color:var(--txt)}
+.vmx{position:absolute;right:8px;top:4px;border:0;background:none;color:var(--txt);font-size:30px;line-height:1;padding:4px 10px;cursor:pointer;z-index:2}
+.vpl{display:grid;place-items:center;margin:24px 0 10px}
+.vpl iframe{display:block;border:0;width:min(100%,360px,calc(60vh*9/16));aspect-ratio:9/16;border-radius:12px;background:#000}
+.vnoemb{display:grid;place-items:center;gap:10px;width:min(100%,260px);aspect-ratio:9/16;border-radius:12px;background:linear-gradient(150deg,var(--vc),#0A1D38 170%);text-align:center;padding:16px;font-size:calc(13px*var(--ps,1));font-weight:700}
+.vmc h3{margin:0 24px 4px 0;font-size:calc(17px*var(--ps,1));line-height:1.4;font-weight:900}
+.vmm{color:var(--mut);font-size:calc(13px*var(--ps,1))}
+.vmm i{font-style:normal;font-weight:800;color:var(--vc)}
+.vma{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.vma a,.vma button{border:2px solid var(--lime);background:var(--ink2);color:var(--lime);border-radius:14px;padding:5px 12px;font-size:calc(13px*var(--ps,1));font-weight:900;text-decoration:none;cursor:pointer;font-family:inherit}
+.vma a:hover,.vma button:hover{background:var(--ink3)}
+.vmr{margin-top:12px;display:flex;flex-direction:column;gap:5px}
+.vmr>b{font-size:calc(12.5px*var(--ps,1));color:var(--lime);letter-spacing:.1em}
+.vnote{margin:12px 0 0;color:var(--mut);font-size:calc(11.5px*var(--ps,1));line-height:1.5}
 </style>
 </head>
 <body>
@@ -377,6 +411,7 @@ html.xl .ov{--ps:1.4}
     <div class="tools">
       <button type="button" id="bgtoggle" aria-pressed="true">既有計畫</button>
       <button type="button" id="biobtn">候選人經歷</button>
+      <button type="button" id="videobtn">影片</button>
       <button type="button" id="fortunebtn">抽政見籤</button>
       <button type="button" id="aboutbtn">關於本頁</button>
       <button type="button" id="sharebtn" aria-expanded="false">分享</button>
@@ -1206,6 +1241,7 @@ function cardHTML(p,open){
   if(p.resp)h+='<div class="box resp"><b>外界回應　</b>'+esc(p.resp)+'</div>';
 
   var au=audFor(p.id);if(au.length)h+='<div class="whos"><span>適合：</span>'+au.slice(0,6).map(function(a){return '<button type="button" class="who" data-aud="'+a.id+'">'+esc(a.n.replace(/（.*?）/g,''))+'</button>'}).join('')+'</div>';
+  h+=vrelHTML(p.id);
   if(p.pl.length||p.rd.length||(p.tw!=='all'&&p.tw.length))h+='<button class="go" type="button" data-show="'+p.id+'">在地圖上看</button>';
   if(!p.bg)h+='<button class="go alt" type="button" data-pcard="'+p.id+'">存成圖卡</button>';
   return h+'</article>';
@@ -1245,6 +1281,8 @@ function panel(){
     h+='<button class="back" type="button" data-back>← 全部政見</button><div class="head"><div class="kind">地點</div><h2>'+esc(pl[0])+'</h2><p class="lede">鎖定這個地點的政見與建設。</p></div>'+listCards(pp,pp.length<=2);
   }else if(s&&s.type==='bio'){
     h+=bioView();
+  }else if(s&&s.type==='videos'){
+    h+=videoView();
   }else if(s&&s.type==='persona'){
     h+=personaControls(false);
   }else if(s&&s.type==='aud'){
@@ -1258,7 +1296,7 @@ function panel(){
     h+='<button class="back" type="button" data-back>← 全部政見</button>'+cardHTML(PBY[s.id],true);
   }else{
     if(!q){
-      h+='<button type="button" class="persbtn" data-bio>認識林國漳：30 年在宜蘭的經歷</button>'+funBox()+''+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
+      h+='<button type="button" class="persbtn" data-bio>認識林國漳：30 年在宜蘭的經歷</button><button type="button" class="persbtn" data-videos>看林國漳的影片（'+VID.length+' 支）</button>'+funBox()+''+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
       WALL.forEach(function(w){var p=PBY[w[0]];h+='<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'});
       h+='</div><button type="button" class="persbtn" data-wallcard>把重點數字存成圖卡</button>';
     }
@@ -1573,6 +1611,7 @@ function bind(){
 }
 $('#pbody').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if(b.dataset.vg){setVG(b.dataset.vg);return}
   if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){clearSel();homeView()}
 });
@@ -1592,6 +1631,7 @@ function buildLegend(){
 }
 $('#bgtoggle').onclick=function(){S.showBg=!S.showBg;this.setAttribute('aria-pressed',S.showBg);refresh()};
 $('#biobtn').onclick=openBio;
+$('#videobtn').onclick=function(){openVideos()};
 $('#aboutbtn').onclick=function(){S.sel={type:'about'};setHL();refresh()};
 /* ================= candidate background ================= */
 var BIO=[
@@ -1611,6 +1651,150 @@ function bioView(){
   return h;
 }
 function openBio(){S.sel={type:'bio'};setHL();refresh();homeView();window.scrollTo&&window.scrollTo({top:0})}
+
+/* ================= videos ================= */
+var VID_AS='10/28';
+var VG=[
+ ['new','最新','最近發布的 8 支。'],
+ ['hot','熱門','觀看次數最高的 10 支。'],
+ ['pol','政見說明','把政見講清楚。每支影片都連到地圖上對應的政見，在政見頁也找得到。'],
+ ['kai','開漳宜蘭','《開漳宜蘭》與《好運開漳》：走進老店、市集與日常，看宜蘭的人情味。'],
+ ['gai','237 宜蘭蓋漳','走訪各鄉鎮市，跟鄉親面對面。'],
+ ['friend','朋友說國漳','《如果有國漳》《還好有國漳》：認識他多年的朋友與受過協助的人，說他們眼中的國漳。'],
+ ['club','後援會','各界後援會成立大會。'],
+ ['walk','走訪宜蘭','拜會、造訪與參與地方活動。'],
+ ['farm','農業與防災','到田裡、到防汛現場，聽農民與地方的需求。'],
+ ['faith','民俗與文化','廟會、水燈、繪本與大拜拜，宜蘭的生活文化。'],
+ ['about','認識國漳','形象影片、三十年在地服務與重要時刻。']
+];
+var VGC={'new':'#C8F56B',hot:'#FF6B57',pol:'#4C8DFF',kai:'#FF9F43',gai:'#2EE6B6',friend:'#FF6FA5',club:'#A87BFF',walk:'#29C5E6',farm:'#7ED957',faith:'#D9A066',about:'#FFD23F'};
+var VGN={};VG.forEach(function(g){VGN[g[0]]=g[1]});
+/* [Facebook reel id, title, views at VID_AS, group, related policy ids]; newest first */
+var VID=[
+ ['1587421089251376','《如果有國漳》包漢銘律師談縣府委員會經驗',16000,'friend',[]],
+ ['1756824228879769','《還好有國漳》第三集：蘭馨婦幼中心創辦人黃淑鈴',15000,'friend',['K01','W02']],
+ ['29241299898840184','新住民後援會成立大會',29000,'club',['N01']],
+ ['2629310767527999','青年後援會成立大會',26000,'club',['K04']],
+ ['887592124442047','「姐妹後援會」成立大會',4601,'club',['K01']],
+ ['1871099793701636','社區大學師生後援會成立大會',16000,'club',[]],
+ ['2300047957487260','《還好有國漳》第二集：法扶當事人洪一平',24000,'friend',[]],
+ ['1641737824294468','《還好有國漳》社大學生黃鈺書律師',25000,'friend',[]],
+ ['1082314381233370','冬山清溝夜市、宜蘭果菜批發市場：與大家相見歡',26000,'walk',[]],
+ ['1402119825325969','首支競選形象影片《宜蘭的窗》',80000,'about',['V01']],
+ ['1402865411949340','中元普渡感恩月，祝大家平安順興',19000,'faith',[]],
+ ['1553140946826715','完成宜蘭縣長候選人登記：11.28 一起贏回宜蘭的光榮',53000,'about',[]],
+ ['1772911103741695','全民蓋「漳」：一起蓋漳宜蘭地圖',9138,'gai',[]],
+ ['1960698871294160','蘭馨婦幼中心庇護工場',13000,'walk',['K01','W02']],
+ ['2355649995175403','五十二甲濕地保育與私有土地解方',12000,'pol',['E03']],
+ ['1998137587546509','與蕭美琴副總統走訪百大青農與宜蘭酒廠',16000,'farm',['A01']],
+ ['1778947483461604','宜蘭交通政策願景：一高、二快、三接、四縱、五轉、六橫',12000,'pol',['T01','T02','T03','T04','T07']],
+ ['1605069467936685','宜蘭放水燈：讓水燈節成為重要的文化資產',22000,'faith',['C03']],
+ ['1073687598424207','羅東藝穗節「海洋總動員」：海洋大使漳魚叔叔登場',20000,'walk',[]],
+ ['1095362619666319','在地打拚！全民縣長！',59000,'about',['V01']],
+ ['1881879116122549','颱風來襲搶收水稻：主張推動農業保險補助',12000,'farm',['A02']],
+ ['1850161425945114','與蕭美琴副總統的傳產轉型之旅',13000,'walk',['I01']],
+ ['1405035381468084','交通改革：簽署交通改革承諾書',20000,'pol',['T04','T08']],
+ ['1816862529300207','員山紅龍果收成：聽農民的心聲',21000,'farm',['A01']],
+ ['37146827571631918','智慧敬老卡：多元使用、一卡通行',420000,'pol',['W01']],
+ ['2215033012596786','員山二湖鳳梨館：手作鳳梨豆腐乳',13000,'farm',['A01']],
+ ['3440928089391381','颱風前視察防汛設施與應變整備',24000,'farm',['E02']],
+ ['2043259512932386','午餐吃好，營養顧好，孩子才會好',24000,'pol',['K02','K03']],
+ ['1613189993715904','#237 宜蘭蓋漳：壯圍向前走',28000,'gai',[]],
+ ['1026050487035985','#237 宜蘭蓋漳：員山好農，種出好生活',31000,'gai',['A01','A02']],
+ ['867849943042399','#237 宜蘭蓋漳：羅東新藍圖',24000,'gai',[]],
+ ['2072679506933273','南澳鄉座談會：耆老為國漳穿上傳統族服',49000,'gai',['D01']],
+ ['3072295919630841','#237 宜蘭蓋漳：三星大團結',37000,'gai',[]],
+ ['961492983185413','#237 宜蘭蓋漳：頭城出發！',71000,'gai',[]],
+ ['1003741492101916','向大海致敬，出發龜山島',54000,'walk',['C01']],
+ ['2212812819481994','五結奠安宮：總統贈匾儀式',18000,'faith',[]],
+ ['828174486599578','台日友好：蘇澳與石垣的國際教育交流歡迎晚會',8425,'walk',[]],
+ ['1670386480941094','恭祝東嶽大帝聖誕千秋',33000,'faith',['C03']],
+ ['1320836936631898','海洋新宜蘭：藍色經濟新引擎',15000,'pol',['I04','C01']],
+ ['4452340578421860','恭祝天上聖母聖誕千秋：祈求媽祖庇佑蘭陽',80000,'faith',['C03']],
+ ['898764006518212','宜蘭勁水大縣章：防洪、水質、水資源',24000,'pol',['E02']],
+ ['990908996768181','拜會蘇澳鎮公所：追蹤災後復原、務實治水',55000,'walk',['E02']],
+ ['834439972546769','冬山定安宮：扛轎初體驗',75000,'faith',['C03']],
+ ['1719720789399197','勞工五大行動計畫',18000,'pol',['W05']],
+ ['1147511071769056','宜中校友後援會與律師後援會籌備會啟動',16000,'club',[]],
+ ['1154277460074751','《開漳宜蘭》老宅美食：馬桂爺爺咖哩',79000,'kai',[]],
+ ['1418428490028282','《開漳宜蘭》屬於我們的記憶：花生捲冰淇淋',18000,'kai',[]],
+ ['2154782341984167','陳定南教育基金會與紀念館：一日導覽員',14000,'walk',[]],
+ ['27042366242035465','三月二八嶽帝爺生：宜蘭呷拜拜',25000,'faith',['C03']],
+ ['825319070596231','《開漳宜蘭》體驗打泰拳',32000,'kai',['C07']],
+ ['1293770082616749','宜蘭新女力：幸福不缺席',9599,'pol',['K01']],
+ ['1443661110578797','在地服務三十年！您來講，我來聽',790000,'about',['V01']],
+ ['1633351917795828','宜蘭繪本《阿媽來收驚》',15000,'faith',['C03']],
+ ['4347356575510695','《開漳宜蘭》森本屋：羅東林業文化園區的舊書店',15000,'kai',[]],
+ ['2237185876810088','#好運開漳 送吉祥：宜蘭綠九市場',9867,'kai',[]],
+ ['1565271708017759','#好運開漳 自行車花海之行：大南澳',31000,'kai',[]],
+ ['25758782747117329','#好運開漳 送吉祥：宜蘭果菜市場',14000,'kai',[]],
+ ['2132290667602867','新年快樂，#好運開漳',28000,'kai',[]],
+ ['879982951684374','《開漳宜蘭》百年中藥房：廣生藥房',43000,'kai',[]],
+ ['1310495654213364','國漳生日：陪他走過人生的真真照相館',57000,'about',[]],
+ ['880955211351493','午餐推薦：國漳與家人愛吃的新店小吃部',83000,'kai',[]],
+ ['756253833711871','弱勢健保全額免費：守護宜蘭醫療平權',17000,'pol',['W02']],
+ ['1793246548222676','正式宣布參選的日子：賴清德主席推薦',120000,'about',[]],
+ ['847954851242630','九九重陽敬老活動',13000,'walk',[]],
+ ['2123098378497034','想在宜蘭喝五十嵐：與青年一起打造留才新亮點',52000,'pol',['K04','I03']],
+ ['879128537772766','宜蘭新住民諮詢站揭牌',12000,'walk',['N01']]
+];
+var VBY={};
+VID=VID.map(function(a,i){var o={id:a[0],t:a[1],n:a[2],g:a[3],pol:a[4].filter(function(x){return PBY[x]}),i:i};VBY[o.id]=o;return o});
+function vN(n){if(n>=10000){var x=Math.round(n/1000)/10;return (x%1?x.toFixed(1):x)+' 萬'}return String(n).replace(/\B(?=(\d{3})+$)/g,',')}
+var VPLAY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="#fff"/></svg>';
+function vList(g){
+  if(g==='new')return VID.slice(0,8);
+  if(g==='hot')return VID.slice().sort(function(a,b){return b.n-a.n||a.i-b.i}).slice(0,10);
+  return VID.filter(function(v){return v.g===g});
+}
+function vRow(v){
+  return '<button type="button" class="vc" data-vid="'+v.id+'" style="--vc:'+VGC[v.g]+'"><span class="vp">'+VPLAY+'</span><span class="vt"><b>'+esc(v.t)+'</b><small><i>'+esc(VGN[v.g])+'</i>　'+vN(v.n)+' 次觀看</small></span></button>';
+}
+function videoView(){
+  var g=S.sel.g||'new',cur=VG.filter(function(x){return x[0]===g})[0]||VG[0];g=cur[0];
+  var h='<button class="back" type="button" data-back>← 回首頁</button><div class="head"><div class="kind">影片</div><h2>林國漳的影片</h2><p class="lede">共 '+VID.length+' 支短片，點一支就能播放。觀看次數是 '+VID_AS+' 當天的數字。</p></div>';
+  h+='<div class="aud vg">'+VG.map(function(x){return '<button type="button" data-vg="'+x[0]+'" aria-pressed="'+(x[0]===g)+'">'+esc(x[1])+'<span>'+vList(x[0]).length+'</span></button>'}).join('')+'</div>';
+  h+='<p class="vdesc">'+esc(cur[2])+'</p>'+vList(g).map(vRow).join('');
+  return h;
+}
+function setVG(g){if(S.sel&&S.sel.type==='videos'){S.sel.g=g;panel()}}
+function openVideos(g){
+  S.sel={type:'videos',g:g||'new'};setHL();refresh();homeView();window.scrollTo&&window.scrollTo({top:0});
+  stat('videos','影片');
+}
+function vidsFor(pid){return VID.filter(function(v){return v.pol.indexOf(pid)>-1}).sort(function(a,b){return b.n-a.n})}
+function vrelHTML(pid){
+  var vs=vidsFor(pid);if(!vs.length)return '';
+  return '<div class="vrel"><span>相關影片</span>'+vs.slice(0,3).map(function(v){return '<button type="button" class="vr" data-vid="'+v.id+'">'+VPLAY+esc(v.t)+'<small>'+vN(v.n)+'</small></button>'}).join('')+'</div>';
+}
+function vCopy2(t){try{var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();var ok=document.execCommand('copy');a.remove();return ok}catch(e){return false}}
+function vCopy(t,cb){try{navigator.clipboard.writeText(t).then(function(){cb(true)},function(){cb(vCopy2(t))})}catch(e){cb(vCopy2(t))}}
+var VMO=null;
+function closeVid(){
+  if(VMO){VMO.remove();VMO=null;document.body.style.overflow=''}
+}
+function openVid(id){
+  var v=VBY[id];if(!v)return;closeVid();
+  var fb='https://www.facebook.com/reel/'+id+'/',link=(SHARE_BASE||location.href.split('#')[0])+'#v-'+id,c=VGC[v.g];
+  var emb=SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&autoplay=true&width=360&t=0" title="'+esc(v.t)+'" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>'
+   :'<div class="vnoemb"><span>私人預覽版不內嵌播放器。<br>正式網站可以直接播放。</span><a class="go" href="'+fb+'" target="_blank" rel="noopener">在臉書觀看</a></div>';
+  var line='https://line.me/R/msg/text/?'+encodeURIComponent(v.t+'｜林國漳\n'+link);
+  var rel=v.pol.length?'<div class="vmr"><b>這支影片談到的政見</b>'+v.pol.map(function(p){return '<button type="button" class="vr" data-mp="'+p+'">'+esc(PBY[p].t)+'</button>'}).join('')+'</div>':'';
+  var m=document.createElement('div');m.className='vmo';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label','播放影片');m.style.setProperty('--vc',c);
+  m.innerHTML='<div class="vmc"><button type="button" class="vmx" aria-label="關閉">×</button><div class="vpl">'+emb+'</div><h3>'+esc(v.t)+'</h3><div class="vmm"><i>'+esc(VGN[v.g])+'</i>　'+vN(v.n)+' 次觀看</div>'+
+   '<div class="vma"><a href="'+line+'" target="_blank" rel="noopener">傳到 LINE</a><button type="button" class="vcp">複製連結</button>'+(SHARE_BASE?'<a href="'+fb+'" target="_blank" rel="noopener">在臉書開啟</a>':'')+'</div>'+rel+
+   (SHARE_BASE?'<p class="vnote">影片由臉書提供，播放時會連線到臉書。</p>':'')+'</div>';
+  m.addEventListener('click',function(e){
+    if(e.target===m||e.target.closest('.vmx')){closeVid();return}
+    var b=e.target.closest('button');if(!b)return;
+    if(b.classList.contains('vcp')){vCopy(link,function(ok){b.textContent=ok?'已複製':'請長按連結複製';setTimeout(function(){b.textContent='複製連結'},1800)})}
+    else if(b.dataset.mp){closeVid();selectPolicy(b.dataset.mp);window.scrollTo&&window.scrollTo({top:0})}
+  });
+  document.body.appendChild(m);document.body.style.overflow='hidden';VMO=m;
+  var x=m.querySelector('.vmx');if(x&&x.focus)x.focus();
+  stat('video/'+id,v.t);
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVid()});
 /* ================= share / deep links / large text ================= */
 var SHARE_BASE='https://hanyingyilan.github.io/yilan-policy-map/';
 var CATKEYS=Object.keys(CATS);
@@ -1618,6 +1802,7 @@ function curKey(){
   var s=S.sel;
   if(s&&s.type==='persona')return 'me';
   if(s&&s.type==='bio')return 'bio';
+  if(s&&s.type==='videos')return 'videos';
   if(s&&({town:'t',policy:'p',road:'r',aud:'a',pin:'l'})[s.type])return ({town:'t',policy:'p',road:'r',aud:'a',pin:'l'})[s.type]+'-'+s.id;
   if(!s){var on=CATKEYS.filter(function(k){return S.cats[k]});if(on.length===1)return 'c-'+on[0]}
   return '';
@@ -1632,6 +1817,7 @@ function keyTitle(k){
   if(ty==='c'&&CATS[id])return CATS[id].n+'政見';
   if(ty==='me')return '依年齡、職業與地區找政見';
   if(ty==='bio')return '林國漳的經歷';
+  if(ty==='videos')return '林國漳的影片';
   return '';
 }
 function syncHash(){
@@ -1650,6 +1836,8 @@ function applyHash(){
     else if(ty==='l'&&PLACES[id])selectPin(id);
     else if(ty==='me')openPersona();
     else if(ty==='bio')openBio();
+    else if(ty==='videos')openVideos(VGN[id]?id:'new');
+    else if(ty==='v'&&VBY[id]){openVideos(VBY[id].g);openVid(id)}
     else if(ty==='f'&&PBY[id]&&!PBY[id].bg)drawFortune(false,id);
     else if(ty==='daily')drawFortune(true);
     else if(ty==='qr'&&TI[id]!==undefined)showQuizResult(id);
@@ -2158,7 +2346,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 67 版';
+var BUILD='10/28 第 68 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
