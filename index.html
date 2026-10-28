@@ -373,7 +373,10 @@ html.xl .ov{--ps:1.4}
 .vh{margin:20px 16px 8px;padding-left:10px;border-left:4px solid var(--lime);font-size:calc(17px*var(--ps,1));font-weight:900;color:var(--txt)}
 .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(max(170px,calc((100% - 28px)/3)),1fr));gap:14px;padding:0 16px}
 .vcard{background:var(--ink2);border:2px solid var(--edge);border-radius:16px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
-.vcard iframe,.vcard .vph{display:block;width:100%;aspect-ratio:9/16;border:0;background:#000}
+.vmw{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:9/16;background:linear-gradient(150deg,var(--vc),#0A1D38 170%);overflow:hidden}
+.vmw>svg{width:22%;height:auto;opacity:.9;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.vmw iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;opacity:0;transition:opacity .25s}
+.vpn{position:absolute;left:0;right:0;bottom:14px;text-align:center;color:#fff;font-weight:800;font-size:calc(12px*var(--ps,1));line-height:1.5}
 .vph{display:grid;place-content:center;justify-items:center;gap:8px;background:linear-gradient(150deg,var(--vc),#0A1D38 170%);color:#fff;text-decoration:none;font-weight:800;font-size:calc(13px*var(--ps,1))}
 .vph svg{width:38px;height:auto}
 .vcard .vb{text-align:left;padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
@@ -1756,10 +1759,9 @@ var VGS='new';
 function vShort(t){return t.split(/[：、，（]/)[0]}
 function vCard(v){
   var fb='https://www.facebook.com/reel/'+v.id+'/',c=VGC[v.g];
-  var media=SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" title="'+esc(v.t)+'" loading="lazy" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>'
-   :'<a class="vph" href="'+fb+'" target="_blank" rel="noopener">'+VPLAY+'<span>在臉書觀看</span></a>';
+  var media='<div class="vmw" style="--vc:'+c+'">'+VPLAY+(SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" title="'+esc(v.t)+'" loading="lazy" allowfullscreen onload="this.style.opacity=1" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>':'<span class="vpn">私人預覽版不能播放<br>請開公開網站觀看</span>')+'</div>';
   var pl=v.pol.slice(0,2).map(function(p){return '<button type="button" class="who" data-pol="'+p+'">'+esc(vShort(PBY[p].t))+'</button>'}).join('');
-  return '<article class="vcard" style="--vc:'+c+'">'+media+'<div class="vb"><h3>'+esc(v.t)+'</h3><div class="vm"><i>'+esc(VGN[v.g])+'</i>　'+vN(v.n)+' 次觀看'+(SHARE_BASE?'　<a href="'+fb+'" target="_blank" rel="noopener">在臉書開啟</a>':'')+'</div>'+(pl?'<div class="vpl2">政見：'+pl+'</div>':'')+'</div></article>';
+  return '<article class="vcard" style="--vc:'+c+'">'+media+'<div class="vb"><h3>'+esc(v.t)+'</h3><div class="vm"><i>'+esc(VGN[v.g])+'</i>　'+vN(v.n)+' 次觀看</div>'+(pl?'<div class="vpl2">政見：'+pl+'</div>':'')+'</div></article>';
 }
 var VMORE=3;
 function vSer(v){return /《還好有國漳》/.test(v.t)?'hao':(/^#237/.test(v.t)?'gai':'')}
@@ -1809,12 +1811,12 @@ function openVid(id){
   var v=VBY[id];if(!v)return;closeVid();
   var fb='https://www.facebook.com/reel/'+id+'/',link=(SHARE_BASE||location.href.split('#')[0])+'#v-'+id,c=VGC[v.g];
   var emb=SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&autoplay=true&width=360&t=0" title="'+esc(v.t)+'" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>'
-   :'<div class="vnoemb"><span>私人預覽版不內嵌播放器。<br>正式網站可以直接播放。</span><a class="go" href="'+fb+'" target="_blank" rel="noopener">在臉書觀看</a></div>';
+   :'<div class="vnoemb"><span>私人預覽版不能播放。<br>請開公開網站觀看。</span></div>';
   var line='https://line.me/R/msg/text/?'+encodeURIComponent(v.t+'｜林國漳\n'+link);
   var rel=v.pol.length?'<div class="vmr"><b>這支影片談到的政見</b>'+v.pol.map(function(p){return '<button type="button" class="vr" data-mp="'+p+'">'+esc(PBY[p].t)+'</button>'}).join('')+'</div>':'';
   var m=document.createElement('div');m.className='vmo';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label','播放影片');m.style.setProperty('--vc',c);
   m.innerHTML='<div class="vmc"><button type="button" class="vmx" aria-label="關閉">×</button><div class="vpl">'+emb+'</div><h3>'+esc(v.t)+'</h3><div class="vmm"><i>'+esc(VGN[v.g])+'</i>　'+vN(v.n)+' 次觀看</div>'+
-   '<div class="vma"><a href="'+line+'" target="_blank" rel="noopener">傳到 LINE</a><button type="button" class="vcp">複製連結</button>'+(SHARE_BASE?'<a href="'+fb+'" target="_blank" rel="noopener">在臉書開啟</a>':'')+'</div>'+rel+
+   '<div class="vma"><a href="'+line+'" target="_blank" rel="noopener">傳到 LINE</a><button type="button" class="vcp">複製連結</button>'+'</div>'+rel+
    (SHARE_BASE?'<p class="vnote">影片由臉書提供，播放時會連線到臉書。</p>':'')+'</div>';
   m.addEventListener('click',function(e){
     if(e.target===m||e.target.closest('.vmx')){closeVid();return}
@@ -2378,7 +2380,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 71 版';
+var BUILD='10/28 第 72 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
