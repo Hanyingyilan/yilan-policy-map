@@ -2016,7 +2016,7 @@ function drawBlessCard(name,wish,img,fx){
   var fs=img?58:200,nm=img?'給 '+name:name;
   do{c.font='900 '+fs+'px '+CV_S;fs-=4}while(c.measureText(nm).width>W-200&&fs>44);
   if(img){
-    var px=96,py=190,pw=W-192,ph=590,sw=img.naturalWidth,sh=img.naturalHeight,r=pw/ph,cw=sw,ch=sh;
+    var px=96,py=190,pw=W-192,ph=550,sw=img.naturalWidth,sh=img.naturalHeight,r=pw/ph,cw=sw,ch=sh;
     if(sw/sh>r)cw=sh*r;else ch=sw/r;
     var sx=Math.max(0,Math.min(sw-cw,sw*(fx==null?.5:fx)-cw/2)),sy=Math.max(0,Math.min(sh-ch,sh*.3-ch/2));
     c.save();rrect(c,px,py,pw,ph,26);c.clip();c.drawImage(img,sx,sy,cw,ch,px,py,pw,ph);c.restore();
@@ -2024,9 +2024,9 @@ function drawBlessCard(name,wish,img,fx){
     var cap='宜蘭縣長參選人　林國漳';c.font='800 32px '+CV_F;var cwid=c.measureText(cap).width+44;
     c.fillStyle='rgba(158,31,24,.9)';rrect(c,px+22,py+ph-72,cwid,50,25);c.fill();
     c.fillStyle=CR;c.textAlign='left';c.fillText(cap,px+44,py+ph-37);c.textAlign='center';
-    c.fillStyle=GOLD;c.font='900 '+fs+'px '+CV_S;c.fillText(nm,W/2,848);
-    c.font='900 200px '+CV_F;c.fillText('1定贏',W/2,1020);
-    c.fillStyle=CR;c.font='900 56px '+CV_S;c.fillText(cvFit(c,wish,W-200),W/2,1098);
+    c.fillStyle=GOLD;c.font='900 '+fs+'px '+CV_S;c.fillText(nm,W/2,812);
+    c.font='900 172px '+CV_F;c.fillText('1定贏',W/2,1006);
+    c.fillStyle=CR;c.font='900 56px '+CV_S;c.fillText(cvFit(c,wish,W-200),W/2,1090);
   }else{
     c.fillStyle=CR;c.font='900 '+fs+'px '+CV_S;c.fillText(nm,W/2,560);
     c.fillStyle=GOLD;c.font='900 290px '+CV_F;c.fillText('1定贏',W/2,860);
@@ -2048,13 +2048,14 @@ function blGen(nm,w){
 }
 function openBless(){
   ovOpen('<h3 class="blh">🧧 「1定贏」祝福卡</h3><p class="ovn" style="margin-top:0">輸入名字，隨機抽一張林國漳的照片，配上一句祝福，做成圖卡傳給朋友。</p>'+
-    '<label class="blf">名字（最多 8 字）<input id="blname" maxlength="8" autocomplete="off" placeholder="例如：阿嬤、小明、全家"></label>'+
-    '<label class="blf">想自己寫祝福的話（最多 14 字，不寫就隨機）<input id="blwish" maxlength="14" autocomplete="off" placeholder="例如：身體健康，天天開心"></label>'+
+    '<label class="blf">名字（最多 8 字）<input id="blname" maxlength="8" autocomplete="off" enterkeyhint="next" placeholder="例如：阿嬤、小明、全家"></label>'+
+    '<label class="blf">想自己寫祝福的話（最多 14 字，不寫就隨機）<input id="blwish" maxlength="14" autocomplete="off" enterkeyhint="go" placeholder="例如：身體健康，天天開心"></label>'+
     '<div class="ovb"><button type="button" class="pri" id="blgo">抽一張祝福卡</button></div>','bless');
   var ni=$('#blname'),wi=$('#blwish');
   function go(){blGen((ni.value||'').trim()||'宜蘭人',(wi.value||'').trim())}
   $('#blgo').onclick=go;
-  ni.onkeydown=wi.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();go()}};
+  ni.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();wi.focus()}};
+  wi.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();go()}};
   try{ni.focus()}catch(x){}
 }
 function townURL(id){return SHARE_BASE?SHARE_BASE+'s/t-'+id+'/':location.href.split('#')[0]+'#t-'+id}
@@ -2103,7 +2104,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 45 版';
+var BUILD='10/28 第 46 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
