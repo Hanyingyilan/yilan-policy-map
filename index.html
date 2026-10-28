@@ -2013,7 +2013,7 @@ function drawBlessCard(name,wish,img,fx){
   c.textBaseline='alphabetic';c.textAlign='center';
   c.font='90px '+CV_F;c.fillText('🏮',140,168);c.fillText('🏮',W-140,168);
   c.fillStyle=GOLD;c.font='900 44px '+CV_F;c.fillText('宜蘭縣長候選人　林國漳',W/2,152);
-  var hd='林國漳　祝福　'+name,fs=64;
+  var hd='祝福　'+name,fs=72;
   while(fs>40){c.font='900 '+fs+'px '+CV_S;if(c.measureText(hd).width<=W-160)break;fs-=2}
   if(img){
     var px=96,py=196,pw=W-192,ph=636,sw=img.naturalWidth,sh=img.naturalHeight,r=pw/ph,cw=sw,ch=sh;
@@ -2108,7 +2108,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 50 版';
+var BUILD='10/28 第 51 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
