@@ -1728,7 +1728,7 @@ function drawFortune(daily,fid){
       '<div class="fzjie"><span class="fzcat">'+esc(c.n)+'</span><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p></div><div class="fznote">籤詩為創作，政見以內容為準</div></div>'+
       '<div class="ovb"><button type="button" class="pri" data-fzsee>看這項政見</button><button type="button" data-fzagain>再抽一支</button><button type="button" data-fzimg>存成籤紙圖</button></div>'+
       '<div class="ovb"><a class="line" href="'+esc(lineHref((daily?'今日一籤「':'我抽到「')+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
-    ovOpen(h,'fz');if(daily)markDay();
+    ovOpen(h,'fz');if(daily)markDay();if(!fid)stat(daily?'fortune/daily':'fortune/draw',daily?'今日一籤':'抽籤');
     OV.querySelector('[data-fzsee]').onclick=function(){ovClose();selectPolicy(p.id);try{window.scrollTo({top:0})}catch(x){}};
     OV.querySelector('[data-fzagain]').onclick=function(){drawFortune()};
     OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length,daily?dayLabel():''),(daily?'今日一籤「':'我抽到「')+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url,'林國漳-政見籤.png',null,daily?'daily':'f-'+p.id)};
@@ -1988,12 +1988,13 @@ function showQuiz(){
 }
 function showQuizResult(id0){
   var id=id0||quizResult(),t=TOWNS[TI[id]];
+  if(!id0){stat('quiz/done','測驗完成');stat('quiz/result/'+id,'測驗結果：'+t.n)}
   openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜林國漳政見地圖',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
     '<button type="button" data-qzagain>再測一次</button><button type="button" data-qzsee>看'+esc(t.n)+'的政見</button>','qr-'+id);
   OV.querySelector('[data-qzagain]').onclick=openQuiz;
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
 }
-function openQuiz(){QS.i=0;QS.sc={};showQuiz()}
+function openQuiz(){QS.i=0;QS.sc={};stat('quiz/start','測驗開始');showQuiz()}
 var BP=[['photos/b01.jpg',0.45],['photos/b02.jpg',0.5],['photos/b03.jpg',0.5],['photos/b04.jpg',0.6],['photos/b05.jpg',0.45],['photos/b06.jpg',0.45],['photos/b07.jpg',0.62],['photos/b08.jpg',0.6],['photos/b09.jpg',0.45],['photos/b10.jpg',0.45],['photos/b11.jpg',0.45],['photos/b12.jpg',0.5],['photos/b13.jpg',0.5],['photos/b14.jpg',0.4],['photos/b15.jpg',0.6],['photos/b16.jpg',0.5]];
 var BL=['平安順心，1定贏！','身體健康，天天開心','好運來，萬事1定贏','家庭和樂，事事順利','工作順利，荷包滿滿','團結作伙拚，宜蘭1定贏','笑口常開，好運跟著來','出門平安，回家溫暖','今天也加油，你1定贏','心想事成，天天精彩','願你有好山好水好心情','平安喜樂，家人安康','生意興隆，客人滿門','你的努力，宜蘭看得見','辛苦了，給你大大的讚','歲歲平安，年年有餘'];
 var BPI={},BS={p:-1,w:-1};
@@ -2005,41 +2006,68 @@ function bpLoad(i,cb){
   im.src=BP[i][0];
 }
 function bpPick(key,n){var i;do{i=Math.floor(Math.random()*n)}while(n>1&&i===BS[key]);BS[key]=i;return i}
+var STATS_CODE='';
+function stat(path,title){
+  try{if(STATS_CODE&&SHARE_BASE&&window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:title||path,event:true})}catch(e){}
+}
+(function(){
+  try{
+    if(!STATS_CODE||!SHARE_BASE)return;
+    window.goatcounter={no_onload:false};
+    var s=document.createElement('script');s.async=true;
+    s.setAttribute('data-goatcounter','https://'+STATS_CODE+'.goatcounter.com/count');
+    s.src='https://gc.zgo.at/count.js';document.head.appendChild(s);
+  }catch(e){}
+})();
 function drawBlessCard(name,wish,img,fx){
-  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),OR='#F26B21',GR='#17803A',GR2='#0F6A2D',PH=820;
-  c.textBaseline='alphabetic';c.textAlign='left';
-  var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#F26B21');g.addColorStop(1,'#E0521A');c.fillStyle=g;c.fillRect(0,0,W,PH);
+  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),GR='#1B5E38',GD='#B08D3C',INK='#3A2A1A',PAPER='#F8F2E3';
+  var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,PAPER);g.addColorStop(1,'#EFE5CC');c.fillStyle=g;c.fillRect(0,0,W,H);
+  c.strokeStyle=GR;c.lineWidth=10;c.strokeRect(34,34,W-68,H-68);
+  c.strokeStyle=GD;c.lineWidth=2.5;c.strokeRect(58,58,W-116,H-116);
+  [[58,58],[W-58,58],[58,H-58],[W-58,H-58]].forEach(function(p){
+    c.fillStyle=PAPER;c.fillRect(p[0]-14,p[1]-14,28,28);c.strokeStyle=GD;c.lineWidth=2.5;c.strokeRect(p[0]-14,p[1]-14,28,28);
+    c.fillStyle=GD;c.fillRect(p[0]-5,p[1]-5,10,10);
+  });
+  function sp(v){if('letterSpacing' in c)c.letterSpacing=v}
+  c.textBaseline='alphabetic';c.textAlign='center';
+  var cap='宜蘭縣長候選人　林國漳';
+  c.fillStyle=GR;c.font='700 38px '+CV_S;sp('8px');var cw=c.measureText(cap).width;c.fillText(cap,W/2+4,134);sp('0px');
+  c.strokeStyle=GD;c.lineWidth=2;
+  c.beginPath();c.moveTo(130,124);c.lineTo(W/2-cw/2-34,124);c.moveTo(W/2+cw/2+34,124);c.lineTo(W-130,124);c.stroke();
+  var mx=120,my=176,mw=840,mh=566,px=mx+16,py=my+16,pw=mw-32,ph=mh-32;
+  c.save();c.shadowColor='rgba(40,30,10,.28)';c.shadowBlur=26;c.shadowOffsetY=10;c.fillStyle='#FFFDF6';c.fillRect(mx,my,mw,mh);c.restore();
+  c.strokeStyle=GD;c.lineWidth=2.5;c.strokeRect(mx,my,mw,mh);
   if(img){
-    var sw=img.naturalWidth,sh=img.naturalHeight,r=W/PH,cw=sw,ch=sh;
-    if(sw/sh>r)cw=sh*r;else ch=sw/r;
-    var sx=Math.max(0,Math.min(sw-cw,sw*(fx==null?.5:fx)-cw/2)),sy=Math.max(0,Math.min(sh-ch,sh*.3-ch/2));
-    c.drawImage(img,sx,sy,cw,ch,0,0,W,PH);
+    var sw=img.naturalWidth,sh=img.naturalHeight,r=pw/ph,cw2=sw,ch=sh;
+    if(sw/sh>r)cw2=sh*r;else ch=sw/r;
+    var sx=Math.max(0,Math.min(sw-cw2,sw*(fx==null?.5:fx)-cw2/2)),sy=Math.max(0,Math.min(sh-ch,sh*.3-ch/2));
+    c.drawImage(img,sx,sy,cw2,ch,px,py,pw,ph);
+  }else{
+    c.fillStyle=GR;c.fillRect(px,py,pw,ph);c.fillStyle='#F8F2E3';c.font='900 140px '+CV_S;c.fillText('宜蘭1定贏',W/2,py+ph/2+48);
   }
-  var tg=c.createLinearGradient(0,0,0,170);tg.addColorStop(0,'rgba(0,0,0,.58)');tg.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=tg;c.fillRect(0,0,W,170);
-  c.fillStyle='#fff';c.font='900 44px '+CV_F;c.fillText('宜蘭縣長候選人　林國漳',48,84);
-  c.fillStyle=OR;c.beginPath();c.arc(W-98,86,56,0,Math.PI*2);c.fill();
-  c.strokeStyle='#fff';c.lineWidth=5;c.stroke();
-  c.fillStyle='#fff';c.textAlign='center';c.font='900 62px '+CV_F;c.fillText('1',W-98,86);
-  c.font='900 26px '+CV_F;c.fillText('號',W-98,118);
-  c.fillStyle=GR;c.beginPath();c.moveTo(0,PH-72);c.lineTo(W,PH-100);c.lineTo(W,PH+90);c.lineTo(0,PH+90);c.closePath();c.fill();
-  c.fillStyle=OR;c.beginPath();c.moveTo(0,PH-52);c.lineTo(W,PH-80);c.lineTo(W,PH+30);c.lineTo(0,PH+30);c.closePath();c.fill();
+  c.strokeStyle=GR;c.lineWidth=4;c.strokeRect(px,py,pw,ph);
+  c.fillStyle=GR;c.beginPath();c.arc(mx+mw-6,my+6,54,0,Math.PI*2);c.fill();
+  c.strokeStyle=GD;c.lineWidth=5;c.stroke();
+  c.fillStyle='#fff';c.font='900 60px '+CV_S;c.fillText('1',mx+mw-6,my+8);
+  c.font='700 24px '+CV_S;c.fillText('號',mx+mw-6,my+38);
   var hd='祝福　'+name,fs=104;
-  while(fs>44){c.font='900 '+fs+'px '+CV_F;if(c.measureText(hd).width<=W-120)break;fs-=4}
-  c.fillStyle='#fff';c.fillText(hd,W/2,PH-3);
-  var g2=c.createLinearGradient(0,PH+30,0,H);g2.addColorStop(0,GR);g2.addColorStop(1,GR2);c.fillStyle=g2;c.fillRect(0,PH+30,W,H-PH-30);
-  c.fillStyle='#fff';c.font='900 80px '+CV_F;
-  var wl=cvWrap(c,wish,W-140,2),y0=wl.length>1?PH+130:PH+178;
-  wl.forEach(function(s,i){c.fillText(s,W/2,y0+i*96)});
-  var sl=typeof SLOGAN==='string'&&SLOGAN?SLOGAN:'團結作伙拚 宜蘭1定贏';
-  c.font='900 46px '+CV_F;var sw2=Math.min(W-120,c.measureText(sl).width+90);
-  c.fillStyle='#fff';rrect(c,(W-sw2)/2,1128,sw2,78,39);c.fill();
-  c.fillStyle=GR;c.fillText(sl,W/2,1182);
-  c.fillStyle='#fff';c.font='700 28px '+CV_F;c.fillText('宜蘭縣長候選人 林國漳'+(BALLOT_NO?' 號次 '+BALLOT_NO:'')+'・投票日 2026/11/28',W/2,1262);
-  c.fillStyle='rgba(255,255,255,.78)';c.font='600 22px '+CV_F;
-  c.fillText('林國漳政見地圖'+(SHARE_BASE?'　'+SHARE_BASE.replace(/^https?:\/\//,'').replace(/\/$/,''):''),W/2,1306);
+  while(fs>48){c.font='900 '+fs+'px '+CV_S;if(c.measureText(hd).width<=W-220)break;fs-=4}
+  c.fillStyle=GR;sp('6px');c.fillText(hd,W/2+3,858);sp('0px');
+  c.strokeStyle=GD;c.lineWidth=2;
+  c.beginPath();c.moveTo(300,912);c.lineTo(W/2-22,912);c.moveTo(W/2+22,912);c.lineTo(W-300,912);c.stroke();
+  c.save();c.translate(W/2,912);c.rotate(Math.PI/4);c.fillStyle=GD;c.fillRect(-7,-7,14,14);c.restore();
+  c.fillStyle=INK;c.font='700 60px '+CV_S;sp('3px');
+  var wl=cvWrap(c,wish,W-240,2),y0=wl.length>1?986:1012;
+  wl.forEach(function(s,i){c.fillText(s,W/2+1,y0+i*84)});sp('0px');
+  c.strokeStyle=GD;c.lineWidth=2;c.beginPath();c.moveTo(170,1100);c.lineTo(W-170,1100);c.stroke();
+  c.fillStyle=GR;c.font='900 50px '+CV_S;sp('4px');c.fillText(typeof SLOGAN==='string'&&SLOGAN?SLOGAN:'團結作伙拚 宜蘭1定贏',W/2+2,1170);sp('0px');
+  c.fillStyle='#6B5A44';c.font='600 26px '+CV_F;c.fillText('宜蘭縣長候選人 林國漳'+(BALLOT_NO?' 號次 '+BALLOT_NO:'')+'・投票日 2026/11/28',W/2,1218);
+  c.fillStyle='#8A7A60';c.font='500 20px '+CV_F;
+  c.fillText('林國漳政見地圖'+(SHARE_BASE?'　'+SHARE_BASE.replace(/^https?:\/\//,'').replace(/\/$/,''):''),W/2,1256);
   return cv;
 }
 function blGen(nm,w){
+  stat('bless/make','祝福卡');
   var k=bpPick('p',BP.length),wish=w||BL[bpPick('w',BL.length)];
   bpLoad(k,function(img){
     openImg(drawBlessCard(nm,wish,img,BP[k][1]),'林國漳祝福'+nm+'：'+wish+'｜林國漳政見地圖',blURL(),'林國漳-1定贏祝福卡.png','<button type="button" data-blagain>再抽一張</button>');
@@ -2109,7 +2137,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 52 版';
+var BUILD='10/28 第 53 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
