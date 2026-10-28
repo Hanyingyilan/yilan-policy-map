@@ -1799,12 +1799,12 @@ function drawCard(){
 var INLINE=/\bLine\//i.test(navigator.userAgent||''),INAPP=INLINE||/FBAN|FBAV|Instagram|MicroMessenger/i.test(navigator.userAgent||'');
 function extURL(h){var b=location.href.split('#')[0];if(typeof SHARE_BASE==='string'&&SHARE_BASE)b=SHARE_BASE;return b.split('?')[0]+'?openExternalBrowser=1#'+h}
 function openImg(cv,txt,url,fname,extra,ext){
-  var data=cv.toDataURL('image/png'),eb=INLINE&&ext?'<a class="pri" href="'+esc(extURL(ext))+'" target="_blank" rel="noopener">用瀏覽器開啟，再下載</a>':'';
+  var data=cv.toDataURL('image/png');
   ovOpen('<img class="cardimg" alt="分享圖卡" src="'+data+'">'+
-    '<div class="ovb">'+(INAPP?eb:'<a class="pri" href="'+data+'" download="'+fname+'">下載圖片</a>')+
+    '<div class="ovb">'+(INAPP?'':'<a class="pri" href="'+data+'" download="'+fname+'">下載圖片</a>')+
     (navigator.canShare?'<button type="button" id="cardshare">分享圖片</button>':'')+
     '<a class="line" href="'+esc(lineHref(txt,url))+'" target="_blank" rel="noopener">傳 LINE 連結</a>'+(extra||'')+'</div>'+
-    (INAPP?'<p class="ovn ovw">這裡不能直接下載。請長按上方圖片，選「儲存」'+(eb?'；或點「用瀏覽器開啟」。':'。')+'</p>':'<p class="ovn">手機也可以長按圖片，選「儲存」。</p>'),'card');
+    (INAPP?'<p class="ovn ovw">長按圖片可以儲存。</p>':'<p class="ovn">手機也可以長按圖片，選「儲存」。</p>'),'card');
   var sb=$('#cardshare');
   if(sb)sb.onclick=function(){
     cv.toBlob(function(b){
@@ -2108,7 +2108,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 49 版';
+var BUILD='10/28 第 50 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
