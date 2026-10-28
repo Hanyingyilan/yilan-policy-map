@@ -1294,7 +1294,9 @@ function personaMatches(){
   arr.sort(function(x,y){return (y.loc?1:0)-(x.loc?1:0)||y.a.length-x.a.length||(x.p.bg?1:0)-(y.p.bg?1:0)||x.p.id.localeCompare(y.p.id)});
   var seen={};arr.forEach(function(x){seen[x.p.id]=1});
   var extra=tw.length?POL.filter(function(p){return !p.bg&&!seen[p.id]&&match(p)&&here(p)}):[];
-  return {ids:ids,arr:arr,extra:extra,tw:tw};
+  extra.forEach(function(p){seen[p.id]=1});
+  var wide=(tw.length&&PS.allOn&&!ids.length)?POL.filter(function(p){return !p.bg&&p.tw==='all'&&!seen[p.id]&&match(p)}):[];
+  return {ids:ids,arr:arr,extra:extra,wide:wide,tw:tw};
 }
 function townName(id){for(var i=0;i<TOWNS.length;i++)if(TOWNS[i].id===id)return TOWNS[i].n;return id}
 function personaControls(home){
@@ -1314,7 +1316,7 @@ function personaControls(home){
    '<div class="ageticks">'+ticks+'</div></div>'+
    '<div class="sec">職業與身分（可多選）</div><div class="aud pjobs" id="pJobs">'+jobs+'</div>'+
    '<div class="sec">'+(home?'② ':'')+'居住或想看的地區（可多選）</div><div class="aud pjobs" id="pTowns">'+towns+'</div>'+
-   '<label class="pall"><input type="checkbox" id="pAllOn"'+(PS.allOn?' checked':'')+'> 同時顯示全縣都適用的政見</label>'+
+   '<label class="pall"><input type="checkbox" id="pAllOn"'+(PS.allOn?' checked':'')+'> 同時顯示全縣都適用的政見<small id="pAllN" style="opacity:.75"></small></label>'+
    '<div class="prow"><button type="button" class="btn2" id="pClear">全部清除</button><button type="button" class="go" id="pFit">在地圖上看全部</button></div>'+
    (home?'<div class="sec">③ 怎麼看</div>':'')+cta+
    (home?'':'<div id="presult"></div>');
@@ -1339,8 +1341,9 @@ function updatePersona(){
   var ag=$('#pAgeG');if(ag)ag.textContent=PS.ageOn?AI[ageGroup(PS.age)].n:'不限年齡';
   var any=r.ids.length||r.tw.length;
   var cand=POL.filter(function(p){return !p.bg&&match(p)});
-  var n=any?(r.arr.length+r.extra.length):cand.length;
+  var n=any?(r.arr.length+r.extra.length+r.wide.length):cand.length;
   var rn=$('#resn');if(rn)rn.textContent='（'+n+' 項）';
+  var an=$('#pAllN');if(an)an.textContent=r.tw.length?'　＋'+POL.filter(function(p){return !p.bg&&p.tw==='all'&&match(p)&&!r.extra.some(function(e){return e.id===p.id})}).length+' 項':'';
   var tn0=$('#tourn');if(tn0)tn0.textContent='（'+(tourList().length-2)+' 站）';
   if(box){
     var h='';
@@ -1363,13 +1366,17 @@ function updatePersona(){
         h+='<div class="sec">'+esc(tn)+' 的在地政見　'+r.extra.length+'</div>';
         r.extra.forEach(function(p){h+=personaRow(p,'')});
       }
+      if(r.wide.length){
+        h+='<div class="sec">全縣都適用的政見　'+r.wide.length+'</div>';
+        r.wide.forEach(function(p){h+=personaRow(p,'')});
+      }
     }
     box.innerHTML=h;
   }
   var tw={},rd={},pl={};
   r.tw.forEach(function(t){tw[t]=1});
-  r.arr.concat(r.extra.map(function(p){return {p:p}})).forEach(function(x){var p=x.p;if(p.bg)return;if(p.tw!=='all'&&!r.tw.length)p.tw.forEach(function(t){tw[t]=1});if(!r.tw.length)(p.lt||[]).forEach(function(t){tw[t]=1});p.rd.forEach(function(k){rd[k]=1});p.pl.forEach(function(k){pl[k]=1})});
-  S.pf=any?{}:null;if(S.pf){r.arr.forEach(function(x){S.pf[x.p.id]=1});r.extra.forEach(function(p){S.pf[p.id]=1})}
+  r.arr.concat(r.extra.concat(r.wide).map(function(p){return {p:p}})).forEach(function(x){var p=x.p;if(p.bg)return;if(p.tw!=='all'&&!r.tw.length)p.tw.forEach(function(t){tw[t]=1});if(!r.tw.length)(p.lt||[]).forEach(function(t){tw[t]=1});p.rd.forEach(function(k){rd[k]=1});p.pl.forEach(function(k){pl[k]=1})});
+  S.pf=any?{}:null;if(S.pf){r.arr.forEach(function(x){S.pf[x.p.id]=1});r.extra.forEach(function(p){S.pf[p.id]=1});r.wide.forEach(function(p){S.pf[p.id]=1})}
   setHL(Object.keys(tw),Object.keys(rd),Object.keys(pl));paint();
 }
 var pRaf=0;
@@ -1391,7 +1398,7 @@ function bindPersona(){
   $('#pClear').addEventListener('click',function(){PS.jobs={};PS.towns={};PS.ageOn=false;$('#pAgeOn').checked=false;$$('#pJobs button,#pTowns button').forEach(function(b){b.setAttribute('aria-pressed','false')});updatePersona()});
   $('#pFit').addEventListener('click',function(){
     var r=personaMatches(),pts=[];
-    r.arr.concat(r.extra.map(function(p){return {p:p}})).forEach(function(x){if(x.p.bg)return;x.p.pl.forEach(function(k){pts.push([PLACES[k][1],PLACES[k][2]])})});
+    r.arr.concat(r.extra.concat(r.wide).map(function(p){return {p:p}})).forEach(function(x){if(x.p.bg)return;x.p.pl.forEach(function(k){pts.push([PLACES[k][1],PLACES[k][2]])})});
     if(pts.length>1)fitBox(ptsBox(pts),1.4,.2);else if(r.tw.length===1)fitBox(TB[r.tw[0]],1.5,.12);else homeView();
   });
   updatePersona();
@@ -1779,7 +1786,7 @@ function cvNew(){var cv=document.createElement('canvas');cv.width=1080;cv.height
 function cvBG(c,W,H){var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0A1D38');g.addColorStop(1,'#173A66');c.fillStyle=g;c.fillRect(0,0,W,H)}
 function drawCard(){
   var r=personaMatches(),any=r.ids.length||r.tw.length,list=[],seen={};
-  if(any)r.arr.filter(function(x){return !x.p.bg}).map(function(x){return x.p}).concat(r.extra).forEach(function(p){if(!seen[p.id]){seen[p.id]=1;list.push(p)}});
+  if(any)r.arr.filter(function(x){return !x.p.bg}).map(function(x){return x.p}).concat(r.extra,r.wide).forEach(function(p){if(!seen[p.id]){seen[p.id]=1;list.push(p)}});
   else WALL.forEach(function(w){var p=PBY[w[0]];if(p&&!seen[p.id]){seen[p.id]=1;list.push(p)}});
   var who=r.ids.map(function(id){return AI[id].n.replace(/（.*?）/g,'')}).concat(r.tw.map(townName));
   var W=1080,H=1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d');
@@ -2163,7 +2170,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 60 版';
+var BUILD='10/28 第 61 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
