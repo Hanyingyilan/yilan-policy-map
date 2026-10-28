@@ -2089,7 +2089,12 @@ function drawBlessCard(name,wish,img,fx){
   c.fillStyle='#FFD36B';c.fillRect(70,base-fs-30,110,10);
   c.save();c.fillStyle='#fff';c.font='900 '+fs+'px '+SS;c.shadowColor='rgba(0,0,0,.5)';c.shadowBlur=22;c.shadowOffsetY=5;
   lines.forEach(function(s,i){c.fillText(s,70,base+i*(fs+gap))});c.restore();sp('0px');
-  c.fillStyle='rgba(255,255,255,.88)';c.font='700 30px '+SN;sp('5px');c.fillText('宜蘭縣長候選人　林國漳',70,1286);sp('0px');
+  c.fillStyle='rgba(255,255,255,.92)';c.font='700 30px '+SN;sp('5px');c.textAlign='left';
+  var cap1='宜蘭縣長候選人',cw1=c.measureText(cap1).width;c.fillText(cap1,70,1286);
+  var ccx=70+cw1+14+25,ccy=1275;
+  c.fillStyle='#fff';c.beginPath();c.arc(ccx,ccy,25,0,Math.PI*2);c.fill();
+  c.fillStyle='#1B1B1B';c.textAlign='center';sp('0px');c.font='900 32px '+SN;c.fillText('1',ccx,ccy+11);
+  c.textAlign='left';c.fillStyle='rgba(255,255,255,.92)';c.font='700 30px '+SN;sp('5px');c.fillText('林國漳',ccx+25+14,1286);sp('0px');
   return cv;
 }
 function sp2(c,v){if('letterSpacing' in c)c.letterSpacing=v}
@@ -2171,7 +2176,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 63 版';
+var BUILD='10/28 第 64 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
