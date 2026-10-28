@@ -370,6 +370,16 @@ html.xl .ov{--ps:1.4}
 .vg button[aria-pressed=true] span{color:var(--ink)}
 .vdesc{margin:10px 16px 8px;color:var(--mut);font-size:calc(13.5px*var(--ps,1));line-height:1.55}
 
+.vd{margin:10px 16px;border:2px solid var(--edge);border-radius:14px;background:var(--ink2);overflow:hidden}
+.vd>summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:2px;padding:10px 44px 10px 14px;position:relative}
+.vd>summary::-webkit-details-marker{display:none}
+.vd>summary::after{content:"＋";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--lime);font-weight:900;font-size:20px}
+.vd[open]>summary::after{content:"－"}
+.vd>summary b{font-size:calc(16px*var(--ps,1));font-weight:900}
+.vd>summary small{color:var(--mut);font-size:calc(12px*var(--ps,1))}
+.vd .vgrid{padding:2px 12px 12px}
+.vd .persbtn{margin:0 12px 12px;width:calc(100% - 24px)}
+.vgrid.v2{grid-template-columns:repeat(auto-fill,minmax(max(170px,calc((100% - 14px)/2)),1fr))}
 .vh{margin:20px 16px 8px;padding-left:10px;border-left:4px solid var(--lime);font-size:calc(17px*var(--ps,1));font-weight:900;color:var(--txt)}
 .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(max(170px,calc((100% - 28px)/3)),1fr));gap:14px;padding:0 16px}
 .vcard{background:var(--ink2);border:2px solid var(--edge);border-radius:16px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
@@ -1688,7 +1698,6 @@ var VID=[
  ['2300047957487260','《還好有國漳》第二集：法扶當事人洪一平',24000,'friend',[]],
  ['1641737824294468','《還好有國漳》社大學生黃鈺書律師',25000,'friend',[]],
  ['1082314381233370','冬山清溝夜市、宜蘭果菜批發市場：與大家相見歡',26000,'walk',[]],
- ['1402119825325969','首支競選形象影片《宜蘭的窗》',80000,'about',['V01']],
  ['1402865411949340','中元普渡感恩月，祝大家平安順興',19000,'faith',[]],
  ['1553140946826715','完成宜蘭縣長候選人登記：11.28 一起贏回宜蘭的光榮',53000,'about',[]],
  ['1772911103741695','全民蓋「漳」：一起蓋漳宜蘭地圖',9138,'gai',[]],
@@ -1723,20 +1732,17 @@ var VID=[
  ['990908996768181','拜會蘇澳鎮公所：追蹤災後復原、務實治水',55000,'walk',['E02']],
  ['834439972546769','冬山定安宮：扛轎初體驗',75000,'faith',['C03']],
  ['1719720789399197','勞工五大行動計畫',18000,'pol',['W05']],
- ['1147511071769056','宜中校友後援會與律師後援會籌備會啟動',16000,'club',[]],
  ['1154277460074751','《開漳宜蘭》老宅美食：馬桂爺爺咖哩',79000,'kai',[]],
  ['1418428490028282','《開漳宜蘭》屬於我們的記憶：花生捲冰淇淋',18000,'kai',[]],
  ['2154782341984167','陳定南教育基金會與紀念館：一日導覽員',14000,'walk',[]],
  ['27042366242035465','三月二八嶽帝爺生：宜蘭呷拜拜',25000,'faith',['C03']],
  ['825319070596231','《開漳宜蘭》體驗打泰拳',32000,'kai',['C07']],
  ['1293770082616749','宜蘭新女力：幸福不缺席',9599,'pol',['K01']],
- ['1443661110578797','在地服務三十年！您來講，我來聽',790000,'about',['V01']],
  ['1633351917795828','宜蘭繪本《阿媽來收驚》',15000,'faith',['C03']],
  ['4347356575510695','《開漳宜蘭》森本屋：羅東林業文化園區的舊書店',15000,'kai',[]],
  ['2237185876810088','#好運開漳 送吉祥：宜蘭綠九市場',9867,'kai',[]],
  ['1565271708017759','#好運開漳 自行車花海之行：大南澳',31000,'kai',[]],
  ['25758782747117329','#好運開漳 送吉祥：宜蘭果菜市場',14000,'kai',[]],
- ['2132290667602867','新年快樂，#好運開漳',28000,'kai',[]],
  ['879982951684374','《開漳宜蘭》百年中藥房：廣生藥房',43000,'kai',[]],
  ['1310495654213364','國漳生日：陪他走過人生的真真照相館',57000,'about',[]],
  ['880955211351493','午餐推薦：國漳與家人愛吃的新店小吃部',83000,'kai',[]],
@@ -1759,23 +1765,23 @@ var VGS='new';
 function vShort(t){return t.split(/[：、，（]/)[0]}
 function vCard(v){
   var fb='https://www.facebook.com/reel/'+v.id+'/',c=VGC[v.g];
-  var media='<div class="vmw" style="--vc:'+c+'">'+VPLAY+(SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" title="'+esc(v.t)+'" loading="lazy" allowfullscreen onload="this.style.opacity=1" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>':'<span class="vpn">私人預覽版不能播放<br>請開公開網站觀看</span>')+'</div>';
+  var media='<div class="vmw" style="--vc:'+c+'">'+VPLAY+(SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" data-src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" title="'+esc(v.t)+'" loading="lazy" allowfullscreen onload="this.style.opacity=1" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>':'<span class="vpn">私人預覽版不能播放<br>請開公開網站觀看</span>')+'</div>';
   var pl=v.pol.slice(0,2).map(function(p){return '<button type="button" class="who" data-pol="'+p+'">'+esc(vShort(PBY[p].t))+'</button>'}).join('');
   return '<article class="vcard" style="--vc:'+c+'">'+media+'<div class="vb"><h3>'+esc(v.t)+'</h3><div class="vm"><i>'+esc(VGN[v.g])+'</i>　'+vN(v.n)+' 次觀看</div>'+(pl?'<div class="vpl2">政見：'+pl+'</div>':'')+'</div></article>';
 }
 var VMORE=3;
 function vSer(v){return /《還好有國漳》/.test(v.t)?'hao':(/^#237/.test(v.t)?'gai':'')}
 function vSecs(){
-  var hao=VID.filter(function(v){return vSer(v)==='hao'}).slice(0,3),gai=VID.filter(function(v){return vSer(v)==='gai'}).slice(0,3);
+  var hao=VID.filter(function(v){return vSer(v)==='hao'}).slice(0,3),gai=VID.filter(function(v){return vSer(v)==='gai'}).slice(0,4);
   var used={};hao.concat(gai).forEach(function(v){used[v.id]=1});
   var pool=function(){return VID.filter(function(v){return !used[v.id]})};
   var hot=pool().sort(function(a,b){return b.n-a.n||a.i-b.i}).slice(0,3);hot.forEach(function(v){used[v.id]=1});
   var nw=pool().slice(0,3);nw.forEach(function(v){used[v.id]=1});
   return {hot:hot,nw:nw,hao:hao,gai:gai,rest:pool()};
 }
-function vBlock(title,desc,arr){
-  return '<h3 class="vh">'+esc(title)+'</h3>'+(desc?'<p class="vdesc" style="margin-top:0">'+esc(desc)+'</p>':'')+'<div class="vgrid">'+arr.map(vCard).join('')+'</div>';
-}
+var VOPEN={};
+function vDet(k,title,desc,inner){return '<details class="vd" data-k="'+k+'"'+(VOPEN[k]?' open':'')+'><summary><b>'+esc(title)+'</b><small>'+esc(desc)+'</small></summary>'+inner+'</details>'}
+function vBlock(k,title,desc,arr){return vDet(k,title,desc,'<div class="vgrid'+(arr.length===4?' v2':'')+'">'+arr.map(vCard).join('')+'</div>')}
 function vMoreHTML(){
   var r=vSecs().rest,left=r.length-VMORE;
   return '<div class="vgrid">'+r.slice(0,VMORE).map(vCard).join('')+'</div>'+(left>0?'<button type="button" class="persbtn" data-vmore>看更多影片（還有 '+left+' 支）</button>':'');
@@ -1784,11 +1790,19 @@ function vMore(){VMORE+=3;var el=$('#vmb');if(el)el.innerHTML=vMoreHTML()}
 function videoSection(){
   var s=vSecs();
   return '<div class="sec" id="vhd">短影音　'+VID.length+'</div><p class="vdesc" style="margin-top:0">林國漳的短影音，點一下就能播放。觀看次數是 '+VID_AS+' 當天的數字。</p>'+
-   '<div id="vsec">'+vBlock('熱門','觀看次數最多的 3 支。',s.hot)+vBlock('最新','最近發布的 3 支。',s.nw)+
-   vBlock('《還好有國漳》系列','受過國漳協助的人，說他們眼中的國漳。',s.hao)+vBlock('#237 宜蘭蓋漳系列','走訪各鄉鎮市，跟鄉親面對面。',s.gai)+
-   '<h3 class="vh">更多短片</h3><div id="vmb">'+vMoreHTML()+'</div></div>';
+   '<div id="vsec">'+vBlock('hot','熱門','觀看次數最多的 '+s.hot.length+' 支',s.hot)+vBlock('nw','最新','最近發布的 '+s.nw.length+' 支',s.nw)+
+   vBlock('hao','《還好有國漳》系列','受過國漳協助的人，說他們眼中的國漳（'+s.hao.length+' 支）',s.hao)+vBlock('gai','#237 宜蘭蓋漳系列','走訪各鄉鎮市，跟鄉親面對面（'+s.gai.length+' 支）',s.gai)+
+   vDet('more','更多短片','還有 '+s.rest.length+' 支','<div id="vmb">'+vMoreHTML()+'</div>')+'</div>';
 }
 function setVG(){}
+$('#pbody').addEventListener('toggle',function(e){
+  var d=e.target;if(!d.classList||!d.classList.contains('vd'))return;
+  VOPEN[d.dataset.k]=d.open;
+  d.querySelectorAll('iframe').forEach(function(f){
+    if(!d.open){f.style.opacity=0;f.src='about:blank'}
+    else if(f.src==='about:blank'&&f.dataset.src){f.style.opacity=0;f.src=f.dataset.src}
+  });
+},true);
 function openVideos(g){
   if(g&&VGN[g])VGS=g;
   S.q='';var qi=$('#q');if(qi)qi.value='';
@@ -2380,7 +2394,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 72 版';
+var BUILD='10/28 第 73 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
