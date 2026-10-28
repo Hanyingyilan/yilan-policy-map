@@ -2003,9 +2003,9 @@ function showQuiz(){
 }
 var QSTAT=null;
 function statCount(path){
-  return fetch('https://'+STATS_CODE+'.goatcounter.com/counter/'+encodeURIComponent(path)+'.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){return parseInt(String(j.count).replace(/[^0-9]/g,''),10)||0});
+  return fetch('https://'+STATS_CODE+'.goatcounter.com/counter/'+encodeURIComponent(path)+'.json?start=2026-10-01').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){return parseInt(String(j.count).replace(/[^0-9]/g,''),10)||0});
 }
-function statCountAny(path){return statCount(path).catch(function(){return statCount('/'+path)}).catch(function(){return 0})}
+function statCountAny(path){return statCount('/'+path).catch(function(){return statCount(path)}).catch(function(){return 0})}
 function loadQuizStats(cb){
   if(!STATS_CODE||typeof fetch!=='function'){cb(null);return}
   if(QSTAT&&Date.now()-QSTAT.t<600000){cb(QSTAT.v);return}
@@ -2048,7 +2048,7 @@ function bpLoad(i,cb){
 function bpPick(key,n){var i;do{i=Math.floor(Math.random()*n)}while(n>1&&i===BS[key]);BS[key]=i;return i}
 var STATS_CODE='yilanwin';
 function stat(path,title){
-  try{if(STATS_CODE&&SHARE_BASE&&window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:title||path,event:true})}catch(e){}
+  try{if(STATS_CODE&&SHARE_BASE&&window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:'/'+path,title:title||path})}catch(e){}
 }
 (function(){
   try{
@@ -2170,7 +2170,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 61 版';
+var BUILD='10/28 第 62 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
