@@ -1914,15 +1914,15 @@ function drawFortuneImg(p,no,total,day){
   return cv;
 }
 var QZ=[
- {q:'週末你最想怎麼過？',o:[['泡湯放空，什麼都不想',['suao','jiaoxi','nanao']],['逛夜市、吃吃喝喝',['luodong','yilan','jiaoxi']],['上山呼吸，看看大自然',['yuanshan','datong','sanxing']],['去海邊吹風、看浪',['nanao','toucheng','zhuangwei']]]},
- {q:'朋友形容你的個性比較像？',o:[['慢熱安靜，喜歡自己的步調',['zhuangwei','nanao','yuanshan']],['熱情愛熱鬧，朋友一堆',['luodong','toucheng','yilan']],['務實勤勞，值得信賴',['dongshan','suao','sanxing']],['有文化氣質，愛看展愛聽戲',['wujie','toucheng','yilan']]]},
- {q:'出去玩，你最在意什麼？',o:[['風景要壯闊',['datong','nanao','toucheng']],['東西要好吃',['jiaoxi','suao','luodong']],['適合帶家人小孩一起',['dongshan','yuanshan','wujie']],['要好拍、有氣氛',['wujie','yilan','zhuangwei']]]},
- {q:'你最常點哪一碗麵？',o:[['炸醬麵，老派麵攤的味道',['dongshan','luodong','toucheng']],['麻醬麵，香濃乾拌',['zhuangwei','jiaoxi','wujie']],['魚丸米粉，宜蘭人的日常',['yilan','yuanshan','suao']],['清爽的涼麵或冷麵',['nanao','suao','datong']]]},
- {q:'魚丸米粉，你要吃粗的還是細的？',o:[['粗米粉，Q彈有嚼勁',['sanxing','toucheng','luodong']],['細米粉，滑順入味',['yilan','wujie','zhuangwei']],['都可以，湯頭夠鮮最重要',['suao','luodong','toucheng']]]},
- {q:'逛街逛到一半肚子餓，你會買？',o:[['蔥油餅加蛋',['yuanshan','sanxing','jiaoxi']],['糕渣、卜肉這類傳統小吃',['toucheng','wujie','sanxing']],['包心粉圓或鮮果冰',['jiaoxi','dongshan','suao']],['帶點山味的烤肉、小米酒香',['datong','nanao','yuanshan']]]},
- {q:'理想中的家在哪裡？',o:[['面海，每天看海',['zhuangwei','toucheng','nanao']],['山邊，空氣好、很安靜',['datong','yuanshan','nanao']],['水邊田園，有河有湖有稻田',['sanxing','dongshan','wujie']],['市區生活圈，什麼都方便',['jiaoxi','luodong','yilan']]]}
+ {q:'週末你最想怎麼過？',o:[['泡湯放空，什麼都不想',['suao','jiaoxi','nanao']],['逛夜市、吃吃喝喝',['luodong','yilan','jiaoxi']],['上山呼吸，看看大自然',['sanxing','yuanshan','datong']],['去海邊吹風、看浪',['nanao','zhuangwei','toucheng']]]},
+ {q:'朋友形容你的個性比較像？',o:[['慢熱安靜，喜歡自己的步調',['zhuangwei','nanao','yuanshan']],['熱情愛熱鬧，朋友一堆',['luodong','yilan','toucheng']],['務實勤勞，值得信賴',['sanxing','suao','dongshan']],['有文化氣質，愛看展愛聽戲',['yilan','toucheng','wujie']]]},
+ {q:'出去玩，你最在意什麼？',o:[['風景要壯闊',['nanao','toucheng','datong']],['東西要好吃',['suao','luodong','jiaoxi']],['適合帶家人小孩一起',['wujie','yuanshan','dongshan']],['要好拍、有氣氛',['zhuangwei','wujie','yilan']]]},
+ {q:'你最常點哪一碗麵？',o:[['炸醬麵，老派麵攤的味道',['zhuangwei','yilan','jiaoxi']],['麻醬麵，香濃乾拌',['yilan','jiaoxi','yuanshan']],['餛飩麵，湯裡要有蝦米才對味',['dongshan','suao','wujie']],['餛飩麵，清清的、不加蝦米',['yilan','jiaoxi','yuanshan']],['魚丸米粉，宜蘭人的日常',['datong','yuanshan','nanao']]]},
+ {q:'魚丸米粉，你要吃粗的還是細的？',o:[['粗米粉，Q彈有嚼勁',['sanxing','datong','dongshan']],['細米粉，滑順入味',['wujie','zhuangwei','jiaoxi']],['都可以，湯頭夠鮮最重要',['suao','toucheng','yuanshan']]]},
+ {q:'逛街逛到一半肚子餓，你會買？',o:[['蔥油餅加蛋',['yuanshan','luodong','jiaoxi']],['糕渣、卜肉這類傳統小吃',['toucheng','wujie','sanxing']],['包心粉圓或鮮果冰',['dongshan','jiaoxi','luodong']],['帶點山味的烤肉、小米酒香',['datong','nanao','yuanshan']]]},
+ {q:'理想中的家在哪裡？',o:[['面海，每天看海',['toucheng','zhuangwei','nanao']],['山邊，空氣好、很安靜',['datong','yuanshan','nanao']],['水邊田園，有河有湖有稻田',['dongshan','wujie','sanxing']],['市區生活圈，什麼都方便',['jiaoxi','luodong','yilan']]]}
 ];
-var FOODS={toucheng:'老街小吃、烏石港海鮮',jiaoxi:'茭白筍、溫泉空心菜、蔥油餅',zhuangwei:'壯圍哈密瓜、花生',yilan:'糕渣、卜肉、宜蘭餅',yuanshan:'員山魚丸、當季水果',wujie:'傳藝中心的古早味小吃',luodong:'羅東夜市小吃、紅豆湯圓',dongshan:'梅花湖畔的家常小吃',sanxing:'三星蔥、蔥油餅、上將梨',suao:'南方澳鮮魚湯、鮮果冰',datong:'泰雅山菜、刺蔥',nanao:'小米與刺蔥料理'};
+var FOODS={toucheng:'老街小吃、烏石港海鮮',jiaoxi:'茭白筍、溫泉空心菜、蔥油餅',zhuangwei:'壯圍哈密瓜、花生',yilan:'炸醬麵、麻醬麵、餛飩麵',yuanshan:'員山魚丸、當季水果',wujie:'傳藝中心的古早味小吃',luodong:'糕渣、卜肉、夜市小吃',dongshan:'梅花湖畔的家常小吃',sanxing:'三星蔥、蔥油餅、上將梨',suao:'南方澳鮮魚湯、鮮果冰',datong:'泰雅山菜、刺蔥',nanao:'小米與刺蔥料理'};
 var QT={
  toucheng:'熱血又重情義，遇到大場面特別拚，像搶孤一樣不認輸。',
  jiaoxi:'最懂得放鬆的人，再忙也要留時間泡一泡、慢慢過。',
@@ -1994,7 +1994,7 @@ function showQuizResult(id0){
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
 }
 function openQuiz(){QS.i=0;QS.sc={};showQuiz()}
-var BP=[['photos/b01.jpg',0.7],['photos/b02.jpg',0.55],['photos/b03.jpg',0.5],['photos/b04.jpg',0.42],['photos/b05.jpg',0.5],['photos/b06.jpg',0.42],['photos/b07.jpg',0.4],['photos/b08.jpg',0.66],['photos/b09.jpg',0.35],['photos/b10.jpg',0.45],['photos/b11.jpg',0.62],['photos/b12.jpg',0.46],['photos/b13.jpg',0.44],['photos/b14.jpg',0.55],['photos/b15.jpg',0.62],['photos/b16.jpg',0.3]];
+var BP=[['photos/b01.jpg',0.45],['photos/b02.jpg',0.5],['photos/b03.jpg',0.5],['photos/b04.jpg',0.6],['photos/b05.jpg',0.45],['photos/b06.jpg',0.45],['photos/b07.jpg',0.62],['photos/b08.jpg',0.6],['photos/b09.jpg',0.45],['photos/b10.jpg',0.45],['photos/b11.jpg',0.45],['photos/b12.jpg',0.5],['photos/b13.jpg',0.5],['photos/b14.jpg',0.4],['photos/b15.jpg',0.6],['photos/b16.jpg',0.5]];
 var BL=['平安順心，1定贏！','身體健康，天天開心','好運來，萬事1定贏','家庭和樂，事事順利','工作順利，荷包滿滿','團結作伙拚，宜蘭1定贏','笑口常開，好運跟著來','出門平安，回家溫暖','今天也加油，你1定贏','心想事成，天天精彩','願你有好山好水好心情','平安喜樂，家人安康','生意興隆，客人滿門','你的努力，宜蘭看得見','辛苦了，給你一個大大的讚','歲歲平安，年年有餘'];
 var BPI={},BS={p:-1,w:-1};
 function bpLoad(i,cb){
@@ -2103,7 +2103,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 44 版';
+var BUILD='10/28 第 45 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
