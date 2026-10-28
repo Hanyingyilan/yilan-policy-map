@@ -341,6 +341,14 @@ html.xl .ov{--ps:1.4}
 .qzr i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--mut);border-radius:5px}
 .qzr.me{color:var(--lime)}.qzr.me i::after{background:var(--lime)}
 .qzr em{font-style:normal;text-align:right;color:var(--mut)}
+.qzpop{position:fixed;inset:0;z-index:99;display:grid;place-items:center;padding:16px;background:rgba(5,14,30,.98);animation:fzpop .35s cubic-bezier(.2,1.2,.4,1)}
+.qzpc{width:min(430px,100%);max-height:90vh;overflow:auto;background:var(--ink2);border:2px solid var(--lime);border-radius:20px;padding:16px 16px 14px}
+.qzpt{margin:0 0 10px;text-align:center;color:var(--lime);font-weight:900;letter-spacing:.08em;font-size:calc(15px*var(--ps,1))}
+.qzbig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.qzbig div{background:var(--ink3);border-radius:14px;padding:10px 6px;text-align:center;color:var(--mut);font-weight:800;font-size:calc(13px*var(--ps,1))}
+.qzbig b{display:block;color:var(--lime);font-family:var(--f-num);font-size:calc(34px*var(--ps,1));line-height:1.1}
+.qzpc .qzr{grid-template-columns:4.6em 1fr 3.6em}
+.qzpc .qzx{display:block;width:100%;margin-top:12px;border:0;border-radius:12px;padding:11px;background:var(--lime);color:var(--ink);font-weight:900;font-size:calc(16px*var(--ps,1));cursor:pointer}
 .blh{margin:0 38px 4px 0;font-size:calc(20px*var(--ps,1));color:var(--lime)}
 .blf{display:block;margin-top:12px;font-weight:900;font-size:calc(14px*var(--ps,1));color:var(--txt)}
 .blf input{display:block;width:100%;margin-top:6px;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:10px;padding:9px 12px;font-size:calc(17px*var(--ps,1));font-family:inherit}
@@ -2011,20 +2019,29 @@ function loadQuizStats(cb){
   if(!STATS_CODE||typeof fetch!=='function'){cb(null);return}
   if(QSTAT&&Date.now()-QSTAT.t<600000){cb(QSTAT.v);return}
   var ids=TOWNS.map(function(t){return t.id});
-  Promise.all([statCountAny('quiz/done')].concat(ids.map(function(id){return statCountAny('quiz/result/'+id)}))).then(function(a){
-    var v={total:a[0],town:{}};ids.forEach(function(id,i){v.town[id]=a[i+1]});if(v.total)QSTAT={t:Date.now(),v:v};cb(v);
+  Promise.all([statCountAny('quiz/done'),statCountAny('TOTAL')].concat(ids.map(function(id){return statCountAny('quiz/result/'+id)}))).then(function(a){
+    var v={total:a[0],visits:a[1],town:{}};ids.forEach(function(id,i){v.town[id]=a[i+2]});
+    if(v.total||v.visits)QSTAT={t:Date.now(),v:v};cb(v);
   }).catch(function(){cb(null)});
 }
 function quizStatsHTML(v,mine){
-  if(!v||!v.total)return '';
-  var h='<div class="qzs"><p class="qzsh">已經有 <b>'+v.total.toLocaleString('en-US')+'</b> 人測過</p>';
-  if(v.total>=50){
+  if(!v||!(v.total||v.visits))return '';
+  var n=function(x){return (x||0).toLocaleString('en-US')};
+  var h='<div class="qzpc"><p class="qzpt">目前累積</p><div class="qzbig"><div><b>'+n(Math.max(v.visits,v.total))+'</b>人次來訪</div><div><b>'+n(v.total)+'</b>人測過鄉鎮測驗</div></div>';
+  if(v.total>=10){
     var rows=TOWNS.map(function(t){return {id:t.id,n:qzShort(t),c:v.town[t.id]||0}}).sort(function(a,b){return b.c-a.c}),mx=Math.max(1,rows[0].c);
-    h+='<p class="ovn" style="margin:0 0 4px">大家測出的鄉鎮</p>'+rows.map(function(r){
-      return '<div class="qzr'+(r.id===mine?' me':'')+'"><span>'+esc(r.n)+'</span><i style="--w:'+Math.round(r.c/mx*100)+'%"></i><em>'+r.c.toLocaleString('en-US')+'</em></div>';
+    h+='<p class="ovn" style="margin:0 0 4px">大家測出是哪裡人</p>'+rows.map(function(r){
+      return '<div class="qzr'+(r.id===mine?' me':'')+'"><span>'+esc(r.n)+'人</span><i style="--w:'+Math.round(r.c/mx*100)+'%"></i><em>'+n(r.c)+'</em></div>';
     }).join('');
   }
-  return h+'<p class="ovn" style="margin:6px 0 0">統計不使用 cookie、不記錄個人資料，數字約每 10 分鐘更新一次，僅供參考。</p></div>';
+  return h+'<p class="ovn" style="margin:8px 0 0">統計不使用 cookie、不記錄個人資料，數字約每 10 分鐘更新一次，僅供參考。</p><button type="button" class="qzx">知道了</button></div>';
+}
+function showStatsPop(v,mine){
+  var s=quizStatsHTML(v,mine),el=document.querySelector('.cardimg'),host=el&&el.closest('.ovc');
+  if(!s||!host||host.querySelector('.qzpop'))return;
+  var d=document.createElement('div');d.className='qzpop';d.innerHTML=s;host.appendChild(d);
+  function close(){if(d.parentNode)d.parentNode.removeChild(d)}
+  d.querySelector('.qzx').onclick=close;d.addEventListener('click',function(e){if(e.target===d)close()});
 }
 function showQuizResult(id0){
   var id=id0||quizResult(),t=TOWNS[TI[id]];
@@ -2032,7 +2049,7 @@ function showQuizResult(id0){
   openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜林國漳政見地圖',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
     '<button type="button" data-qzagain>再測一次</button><button type="button" data-qzsee>看'+esc(t.n)+'的政見</button>','qr-'+id);
   OV.querySelector('[data-qzagain]').onclick=openQuiz;
-  setTimeout(function(){loadQuizStats(function(v){var s=quizStatsHTML(v,id),el=document.querySelector('.cardimg');if(s&&el&&el.parentNode&&!document.getElementById('qzstats')){var d=document.createElement('div');d.id='qzstats';d.innerHTML=s;el.parentNode.appendChild(d)}});},id0?0:2500);
+  if(!id0)setTimeout(function(){loadQuizStats(function(v){showStatsPop(v,id)});},2500);
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
 }
 function openQuiz(){QS.i=0;QS.sc={};showQuiz()}
@@ -2176,7 +2193,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 64 版';
+var BUILD='10/28 第 65 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
