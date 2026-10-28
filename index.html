@@ -1799,7 +1799,7 @@ function videoSection(){
   return '<div class="sec" id="vhd">短影音　'+VID.length+'</div><p class="vdesc" style="margin-top:0">林國漳的短影音，點一下就能播放。觀看次數是 '+VID_AS+' 當天的數字。</p>'+
    '<div id="vsec">'+vBlock('hot','熱門','觀看次數最多的 '+s.hot.length+' 支',s.hot)+vBlock('nw','最新','最近發布的 '+s.nw.length+' 支',s.nw)+
    vBlock('hao','《還好有國漳》系列','受過國漳協助的人，說他們眼中的國漳（'+s.hao.length+' 支）',s.hao)+vBlock('gai','#237 宜蘭蓋漳系列','走訪各鄉鎮市，跟鄉親面對面（'+s.gai.length+' 支）',s.gai)+
-   vBlock('wide','精選影片','形象影片、在地服務三十年與重要活動（'+s.wide.length+' 支）',s.wide)+
+   vBlock('wide','形象影片','在地服務三十年、競選形象與重要活動（'+s.wide.length+' 支）',s.wide)+
    vDet('more','更多短片','還有 '+s.rest.length+' 支','<div id="vmb">'+vMoreHTML()+'</div>')+'</div>';
 }
 function setVG(){}
@@ -2402,7 +2402,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 75 版';
+var BUILD='10/28 第 76 版';
 (function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
