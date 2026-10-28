@@ -333,6 +333,14 @@ html.xl .ov{--ps:1.4}
 .fgrid button .tubei svg{display:block;height:calc(23px*var(--ps,1));width:auto;transform-origin:50% 92%}
 .fgrid button:hover .tubei svg,.fgrid button:focus-visible .tubei svg{animation:fzshake .2s ease-in-out infinite alternate}
 .ovn.ovw{color:var(--lime);font-weight:800}
+.qzs{margin-top:14px;padding:12px 12px 10px;border:2px solid var(--edge);border-radius:14px;background:var(--ink2)}
+.qzsh{margin:0 0 8px;font-weight:900;color:var(--txt);font-size:calc(16px*var(--ps,1))}
+.qzsh b{color:var(--lime);font-size:calc(22px*var(--ps,1))}
+.qzr{display:grid;grid-template-columns:3.2em 1fr 3.4em;gap:8px;align-items:center;margin:4px 0;font-size:calc(14px*var(--ps,1));font-weight:800;color:var(--txt)}
+.qzr i{display:block;height:10px;border-radius:5px;background:var(--ink3);position:relative;overflow:hidden}
+.qzr i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--mut);border-radius:5px}
+.qzr.me{color:var(--lime)}.qzr.me i::after{background:var(--lime)}
+.qzr em{font-style:normal;text-align:right;color:var(--mut)}
 .blh{margin:0 38px 4px 0;font-size:calc(20px*var(--ps,1));color:var(--lime)}
 .blf{display:block;margin-top:12px;font-weight:900;font-size:calc(14px*var(--ps,1));color:var(--txt)}
 .blf input{display:block;width:100%;margin-top:6px;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:10px;padding:9px 12px;font-size:calc(17px*var(--ps,1));font-family:inherit}
@@ -1986,12 +1994,37 @@ function showQuiz(){
     };
   });
 }
+var QSTAT=null;
+function statCount(path){
+  return fetch('https://'+STATS_CODE+'.goatcounter.com/counter/'+encodeURIComponent(path)+'.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){return parseInt(String(j.count).replace(/[^0-9]/g,''),10)||0});
+}
+function statCountAny(path){return statCount(path).catch(function(){return statCount('/'+path)}).catch(function(){return 0})}
+function loadQuizStats(cb){
+  if(!STATS_CODE||typeof fetch!=='function'){cb(null);return}
+  if(QSTAT&&Date.now()-QSTAT.t<600000){cb(QSTAT.v);return}
+  var ids=TOWNS.map(function(t){return t.id});
+  Promise.all([statCountAny('quiz/done')].concat(ids.map(function(id){return statCountAny('quiz/result/'+id)}))).then(function(a){
+    var v={total:a[0],town:{}};ids.forEach(function(id,i){v.town[id]=a[i+1]});QSTAT={t:Date.now(),v:v};cb(v);
+  }).catch(function(){cb(null)});
+}
+function quizStatsHTML(v,mine){
+  if(!v||!v.total)return '';
+  var h='<div class="qzs"><p class="qzsh">已經有 <b>'+v.total.toLocaleString('en-US')+'</b> 人測過</p>';
+  if(v.total>=50){
+    var rows=TOWNS.map(function(t){return {id:t.id,n:qzShort(t),c:v.town[t.id]||0}}).sort(function(a,b){return b.c-a.c}),mx=Math.max(1,rows[0].c);
+    h+='<p class="ovn" style="margin:0 0 4px">大家測出的鄉鎮</p>'+rows.map(function(r){
+      return '<div class="qzr'+(r.id===mine?' me':'')+'"><span>'+esc(r.n)+'</span><i style="--w:'+Math.round(r.c/mx*100)+'%"></i><em>'+r.c.toLocaleString('en-US')+'</em></div>';
+    }).join('');
+  }
+  return h+'<p class="ovn" style="margin:6px 0 0">統計不使用 cookie、不記錄個人資料，數字約每幾小時更新一次，僅供參考。</p></div>';
+}
 function showQuizResult(id0){
   var id=id0||quizResult(),t=TOWNS[TI[id]];
   if(!id0){stat('quiz/done','測驗完成');stat('quiz/result/'+id,'測驗結果：'+t.n)}
   openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜林國漳政見地圖',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
     '<button type="button" data-qzagain>再測一次</button><button type="button" data-qzsee>看'+esc(t.n)+'的政見</button>','qr-'+id);
   OV.querySelector('[data-qzagain]').onclick=openQuiz;
+  loadQuizStats(function(v){var s=quizStatsHTML(v,id),el=document.querySelector('.cardimg');if(s&&el&&el.parentNode&&!document.getElementById('qzstats')){var d=document.createElement('div');d.id='qzstats';d.innerHTML=s;el.parentNode.appendChild(d)}});
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
 }
 function openQuiz(){QS.i=0;QS.sc={};showQuiz()}
@@ -2006,7 +2039,7 @@ function bpLoad(i,cb){
   im.src=BP[i][0];
 }
 function bpPick(key,n){var i;do{i=Math.floor(Math.random()*n)}while(n>1&&i===BS[key]);BS[key]=i;return i}
-var STATS_CODE='';
+var STATS_CODE='yilanwin';
 function stat(path,title){
   try{if(STATS_CODE&&SHARE_BASE&&window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:title||path,event:true})}catch(e){}
 }
@@ -2130,8 +2163,8 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 59 版';
-(function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+'</small>')})();
+var BUILD='10/28 第 60 版';
+(function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
 function setXL(v){
