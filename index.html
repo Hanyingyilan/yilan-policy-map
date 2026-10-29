@@ -627,7 +627,7 @@ body.sub .portrait{display:none}
       <h1>宜蘭政見，一次看懂</h1>
       <div class="ballot" id="ballot" aria-label="候選人號次"></div>
       <div class="hbtns" id="hbtns"></div>
-      <div class="portrait" id="portrait"><div class="pimg"><img src="photos/header.jpg" alt="林國漳" width="148" height="163" decoding="async" onerror="var p=this.closest('.portrait');p.classList.add('empty');this.remove()"></div><span class="ptag"><b>林國漳</b><small>宜蘭縣長候選人</small></span></div>
+      <div class="portrait empty" id="portrait"><div class="pimg"></div><span class="ptag"><b>林國漳</b><small>宜蘭縣長候選人</small></span></div>
     </div>
     <div class="sbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋政見、鄉鎮或道路" aria-label="搜尋"></div>
     <div class="pbody" id="pbody"></div>
@@ -2599,7 +2599,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 97 版';
+var BUILD='10/29 第 98 版';
 $('#mego').onclick=function(){openPersona()};
 $('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
