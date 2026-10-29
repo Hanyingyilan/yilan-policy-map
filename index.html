@@ -609,6 +609,8 @@ body.sub .brand h1{text-shadow:2px 2px 0 #0B3D1E}
 .ft .fnew{position:absolute;top:-9px;right:6px;font-size:calc(11px*var(--ps,1))}
 .agh{margin:16px 16px 8px;color:var(--mut);font-size:calc(14px*var(--ps,1));font-weight:800;letter-spacing:.04em}
 .agh+.audg{margin-bottom:4px}
+.brand h1 .c1{display:inline-grid;place-items:center;width:1.02em;height:1.02em;margin-right:.08em;border-radius:50%;background:var(--sun);color:#15352B;font-family:var(--f-num);font-weight:900;font-size:.86em;line-height:1;text-shadow:none;box-shadow:3px 3px 0 #0B3D1E;vertical-align:.04em}
+body.sub .brand h1 .c1{box-shadow:2px 2px 0 #0B3D1E}
 @media (max-height:520px){
   #mebar{padding:6px 16px calc(6px + env(safe-area-inset-bottom,0px))}
   #mego,#mecl{min-height:44px}
@@ -648,7 +650,7 @@ body.sub .brand h1{text-shadow:2px 2px 0 #0B3D1E}
   <aside class="panel" role="main" aria-label="政見清單與內容">
     <div class="brand">
       <div class="sticker">距離投票日 11/28<b id="cd"></b></div>
-      <h1>宜蘭政見<br>一次看懂</h1>
+      <h1 aria-label="宜蘭政見，一次看懂">宜蘭政見<br><span class="c1" aria-hidden="true">1</span>次看懂</h1>
       <div class="ballot" id="ballot" aria-label="候選人號次"></div>
       <div class="hbtns" id="hbtns"></div>
       <div class="portrait" id="portrait"><div class="pimg"><img src="photos/header.jpg" alt="林國漳" width="184" height="230" decoding="async" onerror="var p=this.closest('.portrait');p.classList.add('empty');this.remove()"></div><span class="ptag"><b>林國漳</b><small>宜蘭縣長候選人</small></span></div>
@@ -1481,11 +1483,7 @@ function panel(){
   var el=$('#pbody'),h='',s=S.sel,q=S.q.trim();
   if(s&&s.type==='about'){
     h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">關於本頁</div><h2>資料與限制</h2></div><ul class="about">'+
-     '<li>內容整理自公開資料，共 '+candCount()+' 項候選人政見。</li>'+
-     '<li>林國漳是民進黨提名的宜蘭縣長候選人，投票日 2026/11/28。尚未當選，這裡是承諾，不是已核定的施政。</li>'+
-     '<li>「既有計畫」是中央或縣府已有的建設，不算候選人承諾。</li>'+
-     '<li>「待確認」代表該項細節仍在確認中。</li>'+
-     '<li>預算金額為估算。</li></ul>';
+     '<li>內容整理自公開資料，共 '+candCount()+' 項候選人政見。</li>'+'</ul>';
   }else if(s&&s.type==='town'){
     var t=TOWNS[TI[s.id]],loc=polForTown(s.id).filter(match),cty=POL.filter(function(p){return !p.bg&&p.tw==='all'&&!localTo(p,s.id)&&match(p)}),bg=POL.filter(function(p){return p.bg&&localTo(p,s.id)&&match(p)});
     h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><h2>'+esc(t.n)+'</h2></div>';
@@ -2642,7 +2640,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 103 版';
+var BUILD='10/29 第 104 版';
 $('#mego').onclick=function(){openPersona()};
 $('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
