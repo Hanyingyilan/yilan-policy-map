@@ -585,6 +585,10 @@ body.sub .portrait{display:none}
 .portrait .ptag small{font-size:calc(10px*var(--ps,1));font-weight:700}
 .portrait.empty .pimg{display:grid;place-items:center;border-style:dashed}
 .portrait.empty .pimg::after{content:"放照片";color:#fff;font-weight:700;font-size:calc(14px*var(--ps,1))}
+/* v99 big, sticky back button */
+.pbody{overflow:visible}
+.back{display:flex;align-items:center;gap:8px;position:sticky;top:10px;z-index:30;width:calc(100% - 32px);margin:14px 16px 10px;min-height:54px;padding:0 20px;border:2px solid var(--edge);border-radius:14px;background:#fff;color:var(--txt);font-size:calc(15px*var(--ps,1));font-weight:800;text-align:left;box-shadow:0 3px 0 rgba(21,53,43,.16)}
+.back:hover{background:var(--ink3)}
 @media (max-height:520px){
   #mebar{padding:6px 16px calc(6px + env(safe-area-inset-bottom,0px))}
   #mego,#mecl{min-height:44px}
@@ -1456,7 +1460,7 @@ function polRow(p){
 function panel(){
   var el=$('#pbody'),h='',s=S.sel,q=S.q.trim();
   if(s&&s.type==='about'){
-    h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><div class="kind">關於本頁</div><h2>資料與限制</h2></div><ul class="about">'+
+    h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">關於本頁</div><h2>資料與限制</h2></div><ul class="about">'+
      '<li>內容整理自公開資料，共 '+candCount()+' 項候選人政見。</li>'+
      '<li>林國漳是民進黨提名的宜蘭縣長候選人，投票日 2026/11/28。尚未當選，這裡是承諾，不是已核定的施政。</li>'+
      '<li>「既有計畫」是中央或縣府已有的建設，不算候選人承諾。</li>'+
@@ -1464,7 +1468,7 @@ function panel(){
      '<li>預算金額為估算。</li></ul>';
   }else if(s&&s.type==='town'){
     var t=TOWNS[TI[s.id]],loc=polForTown(s.id).filter(match),cty=POL.filter(function(p){return !p.bg&&p.tw==='all'&&!localTo(p,s.id)&&match(p)}),bg=POL.filter(function(p){return p.bg&&localTo(p,s.id)&&match(p)});
-    h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><h2>'+esc(t.n)+'</h2></div>';
+    h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><h2>'+esc(t.n)+'</h2></div>';
     if(!loc.length)h+='<p class="empty">'+esc(t.n)+'目前沒有專屬政見，下面是全縣都適用的。</p>';
     if(loc.length)h+='<div class="sec">'+esc(t.n)+'的政見<small>'+loc.length+'</small></div>'+loc.map(polRow2).join('');
     [['cty','全縣都適用',cty],['bg','既有計畫',bg]].forEach(function(g){
@@ -1473,24 +1477,24 @@ function panel(){
     h+='<button type="button" class="persbtn ghost" data-tcard="'+s.id+'">存成'+esc(t.n)+'圖卡</button>';
   }else if(s&&s.type==='road'){
     var r=RMETA[s.id],pr=polForRoad(s.id).filter(match);
-    h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><div class="kind">主要幹道</div><h2>'+esc(r.n)+'</h2><p class="lede">'+(r.dash?'虛線是尚未興建的構想或計畫，位置僅為示意。':'沿線相關的政見與建設。')+'</p></div>';
+    h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">主要幹道</div><h2>'+esc(r.n)+'</h2><p class="lede">'+(r.dash?'虛線是尚未興建的構想或計畫，位置僅為示意。':'沿線相關的政見與建設。')+'</p></div>';
     if(!pr.length)h+='<p class="empty">目前沒有找到與這條路直接相關的政見。</p>';
     h+=listCards(pr,pr.length<=2);
   }else if(s&&s.type==='pin'){
     var pl=PLACES[s.id],pp=polForPlace(s.id).filter(match);
-    h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><div class="kind">地點</div><h2>'+esc(pl[0])+'</h2><p class="lede">鎖定這個地點的政見與建設。</p></div>'+listCards(pp,pp.length<=2);
+    h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">地點</div><h2>'+esc(pl[0])+'</h2><p class="lede">鎖定這個地點的政見與建設。</p></div>'+listCards(pp,pp.length<=2);
   }else if(s&&s.type==='bio'){
     h+=bioView();
   }else if(s&&s.type==='persona'){
     h+=meHTML();
   }else if(s&&s.type==='aud'){
     var A=AI[s.id],ap=A.pol.map(function(id){return PBY[id]}).filter(match);
-    h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><h2>'+esc(A.n.replace(/（.*?）/g,''))+'</h2></div>';
+    h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><h2>'+esc(A.n.replace(/（.*?）/g,''))+'</h2></div>';
     h+='<div class="need"><p>'+esc(A.need.split('；')[0].replace(/。$/,''))+'。</p></div>';
     h+='<div class="sec">相關政見<small>'+ap.length+'</small></div>'+ap.map(polRow2).join('');
     if(!ap.length)h+='<p class="empty">目前的類別篩選下沒有符合的政見。</p>';
   }else if(s&&s.type==='policy'){
-    h+='<button class="back" type="button" data-back>← 返回</button>'+cardHTML(PBY[s.id],true);
+    h+='<button class="back" type="button" data-back>← 返回上一頁</button>'+cardHTML(PBY[s.id],true);
   }else{
     h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>短影音</button></div>';
     h+=funBox();
@@ -1542,7 +1546,7 @@ function townName(id){for(var i=0;i<TOWNS.length;i++)if(TOWNS[i].id===id)return 
 function meNames(){var n=[];AUD.forEach(function(a){if(PS.jobs[a.id])n.push(a.n.replace(/（.*?）/g,''))});TOWNS.forEach(function(t){if(PS.towns[t.id])n.push(t.n)});return n}
 function meHTML(){
   var r=personaMatches(),a=r.arr.map(function(x){return x.p});
-  var h='<button class="back" type="button" data-back>← 返回</button><div class="head"><h2>適合你的政見</h2></div><p class="mesum">'+esc(meNames().join('、'))+'</p>';
+  var h='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><h2>適合你的政見</h2></div><p class="mesum">'+esc(meNames().join('、'))+'</p>';
   if(!a.length&&!r.extra.length&&!r.wide.length)h+='<p class="empty">還沒有選條件，請按「返回」選你住的地方或身分。</p>';
   if(a.length)h+='<div class="sec">跟你有關<small>'+a.length+'</small></div>'+a.map(polRow2).join('');
   if(r.extra.length)h+='<div class="sec">你住的地方<small>'+r.extra.length+'</small></div>'+r.extra.map(polRow2).join('');
@@ -1567,7 +1571,7 @@ function personaControls(home){
   var towns=TOWNS.map(function(t){return '<button type="button" data-ptown="'+t.id+'" aria-pressed="'+(!!PS.towns[t.id])+'">'+esc(t.n)+'</button>'}).join('');
   var head=home
     ?'<div class="head sm"><h2>找跟我有關的政見</h2></div>'
-    :'<button class="back" type="button" data-back>← 返回</button><div class="head"><div class="kind">個人化</div><h2>我的條件</h2></div>';
+    :'<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">個人化</div><h2>我的條件</h2></div>';
   var cta=home
     ?'<div class="cta"><button type="button" class="seebtn" id="seeres">看政見<small id="resn"></small></button><button type="button" class="tourbtn alt" id="tourgo">開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的政見單（圖片）</button></div>'
     :'<div class="cta"><button type="button" class="tourbtn" id="tourgo">用這個條件開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的政見單（圖片）</button></div>';
@@ -1693,7 +1697,7 @@ function selectPin(id){
 }
 function goBack(){
   var f=S.from;S.from=null;
-  if(f&&f.type==='town')selectTown(f.id);else if(f&&f.type==='aud')selectAud(f.id);else clearSel();
+  if(f&&f.type==='town')selectTown(f.id);else if(f&&f.type==='aud')selectAud(f.id);else if(f&&f.type==='persona')openPersona();else clearSel();
 }
 function selectPolicy(id){
   var p=PBY[id];S.from=(S.sel&&S.sel.type!=='policy')?S.sel:(S.sel&&S.sel.type==='policy'?S.from:null);S.sel={type:'policy',id:id};
@@ -1861,7 +1865,7 @@ var BIO=[
 ];
 function bioView(){
   var n=BIO.reduce(function(a,g){return a+g[1].length},0);
-  var h='<button class="back" type="button" data-back>← 返回</button><div class="head"><h2>林國漳的經歷</h2></div>';
+  var h='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><h2>林國漳的經歷</h2></div>';
   BIO.forEach(function(g,i){
     h+='<details class="pcat" data-pk="bio'+i+'"'+(POPEN['bio'+i]?' open':'')+'><summary><b>'+esc(g[0])+'</b><small>'+g[1].length+'</small></summary><ul class="bio">'+g[1].map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></details>';
   });
@@ -2599,7 +2603,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 98 版';
+var BUILD='10/29 第 99 版';
 $('#mego').onclick=function(){openPersona()};
 $('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
