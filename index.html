@@ -2086,8 +2086,6 @@ function cvFoot(c,W){
   c.fillStyle='#9ADB7A';c.fillRect(64,1176,W-128,4);
   c.font='900 64px '+CV_F;c.fillText(typeof SLOGAN==='string'&&SLOGAN?SLOGAN:'林國漳',64,1252);
   c.fillStyle='#fff';c.font='700 32px '+CV_F;c.fillText('宜蘭縣長候選人 林國漳・投票日 2026/11/28',64,1300);
-  c.fillStyle='#9FB8DA';c.font='600 24px '+CV_F;
-  c.fillText('政見為候選人承諾，不是已核定的施政'+(SHARE_BASE?'　'+SHARE_BASE.replace(/^https?:\/\//,'').replace(/\/$/,''):''),64,1334);
 }
 function cvNew(){var cv=document.createElement('canvas');cv.width=1080;cv.height=1350;return cv}
 function cvBG(c,W,H){var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0A1D38');g.addColorStop(1,'#173A66');c.fillStyle=g;c.fillRect(0,0,W,H)}
@@ -2326,6 +2324,27 @@ function stat(path,title){
     s.src='https://gc.zgo.at/count.js';document.head.appendChild(s);
   }catch(e){}
 })();
+var WBRK={'願你有好山好水好心情':['願你有','好山好水好心情']};
+function wishLines(wish){
+  if(WBRK[wish])return WBRK[wish];
+  var parts=wish.split(/[，,、；;]/).filter(Boolean);
+  if(parts.length>=2){
+    var tot=parts.join('').length,best=1,bd=1e9,acc=0;
+    for(var k=1;k<parts.length;k++){acc+=parts[k-1].length;var d=Math.abs(tot-2*acc);if(d<bd){bd=d;best=k}}
+    return [parts.slice(0,best).join(''),parts.slice(best).join('')];
+  }
+  if(wish.length<=7)return [wish];
+  var cuts=[];
+  try{
+    var sg=new Intl.Segmenter('zh-Hant',{granularity:'word'}),pos=0;
+    Array.from(sg.segment(wish)).forEach(function(s){pos+=s.segment.length;if(pos<wish.length)cuts.push(pos)});
+  }catch(e){}
+  cuts=cuts.filter(function(p){return !/[0-9]/.test(wish.charAt(p-1))&&!/[0-9]/.test(wish.charAt(p))});
+  var mid=wish.length/2,at=0,bd2=1e9;
+  cuts.forEach(function(p){var d=Math.abs(p-mid);if(d<bd2){bd2=d;at=p}});
+  if(!at||bd2>Math.max(2,wish.length*0.3))at=Math.ceil(mid);
+  return [wish.slice(0,at),wish.slice(at)];
+}
 function drawBlessCard(name,wish,img,fx){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),SS='"Noto Serif TC",'+CV_S,SN='"Noto Sans TC",'+CV_F;
   function sp(v){if('letterSpacing' in c)c.letterSpacing=v}
@@ -2344,11 +2363,8 @@ function drawBlessCard(name,wish,img,fx){
   chars.forEach(function(ch,i){c.fillText(ch,x,y0+i*step)});c.restore();
   c.fillStyle='rgba(255,255,255,.9)';c.fillRect(x-sz*.5-22,112,3,Math.min(900,n*step+26));
   // blessing: main focus, big, up to two lines (split at the comma when there is one)
-  var parts=wish.split(/[，,、]/).filter(Boolean),lines;
+  var lines=wishLines(wish);
   c.font='900 96px '+SS;
-  if(parts.length>=2&&parts.length<=2)lines=parts;
-  else if(wish.length>7){var hm=Math.ceil(wish.length/2);lines=[wish.slice(0,hm),wish.slice(hm)]}
-  else lines=[wish];
   var fs=150;sp('4px');
   while(fs>64){c.font='900 '+fs+'px '+SS;var ok=lines.every(function(s){return c.measureText(s).width<=W-330});if(ok)break;fs-=4}
   var gap=Math.round(fs*.14),base=1196-(lines.length-1)*(fs+gap);
@@ -2443,7 +2459,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 84 版';
+var BUILD='10/29 第 85 版';
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
 function setXL(v){
