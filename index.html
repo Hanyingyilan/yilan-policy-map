@@ -589,6 +589,8 @@ body.sub .portrait{display:none}
 .pbody{overflow:visible}
 .back{display:flex;align-items:center;gap:8px;position:sticky;top:10px;z-index:30;width:calc(100% - 32px);margin:14px 16px 10px;min-height:54px;padding:0 20px;border:2px solid var(--edge);border-radius:14px;background:#fff;color:var(--txt);font-size:calc(15px*var(--ps,1));font-weight:800;text-align:left;box-shadow:0 3px 0 rgba(21,53,43,.16)}
 .back:hover{background:var(--ink3)}
+.brand h1{text-shadow:4px 4px 0 #0B3D1E,5px 5px 0 rgba(11,61,30,.45)}
+body.sub .brand h1{text-shadow:2px 2px 0 #0B3D1E}
 @media (max-height:520px){
   #mebar{padding:6px 16px calc(6px + env(safe-area-inset-bottom,0px))}
   #mego,#mecl{min-height:44px}
@@ -628,7 +630,7 @@ body.sub .portrait{display:none}
   <aside class="panel" role="main" aria-label="政見清單與內容">
     <div class="brand">
       <div class="sticker">距離投票日 11/28<b id="cd"></b></div>
-      <h1>宜蘭政見，一次看懂</h1>
+      <h1>宜蘭政見<br>一次看懂</h1>
       <div class="ballot" id="ballot" aria-label="候選人號次"></div>
       <div class="hbtns" id="hbtns"></div>
       <div class="portrait empty" id="portrait"><div class="pimg"></div><span class="ptag"><b>林國漳</b><small>宜蘭縣長候選人</small></span></div>
@@ -2603,7 +2605,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 100 版';
+var BUILD='10/29 第 101 版';
 $('#mego').onclick=function(){openPersona()};
 $('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
