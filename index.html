@@ -2268,6 +2268,7 @@ function quizResult(){
   TOWNS.forEach(function(t){var s=QS.sc[t.id]||0;if(s>best){best=s;tops=[t.id]}else if(s===best)tops.push(t.id)});
   return tops[Math.floor(Math.random()*tops.length)];
 }
+function shortT(t){var h=t.split('：')[0];return /[鄉鎮市]$/.test(h)?t:h}
 function drawQuizCard(id){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),t=TOWNS[TI[id]],o=ICONS[id]||['','',''];
   var loc=polForTown(id).filter(match),cty=POL.filter(function(p){return !p.bg&&p.tw==='all'&&!localTo(p,id)&&match(p)}),list=loc.length?loc:cty;
@@ -2286,7 +2287,7 @@ function drawQuizCard(id){
   list.slice(0,3).forEach(function(p,i){
     var yy=908+i*84;
     c.fillStyle='#9ADB7A';c.beginPath();c.arc(78,yy-14,9,0,Math.PI*2);c.fill();
-    c.fillStyle='#fff';c.font='800 48px '+CV_F;c.fillText(cvFit(c,p.t.split('：')[0],W-64-112),112,yy);
+    c.fillStyle='#fff';c.font='800 48px '+CV_F;c.fillText(cvFit(c,shortT(p.t),W-64-112),112,yy);
   });
   if(list.length>3){c.fillStyle='#9ADB7A';c.font='700 38px '+CV_F;c.fillText('還有 '+(list.length-3)+' 項，到網站看全部',64,1140)}
   cvFoot(c,W);
@@ -2454,7 +2455,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 82 版';
+var BUILD='10/29 第 83 版';
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
 function setXL(v){
