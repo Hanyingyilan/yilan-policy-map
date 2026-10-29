@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="宜蘭縣互動地圖：點選鄉鎮、道路或圖釘，查看林國漳候選人的公開政見與相關建設。">
-<title>林國漳政見地圖</title>
-<meta name="description" content="宜蘭縣長候選人林國漳的政見地圖：點選鄉鎮、道路或圖釘，看政見與建設；也能依年齡、職業與地區找到與你有關的政見。">
+<meta name="description" content="宜蘭縣長候選人林國漳的政見：選你住的地方和身分，找到跟你有關的政見，也能看短影音。">
+<title>林國漳找政見</title>
+<meta name="description" content="宜蘭縣長候選人林國漳的政見：選你住的地方和身分，找到跟你有關的政見，也能看短影音。">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="林國漳政見地圖">
-<meta property="og:title" content="林國漳政見地圖｜宜蘭縣長候選人 1 號">
-<meta property="og:description" content="團結作伙拚，宜蘭1定贏。點選鄉鎮、道路或圖釘，看政見與建設；也能依年齡、職業與地區找到與你有關的政見。">
+<meta property="og:site_name" content="林國漳找政見">
+<meta property="og:title" content="林國漳找政見｜宜蘭縣長候選人">
+<meta property="og:description" content="團結作伙拚，宜蘭1定贏。選你住的地方和身分，找到跟你有關的政見。">
 <meta property="og:url" content="https://hanyingyilan.github.io/yilan-policy-map/">
 <meta property="og:image" content="https://hanyingyilan.github.io/yilan-policy-map/og.png">
 <meta property="og:image:width" content="1200">
@@ -552,7 +552,7 @@ body.hasbar .panel{padding-bottom:100px}
   <aside class="panel" role="main" aria-label="政見清單與內容">
     <div class="brand">
       <div class="sticker">距投票日 11/28<b id="cd"></b></div>
-      <h1>林國漳<span>政見地圖</span></h1>
+      <h1>林國漳<span>找政見</span></h1>
       <div class="ballot" id="ballot" aria-label="候選人號次"></div>
       <div class="hbtns" id="hbtns"></div>
     </div>
@@ -1422,9 +1422,9 @@ function panel(){
     h+='<button class="back" type="button" data-back>← 返回</button>'+cardHTML(PBY[s.id],true);
   }else{
     h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>短影音</button></div>';
+    h+=funBox();
     h+='<div class="sec">你住哪裡？<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-pressed="'+(!!PS.towns[t.id])+'">'+esc(t.n)+'</button>'}).join('')+'</div>';
     h+='<div class="sec">你是哪一種人？<small>可複選</small></div><div class="audg">'+AUD.map(function(a){return '<button type="button" class="ab" data-ptog="a:'+a.id+'" aria-pressed="'+(!!PS.jobs[a.id])+'">'+esc(a.n.replace(/（.*?）/g,''))+'</button>'}).join('')+'</div>';
-    h+=funBox();
     h+='<div class="sec">重點數字</div><div class="wall">'+WALL.slice(0,4).map(function(w){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div>';
     h+=videoSection();
     var any=false,tot=0;Object.keys(CATS).forEach(function(k){tot+=POL.filter(function(p){return p.c===k&&match(p)}).length});
@@ -2005,7 +2005,7 @@ function keyTitle(k){
 }
 function syncHash(){
   var k=curKey();
-  document.title=(k?keyTitle(k)+'｜':'')+'林國漳政見地圖';
+  document.title=(k?keyTitle(k)+'｜':'')+'林國漳找政見';
   try{if(history.replaceState)history.replaceState(null,'',location.pathname+location.search+(k?'#'+k:''))}catch(e){}
 }
 function applyHash(){
@@ -2038,9 +2038,9 @@ function shareURL(){
   if(SHARE_BASE)return SHARE_BASE+(k?'s/'+k+'/':'');
   return location.href.split('#')[0]+(k?'#'+k:'');
 }
-function shareText(){var k=curKey(),t=k?keyTitle(k):'';return (t?t+'｜':'')+'林國漳政見地圖（宜蘭縣長候選人）'}
+function shareText(){var k=curKey(),t=k?keyTitle(k):'';return (t?t+'｜':'')+'林國漳找政見（宜蘭縣長候選人）'}
 function openShare(){
-  var box=$('#sharebox'),url=shareURL(),k=curKey(),title=k?keyTitle(k):'全縣政見地圖';
+  var box=$('#sharebox'),url=shareURL(),k=curKey(),title=k?keyTitle(k):'全縣政見';
   var line='https://line.me/R/msg/text/?'+encodeURIComponent(shareText()+'\n'+url);
   box.innerHTML='<div class="sh-k">分享這一頁</div><div class="sh-n">'+esc(title)+'</div>'+
     '<input id="shurl" type="text" readonly value="'+esc(url)+'" aria-label="連結">'+
@@ -2121,11 +2121,11 @@ function drawFortune(daily,fid){
       '<div class="fzpoem" aria-label="籤詩">'+po.map(function(l){return '<span>'+esc(l)+'</span>'}).join('')+'</div>'+
       '<div class="fzjie"><span class="fzcat">'+esc(c.n)+'</span><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p></div><div class="fznote">籤詩為創作，政見以內容為準</div></div>'+
       '<div class="ovb"><button type="button" class="pri" data-fzsee>看這項政見</button><button type="button" data-fzagain>再抽一支</button><button type="button" data-fzimg>存成籤紙圖</button></div>'+
-      '<div class="ovb"><a class="line" href="'+esc(lineHref((daily?'今日一籤「':'我抽到「')+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
+      '<div class="ovb"><a class="line" href="'+esc(lineHref((daily?'今日一籤「':'我抽到「')+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳找政見',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
     ovOpen(h,'fz');if(daily)markDay();
     OV.querySelector('[data-fzsee]').onclick=function(){ovClose();selectPolicy(p.id);try{window.scrollTo({top:0})}catch(x){}};
     OV.querySelector('[data-fzagain]').onclick=function(){drawFortune()};
-    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length,daily?dayLabel():''),(daily?'今日一籤「':'我抽到「')+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳政見地圖',url,'林國漳-政見籤.png',null,daily?'daily':'f-'+p.id)};
+    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length,daily?dayLabel():''),(daily?'今日一籤「':'我抽到「')+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜林國漳找政見',url,'林國漳-政見籤.png',null,daily?'daily':'f-'+p.id)};
     var a=OV.querySelector('[data-fzagain]');if(a&&a.focus)a.focus();
   },reduce?0:1100);
 }
@@ -2144,7 +2144,7 @@ function rrect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,
 function cvHead(c,W){
   c.textBaseline='alphabetic';c.textAlign='left';
   c.fillStyle='#9ADB7A';c.fillRect(0,0,W,16);
-  c.font='900 38px '+CV_F;c.fillText('林國漳政見地圖',64,100);
+  c.font='900 38px '+CV_F;c.fillText('林國漳找政見',64,100);
 }
 function cvFoot(c,W){
   c.fillStyle='#9ADB7A';c.fillRect(64,1176,W-128,4);
@@ -2207,7 +2207,7 @@ function openImg(cv,txt,url,fname,extra,ext){
 }
 function openCard(){
   var d=drawCard();
-  openImg(d.cv,'我的專屬政見單（'+d.count+' 項）｜林國漳政見地圖',SHARE_BASE?SHARE_BASE+'s/me/':location.href.split('#')[0]+'#me','林國漳-我的政見單.png');
+  openImg(d.cv,'我的專屬政見單（'+d.count+' 項）｜林國漳找政見',SHARE_BASE?SHARE_BASE+'s/me/':location.href.split('#')[0]+'#me','林國漳-我的政見單.png');
 }
 function drawPolCard(p){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),cc=CATS[p.c],kn=KN[p.id]||[];
@@ -2244,7 +2244,7 @@ function drawPolCard(p){
   cvFoot(c,W);
   return cv;
 }
-function openPolCard(id){var p=PBY[id];if(p)openImg(drawPolCard(p),p.t+'｜林國漳政見地圖',polURL(id),'林國漳-'+id+'.png')}
+function openPolCard(id){var p=PBY[id];if(p)openImg(drawPolCard(p),p.t+'｜林國漳找政見',polURL(id),'林國漳-'+id+'.png')}
 function pageBase(){return location.href.split('#')[0]}
 function fzURL(id){return SHARE_BASE?SHARE_BASE+'s/f-'+id+'/':pageBase()+'#f-'+id}
 function qzURL(id){return SHARE_BASE?SHARE_BASE+'s/q-'+id+'/':pageBase()+'#quiz'}
@@ -2291,7 +2291,7 @@ function drawFortuneImg(p,no,total,day){
   var tl=cvWrap(c,shortT(p.t),W-200,2);
   tl.forEach(function(s,i){c.fillText(s,W/2,980+i*66)});
   c.fillStyle='#8A5A40';c.font='600 26px '+CV_F;c.fillText('籤詩為創作，政見為候選人承諾',W/2,1212);
-  c.fillStyle=BR;c.font='800 38px '+CV_F;c.fillText('林國漳政見地圖',W/2,1266);
+  c.fillStyle=BR;c.font='800 38px '+CV_F;c.fillText('林國漳找政見',W/2,1266);
   return cv;
 }
 var QZ=[
@@ -2364,7 +2364,7 @@ function showQuiz(){
 function showQuizResult(id0){
   var id=id0||quizResult(),t=TOWNS[TI[id]];
   if(!id0){stat('quiz/done','測驗完成');stat('quiz/result/'+id,'測驗結果：'+t.n)}
-  openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜林國漳政見地圖',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
+  openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜林國漳找政見',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
     '<button type="button" data-qzagain>再測一次</button><button type="button" data-qzsee>看'+esc(t.n)+'的政見</button>','qr-'+id);
   OV.querySelector('[data-qzagain]').onclick=openQuiz;
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
@@ -2462,7 +2462,7 @@ function fontReady(txt,cb){
 function blGen(nm,w){
   var k=bpPick('p',BP.length),wish=w||BL[bpPick('w',BL.length)];
   bpLoad(k,function(img){fontReady('祝福'+nm+wish,function(){
-    openImg(drawBlessCard(nm,wish,img,BP[k][1]),'林國漳祝福'+nm+'：'+wish+'｜林國漳政見地圖',blURL(),'林國漳-1定贏祝福卡.png','<button type="button" data-blagain>再抽一張</button>');
+    openImg(drawBlessCard(nm,wish,img,BP[k][1]),'林國漳祝福'+nm+'：'+wish+'｜林國漳找政見',blURL(),'林國漳-1定贏祝福卡.png','<button type="button" data-blagain>再抽一張</button>');
     var a=OV.querySelector('[data-blagain]');if(a)a.onclick=function(){blGen(nm,w)};
   })});
 }
@@ -2510,7 +2510,7 @@ function drawTownCard(id){
   cvFoot(c,W);
   return cv;
 }
-function openTownCard(id){var t=TOWNS[TI[id]];if(t)openImg(drawTownCard(id),t.n+'的政見與建設｜林國漳政見地圖',townURL(id),'林國漳-'+id+'.png')}
+function openTownCard(id){var t=TOWNS[TI[id]];if(t)openImg(drawTownCard(id),t.n+'的政見與建設｜林國漳找政見',townURL(id),'林國漳-'+id+'.png')}
 function drawWallCard(){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d');
   cvBG(c,W,H);cvHead(c,W);
@@ -2527,8 +2527,8 @@ function drawWallCard(){
   cvFoot(c,W);
   return cv;
 }
-function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 90 版';
+function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
+var BUILD='10/29 第 91 版';
 $('#mego').onclick=function(){openPersona()};
 $('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
