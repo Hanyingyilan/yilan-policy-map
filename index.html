@@ -2439,26 +2439,43 @@ function quizResult(){
 }
 function shortT(t){var h=t.split('：')[0];return /[鄉鎮市]$/.test(h)?t:h}
 function drawQuizCard(id){
-  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),t=TOWNS[TI[id]],o=ICONS[id]||['','',''];
+  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),t=TOWNS[TI[id]];
   var loc=polForTown(id).filter(match),cty=POL.filter(function(p){return !p.bg&&p.tw==='all'&&!localTo(p,id)&&match(p)}),list=loc.length?loc:cty;
-  cvBG(c,W,H);cvHead(c,W);
-  c.fillStyle='#C9D8EE';c.font='700 52px '+CV_F;c.fillText('我是',64,200);
-  c.fillStyle='#fff';c.font='900 230px '+CV_F;c.fillText(qzShort(t)+'人',64,440);
-  c.fillStyle='#C9D8EE';c.font='600 46px '+CV_F;
-  var ql=cvWrap(c,QT[id]||'',W-128,2);
-  if(ql.length===2&&ql[1].length<=6)ql=cvWrap(c,QT[id],(W-128)*.7,2);
-  ql.forEach(function(s,i){c.fillText(s,64,540+i*66)});
-  if(FOODS[id]){c.fillStyle='#F6D58E';c.font='800 42px '+CV_F;c.fillText(cvFit(c,'🍜 '+FOODS[id],W-128),64,700)}
-  c.fillStyle='rgba(255,255,255,.18)';c.fillRect(64,752,W-128,2);
-  c.fillStyle='#C9D8EE';c.font='700 42px '+CV_F;
-  c.fillText(cvFit(c,loc.length?'林國漳的'+t.n+'政見':t.n+'也適用的全縣政見',W-128),64,820);
+  c.textBaseline='alphabetic';c.textAlign='left';
+  c.fillStyle='#F6F9F1';c.fillRect(0,0,W,H);
+  c.fillStyle='#15803D';c.font='900 36px '+CV_F;c.fillText('林國漳找政見',64,100);
+  c.fillStyle='#4B6B57';c.font='700 52px '+CV_F;c.fillText('我是',64,210);
+  var nm=qzShort(t)+'人',fs=230;
+  c.font='900 '+fs+'px '+CV_F;
+  while(fs>120&&c.measureText(nm).width>W-128){fs-=10;c.font='900 '+fs+'px '+CV_F}
+  var nw=c.measureText(nm).width;
+  c.fillStyle='#FFD95A';rrect(c,52,330,Math.min(nw+24,W-104),84,20);c.fill();
+  c.fillStyle='#14532D';c.fillText(nm,64,440);
+  c.fillStyle='#26382D';c.font='600 46px '+CV_F;
+  cvWrap(c,QT[id]||'',W-128,2).forEach(function(s,i){c.fillText(s,64,540+i*68)});
+  if(FOODS[id]){
+    c.fillStyle='#fff';c.strokeStyle='#CFE0C6';c.lineWidth=3;rrect(c,64,690,W-128,86,43);c.fill();c.stroke();
+    c.fillStyle='#15803D';c.font='800 40px '+CV_F;c.fillText(cvFit(c,'在地美食　'+FOODS[id],W-128-80),104,747);
+  }
+  c.fillStyle='#4B6B57';c.font='700 40px '+CV_F;
+  c.fillText(cvFit(c,loc.length?'林國漳的'+t.n+'政見':t.n+'也適用的全縣政見',W-128),64,860);
   list.slice(0,3).forEach(function(p,i){
-    var yy=908+i*84;
-    c.fillStyle='#9ADB7A';c.beginPath();c.arc(78,yy-14,9,0,Math.PI*2);c.fill();
-    c.fillStyle='#fff';c.font='800 48px '+CV_F;c.fillText(cvFit(c,shortT(p.t),W-64-112),112,yy);
+    var y=890+i*96;
+    c.fillStyle='#fff';rrect(c,64,y,W-128,86,28);c.fill();
+    c.fillStyle='#15803D';c.beginPath();c.arc(124,y+43,26,0,Math.PI*2);c.fill();
+    c.fillStyle='#fff';c.font='900 30px '+CV_F;c.textAlign='center';c.fillText(String(i+1),124,y+54);c.textAlign='left';
+    c.fillStyle='#14532D';c.font='800 46px '+CV_F;c.fillText(cvFit(c,shortT(p.t),W-128-110-24),174,y+59);
   });
-  if(list.length>3){c.fillStyle='#9ADB7A';c.font='700 38px '+CV_F;c.fillText('還有 '+(list.length-3)+' 項，到網站看全部',64,1140)}
-  cvFoot(c,W);
+  c.fillStyle='#15803D';c.fillRect(0,1196,W,154);
+  c.fillStyle='#fff';c.font='900 64px '+CV_F;c.fillText(typeof SLOGAN==='string'&&SLOGAN?SLOGAN:'林國漳',64,1252);
+  c.font='700 32px '+CV_F;
+  if(BALLOT_NO){
+    var t1='宜蘭縣長候選人',w1=c.measureText(t1).width,bx=64+w1+14+22;
+    c.fillText(t1,64,1304);
+    c.fillStyle='#FFD95A';c.beginPath();c.arc(bx,1293,22,0,Math.PI*2);c.fill();
+    c.fillStyle='#14532D';c.font='900 28px '+CV_F;c.textAlign='center';c.fillText(String(BALLOT_NO),bx,1303);c.textAlign='left';
+    c.fillStyle='#fff';c.font='700 32px '+CV_F;c.fillText('林國漳',bx+36,1304);
+  }else c.fillText('宜蘭縣長候選人 林國漳',64,1304);
   return cv;
 }
 function showQuiz(){
@@ -2640,7 +2657,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 104 版';
+var BUILD='10/29 第 105 版';
 $('#mego').onclick=function(){openPersona()};
 $('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
