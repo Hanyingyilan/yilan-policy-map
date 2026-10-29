@@ -506,6 +506,25 @@ html.xl body.sub .brand,body.sub html.xl .brand{grid-template-areas:"h h" "x x"}
 body.sub .brand{padding-top:12px;grid-template-areas:"h h" "x x"}
 body.sub .brand h1{font-size:calc(20px*var(--ps,1))}
 body.sub .ballot,body.sub .slogan,body.sub .sticker{display:none}
+#mebar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;gap:10px;max-width:680px;margin:0 auto;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--ink);border-top:2px solid var(--edge)}
+#mebar[hidden]{display:none}
+#mego{flex:1;min-height:56px;border:0;border-radius:14px;background:var(--lime);color:var(--ink);font-weight:800;font-size:calc(15px*var(--ps,1))}
+#mecl{min-height:56px;padding:0 18px;border:2px solid var(--edge);background:none;color:var(--txt);border-radius:14px;font-weight:700;font-size:calc(14px*var(--ps,1))}
+body.hasbar .panel{padding-bottom:100px}
+.ab[aria-pressed="true"],.tb[aria-pressed="true"]{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.ab[aria-pressed="true"]::before,.tb[aria-pressed="true"]::before{content:"✓ ";font-weight:900}
+.mesum{margin:0 16px 4px;color:var(--mut);font-size:calc(13px*var(--ps,1))}
+/* v90 color discipline: one accent, neutral everything else, UI borders >= 3:1 */
+:root{--edge:#587AA5}
+.brand h1 span{color:var(--txt)}
+.sticker{border-color:var(--edge);color:var(--mut)}
+.sticker b{color:var(--txt)}
+.tb{background:var(--ink2);border:2px solid var(--edge)}
+.tb:hover{background:var(--ink3)}
+.wall button{background:var(--ink2);color:var(--txt);border:2px solid var(--edge)}
+.wall button:nth-child(odd):hover,.wall button:nth-child(even):hover{transform:none}
+.wall span{color:var(--mut)}
+.pcat>summary i{background:var(--mut)}
 .foot{margin:36px 16px 24px;text-align:center;color:var(--mut);font-size:calc(12px*var(--ps,1));line-height:1.6}
 .foot button{border:0;background:none;color:var(--txt);text-decoration:underline;font-size:calc(13px*var(--ps,1));font-weight:700;padding:6px}
 </style>
@@ -530,7 +549,7 @@ body.sub .ballot,body.sub .slogan,body.sub .sticker{display:none}
     <div class="tour" id="tour"></div>
     <div class="tip" id="tip"></div>
   </section>
-  <aside class="panel" aria-label="政見清單與內容">
+  <aside class="panel" role="main" aria-label="政見清單與內容">
     <div class="brand">
       <div class="sticker">距投票日 11/28<b id="cd"></b></div>
       <h1>林國漳<span>政見地圖</span></h1>
@@ -541,6 +560,7 @@ body.sub .ballot,body.sub .slogan,body.sub .sticker{display:none}
     <div class="pbody" id="pbody"></div>
   </aside>
 </div>
+<div id="mebar" hidden><button type="button" id="mego">看適合我的政見</button><button type="button" id="mecl">清除</button></div>
 <script>
 (function(){
 'use strict';
@@ -1391,7 +1411,7 @@ function panel(){
   }else if(s&&s.type==='bio'){
     h+=bioView();
   }else if(s&&s.type==='persona'){
-    h+=personaControls(false);
+    h+=meHTML();
   }else if(s&&s.type==='aud'){
     var A=AI[s.id],ap=A.pol.map(function(id){return PBY[id]}).filter(match);
     h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><h2>'+esc(A.n.replace(/（.*?）/g,''))+'</h2></div>';
@@ -1402,8 +1422,8 @@ function panel(){
     h+='<button class="back" type="button" data-back>← 返回</button>'+cardHTML(PBY[s.id],true);
   }else{
     h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>短影音</button></div>';
-    h+='<div class="sec">你住哪裡？</div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-town="'+t.id+'">'+esc(t.n)+'</button>'}).join('')+'</div>';
-    h+='<div class="sec">你是哪一種人？</div><div class="audg">'+AUD.map(function(a){return '<button type="button" class="ab" data-aud="'+a.id+'">'+esc(a.n.replace(/（.*?）/g,''))+'</button>'}).join('')+'</div>';
+    h+='<div class="sec">你住哪裡？<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-pressed="'+(!!PS.towns[t.id])+'">'+esc(t.n)+'</button>'}).join('')+'</div>';
+    h+='<div class="sec">你是哪一種人？<small>可複選</small></div><div class="audg">'+AUD.map(function(a){return '<button type="button" class="ab" data-ptog="a:'+a.id+'" aria-pressed="'+(!!PS.jobs[a.id])+'">'+esc(a.n.replace(/（.*?）/g,''))+'</button>'}).join('')+'</div>';
     h+=funBox();
     h+='<div class="sec">重點數字</div><div class="wall">'+WALL.slice(0,4).map(function(w){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div>';
     h+=videoSection();
@@ -1420,6 +1440,8 @@ function panel(){
   }
   el.innerHTML=h;el.scrollTop=0;
   document.body.classList.toggle('sub',!!s);
+  updateMeBar();
+  el.querySelectorAll('.sec').forEach(function(x){x.setAttribute('role','heading');x.setAttribute('aria-level','2')});
   if(s&&window.scrollTo)window.scrollTo(0,0);
   if((s&&s.type==='persona')||(!s&&!q))bindPersona();
 }
@@ -1446,6 +1468,28 @@ function personaMatches(){
   return {ids:ids,arr:arr,extra:extra,wide:wide,tw:tw};
 }
 function townName(id){for(var i=0;i<TOWNS.length;i++)if(TOWNS[i].id===id)return TOWNS[i].n;return id}
+function meNames(){var n=[];AUD.forEach(function(a){if(PS.jobs[a.id])n.push(a.n.replace(/（.*?）/g,''))});TOWNS.forEach(function(t){if(PS.towns[t.id])n.push(t.n)});return n}
+function meHTML(){
+  var r=personaMatches(),a=r.arr.map(function(x){return x.p});
+  var h='<button class="back" type="button" data-back>← 返回</button><div class="head"><h2>適合你的政見</h2></div><p class="mesum">'+esc(meNames().join('、'))+'</p>';
+  if(!a.length&&!r.extra.length&&!r.wide.length)h+='<p class="empty">還沒有選條件，請按「返回」選你住的地方或身分。</p>';
+  if(a.length)h+='<div class="sec">跟你有關<small>'+a.length+'</small></div>'+a.map(polRow2).join('');
+  if(r.extra.length)h+='<div class="sec">你住的地方<small>'+r.extra.length+'</small></div>'+r.extra.map(polRow2).join('');
+  if(r.wide.length)h+='<details class="pcat" data-pk="mewide"'+(POPEN.mewide?' open':'')+'><summary><b>全縣都適用</b><small>'+r.wide.length+'</small></summary>'+r.wide.map(polRow2).join('')+'</details>';
+  return h;
+}
+function togglePersona(b){
+  var p=b.dataset.ptog.split(':'),k=p[1];
+  if(p[0]==='t')PS.towns[k]=!PS.towns[k];else PS.jobs[k]=!PS.jobs[k];
+  b.setAttribute('aria-pressed',p[0]==='t'?!!PS.towns[k]:!!PS.jobs[k]);updateMeBar();
+}
+function updateMeBar(){
+  var bar=$('#mebar');if(!bar)return;
+  var any=Object.keys(PS.towns).some(function(k){return PS.towns[k]})||Object.keys(PS.jobs).some(function(k){return PS.jobs[k]});
+  var show=any&&!S.sel&&!S.q.trim();
+  bar.hidden=!show;document.body.classList.toggle('hasbar',show);
+  if(show){var r=personaMatches();$('#mego').textContent='看適合我的政見（'+(r.arr.length+r.extra.length+r.wide.length)+' 項）'}
+}
 function personaControls(home){
   var ticks=[0,6,17,39,64,100].map(function(v){return '<span style="left:'+v+'%">'+v+'</span>'}).join('');
   var jobs=AUD.filter(function(a){return a.k==='job'}).map(function(a){return '<button type="button" data-pjob="'+a.id+'" aria-pressed="'+(!!PS.jobs[a.id])+'">'+esc(a.n)+'</button>'}).join('');
@@ -1716,6 +1760,7 @@ function bind(){
 }
 $('#pbody').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.ptog){togglePersona(b);return}
   if('about' in b.dataset){S.sel={type:'about'};setHL();refresh();return}if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
   if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){goBack()}
@@ -2483,7 +2528,9 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 89 版';
+var BUILD='10/29 第 90 版';
+$('#mego').onclick=function(){openPersona()};
+$('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
