@@ -2274,27 +2274,22 @@ function drawQuizCard(id){
   cvBG(c,W,H);cvHead(c,W);
   c.font='900 34px '+CV_F;var kt='鄉鎮小測驗',cw=c.measureText(kt).width+48;
   c.fillStyle=TC[TI[id]];rrect(c,64,150,cw,56,28);c.fill();c.fillStyle='#0A1D38';c.fillText(kt,88,190);
-  c.fillStyle='#9FB8DA';c.font='700 34px '+CV_F;c.fillText('我的測驗結果是',64+cw+20,190);
-  c.fillStyle='#fff';c.font='900 170px '+CV_F;c.fillText(qzShort(t)+'人',64,400);
-  if(o[0]){c.font='130px '+CV_F;c.textAlign='right';c.fillText(o[0],W-64,390);c.textAlign='left'}
-  c.fillStyle='#C9D8EE';c.font='600 40px '+CV_F;
+  c.fillStyle='#fff';c.font='900 230px '+CV_F;c.fillText(qzShort(t)+'人',64,440);
+  if(o[0]){c.font='150px '+CV_F;c.textAlign='right';c.fillText(o[0],W-64,420);c.textAlign='left'}
+  c.fillStyle='#C9D8EE';c.font='600 46px '+CV_F;
   var ql=cvWrap(c,QT[id]||'',W-128,2);
-  if(ql.length===2&&ql[1].length<=2)ql=cvWrap(c,QT[id],(W-128)*.82,2);
-  ql.forEach(function(s,i){c.fillText(s,64,480+i*58)});
-  if(o[1]){c.fillStyle='#9ADB7A';c.font='900 38px '+CV_F;c.fillText(cvFit(c,'在地代表：'+o[1],W-128),64,610)}
-  if(FOODS[id]){c.fillStyle='#F6D58E';c.font='900 38px '+CV_F;c.fillText(cvFit(c,'🍜 在地美食：'+FOODS[id],W-128),64,662)}
-  c.fillStyle='#fff';c.font='900 42px '+CV_F;
-  c.fillText(cvFit(c,loc.length?'林國漳為'+t.n+'提出的政見':t.n+'也適用的全縣政見',W-128),64,716);
+  if(ql.length===2&&ql[1].length<=6)ql=cvWrap(c,QT[id],(W-128)*.7,2);
+  ql.forEach(function(s,i){c.fillText(s,64,540+i*66)});
+  if(FOODS[id]){c.fillStyle='#F6D58E';c.font='800 42px '+CV_F;c.fillText(cvFit(c,'🍜 '+FOODS[id],W-128),64,700)}
+  c.fillStyle='rgba(255,255,255,.18)';c.fillRect(64,752,W-128,2);
+  c.fillStyle='#9FB8DA';c.font='700 36px '+CV_F;
+  c.fillText(cvFit(c,loc.length?'林國漳的'+t.n+'政見':t.n+'也適用的全縣政見',W-128),64,820);
   list.slice(0,3).forEach(function(p,i){
-    var cc=CATS[p.c],yy=744+i*104;
-    c.fillStyle='rgba(255,255,255,.18)';c.fillRect(64,yy+100,W-128,2);
-    c.fillStyle=cc.c;c.beginPath();c.arc(100,yy+44,32,0,Math.PI*2);c.fill();
-    c.fillStyle='#0A1D38';c.font='900 32px '+CV_F;c.textAlign='center';c.fillText(cc.n.slice(0,1),100,yy+55);c.textAlign='left';
-    c.fillStyle='#fff';c.font='800 42px '+CV_F;c.fillText(cvFit(c,p.t,W-176-64),164,yy+44);
-    c.fillStyle='#9FB8DA';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+84);
+    var yy=908+i*84;
+    c.fillStyle='#9ADB7A';c.beginPath();c.arc(78,yy-14,9,0,Math.PI*2);c.fill();
+    c.fillStyle='#fff';c.font='800 48px '+CV_F;c.fillText(cvFit(c,p.t.split('：')[0],W-64-112),112,yy);
   });
-  if(list.length>3){c.fillStyle='#9ADB7A';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-3)+' 項，到網站看全部',64,1100)}
-  c.fillStyle='#9FB8DA';c.font='600 26px '+CV_F;c.fillText('好玩的小測驗，結果只是參考，不代表戶籍',64,1150);
+  if(list.length>3){c.fillStyle='#9ADB7A';c.font='700 32px '+CV_F;c.fillText('還有 '+(list.length-3)+' 項，到網站看全部',64,1140)}
   cvFoot(c,W);
   return cv;
 }
@@ -2460,7 +2455,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 80 版';
+var BUILD='10/29 第 81 版';
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
 function setXL(v){
