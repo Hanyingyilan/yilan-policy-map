@@ -1213,7 +1213,7 @@ function renderLabels(){
   if(b.w>=640||z>1.35)TOWNS.forEach(function(t){
     var o=ICONS[t.id];if(!o)return;var q=P(t.lab[0],t.lab[1]),X=sx(q[0]),Y=sy(q[1])+21;
     if(X<-30||X>b.w+30||Y<-20||Y>b.h+20)return;
-    h+='<div class="lb ic2" style="left:'+f1(X)+'px;top:'+f1(Y)+'px">'+o[0]+(z>1.7?'<i>'+esc(o[1])+'</i>':'')+'</div>';
+    if(z>1.7)h+='<div class="lb ic2" style="left:'+f1(X)+'px;top:'+f1(Y)+'px"><i>'+esc(o[1])+'</i></div>';
   });
   if(z>1.15)SHIELDS.forEach(function(s){
     if(s.id==='tra'&&!true)return;var q=P(s.lon,s.lat);place(q[0],q[1],esc(s.txt),'sh '+s.cls,s.txt.length*12+16,18,false);
@@ -2011,7 +2011,7 @@ var ICONS={
  datong:['⛰️','太平山','國家森林遊樂區，有翠峰湖與見晴懷古步道，也是泰雅族的家鄉。'],
  nanao:['🌅','朝陽國家步道','全長約 2.2 公里，沿途可以俯瞰南澳灣與烏石鼻海岸。']
 };
-function iconBox(id){var o=ICONS[id];if(!o)return '';return '<div class="need loc"><b>'+o[0]+'　在地代表：'+esc(o[1])+'</b><p>'+esc(o[2])+'</p><button class="go" type="button" data-tcard="'+id+'">存成鄉鎮圖卡</button></div>'}
+function iconBox(id){var o=ICONS[id];if(!o)return '';return '<div class="need loc"><b>在地代表：'+esc(o[1])+'</b><p>'+esc(o[2])+'</p><button class="go" type="button" data-tcard="'+id+'">存成鄉鎮圖卡</button></div>'}
 
 /* ================= overlay + 抽政見籤 + 我的政見單 ================= */
 var OV=document.createElement('div');OV.className='ov';OV.id='ov';OV.hidden=true;document.body.appendChild(OV);
@@ -2075,17 +2075,18 @@ function cvHead(c,W){
   c.textBaseline='alphabetic';c.textAlign='left';
   c.fillStyle='#9ADB7A';c.fillRect(0,0,W,16);
   c.font='900 38px '+CV_F;c.fillText('林國漳政見地圖',64,100);
-  if(BALLOT_NO){
-    var cx=W-64-30,cy=88;
-    c.fillStyle='#9ADB7A';c.beginPath();c.arc(cx,cy,30,0,Math.PI*2);c.fill();
-    c.fillStyle='#0A1D38';c.font='900 40px '+CV_F;c.textAlign='center';c.fillText(String(BALLOT_NO),cx,cy+14);
-    c.textAlign='right';c.fillStyle='#C9D8EE';c.font='700 32px '+CV_F;c.fillText('縣長候選人',cx-30-16,cy+11);c.textAlign='left';
-  }
 }
 function cvFoot(c,W){
   c.fillStyle='#9ADB7A';c.fillRect(64,1176,W-128,4);
   c.font='900 64px '+CV_F;c.fillText(typeof SLOGAN==='string'&&SLOGAN?SLOGAN:'林國漳',64,1252);
-  c.fillStyle='#fff';c.font='700 32px '+CV_F;c.fillText('宜蘭縣長候選人 林國漳・投票日 2026/11/28',64,1300);
+  c.fillStyle='#fff';c.font='700 32px '+CV_F;
+  if(BALLOT_NO){
+    var t1='宜蘭縣長候選人',w1=c.measureText(t1).width,bx=64+w1+14+22;
+    c.fillText(t1,64,1300);
+    c.fillStyle='#9ADB7A';c.beginPath();c.arc(bx,1289,22,0,Math.PI*2);c.fill();
+    c.fillStyle='#0A1D38';c.font='900 28px '+CV_F;c.textAlign='center';c.fillText(String(BALLOT_NO),bx,1299);c.textAlign='left';
+    c.fillStyle='#fff';c.font='700 32px '+CV_F;c.fillText('林國漳',bx+22+14,1300);
+  }else c.fillText('宜蘭縣長候選人 林國漳',64,1300);
 }
 function cvNew(){var cv=document.createElement('canvas');cv.width=1080;cv.height=1350;return cv}
 function cvBG(c,W,H){var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0A1D38');g.addColorStop(1,'#173A66');c.fillStyle=g;c.fillRect(0,0,W,H)}
@@ -2261,7 +2262,6 @@ function drawQuizCard(id){
   cvBG(c,W,H);cvHead(c,W);
   c.fillStyle='#C9D8EE';c.font='700 52px '+CV_F;c.fillText('我是',64,200);
   c.fillStyle='#fff';c.font='900 230px '+CV_F;c.fillText(qzShort(t)+'人',64,440);
-  if(o[0]){c.font='150px '+CV_F;c.textAlign='right';c.fillText(o[0],W-64,420);c.textAlign='left'}
   c.fillStyle='#C9D8EE';c.font='600 46px '+CV_F;
   var ql=cvWrap(c,QT[id]||'',W-128,2);
   if(ql.length===2&&ql[1].length<=6)ql=cvWrap(c,QT[id],(W-128)*.7,2);
@@ -2421,7 +2421,6 @@ function drawTownCard(id){
   c.font='900 34px '+CV_F;var kt='鄉鎮市・'+t.g,cw=c.measureText(kt).width+48;
   c.fillStyle=TC[TI[id]];rrect(c,64,150,cw,56,28);c.fill();c.fillStyle='#0A1D38';c.fillText(kt,88,190);
   c.fillStyle='#fff';c.font='900 140px '+CV_F;c.fillText(t.n,64,350);
-  if(o[0]){c.font='120px '+CV_F;c.textAlign='right';c.fillText(o[0],W-64,350);c.textAlign='left'}
   if(o[1]){
     c.fillStyle='#9ADB7A';c.font='900 46px '+CV_F;c.fillText('在地代表：'+o[1],64,440);
     c.fillStyle='#C9D8EE';c.font='600 36px '+CV_F;cvWrap(c,o[2],W-128,2).forEach(function(s,i){c.fillText(s,64,498+i*52)});
@@ -2459,7 +2458,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 86 版';
+var BUILD='10/29 第 87 版';
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
 function setXL(v){
