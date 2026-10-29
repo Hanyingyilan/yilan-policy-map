@@ -607,6 +607,8 @@ body.sub .brand h1{text-shadow:2px 2px 0 #0B3D1E}
 .ft:hover{filter:brightness(.97)}
 .ft:active{transform:translateY(2px);box-shadow:none}
 .ft .fnew{position:absolute;top:-9px;right:6px;font-size:calc(11px*var(--ps,1))}
+.agh{margin:16px 16px 8px;color:var(--mut);font-size:calc(14px*var(--ps,1));font-weight:800;letter-spacing:.04em}
+.agh+.audg{margin-bottom:4px}
 @media (max-height:520px){
   #mebar{padding:6px 16px calc(6px + env(safe-area-inset-bottom,0px))}
   #mego,#mecl{min-height:44px}
@@ -1517,7 +1519,7 @@ function panel(){
     h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>短影音</button></div>';
     h+=funBox();
     h+='<div class="sec">你住哪裡？<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-pressed="'+(!!PS.towns[t.id])+'">'+esc(t.n)+'</button>'}).join('')+'</div>';
-    h+='<div class="sec">你是哪一種人？<small>可複選</small></div><div class="audg">'+AUD.map(function(a){return '<button type="button" class="ab" data-ptog="a:'+a.id+'" aria-pressed="'+(!!PS.jobs[a.id])+'">'+esc(a.n.replace(/（.*?）/g,''))+'</button>'}).join('')+'</div>';
+    h+='<div class="sec">你是哪一種人？<small>可複選</small></div>'+audGroups();
     h+='<div class="sec">重點數字</div><div class="wall">'+WALL.slice(0,4).map(function(w){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div>';
     h+=videoSection();
     var any=false,tot=0;Object.keys(CATS).forEach(function(k){tot+=POL.filter(function(p){return p.c===k&&match(p)}).length});
@@ -1561,6 +1563,21 @@ function personaMatches(){
   return {ids:ids,arr:arr,extra:extra,wide:wide,tw:tw};
 }
 function townName(id){for(var i=0;i<TOWNS.length;i++)if(TOWNS[i].id===id)return TOWNS[i].n;return id}
+var AGRP=[['家庭與年齡',['a_baby','a_student','a_youth','a_adult','a_senior','j_women']],
+  ['工作與行業',['j_farmer','j_fisher','j_worker','j_teacher','j_startup','j_tour','j_shop','j_commuter','j_sports','j_culture']],
+  ['其他身分',['j_indig','j_hakka','j_newres','j_pet']]];
+var ASHORT={a_student:'學生與家長',j_startup:'創業與青創',j_tour:'旅宿餐飲觀光',j_sports:'運動與體育',j_culture:'藝文工作者'};
+function audGroups(){
+  var seen={};AGRP.forEach(function(g){g[1].forEach(function(id){seen[id]=1})});
+  var rest=AUD.filter(function(a){return !seen[a.id]}).map(function(a){return a.id});
+  var groups=AGRP.map(function(g){return [g[0],g[1].slice()]});
+  if(rest.length)groups[groups.length-1][1]=groups[groups.length-1][1].concat(rest);
+  return groups.map(function(g){
+    var btns=g[1].filter(function(id){return AI[id]}).map(function(id){var a=AI[id];
+      return '<button type="button" class="ab" data-ptog="a:'+id+'" aria-pressed="'+(!!PS.jobs[id])+'">'+esc(ASHORT[id]||a.n.replace(/（.*?）/g,''))+'</button>'}).join('');
+    return '<div class="agh">'+g[0]+'</div><div class="audg">'+btns+'</div>';
+  }).join('');
+}
 function meNames(){var n=[];AUD.forEach(function(a){if(PS.jobs[a.id])n.push(a.n.replace(/（.*?）/g,''))});TOWNS.forEach(function(t){if(PS.towns[t.id])n.push(t.n)});return n}
 function meHTML(){
   var r=personaMatches(),a=r.arr.map(function(x){return x.p});
@@ -2625,7 +2642,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 102 版';
+var BUILD='10/29 第 103 版';
 $('#mego').onclick=function(){openPersona()};
 $('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
