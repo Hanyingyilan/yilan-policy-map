@@ -25,7 +25,7 @@
    Left: the live map. Right: a tall poster panel with huge numerals for the policies. */
 :root{
   --ink:#0A1D38; --ink2:#102B4D; --ink3:#173A66; --edge:#2A4A72; --txt:#F4F8FF; --mut:#9FB8DA;
-  --lime:#C8F56B; --coral:#FF6B57; --sea:#0B2A52; --nb:#143F70;
+  --lime:#9ADB7A; --coral:#FF6B57; --sea:#0B2A52; --nb:#143F70;
   --f-sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --f-num:"Big Shoulders Display","Noto Sans TC",Impact,sans-serif;
   color-scheme:dark;
@@ -51,7 +51,7 @@ a{color:var(--lime)}
 .slogan{margin-top:8px;font-size:calc(17px*var(--ps,1));font-weight:900;color:#fff;letter-spacing:.04em}
 .ballot.pending{border-style:dashed;color:var(--mut);border-color:var(--edge);font-weight:700}
 .ballot.pending b{display:none}
-.sticker{position:absolute;right:16px;top:16px;transform:rotate(5deg);background:var(--lime);color:var(--ink);border-radius:12px;padding:4px 10px;text-align:center;font-size:calc(10px*var(--ps,1));font-weight:700;line-height:1.15;box-shadow:0 3px 0 #7FA32A}
+.sticker{position:absolute;right:16px;top:16px;transform:rotate(5deg);background:var(--lime);color:var(--ink);border-radius:12px;padding:4px 10px;text-align:center;font-size:calc(10px*var(--ps,1));font-weight:700;line-height:1.15;box-shadow:0 3px 0 #5E9A47}
 .sticker b{display:block;font-family:var(--f-num);font-size:calc(22px*var(--ps,1));font-weight:900;line-height:1}
 .sbox{margin:10px 16px 6px;display:flex;align-items:center;gap:8px;border-radius:12px;background:var(--ink2);border:2px solid var(--edge);padding:1px 12px}
 .sbox input{flex:1;border:0;background:none;padding:9px 0;font-size:calc(15px*var(--ps,1));min-width:0;color:var(--txt)}
@@ -98,8 +98,8 @@ a{color:var(--lime)}
 .box b{color:var(--lime)}
 .box.resp{background:#3A2A0F}.box.resp b{color:#FFD23F}
 .src{margin-top:9px;font-size:calc(12.5px*var(--ps,1));display:flex;flex-wrap:wrap;gap:2px 12px;color:var(--mut)}
-.go{margin-top:10px;border:0;background:var(--lime);color:var(--ink);border-radius:20px;padding:5px 16px;font-size:calc(13.5px*var(--ps,1));font-weight:900;box-shadow:0 3px 0 #7FA32A;transition:transform .1s,box-shadow .1s}
-.go:hover{transform:translateY(1px);box-shadow:0 2px 0 #7FA32A}
+.go{margin-top:10px;border:0;background:var(--lime);color:var(--ink);border-radius:20px;padding:5px 16px;font-size:calc(13.5px*var(--ps,1));font-weight:900;box-shadow:0 3px 0 #5E9A47;transition:transform .1s,box-shadow .1s}
+.go:hover{transform:translateY(1px);box-shadow:0 2px 0 #5E9A47}
 .empty{padding:10px 16px;color:var(--mut)}
 .about{margin:10px 16px;font-size:calc(13.5px*var(--ps,1));color:var(--mut)}.about li{margin:5px 0 5px 16px}
 .persbtn{display:block;margin:10px 16px 2px;width:calc(100% - 32px);border:2px solid var(--lime);background:var(--ink2);color:var(--lime);border-radius:14px;padding:9px 12px;font-size:calc(15px*var(--ps,1));font-weight:900;transition:background .12s,transform .1s}
@@ -153,7 +153,7 @@ a{color:var(--lime)}
 .lb b{display:inline-block;min-width:18px;height:18px;line-height:18px;text-align:center;border-radius:9px;background:var(--ink);color:var(--lime);font-family:var(--f-num);font-size:calc(14px*var(--ps,1));font-weight:800;margin-left:5px;vertical-align:-1px}
 .lb.sel{background:var(--lime);font-size:calc(15px*var(--ps,1));box-shadow:0 0 0 3px var(--ink)}
 .lb.sh{font-size:calc(11px*var(--ps,1));font-weight:900;padding:0 6px;border-radius:5px;background:var(--ink);color:#fff;box-shadow:none;border:2px solid #fff;line-height:15px}
-.lb.sh.n5{background:#7FA32A}.lb.sh.t62,.lb.sh.hsr{background:#7C3AED}.lb.sh.tra{background:#1F5FA6}
+.lb.sh.n5{background:#5E9A47}.lb.sh.t62,.lb.sh.hsr{background:#7C3AED}.lb.sh.tra{background:#1F5FA6}
 .lb.pn{transform:translate(-50%,-100%);font-size:calc(12.5px*var(--ps,1));background:var(--ink);color:#fff}
 .chips{position:absolute;left:12px;right:12px;top:10px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
 .chips::-webkit-scrollbar{display:none}
@@ -225,8 +225,8 @@ a{color:var(--lime)}
 .agebox.nostick{position:static;box-shadow:none}
 .cta{display:flex;flex-direction:column;gap:10px;margin:12px 16px 6px}
 .cta .tourbtn,.cta .seebtn{display:block;margin:0;width:100%}
-.seebtn{border:0;border-radius:14px;background:var(--lime);color:var(--ink);padding:12px;font-size:calc(17px*var(--ps,1));font-weight:900;box-shadow:0 4px 0 #7FA32A;cursor:pointer}
-.seebtn:hover{transform:translateY(2px);box-shadow:0 2px 0 #7FA32A}
+.seebtn{border:0;border-radius:14px;background:var(--lime);color:var(--ink);padding:12px;font-size:calc(17px*var(--ps,1));font-weight:900;box-shadow:0 4px 0 #5E9A47;cursor:pointer}
+.seebtn:hover{transform:translateY(2px);box-shadow:0 2px 0 #5E9A47}
 .cta small{font-size:.8em;font-weight:700;margin-left:6px;opacity:.9}
 .sbox{display:none}
 .bio{list-style:none;margin:0 16px 8px;padding:0}
@@ -461,6 +461,18 @@ html.xl .ov{--ps:1.4}
 .tb:hover{transform:none;background:var(--ink3)}
 .tb span{color:var(--mut)}
 .fday{box-shadow:none}
+/* v79 quieter: calmer paddy-green accent, lighter weights, flat buttons, no hover tricks */
+:root{--ink2:#10263F;--ink3:#183450}
+.sticker{background:none;border:2px solid var(--lime);color:var(--lime);box-shadow:none;padding:3px 10px;font-weight:700}
+.sticker b{color:var(--lime)}
+.ballot{border:0;padding:0;gap:10px;color:var(--txt);font-weight:700}
+.head .kind{color:var(--mut);letter-spacing:0;font-weight:700;font-size:calc(13px*var(--ps,1))}
+.head h2{font-weight:800}
+.persbtn,.qrow button,.seebtn,.tourbtn,.go,.fday b,.cta .cardbtn,.cta .cardbtn:hover{font-weight:800}
+.sec,.pcat>summary b,.vd>summary b,.fold>summary{font-weight:800}
+.seebtn,.go,.tourbtn,.fday{box-shadow:none}
+.seebtn:hover,.go:hover,.tourbtn:hover,.fday:hover,.persbtn:hover,.fgrid button:hover,.wall button:hover,.wall button:nth-child(odd):hover,.wall button:nth-child(even):hover{transform:none}
+.tourbtn.alt:hover{transform:none}
 .foot{margin:36px 16px 24px;text-align:center;color:var(--mut);font-size:calc(12px*var(--ps,1));line-height:1.6}
 .foot button{border:0;background:none;color:var(--txt);text-decoration:underline;font-size:calc(13px*var(--ps,1));font-weight:700;padding:6px}
 </style>
@@ -487,7 +499,7 @@ html.xl .ov{--ps:1.4}
   </section>
   <aside class="panel" aria-label="政見清單與內容">
     <div class="brand">
-      <div class="sticker">距投票日<b id="cd"></b></div>
+      <div class="sticker">距投票日 11/28<b id="cd"></b></div>
       <h1>林國漳<span>政見地圖</span></h1>
       <div class="ballot" id="ballot" aria-label="候選人號次"></div>
     </div>
@@ -502,7 +514,7 @@ html.xl .ov{--ps:1.4}
 var CATS={
   traffic:{n:'交通',c:'#5C94F2'},industry:{n:'產業人才',c:'#A992F0'},agri:{n:'農業',c:'#8FCB70'},
   sea:{n:'海洋漁業',c:'#55BBD8'},tour:{n:'觀光文化',c:'#F0A762'},env:{n:'環境防災食安',c:'#56CDB0'},
-  care:{n:'長者醫療社福',c:'#EBC95F'},kids:{n:'托育教育',c:'#EE8DB2'},ind:{n:'原住民族',c:'#CDA77A'},safe:{n:'治安交通安全',c:'#EE8473'},vision:{n:'施政理念',c:'#C3CBD8'},town:{n:'鄉鎮在地政見',c:'#C8F56B'}
+  care:{n:'長者醫療社福',c:'#EBC95F'},kids:{n:'托育教育',c:'#EE8DB2'},ind:{n:'原住民族',c:'#CDA77A'},safe:{n:'治安交通安全',c:'#EE8473'},vision:{n:'施政理念',c:'#C3CBD8'},town:{n:'鄉鎮在地政見',c:'#9ADB7A'}
 };
 var TOWNS=[
   {id:'toucheng',n:'頭城鎮',g:'溪北',lab:[121.823,24.858]},
@@ -1037,7 +1049,7 @@ function polForRoad(rid){return POL.filter(function(p){return p.rd.indexOf(rid)>
 function polForPlace(pid){return POL.filter(function(p){return p.pl.indexOf(pid)>-1})}
 function candCount(){return POL.filter(function(p){return !p.bg}).length}
 var RMETA={
-  n5:{n:'國道5號',col:'#C8F56B'},t9:{n:'台9線',col:'#FFFFFF'},t2:{n:'台2線濱海公路',col:'#FFFFFF'},t7:{n:'台7線（北橫）',col:'#FFFFFF'},
+  n5:{n:'國道5號',col:'#9ADB7A'},t9:{n:'台9線',col:'#FFFFFF'},t2:{n:'台2線濱海公路',col:'#FFFFFF'},t7:{n:'台7線（北橫）',col:'#FFFFFF'},
   t62:{n:'台62線延伸（構想）',col:'#C7A6FF',dash:1},tra:{n:'台鐵宜蘭線',col:'#8FC1FF'},hsr:{n:'高鐵延伸（中央計畫）',col:'#FFA94D',dash:1}
 };
 var TC=['#FF8A5B','#FFC857','#5BC0BE','#FF6F9F','#A3D95B','#7C9CFF','#FF9F1C','#3DDC97','#C792EA','#4CC9F0','#8FBF8F','#E8B66F'];
@@ -1694,7 +1706,7 @@ function buildChips(){
   });
 }
 function buildLegend(){
-  $('#legend').innerHTML='<span><i style="border-color:#C8F56B"></i>國道</span><span><i style="border-color:#fff"></i>省道</span><span><i style="border-color:#8FC1FF;border-top-style:dashed"></i>台鐵</span><span><i style="border-color:#00F0C8"></i>台鐵高架化</span><span><i style="border-color:#C7A6FF;border-top-style:dashed"></i>構想/示意</span>';
+  $('#legend').innerHTML='<span><i style="border-color:#9ADB7A"></i>國道</span><span><i style="border-color:#fff"></i>省道</span><span><i style="border-color:#8FC1FF;border-top-style:dashed"></i>台鐵</span><span><i style="border-color:#00F0C8"></i>台鐵高架化</span><span><i style="border-color:#C7A6FF;border-top-style:dashed"></i>構想/示意</span>';
 }
 $('#bgtoggle').onclick=function(){S.showBg=!S.showBg;this.setAttribute('aria-pressed',S.showBg);refresh()};
 /* ================= candidate background ================= */
@@ -1731,7 +1743,7 @@ var VG=[
  ['faith','民俗與文化','廟會、水燈、繪本與大拜拜，宜蘭的生活文化。'],
  ['about','認識國漳','形象影片、三十年在地服務與重要時刻。']
 ];
-var VGC={'new':'#C8F56B',hot:'#FF6B57',pol:'#4C8DFF',kai:'#FF9F43',gai:'#2EE6B6',friend:'#FF6FA5',club:'#A87BFF',walk:'#29C5E6',farm:'#7ED957',faith:'#D9A066',about:'#FFD23F'};
+var VGC={'new':'#9ADB7A',hot:'#FF6B57',pol:'#4C8DFF',kai:'#FF9F43',gai:'#2EE6B6',friend:'#FF6FA5',club:'#A87BFF',walk:'#29C5E6',farm:'#7ED957',faith:'#D9A066',about:'#FFD23F'};
 var VGN={};VG.forEach(function(g){VGN[g[0]]=g[1]});
 /* [Facebook reel id, title, views at VID_AS, group, related policy ids]; newest first */
 var VID=[
@@ -2061,18 +2073,18 @@ function cvWrap(c,s,w,max){
 function rrect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
 function cvHead(c,W){
   c.textBaseline='alphabetic';c.textAlign='left';
-  c.fillStyle='#C8F56B';c.fillRect(0,0,W,16);
+  c.fillStyle='#9ADB7A';c.fillRect(0,0,W,16);
   c.font='900 38px '+CV_F;c.fillText('林國漳政見地圖',64,100);
   if(BALLOT_NO){
     c.font='900 34px '+CV_F;var bt='縣長候選人 號次',bw=c.measureText(bt).width+96;
-    c.strokeStyle='#C8F56B';c.lineWidth=4;rrect(c,W-64-bw,58,bw,60,22);c.stroke();
-    c.fillStyle='#C8F56B';c.fillText(bt,W-64-bw+20,100);
+    c.strokeStyle='#9ADB7A';c.lineWidth=4;rrect(c,W-64-bw,58,bw,60,22);c.stroke();
+    c.fillStyle='#9ADB7A';c.fillText(bt,W-64-bw+20,100);
     rrect(c,W-64-60,64,48,48,14);c.fill();
     c.fillStyle='#0A1D38';c.font='900 40px '+CV_F;c.textAlign='center';c.fillText(String(BALLOT_NO),W-64-36,102);c.textAlign='left';
   }
 }
 function cvFoot(c,W){
-  c.fillStyle='#C8F56B';c.fillRect(64,1176,W-128,4);
+  c.fillStyle='#9ADB7A';c.fillRect(64,1176,W-128,4);
   c.font='900 64px '+CV_F;c.fillText(typeof SLOGAN==='string'&&SLOGAN?SLOGAN:'林國漳',64,1252);
   c.fillStyle='#fff';c.font='700 32px '+CV_F;c.fillText('宜蘭縣長候選人 林國漳・投票日 2026/11/28',64,1300);
   c.fillStyle='#9FB8DA';c.font='600 24px '+CV_F;
@@ -2092,7 +2104,7 @@ function drawCard(){
   c.fillStyle='#9FB8DA';c.font='700 38px '+CV_F;
   var wl=who.length?cvWrap(c,who.join('・'),W-128,2):['全縣重點政見'];
   wl.forEach(function(s,i){c.fillText(s,64,300+i*50)});
-  c.fillStyle='#C8F56B';c.font='900 44px '+CV_F;
+  c.fillStyle='#9ADB7A';c.font='900 44px '+CV_F;
   c.fillText(any?'共 '+list.length+' 項政見和你有關':'先看這 '+list.length+' 項重點政見',64,420);
   var y=462,RH=108,rows=list.slice(0,6);
   rows.forEach(function(p,i){
@@ -2103,7 +2115,7 @@ function drawCard(){
     c.fillStyle='#fff';c.font='800 44px '+CV_F;c.fillText(cvFit(c,p.t,W-176-64),164,yy+46);
     c.fillStyle='#9FB8DA';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+86);
   });
-  if(list.length>rows.length){c.fillStyle='#C8F56B';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-rows.length)+' 項，到網站看全部',64,y+rows.length*RH+44)}
+  if(list.length>rows.length){c.fillStyle='#9ADB7A';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-rows.length)+' 項，到網站看全部',64,y+rows.length*RH+44)}
   cvFoot(c,W);
   return {cv:cv,count:list.length};
 }
@@ -2269,7 +2281,7 @@ function drawQuizCard(id){
   var ql=cvWrap(c,QT[id]||'',W-128,2);
   if(ql.length===2&&ql[1].length<=2)ql=cvWrap(c,QT[id],(W-128)*.82,2);
   ql.forEach(function(s,i){c.fillText(s,64,480+i*58)});
-  if(o[1]){c.fillStyle='#C8F56B';c.font='900 38px '+CV_F;c.fillText(cvFit(c,'在地代表：'+o[1],W-128),64,610)}
+  if(o[1]){c.fillStyle='#9ADB7A';c.font='900 38px '+CV_F;c.fillText(cvFit(c,'在地代表：'+o[1],W-128),64,610)}
   if(FOODS[id]){c.fillStyle='#F6D58E';c.font='900 38px '+CV_F;c.fillText(cvFit(c,'🍜 在地美食：'+FOODS[id],W-128),64,662)}
   c.fillStyle='#fff';c.font='900 42px '+CV_F;
   c.fillText(cvFit(c,loc.length?'林國漳為'+t.n+'提出的政見':t.n+'也適用的全縣政見',W-128),64,716);
@@ -2281,7 +2293,7 @@ function drawQuizCard(id){
     c.fillStyle='#fff';c.font='800 42px '+CV_F;c.fillText(cvFit(c,p.t,W-176-64),164,yy+44);
     c.fillStyle='#9FB8DA';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+84);
   });
-  if(list.length>3){c.fillStyle='#C8F56B';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-3)+' 項，到網站看全部',64,1100)}
+  if(list.length>3){c.fillStyle='#9ADB7A';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-3)+' 項，到網站看全部',64,1100)}
   c.fillStyle='#9FB8DA';c.font='600 26px '+CV_F;c.fillText('好玩的小測驗，結果只是參考，不代表戶籍',64,1150);
   cvFoot(c,W);
   return cv;
@@ -2412,11 +2424,11 @@ function drawTownCard(id){
   c.fillStyle='#fff';c.font='900 140px '+CV_F;c.fillText(t.n,64,350);
   if(o[0]){c.font='120px '+CV_F;c.textAlign='right';c.fillText(o[0],W-64,350);c.textAlign='left'}
   if(o[1]){
-    c.fillStyle='#C8F56B';c.font='900 46px '+CV_F;c.fillText('在地代表：'+o[1],64,440);
+    c.fillStyle='#9ADB7A';c.font='900 46px '+CV_F;c.fillText('在地代表：'+o[1],64,440);
     c.fillStyle='#C9D8EE';c.font='600 36px '+CV_F;cvWrap(c,o[2],W-128,2).forEach(function(s,i){c.fillText(s,64,498+i*52)});
   }
   var list=loc.length?loc:cty;
-  c.fillStyle='#C8F56B';c.font='900 44px '+CV_F;
+  c.fillStyle='#9ADB7A';c.font='900 44px '+CV_F;
   c.fillText(cvFit(c,loc.length?loc.length+' 項在地政見':'目前沒有專屬於'+t.n+'的政見，全縣適用 '+cty.length+' 項',W-128),64,640);
   list.slice(0,4).forEach(function(p,i){
     var cc=CATS[p.c],yy=668+i*104;
@@ -2426,7 +2438,7 @@ function drawTownCard(id){
     c.fillStyle='#fff';c.font='800 42px '+CV_F;c.fillText(cvFit(c,p.t,W-176-64),164,yy+44);
     c.fillStyle='#9FB8DA';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+84);
   });
-  if(list.length>4){c.fillStyle='#C8F56B';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-4)+' 項，到網站看全部',64,1138)}
+  if(list.length>4){c.fillStyle='#9ADB7A';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-4)+' 項，到網站看全部',64,1138)}
   cvFoot(c,W);
   return cv;
 }
@@ -2448,7 +2460,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 78 版';
+var BUILD='10/29 第 79 版';
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
 function setXL(v){
