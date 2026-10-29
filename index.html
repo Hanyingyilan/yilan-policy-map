@@ -474,6 +474,38 @@ html.xl .ov{--ps:1.4}
 .seebtn:hover,.go:hover,.tourbtn:hover,.fday:hover,.persbtn:hover,.fgrid button:hover,.wall button:hover,.wall button:nth-child(odd):hover,.wall button:nth-child(even):hover{transform:none}
 .tourbtn.alt:hover{transform:none}
 .tools button,html.xl .tools button{min-height:40px;padding-left:14px;padding-right:14px}
+/* v89 single column for 50+ readers: no map on screen, bigger type, fewer words */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{height:auto}
+.app{display:block;height:auto;max-width:680px;margin:0 auto}
+.mapbox{position:absolute!important;left:-10000px!important;top:0!important;width:900px!important;height:600px!important;min-height:0!important;visibility:hidden;pointer-events:none;overflow:hidden}
+.sharebox{position:fixed!important;visibility:visible;left:12px!important;right:12px!important;bottom:12px!important;top:auto!important;width:auto!important;max-width:440px;margin:0 auto;z-index:60}
+.panel{--ps:1.3;border:0!important;min-height:100vh;width:100%}
+.brand{display:grid;grid-template-columns:1fr auto;grid-template-areas:"h h" "b s" "g g" "x x";gap:10px 12px;align-items:center;padding:20px 16px 6px}
+.brand h1{grid-area:h;font-size:calc(30px*var(--ps,1))}
+.brand .ballot{grid-area:b;margin:0;justify-self:start}
+.brand .slogan{grid-area:g;margin:0}
+.brand .sticker{grid-area:s;position:static;margin:0}
+.hbtns{grid-area:x;display:flex;gap:10px}
+.hbtns button{min-height:44px;flex:0 0 auto;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:12px;padding:0 18px;font-size:calc(14px*var(--ps,1));font-weight:700;box-shadow:none;opacity:1}
+.hbtns button[aria-pressed="true"]{border-color:var(--lime);color:var(--lime)}
+.row{padding:14px 16px}
+.row .t{font-size:calc(15px*var(--ps,1))}
+.qrow button,.persbtn,.fday,.fgrid button{min-height:56px}
+.towns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0 16px}
+.tb{min-height:56px;justify-content:center;text-align:center;font-size:calc(14px*var(--ps,1))}
+.audg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 16px}
+.ab{min-height:60px;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:14px;padding:8px 10px;font-size:calc(14px*var(--ps,1));font-weight:700;line-height:1.3}
+.ab:hover{background:var(--ink3)}
+.pcat>summary{min-height:56px}
+.pcat .bio{margin:0;padding:4px 16px 12px 34px}
+.ballot{white-space:nowrap}
+html.xl .brand{grid-template-areas:"h h" "b b" "s s" "g g" "x x"}
+html.xl .brand .sticker{justify-self:start}
+html.xl body.sub .brand,body.sub html.xl .brand{grid-template-areas:"h h" "x x"}
+body.sub .brand{padding-top:12px;grid-template-areas:"h h" "x x"}
+body.sub .brand h1{font-size:calc(20px*var(--ps,1))}
+body.sub .ballot,body.sub .slogan,body.sub .sticker{display:none}
 .foot{margin:36px 16px 24px;text-align:center;color:var(--mut);font-size:calc(12px*var(--ps,1));line-height:1.6}
 .foot button{border:0;background:none;color:var(--txt);text-decoration:underline;font-size:calc(13px*var(--ps,1));font-weight:700;padding:6px}
 </style>
@@ -489,7 +521,7 @@ html.xl .ov{--ps:1.4}
     <div class="tools">
       <button type="button" id="bgtoggle" aria-pressed="true">既有計畫</button>
       <button type="button" id="sharebtn" aria-expanded="false">分享</button>
-      <button type="button" id="xlbtn" aria-pressed="false">大字</button>
+      <button type="button" id="xlbtn" aria-pressed="false">字放大</button>
     </div>
     <div class="sharebox" id="sharebox" hidden></div>
     <div class="legend" id="legend"></div>
@@ -503,6 +535,7 @@ html.xl .ov{--ps:1.4}
       <div class="sticker">距投票日 11/28<b id="cd"></b></div>
       <h1>林國漳<span>政見地圖</span></h1>
       <div class="ballot" id="ballot" aria-label="候選人號次"></div>
+      <div class="hbtns" id="hbtns"></div>
     </div>
     <div class="sbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋政見、鄉鎮或道路" aria-label="搜尋"></div>
     <div class="pbody" id="pbody"></div>
@@ -1303,19 +1336,17 @@ function audFor(pid){return AUD.filter(function(a){return a.pol.indexOf(pid)>-1}
 /* ================= panel ================= */
 function cardHTML(p,open){
   var c=CATS[p.c];
-  var h='<article class="pc" style="--cc:'+(p.bg?'#9FB8DA':c.c)+'"><header><span class="dot" style="background:'+c.c+'"></span><span>'+esc(c.n)+'</span><span>'+esc(p.d)+'</span>';
+  var h='<article class="pc" style="--cc:'+(p.bg?'#9FB8DA':c.c)+'"><header><span class="dot" style="background:'+c.c+'"></span><span>'+esc(c.n)+'</span>';
   h+=p.bg?'<span class="badge bg">既有計畫</span>':'<span class="badge">候選人承諾</span>';
   if(p.v===0)h+='<span class="badge v0" title="細節尚待確認">待確認</span>';
   h+='</header><h4>'+esc(p.t)+'</h4><p>'+esc(p.s)+'</p>';
   if(KN[p.id])h+='<div class="kn">'+KN[p.id].map(function(k){return '<div><b style="font-size:'+numSize(k[0],34,88)+'px">'+esc(k[0])+'</b><span>'+esc(k[1])+'</span></div>'}).join('')+'</div>';
-  h+='<details'+(open?' open':'')+'><summary>細節</summary><ul>'+p.b.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></details>';
+  h+='<details><summary>看細節</summary><ul>'+p.b.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>';
   if(p.bud)h+='<div class="box"><b>預算估算　</b>'+esc(p.bud)+'</div>';
   if(p.note)h+='<div class="box"><b>注意　</b>'+esc(p.note)+'</div>';
   if(p.resp)h+='<div class="box resp"><b>外界回應　</b>'+esc(p.resp)+'</div>';
-
-  var au=audFor(p.id);if(au.length)h+='<div class="whos"><span>適合：</span>'+au.slice(0,6).map(function(a){return '<button type="button" class="who" data-aud="'+a.id+'">'+esc(a.n.replace(/（.*?）/g,''))+'</button>'}).join('')+'</div>';
+  h+='</details>';
   h+=vrelHTML(p.id);
-  if(p.pl.length||p.rd.length||(p.tw!=='all'&&p.tw.length))h+='<button class="go" type="button" data-show="'+p.id+'">在地圖上看</button>';
   if(!p.bg)h+='<button class="go alt" type="button" data-pcard="'+p.id+'">存成圖卡</button>';
   return h+'</article>';
 }
@@ -1342,52 +1373,40 @@ function panel(){
      '<li>預算金額為估算。三星鄉、冬山鄉、南澳鄉目前沒有專屬政見。</li></ul>';
   }else if(s&&s.type==='town'){
     var t=TOWNS[TI[s.id]],loc=polForTown(s.id).filter(match),cty=POL.filter(function(p){return !p.bg&&p.tw==='all'&&!localTo(p,s.id)&&match(p)}),bg=POL.filter(function(p){return p.bg&&localTo(p,s.id)&&match(p)});
-    h+='<button class="back" type="button" data-back>← 全部政見</button><div class="head"><div class="kind">鄉鎮市・'+esc(t.g)+'</div><h2>'+esc(t.n)+'</h2></div>';
-    h+=iconBox(s.id)+stats([loc.length,'在地政見'],[cty.length,'全縣適用'],[bg.length,'既有計畫']);
-    if(!loc.length)h+='<p class="empty">目前沒有找到專屬於'+esc(t.n)+'的政見，下方是全縣適用的項目。</p>';
-    if(loc.length)h+='<div class="sec">在地政見與建設</div>'+listCards(loc,loc.length<=2);
-    if(bg.length)h+='<div class="sec">此地的既有計畫（背景）</div>'+listCards(bg,false);
-    if(cty.length)h+='<div class="sec">全縣適用，'+esc(t.n)+'也包含在內</div>'+listCards(cty,false);
+    h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><h2>'+esc(t.n)+'</h2></div>';
+    if(!loc.length)h+='<p class="empty">'+esc(t.n)+'目前沒有專屬政見，下面是全縣都適用的。</p>';
+    if(loc.length)h+='<div class="sec">'+esc(t.n)+'的政見<small>'+loc.length+'</small></div>'+loc.map(polRow2).join('');
+    [['cty','全縣都適用',cty],['bg','既有計畫',bg]].forEach(function(g){
+      if(g[2].length)h+='<details class="pcat" data-pk="'+g[0]+'"'+(POPEN[g[0]]?' open':'')+'><summary><b>'+g[1]+'</b><small>'+g[2].length+'</small></summary>'+g[2].map(polRow2).join('')+'</details>';
+    });
+    h+='<button type="button" class="persbtn ghost" data-tcard="'+s.id+'">存成'+esc(t.n)+'圖卡</button>';
   }else if(s&&s.type==='road'){
     var r=RMETA[s.id],pr=polForRoad(s.id).filter(match);
-    h+='<button class="back" type="button" data-back>← 全部政見</button><div class="head"><div class="kind">主要幹道</div><h2>'+esc(r.n)+'</h2><p class="lede">'+(r.dash?'虛線是尚未興建的構想或計畫，位置僅為示意。':'沿線相關的政見與建設。')+'</p></div>';
+    h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><div class="kind">主要幹道</div><h2>'+esc(r.n)+'</h2><p class="lede">'+(r.dash?'虛線是尚未興建的構想或計畫，位置僅為示意。':'沿線相關的政見與建設。')+'</p></div>';
     if(!pr.length)h+='<p class="empty">目前沒有找到與這條路直接相關的政見。</p>';
     h+=listCards(pr,pr.length<=2);
   }else if(s&&s.type==='pin'){
     var pl=PLACES[s.id],pp=polForPlace(s.id).filter(match);
-    h+='<button class="back" type="button" data-back>← 全部政見</button><div class="head"><div class="kind">地點</div><h2>'+esc(pl[0])+'</h2><p class="lede">鎖定這個地點的政見與建設。</p></div>'+listCards(pp,pp.length<=2);
+    h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><div class="kind">地點</div><h2>'+esc(pl[0])+'</h2><p class="lede">鎖定這個地點的政見與建設。</p></div>'+listCards(pp,pp.length<=2);
   }else if(s&&s.type==='bio'){
     h+=bioView();
   }else if(s&&s.type==='persona'){
     h+=personaControls(false);
   }else if(s&&s.type==='aud'){
     var A=AI[s.id],ap=A.pol.map(function(id){return PBY[id]}).filter(match);
-    h+='<button class="back" type="button" data-back>← 全部政見</button><div class="head"><div class="kind">'+(A.k==='age'?'年齡層':'職業與身分')+'</div><h2>'+esc(A.n)+'</h2></div>';
-    h+='<div class="need"><b>他們在意的事</b><p>'+esc(A.need)+'</p></div>';
-    h+=stats([ap.filter(function(p){return !p.bg}).length,'相關政見'],[ap.filter(function(p){return !!p.bud}).length,'有預算估算'],[Object.keys(ap.reduce(function(o,p){o[p.c]=1;return o},{})).length,'涉及類別']);
-    h+='<div class="sec">對應的政見</div>'+listCards(ap,ap.length<=2);
+    h+='<button class="back" type="button" data-back>← 返回</button><div class="head"><h2>'+esc(A.n.replace(/（.*?）/g,''))+'</h2></div>';
+    h+='<div class="need"><p>'+esc(A.need.split('；')[0].replace(/。$/,''))+'。</p></div>';
+    h+='<div class="sec">相關政見<small>'+ap.length+'</small></div>'+ap.map(polRow2).join('');
     if(!ap.length)h+='<p class="empty">目前的類別篩選下沒有符合的政見。</p>';
   }else if(s&&s.type==='policy'){
-    h+='<button class="back" type="button" data-back>← 全部政見</button>'+cardHTML(PBY[s.id],true);
+    h+='<button class="back" type="button" data-back>← 返回</button>'+cardHTML(PBY[s.id],true);
   }else{
-    if(!q){
-      h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>短影音</button></div>'+funBox()+''+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
-      WALL.forEach(function(w){var p=PBY[w[0]];h+='<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'});
-      h+='</div><button type="button" class="persbtn ghost" data-wallcard>把重點數字存成圖卡</button>';
-    }
-    if(q)h+=audHTML(q);
-    var tm=q?TOWNS.filter(function(t){return t.n.indexOf(q)>-1}):TOWNS,rm=Object.keys(RMETA).filter(function(k){return !q||RMETA[k].n.indexOf(q)>-1});
-    if(tm.length){
-      h+='<div class="sec">鄉鎮市</div><div class="towns">';
-      tm.forEach(function(t){h+='<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-town="'+t.id+'">'+esc(t.n)+'<span>'+polForTown(t.id).filter(match).length+'</span></button>'});
-      h+='</div>';
-    }
-    if(rm.length){
-      h+='<details class="fold"'+(q?' open':'')+'><summary>主要幹道與軌道<small>'+rm.length+'</small></summary>';
-      rm.forEach(function(k){var r=RMETA[k];h+='<button type="button" class="row" data-road="'+k+'" style="padding:7px 16px"><span class="sw" style="border-color:'+r.col+(r.dash?';border-top-style:dashed':'')+'"></span><span class="t">'+esc(r.n)+'<small>'+polForRoad(k).filter(match).length+' 項相關政見</small></span></button>'});
-      h+='</details>';
-    }
-    if(!q)h+=videoSection();
+    h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>短影音</button></div>';
+    h+='<div class="sec">你住哪裡？</div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-town="'+t.id+'">'+esc(t.n)+'</button>'}).join('')+'</div>';
+    h+='<div class="sec">你是哪一種人？</div><div class="audg">'+AUD.map(function(a){return '<button type="button" class="ab" data-aud="'+a.id+'">'+esc(a.n.replace(/（.*?）/g,''))+'</button>'}).join('')+'</div>';
+    h+=funBox();
+    h+='<div class="sec">重點數字</div><div class="wall">'+WALL.slice(0,4).map(function(w){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div>';
+    h+=videoSection();
     var any=false,tot=0;Object.keys(CATS).forEach(function(k){tot+=POL.filter(function(p){return p.c===k&&match(p)}).length});
     h+='<div class="sec">全部政見<small>'+tot+'</small></div>';
     Object.keys(CATS).forEach(function(k){
@@ -1400,6 +1419,8 @@ function panel(){
     if(!q)h+=footHTML();
   }
   el.innerHTML=h;el.scrollTop=0;
+  document.body.classList.toggle('sub',!!s);
+  if(s&&window.scrollTo)window.scrollTo(0,0);
   if((s&&s.type==='persona')||(!s&&!q))bindPersona();
 }
 
@@ -1431,7 +1452,7 @@ function personaControls(home){
   var towns=TOWNS.map(function(t){return '<button type="button" data-ptown="'+t.id+'" aria-pressed="'+(!!PS.towns[t.id])+'">'+esc(t.n)+'</button>'}).join('');
   var head=home
     ?'<div class="head sm"><h2>找跟我有關的政見</h2></div>'
-    :'<button class="back" type="button" data-back>← 回到選條件</button><div class="head"><div class="kind">個人化</div><h2>我的條件</h2></div>';
+    :'<button class="back" type="button" data-back>← 返回</button><div class="head"><div class="kind">個人化</div><h2>我的條件</h2></div>';
   var cta=home
     ?'<div class="cta"><button type="button" class="seebtn" id="seeres">看政見<small id="resn"></small></button><button type="button" class="tourbtn alt" id="tourgo">開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的政見單（圖片）</button></div>'
     :'<div class="cta"><button type="button" class="tourbtn" id="tourgo">用這個條件開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的政見單（圖片）</button></div>';
@@ -1555,8 +1576,12 @@ function selectPin(id){
   S.sel={type:'pin',id:id};var rd={};polForPlace(id).forEach(function(x){x.rd.forEach(function(r){rd[r]=1})});
   setHL([],Object.keys(rd),[id]);refresh();var q=P(PLACES[id][1],PLACES[id][2]);flyView(q[0],q[1]+10,Math.min(V.s,.22));
 }
+function goBack(){
+  var f=S.from;S.from=null;
+  if(f&&f.type==='town')selectTown(f.id);else if(f&&f.type==='aud')selectAud(f.id);else clearSel();
+}
 function selectPolicy(id){
-  var p=PBY[id];S.sel={type:'policy',id:id};
+  var p=PBY[id];S.from=(S.sel&&S.sel.type!=='policy')?S.sel:(S.sel&&S.sel.type==='policy'?S.from:null);S.sel={type:'policy',id:id};
   var tw=p.tw==='all'?[]:p.tw.slice();(p.lt||[]).forEach(function(t){if(tw.indexOf(t)<0)tw.push(t)});
   setHL(tw,p.rd,p.pl);refresh();
   var pts=[];p.pl.forEach(function(k){pts.push([PLACES[k][1],PLACES[k][2]])});p.rd.forEach(function(r){roadPts(r).forEach(function(q){pts.push(q)})});
@@ -1693,7 +1718,7 @@ $('#pbody').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
   if('about' in b.dataset){S.sel={type:'about'};setHL();refresh();return}if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
   if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
-  else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){clearSel();homeView()}
+  else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){goBack()}
 });
 var qt=null;$('#q').addEventListener('input',function(e){
   clearTimeout(qt);var v=e.target.value;qt=setTimeout(function(){S.q=v;S.sel=null;setHL();refresh()},160);
@@ -1720,10 +1745,9 @@ var BIO=[
 ];
 function bioView(){
   var n=BIO.reduce(function(a,g){return a+g[1].length},0);
-  var h='<button class="back" type="button" data-back>← 回首頁</button><div class="head"><div class="kind">候選人</div><h2>林國漳的經歷</h2><p class="lede">過去 30 年在宜蘭執業、教學與擔任各種委員的經歷。</p></div>';
-  h+=stats([n,'項職務與經歷'],['30 年','在宜蘭'],[BIO.length,'個領域']);
-  BIO.forEach(function(g){
-    h+='<div class="sec">'+esc(g[0])+'　'+g[1].length+'</div><ul class="bio">'+g[1].map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>';
+  var h='<button class="back" type="button" data-back>← 返回</button><div class="head"><h2>林國漳的經歷</h2></div>';
+  BIO.forEach(function(g,i){
+    h+='<details class="pcat" data-pk="bio'+i+'"'+(POPEN['bio'+i]?' open':'')+'><summary><b>'+esc(g[0])+'</b><small>'+g[1].length+'</small></summary><ul class="bio">'+g[1].map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></details>';
   });
   return h;
 }
@@ -2459,12 +2483,13 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 88 版';
+var BUILD='10/29 第 89 版';
+(function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
 function setXL(v){
   XL=v;document.documentElement.classList.toggle('xl',v);
-  var b=$('#xlbtn');b.setAttribute('aria-pressed',v);b.textContent=v?'標準字':'大字';
+  var b=$('#xlbtn');b.setAttribute('aria-pressed',v);b.textContent=v?'字縮小':'字放大';
   try{localStorage.setItem('xl',v?'1':'0')}catch(e){}
   closeShare();
 }
