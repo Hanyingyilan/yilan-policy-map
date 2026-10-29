@@ -2272,8 +2272,7 @@ function drawQuizCard(id){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),t=TOWNS[TI[id]],o=ICONS[id]||['','',''];
   var loc=polForTown(id).filter(match),cty=POL.filter(function(p){return !p.bg&&p.tw==='all'&&!localTo(p,id)&&match(p)}),list=loc.length?loc:cty;
   cvBG(c,W,H);cvHead(c,W);
-  c.font='900 34px '+CV_F;var kt='鄉鎮小測驗',cw=c.measureText(kt).width+48;
-  c.fillStyle=TC[TI[id]];rrect(c,64,150,cw,56,28);c.fill();c.fillStyle='#0A1D38';c.fillText(kt,88,190);
+  c.fillStyle='#C9D8EE';c.font='700 52px '+CV_F;c.fillText('我是',64,200);
   c.fillStyle='#fff';c.font='900 230px '+CV_F;c.fillText(qzShort(t)+'人',64,440);
   if(o[0]){c.font='150px '+CV_F;c.textAlign='right';c.fillText(o[0],W-64,420);c.textAlign='left'}
   c.fillStyle='#C9D8EE';c.font='600 46px '+CV_F;
@@ -2282,14 +2281,14 @@ function drawQuizCard(id){
   ql.forEach(function(s,i){c.fillText(s,64,540+i*66)});
   if(FOODS[id]){c.fillStyle='#F6D58E';c.font='800 42px '+CV_F;c.fillText(cvFit(c,'🍜 '+FOODS[id],W-128),64,700)}
   c.fillStyle='rgba(255,255,255,.18)';c.fillRect(64,752,W-128,2);
-  c.fillStyle='#9FB8DA';c.font='700 36px '+CV_F;
+  c.fillStyle='#C9D8EE';c.font='700 42px '+CV_F;
   c.fillText(cvFit(c,loc.length?'林國漳的'+t.n+'政見':t.n+'也適用的全縣政見',W-128),64,820);
   list.slice(0,3).forEach(function(p,i){
     var yy=908+i*84;
     c.fillStyle='#9ADB7A';c.beginPath();c.arc(78,yy-14,9,0,Math.PI*2);c.fill();
     c.fillStyle='#fff';c.font='800 48px '+CV_F;c.fillText(cvFit(c,p.t.split('：')[0],W-64-112),112,yy);
   });
-  if(list.length>3){c.fillStyle='#9ADB7A';c.font='700 32px '+CV_F;c.fillText('還有 '+(list.length-3)+' 項，到網站看全部',64,1140)}
+  if(list.length>3){c.fillStyle='#9ADB7A';c.font='700 38px '+CV_F;c.fillText('還有 '+(list.length-3)+' 項，到網站看全部',64,1140)}
   cvFoot(c,W);
   return cv;
 }
@@ -2455,7 +2454,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 81 版';
+var BUILD='10/29 第 82 版';
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
 function setXL(v){
