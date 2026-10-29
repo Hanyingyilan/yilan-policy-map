@@ -562,6 +562,12 @@ body.sub .brand h1{font-size:min(calc(20px*var(--ps,1)),7vw)}
 .brand .ballot{white-space:normal;max-width:100%;flex-wrap:wrap}
 .wall{grid-template-columns:repeat(auto-fit,minmax(calc(var(--ps,1)*95px),1fr))}
 .wall b{max-width:100%;font-size:clamp(20px,7.6vw,40px)!important}
+@media (max-height:520px){
+  #mebar{padding:6px 16px calc(6px + env(safe-area-inset-bottom,0px))}
+  #mego,#mecl{min-height:44px}
+  body.hasbar .panel{padding-bottom:70px}
+  .ovx{position:fixed!important;top:calc(8px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));z-index:20}
+}
 .box b{color:var(--txt)}
 .go.alt{color:#0F5F2C}
 .hbtns button{background:rgba(0,0,0,.22);border-color:rgba(255,255,255,.85)}
@@ -2571,7 +2577,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 93 版';
+var BUILD='10/29 第 94 版';
 $('#mego').onclick=function(){openPersona()};
 $('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
