@@ -548,6 +548,20 @@ body.sub .brand{padding:12px 16px 14px;margin-bottom:12px}
 .wall button{background:color-mix(in srgb,var(--cc) 32%,#fff);border-color:transparent;color:#15352B}
 .wall span{color:#35574B}
 #mebar{background:#fff}
+/* v93 survive large system fonts: header wraps, grids adapt to text size */
+.brand{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.brand h1{flex:1 1 100%;min-width:0;font-size:min(calc(30px*var(--ps,1)),10.5vw);overflow-wrap:anywhere}
+.brand .ballot{flex:0 0 auto}
+.brand .sticker{flex:0 0 auto;margin-left:auto;white-space:nowrap}
+.brand .slogan{flex:1 1 100%;min-width:0}
+.hbtns{flex:1 1 100%;flex-wrap:wrap}
+body.sub .brand h1{font-size:min(calc(20px*var(--ps,1)),7vw)}
+.towns{grid-template-columns:repeat(auto-fit,minmax(calc(var(--ps,1)*68px),1fr))}
+.audg{grid-template-columns:repeat(auto-fit,minmax(calc(var(--ps,1)*105px),1fr))}
+.tb,.ab,.row .t,.qrow button,.fgrid button,.pcat>summary b{overflow-wrap:anywhere}
+.brand .ballot{white-space:normal;max-width:100%;flex-wrap:wrap}
+.wall{grid-template-columns:repeat(auto-fit,minmax(calc(var(--ps,1)*95px),1fr))}
+.wall b{max-width:100%;font-size:clamp(20px,7.6vw,40px)!important}
 .box b{color:var(--txt)}
 .go.alt{color:#0F5F2C}
 .hbtns button{background:rgba(0,0,0,.22);border-color:rgba(255,255,255,.85)}
@@ -2557,7 +2571,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 92 版';
+var BUILD='10/29 第 93 版';
 $('#mego').onclick=function(){openPersona()};
 $('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
