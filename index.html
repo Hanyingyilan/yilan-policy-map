@@ -419,6 +419,34 @@ html.xl .ov{--ps:1.4}
 .vmr{margin-top:12px;display:flex;flex-direction:column;gap:5px}
 .vmr>b{font-size:calc(12.5px*var(--ps,1));color:var(--lime);letter-spacing:.1em}
 .vnote{margin:12px 0 0;color:var(--mut);font-size:calc(11.5px*var(--ps,1));line-height:1.5}
+/* v77 cleanup: quieter section titles, one primary button per area, fewer boxes */
+.sec{margin:28px 16px 10px;font-size:calc(16px*var(--ps,1));color:var(--txt);letter-spacing:.02em}
+.sec small{color:var(--mut);font-size:calc(12px*var(--ps,1));font-weight:500;opacity:1;margin-left:8px}
+.sticker{transform:none;box-shadow:none}
+.brand{padding-bottom:2px}
+.slogan{font-size:calc(15px*var(--ps,1));font-weight:700;color:var(--mut);letter-spacing:.04em;margin-top:10px}
+.head.sm{padding-top:22px}
+.head.sm h2{font-size:calc(22px*var(--ps,1))}
+.persbtn{border-color:var(--edge);color:var(--txt)}
+.persbtn.ghost{border-color:transparent;background:none;color:var(--mut);font-size:calc(13px*var(--ps,1));font-weight:700}
+.qrow{display:flex;gap:8px;margin:12px 16px 0}
+.qrow button{flex:1;border:2px solid var(--edge);background:var(--ink2);color:var(--txt);border-radius:14px;padding:10px 8px;font-size:calc(15px*var(--ps,1));font-weight:900}
+.qrow button:hover{background:var(--ink3)}
+.fun{border:0;padding:12px}
+.funh{color:var(--txt)}
+.cta .tourbtn.alt{background:var(--ink2);color:var(--txt);border:2px solid var(--edge);box-shadow:none}
+.cta .tourbtn.alt:hover{background:var(--ink3);transform:none}
+.cta .cardbtn{border-color:transparent;background:none;color:var(--mut);font-size:calc(14px*var(--ps,1));font-weight:700}
+.fold>summary{list-style:none;cursor:pointer;margin:28px 16px 10px;font-size:calc(16px*var(--ps,1));font-weight:900;display:flex;align-items:baseline;gap:8px;position:relative;padding-right:28px}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary::after{content:"＋";position:absolute;right:0;top:0;color:var(--mut);font-weight:900}
+.fold[open]>summary::after{content:"－"}
+.fold>summary small{color:var(--mut);font-size:calc(12px*var(--ps,1));font-weight:500}
+.vd>summary{flex-direction:row;align-items:baseline;gap:8px}
+.prow .go{background:var(--ink2);color:var(--txt);border:2px solid var(--edge);box-shadow:none;padding:3px 14px}
+@media (min-width:901px){.tools,html.xl .tools{top:12px;bottom:auto}.sharebox,html.xl .sharebox{top:56px;bottom:auto}html.xl .sharebox{top:66px}}
+.foot{margin:36px 16px 24px;text-align:center;color:var(--mut);font-size:calc(12px*var(--ps,1));line-height:1.6}
+.foot button{border:0;background:none;color:var(--txt);text-decoration:underline;font-size:calc(13px*var(--ps,1));font-weight:700;padding:6px}
 </style>
 </head>
 <body>
@@ -431,10 +459,6 @@ html.xl .ov{--ps:1.4}
     <div class="chips" id="chips" role="group" aria-label="政見類別"></div>
     <div class="tools">
       <button type="button" id="bgtoggle" aria-pressed="true">既有計畫</button>
-      <button type="button" id="biobtn">候選人經歷</button>
-      <button type="button" id="videobtn">影片</button>
-      <button type="button" id="fortunebtn">抽政見籤</button>
-      <button type="button" id="aboutbtn">關於本頁</button>
       <button type="button" id="sharebtn" aria-expanded="false">分享</button>
       <button type="button" id="xlbtn" aria-pressed="false">大字</button>
     </div>
@@ -450,7 +474,6 @@ html.xl .ov{--ps:1.4}
       <div class="sticker">距投票日<b id="cd"></b></div>
       <h1>林國漳<span>政見地圖</span></h1>
       <div class="ballot" id="ballot" aria-label="候選人號次"></div>
-      <p>宜蘭縣長候選人・2026/11/28 投票<br>整理自公開資料</p>
     </div>
     <div class="sbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋政見、鄉鎮或道路" aria-label="搜尋"></div>
     <div class="pbody" id="pbody"></div>
@@ -1271,7 +1294,7 @@ function listCards(arr,open){return arr.map(function(p){return cardHTML(p,open)}
 function stats(a,b,c){return '<div class="stats"><div><div class="v">'+a[0]+'</div><div class="l">'+a[1]+'</div></div><div><div class="v">'+b[0]+'</div><div class="l">'+b[1]+'</div></div><div><div class="v">'+c[0]+'</div><div class="l">'+c[1]+'</div></div></div>'}
 function polRow(p){
   var c=CATS[p.c];
-  return '<button type="button" class="row" data-pol="'+p.id+'"><span class="ic" style="--cc:'+(p.bg?'#9FB8DA':c.c)+'">'+esc(c.n.slice(0,1))+'</span><span class="t">'+esc(p.t)+'<small>'+esc(c.n)+'・'+esc(p.d)+(p.bg?'・既有計畫':'')+'</small></span></button>';
+  return '<button type="button" class="row" data-pol="'+p.id+'"><span class="ic" style="--cc:'+(p.bg?'#9FB8DA':c.c)+'">'+esc(c.n.slice(0,1))+'</span><span class="t">'+esc(p.t)+'<small>'+esc(c.n)+(p.bg?'・既有計畫':'')+'</small></span></button>';
 }
 function panel(){
   var el=$('#pbody'),h='',s=S.sel,q=S.q.trim();
@@ -1315,9 +1338,9 @@ function panel(){
     h+='<button class="back" type="button" data-back>← 全部政見</button>'+cardHTML(PBY[s.id],true);
   }else{
     if(!q){
-      h+='<button type="button" class="persbtn" data-bio>認識林國漳：30 年在宜蘭的經歷</button>'+funBox()+''+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
+      h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>短影音</button></div>'+funBox()+''+personaControls(true)+'<div class="sec">重點數字</div><div class="wall">';
       WALL.forEach(function(w){var p=PBY[w[0]];h+='<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'});
-      h+='</div><button type="button" class="persbtn" data-wallcard>把重點數字存成圖卡</button>';
+      h+='</div><button type="button" class="persbtn ghost" data-wallcard>把重點數字存成圖卡</button>';
     }
     if(q)h+=audHTML(q);
     var tm=q?TOWNS.filter(function(t){return t.n.indexOf(q)>-1}):TOWNS,rm=Object.keys(RMETA).filter(function(k){return !q||RMETA[k].n.indexOf(q)>-1});
@@ -1327,17 +1350,19 @@ function panel(){
       h+='</div>';
     }
     if(rm.length){
-      h+='<div class="sec">主要幹道與軌道</div>';
+      h+='<details class="fold"'+(q?' open':'')+'><summary>主要幹道與軌道<small>'+rm.length+'</small></summary>';
       rm.forEach(function(k){var r=RMETA[k];h+='<button type="button" class="row" data-road="'+k+'" style="padding:7px 16px"><span class="sw" style="border-color:'+r.col+(r.dash?';border-top-style:dashed':'')+'"></span><span class="t">'+esc(r.n)+'<small>'+polForRoad(k).filter(match).length+' 項相關政見</small></span></button>'});
+      h+='</details>';
     }
     if(!q)h+=videoSection();
     var any=false,tot=0;Object.keys(CATS).forEach(function(k){tot+=POL.filter(function(p){return p.c===k&&match(p)}).length});
-    h+='<div class="sec">全部政見　'+tot+'</div>';
+    h+='<div class="sec">全部政見<small>'+tot+'</small></div>';
     Object.keys(CATS).forEach(function(k){
       var arr=POL.filter(function(p){return p.c===k&&match(p)});if(!arr.length)return;any=true;
       arr.forEach(function(p){h+=polRow(p)});
     });
     if(!any)h+='<p class="empty">沒有符合的政見。</p>';
+    if(!q)h+=footHTML();
   }
   el.innerHTML=h;el.scrollTop=0;
   if((s&&s.type==='persona')||(!s&&!q))bindPersona();
@@ -1370,21 +1395,21 @@ function personaControls(home){
   var jobs=AUD.filter(function(a){return a.k==='job'}).map(function(a){return '<button type="button" data-pjob="'+a.id+'" aria-pressed="'+(!!PS.jobs[a.id])+'">'+esc(a.n)+'</button>'}).join('');
   var towns=TOWNS.map(function(t){return '<button type="button" data-ptown="'+t.id+'" aria-pressed="'+(!!PS.towns[t.id])+'">'+esc(t.n)+'</button>'}).join('');
   var head=home
-    ?'<div class="head"><div class="kind">三步驟</div><h2>先選條件和地區，再看政見</h2><p class="lede">① 我的條件（年齡、職業）　② 地區（鄉鎮市）。兩項先後都可以，也可以只選一項或都不選。選好後按「開始導覽」或「看政見」。</p></div><div class="sec">① 我的條件</div>'
-    :'<button class="back" type="button" data-back>← 回到選條件</button><div class="head"><div class="kind">個人化</div><h2>我的條件</h2><p class="lede">年齡、職業與居住地區可以一起選，下面的政見清單與地圖會一起更新。</p></div>';
+    ?'<div class="head sm"><h2>找跟我有關的政見</h2></div>'
+    :'<button class="back" type="button" data-back>← 回到選條件</button><div class="head"><div class="kind">個人化</div><h2>我的條件</h2></div>';
   var cta=home
-    ?'<div class="cta"><button type="button" class="tourbtn" id="tourgo">開始導覽<small id="tourn"></small></button><button type="button" class="seebtn" id="seeres">看政見<small id="resn"></small></button><button type="button" class="cardbtn" data-card>做成我的政見單（圖片）</button></div>'
+    ?'<div class="cta"><button type="button" class="seebtn" id="seeres">看政見<small id="resn"></small></button><button type="button" class="tourbtn alt" id="tourgo">開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的政見單（圖片）</button></div>'
     :'<div class="cta"><button type="button" class="tourbtn" id="tourgo">用這個條件開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的政見單（圖片）</button></div>';
   return head+
-   '<div class="agebox'+(home?' nostick':'')+'"><label class="agetop"><input type="checkbox" id="pAgeOn"'+(PS.ageOn?' checked':'')+'> 依年齡篩選（拖移滑桿會自動開啟）</label>'+
+   '<div class="agebox'+(home?' nostick':'')+'"><label class="agetop"><input type="checkbox" id="pAgeOn"'+(PS.ageOn?' checked':'')+'> 依年齡篩選</label>'+
    '<div class="agev"><b id="pAgeV">'+PS.age+'</b><span>歲</span><em id="pAgeG"></em></div>'+
    '<input type="range" id="pAge" min="0" max="100" step="1" value="'+PS.age+'" aria-label="年齡">'+
    '<div class="ageticks">'+ticks+'</div></div>'+
-   '<div class="sec">職業與身分（可多選）</div><div class="aud pjobs" id="pJobs">'+jobs+'</div>'+
-   '<div class="sec">'+(home?'② ':'')+'居住或想看的地區（可多選）</div><div class="aud pjobs" id="pTowns">'+towns+'</div>'+
+   '<div class="sec">職業與身分</div><div class="aud pjobs" id="pJobs">'+jobs+'</div>'+
+   '<div class="sec">地區</div><div class="aud pjobs" id="pTowns">'+towns+'</div>'+
    '<label class="pall"><input type="checkbox" id="pAllOn"'+(PS.allOn?' checked':'')+'> 同時顯示全縣都適用的政見<small id="pAllN" style="opacity:.75"></small></label>'+
    '<div class="prow"><button type="button" class="btn2" id="pClear">全部清除</button><button type="button" class="go" id="pFit">在地圖上看全部</button></div>'+
-   (home?'<div class="sec">③ 怎麼看</div>':'')+cta+
+   cta+
    (home?'':'<div id="presult"></div>');
 }
 function personaRow(p,sub,tag){
@@ -1631,7 +1656,7 @@ function bind(){
 }
 $('#pbody').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
-  if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
+  if('about' in b.dataset){S.sel={type:'about'};setHL();refresh();return}if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
   if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){clearSel();homeView()}
 });
@@ -1650,9 +1675,6 @@ function buildLegend(){
   $('#legend').innerHTML='<span><i style="border-color:#C8F56B"></i>國道</span><span><i style="border-color:#fff"></i>省道</span><span><i style="border-color:#8FC1FF;border-top-style:dashed"></i>台鐵</span><span><i style="border-color:#00F0C8"></i>台鐵高架化</span><span><i style="border-color:#C7A6FF;border-top-style:dashed"></i>構想/示意</span>';
 }
 $('#bgtoggle').onclick=function(){S.showBg=!S.showBg;this.setAttribute('aria-pressed',S.showBg);refresh()};
-$('#biobtn').onclick=openBio;
-$('#videobtn').onclick=function(){openVideos()};
-$('#aboutbtn').onclick=function(){S.sel={type:'about'};setHL();refresh()};
 /* ================= candidate background ================= */
 var BIO=[
  ['律師與公益',['執業律師','宜蘭律師公會理事長','財團法人法律扶助基金會宜蘭分會長','宜蘭縣車禍受難者關懷協會理事長']],
@@ -1788,7 +1810,7 @@ function vSecs(){
 }
 var VOPEN={hot:true};
 function vDet(k,title,desc,inner){return '<details class="vd" data-k="'+k+'"'+(VOPEN[k]?' open':'')+'><summary><b>'+esc(title)+'</b><small>'+esc(desc)+'</small></summary>'+inner+'</details>'}
-function vBlock(k,title,desc,arr){return vDet(k,title,desc,'<div class="vgrid'+(arr.length===4?' v2':'')+'">'+arr.map(vCard).join('')+'</div>')}
+function vBlock(k,title,desc,arr){return vDet(k,title,arr.length+' 支','<div class="vgrid'+(arr.length===4?' v2':'')+'">'+arr.map(vCard).join('')+'</div>')}
 function vMoreHTML(){
   var r=vSecs().rest,left=r.length-VMORE;
   return '<div class="vgrid">'+r.slice(0,VMORE).map(vCard).join('')+'</div>'+(left>0?'<button type="button" class="persbtn" data-vmore>看更多影片（還有 '+left+' 支）</button>':'');
@@ -1796,11 +1818,11 @@ function vMoreHTML(){
 function vMore(){VMORE+=3;var el=$('#vmb');if(el)el.innerHTML=vMoreHTML()}
 function videoSection(){
   var s=vSecs();
-  return '<div class="sec" id="vhd">短影音　'+VID.length+'</div><p class="vdesc" style="margin-top:0">林國漳的短影音，點一下就能播放。觀看次數是 '+VID_AS+' 當天的數字。</p>'+
+  return '<div class="sec" id="vhd">短影音<small>'+VID.length+' 支・觀看數 '+VID_AS+' 統計</small></div>'+
    '<div id="vsec">'+vBlock('hot','熱門','觀看次數最多的 '+s.hot.length+' 支',s.hot)+vBlock('nw','最新','最近發布的 '+s.nw.length+' 支',s.nw)+
    vBlock('hao','《還好有國漳》系列','受過國漳協助的人，說他們眼中的國漳（'+s.hao.length+' 支）',s.hao)+vBlock('gai','#237 宜蘭蓋漳系列','走訪各鄉鎮市，跟鄉親面對面（'+s.gai.length+' 支）',s.gai)+
    vBlock('wide','形象影片','在地服務三十年、競選形象與重要活動（'+s.wide.length+' 支）',s.wide)+
-   vDet('more','更多短片','還有 '+s.rest.length+' 支','<div id="vmb">'+vMoreHTML()+'</div>')+'</div>';
+   vDet('more','更多短片',s.rest.length+' 支','<div id="vmb">'+vMoreHTML()+'</div>')+'</div>';
 }
 function setVG(){}
 $('#pbody').addEventListener('toggle',function(e){
@@ -2002,7 +2024,6 @@ function drawFortune(daily,fid){
     var a=OV.querySelector('[data-fzagain]');if(a&&a.focus)a.focus();
   },reduce?0:1100);
 }
-$('#fortunebtn').onclick=function(){drawFortune()};
 
 var CV_F='"PingFang TC","Noto Sans TC","Microsoft JhengHei","Heiti TC",sans-serif';
 function cvEll(c,s,w){while(s.length>1&&c.measureText(s+'…').width>w)s=s.slice(0,-1);return s+'…'}
@@ -2135,8 +2156,9 @@ function dailyIdx(n){
 }
 function dayDone(){try{return localStorage.getItem('yl-fday')===String(todayKey())}catch(e){return false}}
 function markDay(){try{localStorage.setItem('yl-fday',String(todayKey()))}catch(e){}var n=document.querySelector('[data-daily] .fnew');if(n)n.remove()}
+function footHTML(){return '<div class="foot"><button type="button" data-about>關於本頁與資料限制</button><br>更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</div>'}
 function funBox(){
-  return '<div class="fun"><div class="funh">玩一玩<small>今天 '+dayLabel()+'</small></div>'+
+  return '<div class="fun"><div class="funh">玩一玩</div>'+
     '<button type="button" class="fday" data-daily><span>🏮</span><b>今日一籤</b>'+(dayDone()?'':'<i class="fnew">今天還沒抽</i>')+'</button>'+
     '<div class="fgrid"><button type="button" data-fortune><span class="tubei">'+TUBE+'</span>隨手抽一支</button><button type="button" data-bless><span>🧧</span>祝福卡</button><button type="button" data-quiz><span>🧭</span>鄉鎮測驗</button></div></div>';
 }
@@ -2402,8 +2424,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳政見地圖',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/28 第 76 版';
-(function(){var bp=document.querySelector('.brand p');if(bp)bp.insertAdjacentHTML('beforeend','<br><small style="opacity:.65">更新 '+BUILD+(STATS_CODE&&SHARE_BASE?'・本站以不使用 cookie 的方式統計使用人數':'')+'</small>')})();
+var BUILD='10/29 第 77 版';
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
 function setXL(v){
