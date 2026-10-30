@@ -1203,6 +1203,34 @@ body.hasbar .mpbar{bottom:88px}
 }
 @media (max-width:1023px){.pcat:not([open]){background:linear-gradient(160deg,var(--pc),color-mix(in srgb,var(--pc) 80%,#1B1B18))}.pcat:not([open])>summary b{font-family:var(--serif);color:#1B1B18}.pcat:not([open])>summary small,.pcat:not([open])>summary::after{color:#1B1B18}}
 .foot{box-shadow:0 0 0 100vmax #1B1B18;clip-path:inset(0 -100vmax);margin:56px 0 0;padding:44px 16px 48px}
+
+/* v129 category cards: rubber-stamp seal instead of modern line icons */
+.pcat[data-pk="traffic"]>summary::before{content:"交"}
+.pcat[data-pk="industry"]>summary::before{content:"產"}
+.pcat[data-pk="agri"]>summary::before{content:"農"}
+.pcat[data-pk="sea"]>summary::before{content:"海"}
+.pcat[data-pk="tour"]>summary::before{content:"觀"}
+.pcat[data-pk="env"]>summary::before{content:"環"}
+.pcat[data-pk="care"]>summary::before{content:"長"}
+.pcat[data-pk="kids"]>summary::before{content:"托"}
+.pcat[data-pk="ind"]>summary::before{content:"原"}
+.pcat[data-pk="safe"]>summary::before{content:"治"}
+.pcat[data-pk="vision"]>summary::before{content:"施"}
+.pcat[data-pk="town"]>summary::before{content:"鄉"}
+@media (min-width:1024px){
+ .pcats .pcat>summary::before{-webkit-mask:none!important;mask:none!important;background:transparent!important;width:52px!important;height:52px!important;display:grid!important;place-items:center;border:3px double #1B1B18;border-radius:50%;font:900 26px/1 var(--serif);color:#1B1B18;transform:rotate(-9deg);opacity:.85;flex:none}
+ .pcats .pcat[open]>summary::before{width:44px!important;height:44px!important;font-size:22px}
+}
+@media (max-width:1023px){
+ .pcat>summary::before{-webkit-mask:none!important;mask:none!important;background:transparent!important;display:grid!important;place-items:center;flex:none;width:36px!important;height:36px!important;border:2px double #1B1B18;border-radius:50%;font:900 18px/1 var(--serif);color:#1B1B18;transform:rotate(-9deg);opacity:.85}
+ .pcat[open]>summary::before{width:34px!important;height:34px!important}
+ .pcat>summary i{display:none}
+}
+/* flat print colour instead of candy gradients */
+.pcat:not([open]){background:var(--pc)!important}
+/* large-font mode kept the hero's photo column */
+html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
+@media (min-width:1024px){html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b p" "g p"}html.xl body.sub .brand{grid-template-areas:"h" "x"}}
 </style>
 </head>
 <body>
@@ -2936,7 +2964,11 @@ function cvEll(c,s,w){while(s.length>1&&c.measureText(s+'…').width>w)s=s.slice
 function cvFit(c,s,w){return c.measureText(s).width<=w?s:cvEll(c,s,w)}
 function cvWrap(c,s,w,max){
   var ls=[],cur='';
-  for(var i=0;i<s.length;i++){var t=cur+s[i];if(c.measureText(t).width>w&&cur){ls.push(cur);cur=s[i]}else cur=t}
+  for(var i=0;i<s.length;i++){var t=cur+s[i];if(c.measureText(t).width>w&&cur){
+      if('、。，,：；！？）」』》…'.indexOf(s[i])>=0)cur=t;
+      else{var m=/[A-Za-z0-9]/.test(s[i])?cur.match(/[A-Za-z0-9.,%]+$/):null;
+        if(m&&m[0].length<cur.length){ls.push(cur.slice(0,-m[0].length));cur=m[0]+s[i]}else{ls.push(cur);cur=s[i]}}
+    }else cur=t}
   if(cur)ls.push(cur);
   if(ls.length>max){ls=ls.slice(0,max);ls[max-1]=cvEll(c,ls[max-1],w)}
   return ls;
@@ -3007,34 +3039,37 @@ function openCard(){
   openImg(d.cv,'我的專屬政見單（'+d.count+' 項）｜宜蘭金曲①次看懂',SHARE_BASE?SHARE_BASE+'s/me/':location.href.split('#')[0]+'#me','林國漳-我的政見單.png');
 }
 function drawPolCard(p){
-  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),cc=CATS[p.c],kn=KN[p.id]||[];
+  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),cc=CATS[p.c],kn=KN[p.id]||[],X=88,TW=W-X*2;
   cvBG(c,W,H);cvHead(c,W);
-  c.font='900 34px '+CV_F;var cw=c.measureText(cc.n).width+48;
-  c.fillStyle=cc.c;rrect(c,64,150,cw,56,28);c.fill();
-  c.fillStyle='#1B1B18';c.fillText(cc.n,88,190);
-  c.fillStyle='#F1DFC0';c.font='700 30px '+CV_F;c.fillText('林國漳提出',64+cw+20,190);
+  c.font='900 34px '+CV_S;var cw=c.measureText(cc.n).width+52;
+  c.fillStyle='#1B1B18';c.fillRect(X,152,cw,58);
+  c.fillStyle='#E0C85C';c.fillRect(X,152,6,58);
+  c.fillText(cc.n,X+28,193);
+  c.fillStyle='#FFF6DA';c.font='700 30px '+CV_F;c.fillText('林國漳提出',X+cw+22,192);
   var tfs=78,tl;
-  [112,98,88,78].some(function(f){tfs=f;c.font='900 '+f+'px '+CV_S;tl=cvWrap(c,p.t,W-128,4);return f===78||(tl.length<=3&&(tl.length===1||tl[tl.length-1].length>=2))});
+  [108,96,86,78].some(function(f){tfs=f;c.font='900 '+f+'px '+CV_S;tl=cvWrap(c,p.t,TW-52,4);return f===78||(tl.length<=3&&(tl.length===1||tl[tl.length-1].length>=2))});
   var lh=Math.round(tfs*1.28);
-  c.font='600 46px '+CV_F;
-  var sl=cvWrap(c,p.s,W-128,kn.length?(tl.length>=4?3:4):7);
-  var H0=(tl.length-1)*lh+tfs+50+(sl.length-1)*66+46+(kn.length?60+200:0);
-  var top=240+Math.max(20,(910-H0)*.35),y=top+tfs*.85;
+  c.font='600 44px '+CV_F;
+  var sl=cvWrap(c,p.s,TW,kn.length?(tl.length>=4?3:4):7);
+  var H0=(tl.length-1)*lh+tfs+50+(sl.length-1)*64+44+(kn.length?64+190:0);
+  var top=250+Math.max(10,(890-H0)*.5),y=top+tfs*.85;
   c.fillStyle='#E0C85C';c.font='900 '+tfs+'px '+CV_S;
-  tl.forEach(function(s,i){c.fillText(s,64,y+i*lh)});
-  var sy=y+(tl.length-1)*lh+96;
-  c.fillStyle='#F1DFC0';c.font='600 46px '+CV_F;
-  sl.forEach(function(s,i){c.fillText(s,64,sy+i*66)});
+  tl.forEach(function(s,i){c.fillText(s,X,y+i*lh)});
+  var sy=y+(tl.length-1)*lh+92;
+  c.fillStyle='#FFF6DA';c.font='600 44px '+CV_F;
+  sl.forEach(function(s,i){c.fillText(s,X,sy+i*64)});
   if(kn.length){
-    var n=Math.min(3,kn.length),gap=20,bw=(W-128-gap*(n-1))/n,by=sy+(sl.length-1)*66+60;
+    var n=Math.min(3,kn.length),gap=24,bw=(TW-gap*(n-1))/n,by=sy+(sl.length-1)*64+64;
     kn.slice(0,n).forEach(function(k,i){
-      var bx=64+i*(bw+gap),fs=88;
-      c.fillStyle=cc.c;rrect(c,bx,by,bw,200,22);c.fill();
-      c.fillStyle='#1B1B18';
-      do{c.font='900 '+fs+'px '+CV_F;fs-=4}while(c.measureText(k[0]).width>bw-32&&fs>32);
+      var bx=X+i*(bw+gap),fs=84;
+      c.fillStyle='#FFF6DA';c.fillRect(bx,by,bw,190);
+      c.strokeStyle='#1B1B18';c.lineWidth=4;c.strokeRect(bx+2,by+2,bw-4,186);
+      c.strokeStyle='#A63A35';c.lineWidth=2;c.strokeRect(bx+12,by+12,bw-24,166);
+      c.fillStyle='#A63A35';
+      do{c.font='900 '+fs+'px '+CV_S;fs-=4}while(c.measureText(k[0]).width>bw-48&&fs>32);
       c.textAlign='center';c.fillText(k[0],bx+bw/2,by+96);
-      c.font='700 28px '+CV_F;
-      cvWrap(c,k[1],bw-32,2).forEach(function(s,j){c.fillText(s,bx+bw/2,by+142+j*34)});
+      c.fillStyle='#1B1B18';c.font='700 28px '+CV_F;
+      cvWrap(c,k[1],bw-48,2).forEach(function(t,j){c.fillText(t,bx+bw/2,by+138+j*32)});
       c.textAlign='left';
     });
   }
@@ -3354,7 +3389,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 128 版';
+var BUILD='10/30 第 130 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
