@@ -9,13 +9,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="林國漳找政見">
 <meta property="og:title" content="林國漳找政見｜宜蘭縣長候選人">
-<meta property="og:description" content="團結作伙拚，宜蘭1定贏。選你住的地方和身分，找到跟你有關的政見。">
+<meta property="og:description" content="選你住的地方和身分，找到跟你有關的政見。">
 <meta property="og:url" content="https://hanyingyilan.github.io/yilan-policy-map/">
 <meta property="og:image" content="https://hanyingyilan.github.io/yilan-policy-map/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hanyingyilan.github.io/yilan-policy-map/og.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Iansui&display=swap">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@900&display=swap">
@@ -625,6 +626,385 @@ body.sub .brand h1 .c1{box-shadow:2px 2px 0 #0B3D1E}
 .kn div{background:color-mix(in srgb,var(--cc) 32%,#fff);color:#15352B}
 .row .ic,.fzcat{color:#15352B}
 #mego{color:#fff}
+/* v106 poster-cover theme (red/gold albums) */
+/* C: 白底 + 暖灰紙面 + 黃綠（Firefly） */
+:root{--ink:#FFFFFF;--ink2:#F6F5EF;--surface:#F6F5EF;--ink3:#EEEDE4;--tint:#EEEDE4;--line:#E6E5DC;--edge:#CFCEC2;--txt:#1B1B18;--mut:#62635A;--lime:#55691A;--acc:#D9EE3F;--acc-ink:#1B1B18;--hero-bg:#F6F5EF;--hero-fg:#1B1B18;--hero-num:#1B1B18;--rad:999px;--rad-l:32px;--pill:999px;color-scheme:light}
+.tb,.ab{border-color:transparent}
+.ft,.ft.fday{border-color:transparent}
+.qrow button{border-color:transparent}
+.qrow button:first-child{border-color:var(--acc)}
+/* v106 common: token-driven, one accent, no pastel rainbow, no hard shadows; desktop = wide */
+body{background:var(--ink);color:var(--txt)}
+:focus-visible{outline-color:var(--lime)}
+a{color:var(--lime)}
+/* hero */
+.brand{background:var(--hero-bg);color:var(--hero-fg);border-radius:0;margin-bottom:0}
+body .brand h1,body .brand h1 span,body.sub .brand h1{color:var(--hero-fg);text-shadow:none}
+.brand h1 .c1,body.sub .brand h1 .c1{background:var(--acc);color:var(--acc-ink);box-shadow:none}
+.brand .ballot{color:var(--hero-fg)}
+.brand .ballot b{background:var(--acc);color:var(--acc-ink)}
+.brand .slogan{display:none}
+.brand .sticker{background:none;color:var(--mut);padding:0;border:0;border-radius:0;box-shadow:none;font-size:calc(12px*var(--ps,1))}
+.brand .sticker b{color:var(--hero-num)}
+.hbtns button{background:none;border:1.5px solid var(--edge);color:var(--hero-fg);border-radius:var(--pill)}
+.hbtns button[aria-pressed="true"]{border-color:var(--hero-fg);background:var(--tint)}
+.portrait{transform:none}
+.portrait .pimg{border:0;border-radius:var(--rad-l);box-shadow:none}
+.portrait .ptag{position:static;display:flex;gap:10px;align-items:baseline;max-width:none;background:none;color:var(--mut);border:0;box-shadow:none;transform:none;padding:12px 0 0}
+.portrait .ptag b{font-size:calc(14px*var(--ps,1))}
+/* body */
+.sec{color:var(--txt);font-weight:800}
+.sec small,.agh{color:var(--mut)}
+.qrow button{background:var(--surface);border:1.5px solid var(--edge);border-radius:var(--rad);color:var(--txt)}
+.qrow button:first-child{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.ft,.ft.fday{box-shadow:none;border-radius:var(--rad-l);color:var(--txt);background:var(--surface);border:1px solid var(--line)}
+.ft svg{stroke:var(--txt)}
+.ft.t1,.ft.t1.fday{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.ft.t1 svg{stroke:var(--acc-ink)}
+.ft.t2,.ft.t3{background:var(--surface)}
+.ft .fnew,.fnew{background:var(--txt);color:var(--ink);box-shadow:none}
+.tb,.ab{background:var(--surface);border:1.5px solid var(--edge);color:var(--txt);border-radius:var(--rad)}
+.tb:hover,.ab:hover{background:var(--tint)}
+.ab[aria-pressed="true"],.tb[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.wall button{background:none;border:0;border-radius:0;border-left:1px solid var(--line);padding:0 0 0 24px;color:var(--txt)}
+.wall button:first-child{border-left:0;padding-left:0}
+.wall button{padding-right:16px}
+.wall span{color:var(--mut)}
+.kn div{background:var(--tint);color:var(--txt)}
+.pcat{background:none;border:0;border-top:1px solid var(--line);border-radius:0;margin-bottom:0}
+.pcat>summary i{background:var(--mut)}
+.vd{background:none;border:0;border-top:1px solid var(--line);border-radius:0}
+.vd>summary::after{color:var(--mut)}
+.back{border:1px solid var(--line);background:var(--surface);box-shadow:none}
+.qrow button,.fgrid button{background:var(--surface)}
+#mebar{background:var(--surface);border-top:1px solid var(--line)}
+#mego{background:var(--acc);color:var(--acc-ink)}
+.foot{margin-top:56px}
+.blk{display:block}
+@media (min-width:700px) and (max-width:1023px){.app{max-width:760px}}
+@media (min-width:1024px){
+  .app{max-width:1360px;padding:0 56px}
+  body.sub .app{max-width:920px}
+  .panel{--ps:1.4}
+  .brand{margin:0;box-shadow:0 0 0 100vmax var(--hero-bg);clip-path:inset(0 -100vmax);
+    grid-template-columns:minmax(0,1fr) minmax(340px,460px);grid-template-areas:"h p" "s p" "x p" "b p" "g p";gap:20px 96px;align-content:center;padding:72px 0 80px}
+  .brand h1{font-size:clamp(72px,7.8vw,118px);line-height:1.1;letter-spacing:-.01em}
+  .brand .sticker{display:grid;font-size:calc(11px*var(--ps,1))}
+  .brand .sticker b{font-size:calc(44px*var(--ps,1))}
+  .hbtns{gap:12px}
+  .hbtns button{min-height:48px;padding:0 24px}
+  .portrait{width:100%;justify-self:end;margin:0}
+  .portrait .pimg{aspect-ratio:1/1.08}
+  body.sub .brand{grid-template-columns:1fr;grid-template-areas:"h" "x";padding:22px 0;gap:10px}
+  body.sub .brand h1{font-size:30px}
+  #pbody>*{margin-left:0;margin-right:0}
+  .qrow{margin:44px 0 0;gap:20px}
+  .qrow button{min-height:72px;font-size:calc(15px*var(--ps,1));text-align:left;padding:0 28px}
+  .blk{display:grid;grid-template-columns:240px minmax(0,1fr);column-gap:64px;row-gap:0;padding:88px 0;border-top:1px solid var(--line)}
+  .blk:first-of-type{border-top:0;padding-top:72px}
+  .blk>.sec{grid-column:1;grid-row:1/span 40;align-self:start;position:sticky;top:32px;margin:0;font-size:calc(22px*var(--ps,1));line-height:1.25;font-weight:900}
+  .blk>.sec small{display:block;margin:6px 0 0;font-size:calc(12px*var(--ps,1))}
+  .blk>:not(.sec){grid-column:2}
+  .blk .towns,.blk .audg,.blk .ftiles,.blk .vgrid,.blk .wall{padding:0}
+  .blk .fun{margin:0}
+  .agh{margin:0 0 14px;font-size:calc(13px*var(--ps,1))}
+  .agh:not(:first-child){margin-top:36px}
+  .ftiles{grid-template-columns:1.5fr 1fr 1fr;gap:20px}
+  .ft,.ft.fday{min-height:220px;gap:16px;flex-direction:column;justify-content:center}
+  .ft svg{width:60px;height:60px}
+  .towns{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+  .tb{min-height:68px}
+  .audg{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+  .ab{min-height:64px}
+  .wall{grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+  .wall b{font-size:clamp(34px,3.4vw,56px)!important}
+  .pcats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;align-items:start}
+  .vd{margin:0 0 14px}
+  .vdesc{margin-left:0;margin-right:0}
+  .foot{margin:0;padding:56px 0 72px;border-top:1px solid var(--line)}
+  #mebar{left:50%;right:auto;transform:translateX(-50%);width:min(720px,calc(100% - 48px));bottom:20px;border:1px solid var(--line);border-radius:var(--rad-l);padding:12px 14px}
+  body.hasbar .panel{padding-bottom:120px}
+}
+/* C2: more rhythm, still one accent: photo mosaic, countdown block, three different tiles, lime numbers band */
+.ft.t2,.ft.t2.fday{background:#1B1B18;color:#fff}
+.ft.t2 svg{stroke:var(--acc)}
+@media (min-width:1024px){
+  .brand .sticker{background:var(--acc);color:var(--acc-ink);padding:18px 32px 14px;border-radius:26px;justify-self:start}
+  .brand .sticker b{color:var(--acc-ink);font-size:calc(52px*var(--ps,1))}
+  .blk:nth-of-type(2){box-shadow:0 0 0 100vmax var(--surface);clip-path:inset(0 -100vmax);background:var(--surface);border-top:0}
+  .blk:nth-of-type(2) .tb{background:#fff}
+  .blk:nth-of-type(3){border-top:0}
+  .blk:nth-of-type(4){box-shadow:0 0 0 100vmax var(--acc);clip-path:inset(0 -100vmax);background:var(--acc);border-top:0;color:var(--acc-ink)}
+  .blk:nth-of-type(4)>.sec{color:var(--acc-ink)}
+  .blk:nth-of-type(4) .wall button{border-left-color:rgba(27,27,24,.28);color:var(--acc-ink)}
+  .blk:nth-of-type(4) .wall span{color:#2F3410}
+  .blk:nth-of-type(5){border-top:0}
+  .blk:nth-of-type(6){box-shadow:0 0 0 100vmax var(--surface);clip-path:inset(0 -100vmax);background:var(--surface);border-top:0}
+}
+/* C3: category icon cards, deep-green video band */
+.pcat[data-pk="traffic"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%2040h36M10%2040l6-26h16l6%2026M24%2014v26%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%2040h36M10%2040l6-26h16l6%2026M24%2014v26%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="industry"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%2042V22l12%208V22l12%208V10h12v32z%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%2042V22l12%208V22l12%208V10h12v32z%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="agri"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%2044V22M24%2030c-9%200-13-6-13-14%209%200%2013%206%2013%2014zM24%2024c0-8%204-13%2013-13%200%208-4%2013-13%2013z%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%2044V22M24%2030c-9%200-13-6-13-14%209%200%2013%206%2013%2014zM24%2024c0-8%204-13%2013-13%200%208-4%2013-13%2013z%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="sea"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020c5-6%209-6%2014%200s9%206%2014%200%209-6%2012%200M4%2032c5-6%209-6%2014%200s9%206%2014%200%209-6%2012%200%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020c5-6%209-6%2014%200s9%206%2014%200%209-6%2012%200M4%2032c5-6%209-6%2014%200s9%206%2014%200%209-6%2012%200%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="tour"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2042l15-24%209%2013%206-8%2010%2019zM36%2010a4%204%200%201%200%20.1%200%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2042l15-24%209%2013%206-8%2010%2019zM36%2010a4%204%200%201%200%20.1%200%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="env"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%206s13%2014%2013%2025a13%2013%200%200%201-26%200C11%2020%2024%206%2024%206z%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%206s13%2014%2013%2025a13%2013%200%200%201-26%200C11%2020%2024%206%2024%206z%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="care"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%2042S6%2031%206%2019a9%209%200%200%201%2018-3%209%209%200%200%201%2018%203c0%2012-18%2023-18%2023z%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%2042S6%2031%206%2019a9%209%200%200%201%2018-3%209%209%200%200%201%2018%203c0%2012-18%2023-18%2023z%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="kids"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%206a18%2018%200%201%200%20.1%200zM17%2020h.01M31%2020h.01M15%2029c5%206%2013%206%2018%200%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%206a18%2018%200%201%200%20.1%200zM17%2020h.01M31%2020h.01M15%2029c5%206%2013%206%2018%200%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="ind"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2023L24%208l19%2015M10%2020v22h28V20M20%2042V30h8v12%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M5%2023L24%208l19%2015M10%2020v22h28V20M20%2042V30h8v12%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="safe"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%205l17%206v13c0%2011-8%2017-17%2021C15%2041%207%2035%207%2024V11z%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%205l17%206v13c0%2011-8%2017-17%2021C15%2041%207%2035%207%2024V11z%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="vision"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M11%2044V5M11%208h28l-7%209%207%209H11%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M11%2044V5M11%208h28l-7%209%207%209H11%22%2F%3E%3C%2Fsvg%3E")}
+.pcat[data-pk="town"]>summary::before{-webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%2044s14-13%2014-23a14%2014%200%201%200-28%200c0%2010%2014%2023%2014%2023zM24%2021m-5%200a5%205%200%201%200%2010%200a5%205%200%201%200-10%200%22%2F%3E%3C%2Fsvg%3E");mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%2044s14-13%2014-23a14%2014%200%201%200-28%200c0%2010%2014%2023%2014%2023zM24%2021m-5%200a5%205%200%201%200%2010%200a5%205%200%201%200-10%200%22%2F%3E%3C%2Fsvg%3E")}
+
+@media (min-width:1024px){
+  .pcats{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;grid-auto-flow:row dense}
+  .pcats .pcat{background:var(--surface);border:0;border-radius:var(--rad-l);overflow:hidden}
+  .pcats .pcat[open]{grid-column:1/-1;order:-0}
+  .pcats .pcat>summary{flex-direction:column;align-items:flex-start;gap:18px;min-height:176px;padding:24px 24px 22px;justify-content:space-between}
+  .pcats .pcat>summary::before{content:"";display:block;width:44px;height:44px;background:var(--txt);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+  .pcats .pcat>summary i{display:none}
+  .pcats .pcat>summary::after{right:20px;top:24px;transform:none;color:var(--mut)}
+  .pcats .pcat>summary b{font-size:calc(17px*var(--ps,1));line-height:1.3;display:block}
+  .pcats .pcat>summary small{display:block;margin-top:4px}
+  .pcats .pcat[open]>summary{min-height:0;flex-direction:row;align-items:center;gap:16px;padding:20px 24px}
+  .pcats .pcat[open]>summary::before{width:36px;height:36px}
+  .blk:nth-of-type(6){background:var(--ink);box-shadow:none;clip-path:none;border-top:0}
+}
+/* C5: accent only where it points, section titles above content */
+.qrow button:first-child{background:var(--surface);border-color:var(--edge);color:var(--txt)}
+.qrow button:first-child:hover{background:var(--tint)}
+@media (min-width:1024px){
+  .blk{display:block;padding:80px 0}
+  .blk>.sec{position:static;margin:0 0 32px;font-size:calc(24px*var(--ps,1));line-height:1.2}
+  .blk>.sec small{display:inline;margin:0 0 0 14px;font-size:calc(13px*var(--ps,1));font-weight:500}
+  .blk>:not(.sec){grid-column:auto}
+  .blk:nth-of-type(4){padding:64px 0}
+  .ftiles{grid-template-columns:1.6fr 1fr 1fr}
+  .ft,.ft.fday{min-height:240px}
+  .towns{gap:14px}
+  .tb{min-height:76px}
+  .audg{gap:14px}
+  .ab{min-height:70px}
+  .wall b{font-size:clamp(40px,4.2vw,68px)!important}
+  .pcats{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+/* fx: affordance, nav, clickable photos */
+:root{--edge:#8A8B80}
+.qrow button,.tb,.ab,.hbtns button{border:1.5px solid var(--edge)}
+.topnav{display:none}
+@media (min-width:1024px){
+  body:not(.sub) .topnav{display:flex;gap:4px;position:sticky;top:0;z-index:40;padding:8px 0;background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax)}
+  .topnav button{border:0;background:none;color:var(--txt);font-size:calc(14px*var(--ps,1));font-weight:700;padding:0 18px;border-radius:999px;min-height:44px}
+  .topnav button:hover{background:var(--tint)}
+  .blk{scroll-margin-top:64px}
+}
+
+/* v107 poster-cover theme: red + gold, Noto Serif TC heavy titles, Iansui subtitles, albums as covers */
+:root{--ink:#FFF6DA;--ink2:#FFFFFF;--surface:#FFFFFF;--ink3:#FBE9B6;--tint:#FBE9B6;--line:#E8D9A8;--edge:#8A7A4A;--txt:#1B1B18;--mut:#5C5646;--lime:#A63A35;--acc:#A63A35;--acc-ink:#FFFFFF;--hero-bg:#A63A35;--hero-fg:#FFFFFF;--hero-num:#E0C85C;--rad:10px;--rad-l:12px;--pill:999px;--red:#A63A35;--gold:#E0C85C;--serif:"Noto Serif TC","Noto Sans TC",serif;--hand:"Iansui","Noto Sans TC",sans-serif}
+body{background:var(--ink)}
+/* hero */
+.brand{background:var(--red);border-radius:0;border-bottom:10px solid var(--gold);margin-bottom:0}
+body .brand h1,body .brand h1 span,body.sub .brand h1{font-family:var(--serif);font-weight:900;color:#fff}
+.brand h1 .c1,body.sub .brand h1 .c1{background:var(--gold);color:var(--red);font-family:var(--serif)}
+.brand .sticker{background:#1B1B18;color:var(--gold);border-radius:999px;padding:8px 22px}
+.brand .sticker b{color:var(--gold)}
+.brand .ballot{background:var(--gold);color:#1B1B18;border-radius:999px;padding:6px 18px;font-weight:900}
+.brand .ballot b{background:var(--red);color:var(--gold)}
+.hbtns button{color:#fff;border-color:rgba(255,255,255,.85);background:rgba(255,255,255,.08);font-weight:700}
+.hbtns button[aria-pressed="true"]{background:rgba(255,255,255,.22);border-color:#fff}
+.portrait .pimg{border:8px solid var(--gold);border-radius:0;box-shadow:none;background:#fff}
+.portrait .ptag{background:#1B1B18;color:var(--gold);box-shadow:none;padding:6px 12px}
+/* titles */
+.sec{font-family:var(--serif);font-weight:900;color:var(--txt);border-left:10px solid var(--red);padding-left:16px;line-height:1.2}
+.sec small{font-family:var(--hand);color:var(--mut);font-weight:400}
+/* buttons + tiles */
+.qrow button:first-child{background:var(--red);border-color:var(--red);color:#fff}
+.qrow button{border-radius:8px}
+.ft,.ft.fday{border-radius:8px;font-family:var(--serif)}
+.ft.t1,.ft.t1.fday{background:var(--gold);border-color:var(--gold);color:#1B1B18}.ft.t1 svg{stroke:var(--red)}
+.ft.t2,.ft.t2.fday{background:var(--red);border-color:var(--red);color:#fff}.ft.t2 svg{stroke:#fff}
+.ft.t3,.ft.t3.fday{background:#1B1B18;border-color:#1B1B18;color:var(--gold)}.ft.t3 svg{stroke:var(--gold)}
+.ft .fnew{background:#fff;color:var(--red)}
+/* albums: towns and groups are covers */
+.tb,.ab{position:relative;display:block;aspect-ratio:1;min-height:0!important;padding:0;overflow:hidden;border:0;border-radius:6px;text-align:left;container-type:inline-size;background:var(--cbg,#8A7560);color:var(--c1,#fff);box-shadow:0 8px 18px rgba(60,30,10,.22);transform:none!important}
+.tb::before,.ab::before,.tb[aria-pressed="true"]::before,.ab[aria-pressed="true"]::before{content:"";position:absolute;inset:3.6cqw;border:.9cqw dotted var(--cfr,#fff);border-radius:3cqw;opacity:.8}
+.tb:hover,.ab:hover{background:var(--cbg,#8A7560);filter:brightness(1.06)}
+.tb .nm,.ab .nm{position:absolute;left:8cqw;top:8cqw;font-family:var(--serif);font-weight:900;color:var(--c1);z-index:1}
+.nm.v{writing-mode:vertical-rl;text-orientation:upright;font-size:25cqw;line-height:1.02}
+.nm.h{font-size:21cqw;line-height:1.1;white-space:nowrap}
+.tb .sb,.ab .sb{position:absolute;right:7cqw;top:9cqw;writing-mode:vertical-rl;text-orientation:upright;font-family:var(--hand);font-size:7cqw;line-height:1.25;letter-spacing:.12em;color:var(--c2);max-height:72cqw;overflow:hidden;z-index:1}
+.tb .ct,.ab .ct{position:absolute;right:7cqw;bottom:6cqw;font-family:var(--hand);font-size:8cqw;color:var(--c2);z-index:1}
+.tb:nth-child(6n+1),.ab:nth-child(6n+1){--cbg:linear-gradient(160deg,#6B5645,#52433A);--c1:#F7B8E2;--c2:#FFE9F7;--cfr:#FFC2EE}
+.tb:nth-child(6n+2),.ab:nth-child(6n+2){--cbg:linear-gradient(160deg,#BC4A40,#9C332E);--c1:#fff;--c2:#fff;--cfr:#fff}
+.tb:nth-child(6n+3),.ab:nth-child(6n+3){--cbg:linear-gradient(160deg,#5D5A4C,#3F3C32);--c1:#F3EBD4;--c2:#F3EBD4;--cfr:#F3EBD4}
+.tb:nth-child(6n+4),.ab:nth-child(6n+4){--cbg:linear-gradient(160deg,#8E2A33,#6E1B25);--c1:#E0C85C;--c2:#FFE9A8;--cfr:#E0C85C}
+.tb:nth-child(6n+5),.ab:nth-child(6n+5){--cbg:linear-gradient(160deg,#E8D272,#D2B440);--c1:#7A221E;--c2:#1B1B18;--cfr:#A63A35}
+.tb:nth-child(6n),.ab:nth-child(6n){--cbg:linear-gradient(160deg,#B9CC74,#8BA64A);--c1:#13331D;--c2:#13331D;--cfr:#13331D}
+.tb[aria-pressed="true"],.ab[aria-pressed="true"]{background:var(--cbg);color:var(--c1);box-shadow:0 0 0 4px var(--ink),0 0 0 9px #1B1B18;font-weight:900}
+.tb[aria-pressed="true"]::after,.ab[aria-pressed="true"]::after{content:"已選";position:absolute;right:0;top:0;background:#1B1B18;color:var(--gold);font:900 7cqw var(--hand);padding:2cqw 5cqw 2.4cqw;border-bottom-left-radius:2cqw;z-index:3}
+.blk .tb,.blk:nth-of-type(2) .tb,.blk:nth-of-type(2) .tb:hover{background:var(--cbg)}
+.towns,.audg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (min-width:600px){.towns{grid-template-columns:repeat(3,minmax(0,1fr))}.audg{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1024px){.towns{grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}.audg{grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}.tb,.ab{min-height:0}}
+/* numbers: gold band on desktop */
+.wall button{color:var(--txt)}
+@media (min-width:1024px){
+  .blk:nth-of-type(4){background:var(--gold);box-shadow:0 0 0 100vmax var(--gold);color:#1B1B18}
+  .blk:nth-of-type(4)>.sec{color:#1B1B18;border-left-color:var(--red)}
+  .blk:nth-of-type(4) .wall button{color:#1B1B18;border-left-color:rgba(27,27,24,.3)}
+  .blk:nth-of-type(4) .wall span{color:#3a3410}
+  .brand h1{font-size:clamp(76px,8vw,120px)}
+}
+.brand .ballot::before{content:"全民縣長";background:#1B1B18;color:#E0C85C;font-weight:900;padding:2px 14px;margin-right:6px}
+
+/* v107 album viewer: pull a record off the shelf, slide the CD out, flip to the track list */
+.tb,.ab{transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s}
+.tb:hover,.ab:hover,.tb:focus-visible,.ab:focus-visible{transform:translateY(-8px)!important;box-shadow:0 16px 26px rgba(60,30,10,.3)}
+body.albopen{overflow:hidden}
+.albv{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;opacity:0;transition:opacity .25s;font-family:var(--sans,"Noto Sans TC",sans-serif)}
+.albv[hidden]{display:none}.albv.on{opacity:1}
+.albv-bg{position:absolute;inset:0;background:rgba(27,27,24,.74)}
+.albv-box{position:relative;display:grid;gap:26px;justify-items:center;max-width:100%}
+.albv-stage{position:relative;width:min(64vw,440px);aspect-ratio:1;perspective:1500px;transform:translateY(34px) scale(.82);transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.albv.on .albv-stage{transform:translateX(-26%)}
+.albv.on.is-back .albv-stage{transform:none}
+.albv-disc{position:absolute;left:4%;top:4%;width:92%;aspect-ratio:1;z-index:1;filter:drop-shadow(0 12px 18px rgba(0,0,0,.35));transition:transform .75s cubic-bezier(.22,1,.36,1) .12s}
+.albv-disc svg{display:block;width:100%;height:100%}
+.albv.on .albv-disc{transform:translateX(64%) rotate(220deg)}
+.albv.on.is-back .albv-disc{transform:none}
+.albv-flip{position:absolute;inset:0;z-index:2;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.albv.is-back .albv-flip{transform:rotateY(180deg)}
+.albv-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;overflow:hidden;box-shadow:0 20px 44px rgba(0,0,0,.42)}
+.albv-cover{background:var(--cbg);color:var(--c1);container-type:inline-size}
+.albv-cover::before{content:"";position:absolute;inset:3.6cqw;border:.9cqw dotted var(--cfr);border-radius:3cqw;opacity:.8}
+.albv-cover .nm{position:absolute;left:8cqw;top:8cqw;font-family:var(--serif);font-weight:900;color:var(--c1)}
+.albv-cover .sb{position:absolute;right:7cqw;top:9cqw;writing-mode:vertical-rl;text-orientation:upright;font-family:var(--hand);font-size:7cqw;line-height:1.25;letter-spacing:.12em;color:var(--c2);max-height:72cqw;overflow:hidden}
+.albv-cover .ct{position:absolute;right:7cqw;bottom:6cqw;font-family:var(--hand);font-size:8cqw;color:var(--c2)}
+.albv-back{transform:rotateY(180deg);background:#FFF6DA;color:#1B1B18;padding:18px 18px 10px;display:flex;flex-direction:column}
+.albv-back h3{margin:0;font:900 22px/1.2 var(--serif);border-left:8px solid var(--red);padding-left:12px}
+.albv-back .tl{list-style:none;margin:10px 0 0;padding:0;overflow:auto;flex:1}
+.trk{display:flex;gap:10px;width:100%;text-align:left;border:0;border-bottom:1.5px solid rgba(27,27,24,.25);background:none;padding:12px 4px;font:700 17px/1.4 var(--sans,"Noto Sans TC",sans-serif);color:inherit;cursor:pointer}
+.trk b{font-family:var(--hand);font-weight:400;color:var(--red);min-width:30px}
+.trk:hover,.trk:focus-visible{background:#F4E7B8}
+.albv-back .none{padding:16px 4px;color:#5C5646}
+.albv-acts{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.albv-b{min-height:52px;padding:0 24px;border-radius:8px;border:2px solid #FFF6DA;background:transparent;color:#FFF6DA;font:900 18px var(--sans,"Noto Sans TC",sans-serif);cursor:pointer}
+.albv-b.pri{background:var(--gold);border-color:var(--gold);color:#1B1B18}
+.albv-b.pri[aria-pressed="true"]{background:#FFF6DA;border-color:#FFF6DA}
+.albv-b:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.tb,.ab,.albv,.albv-stage,.albv-disc,.albv-flip{transition:none!important}}
+
+/* v108 phase 2: bag + jukebox */
+.mebag{display:flex;align-items:center;gap:6px;font-weight:900;color:var(--txt);white-space:nowrap;font-size:calc(14px*var(--ps,1))}
+.mebag svg{width:30px;height:35px;flex:none}
+.mebag .n{display:grid;place-items:center;min-width:28px;height:28px;padding:0 7px;border-radius:999px;background:var(--red);color:#fff;font-size:15px}
+.mebag .t{font-weight:700}
+.mebag.bump{animation:bagbump .46s cubic-bezier(.34,1.56,.64,1)}
+@keyframes bagbump{0%{transform:scale(1)}40%{transform:scale(1.32) rotate(-6deg)}100%{transform:scale(1)}}
+body.albopen #mebar{z-index:95}
+@media (max-width:420px){.mebag .t{display:none}}
+.ft.t1,.ft.t1.fday{border-radius:120px 120px 8px 8px}
+
+/* v109 phase 3: shop front, walk-in scroll, listening booth; fortune goes back to the tube */
+.ft.t1,.ft.t1.fday{border-radius:8px}
+.ft.t1 svg{stroke:var(--red)}
+.brand{position:relative}
+.brand::before{content:"";position:absolute;left:50%;top:0;width:100vw;height:22px;transform:translateX(-50%);background:repeating-linear-gradient(90deg,#8E2A33 0 44px,#F6EFD8 44px 88px);z-index:3}
+.hcd{position:absolute;z-index:0;width:86%;aspect-ratio:1;left:-34%;top:7%;display:none}
+.hcd svg{display:block;width:100%;height:100%;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35))}
+.portrait .pimg{position:relative;z-index:1}
+@keyframes hspin{to{transform:rotate(360deg)}}
+@media (min-width:700px){.hcd{display:block}.hcd svg{animation:hspin 14s linear infinite}}
+/* listening booth */
+.pdisc{display:grid;place-items:center;width:34%;aspect-ratio:1;border-radius:50%;position:relative;background:conic-gradient(from 30deg,#f4f8ff,#ffd9f0,#d9fff0,#fff6cc,#d9e4ff,#f4f8ff);box-shadow:inset 0 0 0 4px rgba(255,255,255,.55),0 6px 14px rgba(0,0,0,.4);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.pdisc::before{content:"";position:absolute;inset:14%;border-radius:50%;border:2px dotted rgba(166,58,53,.7)}
+.pdisc::after{content:"";position:absolute;inset:30%;border-radius:50%;background:#A63A35}
+.pdisc svg{position:relative;z-index:2;width:34%;height:auto;margin-left:6%}
+.vmw>.pdisc{opacity:1}
+.vcard:hover .pdisc,.vcard:focus-within .pdisc{transform:scale(1.12) rotate(90deg)}
+.vcard{border-radius:6px;border:2px solid #1B1B18}
+#vhd::before{content:"";display:inline-block;width:1.15em;height:1.15em;margin-right:10px;vertical-align:-.12em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 15v-3a8 8 0 0 1 16 0v3' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'/%3E%3Crect x='3' y='14' width='4.5' height='7' rx='1.6'/%3E%3Crect x='16.5' y='14' width='4.5' height='7' rx='1.6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 15v-3a8 8 0 0 1 16 0v3' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'/%3E%3Crect x='3' y='14' width='4.5' height='7' rx='1.6'/%3E%3Crect x='16.5' y='14' width='4.5' height='7' rx='1.6'/%3E%3C/svg%3E") center/contain no-repeat}
+.vmo{background:rgba(27,27,24,.9)}
+.vmc{border:4px solid #1B1B18;border-radius:8px;background:#FFF6DA;color:#1B1B18}
+.vmc::before{content:"";display:block;height:14px;margin:-14px -14px 10px;background:repeating-linear-gradient(90deg,#8E2A33 0 36px,#F6EFD8 36px 72px)}
+/* walking in: hero leaves like a doorway, covers rise row by row (browsers with scroll-driven animation only) */
+@media (prefers-reduced-motion:no-preference){
+ @supports (animation-timeline:scroll()){
+  @keyframes doorway{to{transform:scale(1.14);opacity:.15}}
+  @keyframes rowrise{from{transform:translateY(46px);opacity:0}to{transform:none;opacity:1}}
+  .brand>*:not(.portrait){animation:doorway linear both;animation-timeline:scroll(root);animation-range:0 70vh;transform-origin:50% 100%}
+  .tb,.ab{animation:rowrise linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+ }
+}
+
+/* v110 hero sleeve = the candidate's album cover (square, already framed) */
+.portrait .pimg{aspect-ratio:1/1!important;border:0!important;border-radius:4px!important;background:#A63A35;box-shadow:0 14px 28px rgba(0,0,0,.35)}
+.portrait .pimg img{object-position:50% 50%!important}
+.portrait .ptag{display:none}
+.portrait{margin-bottom:0}
+
+/* v111 fortune slip in the album style (on screen) */
+.fzc{background:#A63A35;color:#FFF6DA;border:10px solid #E0C85C;border-radius:4px;padding:20px 20px 16px}
+.fzc::before{content:"";position:absolute;inset:6px;border:2px dotted rgba(255,246,218,.65);pointer-events:none}
+.fzno{color:#E0C85C;font-family:var(--serif)}
+.fzno b{font-family:var(--serif);font-weight:900;color:#FFF6DA;font-size:calc(50px*var(--ps,1))}
+.fzno small{color:#FFF1D0}
+.fzgr{background:#E0C85C;color:#1B1B18;border-radius:999px}
+.fzday{color:#F1DC86;font-family:var(--hand)}
+.fzjie h3{font-family:var(--serif);font-weight:900;color:#E0C85C}
+.fzjie p{color:#FFF6DA}
+.fzcat{background:#1B1B18;color:#E0C85C}
+.fznote{color:rgba(255,246,218,.8)}
+.fzpoem,.fzp{background:#FFF6DA;color:#1B1B18;border:3px solid #1B1B18;border-radius:2px}
+.fzc .fzp *{color:#1B1B18}
+
+#mebar .mecard{min-height:56px;padding:0 16px;border:2px solid var(--edge,#8A7A4A);background:#fff;color:var(--txt);border-radius:14px;font-weight:800;font-size:calc(14px*var(--ps,1));cursor:pointer}
+.albv-b.tcard{border-style:dashed}
+@media (max-width:420px){#mebar{gap:6px;padding-left:10px;padding-right:10px}#mebar .mecard,#mecl{padding:0 10px;font-size:13px}#mego{font-size:13.5px;padding:0 6px;line-height:1.25}.mebag{gap:3px}}
+
+/* v113 album back: tracks expand in place; video cards carry a CD; wall card entry */
+.trkd{padding:2px 6px 12px 40px;font-size:15px;line-height:1.6;color:#3A3630}
+.trkd[hidden]{display:none}
+.trka{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.albv-back .albv-b.sm{min-height:44px;padding:0 14px;font-size:15px;border-color:#1B1B18;color:#1B1B18;background:transparent}
+.albv-back .albv-b.sm.pri{background:#E0C85C;border-color:#E0C85C}
+.trk[aria-expanded="true"]{background:#F4E7B8}
+.vcard .vb h3::before{content:"";display:inline-block;width:1.15em;height:1.15em;margin-right:.4em;vertical-align:-.18em;border-radius:50%;background:radial-gradient(circle,#FFF6DA 0 17%,#A63A35 18% 32%,transparent 33%),conic-gradient(from 30deg,#f4f8ff,#ffd9f0,#d9fff0,#fff6cc,#d9e4ff,#f4f8ff);box-shadow:0 0 0 1px rgba(27,27,24,.25)}
+.wallact{margin-top:18px}
+@media (prefers-reduced-motion:reduce){.mebag.bump{animation:none!important}}
+
+/* v113b inner pages: buttons and related-video disc in the album palette */
+.go,.go.alt{background:var(--gold);color:#1B1B18;box-shadow:none;border:2px solid #1B1B18;border-radius:8px;padding:8px 18px;font-weight:900}
+.go:hover,.go.alt:hover{background:#F1DC86;transform:none}
+.vr .pdisc{width:2.4em;flex:none;margin-top:0;box-shadow:0 0 0 1px rgba(27,27,24,.25);transition:none}
+.vr:hover .pdisc{transform:none}
+
+@media (max-width:480px){.brand .ballot{font-size:13px;gap:.2em .3em;flex-wrap:nowrap;white-space:nowrap}.brand .ballot::before{padding:2px 8px;margin-right:2px}}
+
+/* v115 music: open from the album cover; keeps playing while browsing; can be switched off */
+.portrait .pimg{cursor:pointer}
+.mplaybtn{position:relative;z-index:3;margin-top:12px;display:flex;align-items:center;gap:8px;min-height:48px;padding:0 16px 0 10px;border:0;border-radius:999px;background:#1B1B18;color:#E0C85C;font:900 16px var(--sans,"Noto Sans TC",sans-serif);cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.mplaybtn i{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle,#FFF6DA 0 16%,#A63A35 17% 30%,transparent 31%),conic-gradient(from 30deg,#f4f8ff,#ffd9f0,#d9fff0,#fff6cc,#d9e4ff,#f4f8ff)}
+.mplay .mplaybtn i,.mpbar.playing .mpd{animation:hspin 3s linear infinite}
+.mplaybtn:focus-visible,.mpb:focus-visible,.mptr:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.mpanel{position:fixed;z-index:96;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100% - 24px));background:#A63A35;color:#FFF6DA;border:10px solid #E0C85C;border-radius:4px;padding:16px 16px 14px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.mpanel[hidden],.mpbar[hidden]{display:none}
+.mph{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.mph b{font:900 24px var(--serif);color:#F1DC86}
+.mpx{width:44px;height:44px;border:0;border-radius:50%;background:#1B1B18;color:#FFF6DA;font-size:18px;cursor:pointer}
+.mptr{display:flex;align-items:center;gap:14px;width:100%;min-height:68px;margin-top:8px;padding:8px 14px;border:2px solid #FFF6DA;border-radius:8px;background:rgba(27,27,24,.25);color:#FFF6DA;text-align:left;cursor:pointer}
+.mptr.cur{background:#FFF6DA;color:#1B1B18}
+.mpn{font:900 26px var(--serif);min-width:26px}
+.mptt{display:grid;flex:1}.mptt b{font:900 20px var(--serif)}.mptt small{font-size:15px}
+.mpg{font:900 18px var(--sans,"Noto Sans TC",sans-serif);padding:6px 14px;border-radius:999px;background:#E0C85C;color:#1B1B18}
+.mpn2{margin:12px 2px 0;font-size:15px;line-height:1.5;color:#F1DFC0}
+.mpbar{position:fixed;z-index:80;left:12px;bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:calc(100% - 24px);padding:8px 10px;background:#1B1B18;color:#FFF6DA;border:2px solid #E0C85C;border-radius:14px;box-shadow:0 8px 22px rgba(0,0,0,.4)}
+body.hasbar .mpbar{bottom:88px}
+.mpd{width:30px;height:30px;border-radius:50%;flex:none;background:radial-gradient(circle,#FFF6DA 0 16%,#A63A35 17% 30%,transparent 31%),conic-gradient(from 30deg,#f4f8ff,#ffd9f0,#d9fff0,#fff6cc,#d9e4ff,#f4f8ff)}
+.mpt{font:700 15px var(--sans,"Noto Sans TC",sans-serif);max-width:210px}
+.mpb{min-height:44px;padding:0 14px;border:2px solid #E0C85C;border-radius:8px;background:transparent;color:#E0C85C;font:800 15px var(--sans,"Noto Sans TC",sans-serif);cursor:pointer}
+#mpplay{background:#E0C85C;color:#1B1B18}
+@media (max-width:480px){.mpbar{left:8px;right:8px;bottom:8px;max-width:none}body.hasbar .mpbar{bottom:96px}.mpt{max-width:none;flex:1 1 100%}}
+@media (prefers-reduced-motion:reduce){.mplay .mplaybtn i,.mpbar.playing .mpd{animation:none}}
 </style>
 </head>
 <body>
@@ -648,26 +1028,27 @@ body.sub .brand h1 .c1{box-shadow:2px 2px 0 #0B3D1E}
     <div class="tip" id="tip"></div>
   </section>
   <aside class="panel" role="main" aria-label="政見清單與內容">
+    <nav class="topnav" aria-label="頁面導覽"><button type="button" data-go="s-play">玩一玩</button><button type="button" data-go="s-town">找你家那一張</button><button type="button" data-go="s-who">找你那一張</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button></nav>
     <div class="brand">
       <div class="sticker">距離投票日 11/28<b id="cd"></b></div>
       <h1 aria-label="宜蘭政見，一次看懂">宜蘭政見<br><span class="c1" aria-hidden="true">1</span>次看懂</h1>
       <div class="ballot" id="ballot" aria-label="候選人號次"></div>
       <div class="hbtns" id="hbtns"></div>
-      <div class="portrait" id="portrait"><div class="pimg"><img src="photos/header.jpg" alt="林國漳" width="184" height="230" decoding="async" onerror="var p=this.closest('.portrait');p.classList.add('empty');this.remove()"></div><span class="ptag"><b>林國漳</b><small>宜蘭縣長候選人</small></span></div>
+      <div class="portrait" id="portrait"><div class="pimg"><img src="photos/album.jpg" alt="林國漳 宜蘭未來的希望 專輯封面" width="184" height="230" decoding="async" onerror="var p=this.closest('.portrait');p.classList.add('empty');this.remove()"></div><button type="button" class="mplaybtn" data-music aria-label="聽競選歌曲"><i aria-hidden="true"></i>聽歌</button><span class="ptag"><b>林國漳</b><small>宜蘭縣長候選人</small></span></div>
     </div>
     <div class="sbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋政見、鄉鎮或道路" aria-label="搜尋"></div>
     <div class="pbody" id="pbody"></div>
   </aside>
 </div>
-<div id="mebar" hidden><button type="button" id="mego">看適合我的政見</button><button type="button" id="mecl">清除</button></div>
+<div id="mebar" hidden><span class="mebag" id="mebag" role="status"><svg viewBox="0 0 40 46" aria-hidden="true"><path d="M8 16h24l3 26H5z" fill="#A63A35"/><path d="M13 16v-4a7 7 0 0 1 14 0v4" fill="none" stroke="#A63A35" stroke-width="3"/></svg><span class="t">購物袋裡有</span><b class="n" id="mebagn">0</b><span class="t">張</span></span><button type="button" class="mecard" id="mecard">做成圖卡</button><button type="button" id="mego">看適合我的政見</button><button type="button" id="mecl">清除</button></div>
 <script>
 (function(){
 'use strict';
 /* ================= data ================= */
 var CATS={
-  traffic:{n:'交通',c:'#5C94F2'},industry:{n:'產業人才',c:'#A992F0'},agri:{n:'農業',c:'#8FCB70'},
-  sea:{n:'海洋漁業',c:'#55BBD8'},tour:{n:'觀光文化',c:'#F0A762'},env:{n:'環境防災食安',c:'#56CDB0'},
-  care:{n:'長者醫療社福',c:'#EBC95F'},kids:{n:'托育教育',c:'#EE8DB2'},ind:{n:'原住民族',c:'#CDA77A'},safe:{n:'治安交通安全',c:'#EE8473'},vision:{n:'施政理念',c:'#C3CBD8'},town:{n:'鄉鎮在地政見',c:'#9ADB7A'}
+  traffic:{n:'交通',c:'#E0C85C'},industry:{n:'產業人才',c:'#D99A5B'},agri:{n:'農業',c:'#B9CC74'},
+  sea:{n:'海洋漁業',c:'#7FC4C0'},tour:{n:'觀光文化',c:'#F2A6C4'},env:{n:'環境防災食安',c:'#8FCFA5'},
+  care:{n:'長者醫療社福',c:'#F3D9A4'},kids:{n:'托育教育',c:'#F29C8A'},ind:{n:'原住民族',c:'#C9A27A'},safe:{n:'治安交通安全',c:'#B9B2D6'},vision:{n:'施政理念',c:'#FFF6DA'},town:{n:'鄉鎮在地政見',c:'#9CC3E0'}
 };
 var TOWNS=[
   {id:'toucheng',n:'頭城鎮',g:'溪北',lab:[121.823,24.858]},
@@ -1514,21 +1895,22 @@ function panel(){
   }else if(s&&s.type==='policy'){
     h+='<button class="back" type="button" data-back>← 返回上一頁</button>'+cardHTML(PBY[s.id],true);
   }else{
-    h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>短影音</button></div>';
-    h+=funBox();
-    h+='<div class="sec">你住哪裡？<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-pressed="'+(!!PS.towns[t.id])+'">'+esc(t.n)+'</button>'}).join('')+'</div>';
-    h+='<div class="sec">你是哪一種人？<small>可複選</small></div>'+audGroups();
-    h+='<div class="sec">重點數字</div><div class="wall">'+WALL.slice(0,4).map(function(w){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div>';
-    h+=videoSection();
+    h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>現場 MV</button></div>';
+    h+='<section class="blk" id="s-play">'+funBox()+'</section>';
+    h+='<section class="blk" id="s-town"><div class="sec">找你家那一張<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-label="'+esc(t.n)+' '+townCount(t.id)+' 首，打開專輯" aria-pressed="'+(!!PS.towns[t.id])+'">'+covName(t.n)+'<span class="sb">'+esc((ICONS[t.id]||[])[1]||'')+'</span><span class="ct">'+townCount(t.id)+' 首</span></button>'}).join('')+'</div></section>';
+    h+='<section class="blk" id="s-who"><div class="sec">找你那一張<small>可複選</small></div>'+audGroups()+'</section>';
+    h+='<section class="blk" id="s-num"><div class="sec">排行榜</div><div class="wall">'+WALL.slice(0,4).map(function(w){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div><div class="wallact"><button type="button" class="persbtn" data-wallcard>存成排行榜圖卡</button></div></section>';
+    h+='<section class="blk" id="s-video">'+videoSection()+'</section>';
     var any=false,tot=0;Object.keys(CATS).forEach(function(k){tot+=POL.filter(function(p){return p.c===k&&match(p)}).length});
-    h+='<div class="sec">全部政見<small>'+tot+'</small></div>';
+    h+='<section class="blk" id="s-all"><div class="sec">全部曲目<small>'+tot+'</small></div><div class="pcats">';
     Object.keys(CATS).forEach(function(k){
       var arr=POL.filter(function(p){return p.c===k&&match(p)});if(!arr.length)return;any=true;
       h+='<details class="pcat" data-pk="'+k+'"'+((q||POPEN[k])?' open':'')+'><summary><i style="background:'+CATS[k].c+'"></i><b>'+esc(CATS[k].n)+'</b><small>'+arr.length+'</small></summary>';
       arr.forEach(function(p){h+=polRow2(p)});
       h+='</details>';
     });
-    if(!any)h+='<p class="empty">沒有符合的政見。</p>';
+    h+='</div>';if(!any)h+='<p class="empty">沒有符合的政見。</p>';
+    h+='</section>';
     if(!q)h+=footHTML();
   }
   el.innerHTML=h;el.scrollTop=0;
@@ -1561,10 +1943,12 @@ function personaMatches(){
   return {ids:ids,arr:arr,extra:extra,wide:wide,tw:tw};
 }
 function townName(id){for(var i=0;i<TOWNS.length;i++)if(TOWNS[i].id===id)return TOWNS[i].n;return id}
-var AGRP=[['家庭與年齡',['a_baby','a_student','a_youth','a_adult','a_senior','j_women']],
-  ['工作與行業',['j_farmer','j_fisher','j_worker','j_teacher','j_startup','j_tour','j_shop','j_commuter','j_sports','j_culture']],
-  ['其他身分',['j_indig','j_hakka','j_newres','j_pet']]];
-var ASHORT={a_student:'學生與家長',j_startup:'創業與青創',j_tour:'旅宿餐飲觀光',j_sports:'運動與體育',j_culture:'藝文工作者'};
+var AGRP=[['家庭與年齡',['a_baby','a_student','a_youth','a_adult','a_senior','j_pet']],
+  ['工作與通勤',['j_farmer','j_fisher','j_worker','j_teacher','j_startup','j_tour','j_shop','j_sports','j_culture','j_commuter']],
+  ['族群與性別',['j_indig','j_hakka','j_newres','j_women']]];
+var ASHORT={a_student:'學生與家長',j_startup:'創業與青創',j_tour:'旅宿餐飲觀光',j_sports:'運動與體育',j_culture:'藝文工作者',j_women:'女性'};
+function covName(n){var l=n.length;if(l<=3)return '<span class="nm v">'+esc(n)+'</span>';var f=l===4?2:3;return '<span class="nm h">'+esc(n.slice(0,f))+'<br>'+esc(n.slice(f))+'</span>'}
+function townCount(id){return POL.filter(function(p){return !p.bg&&p.tw&&p.tw.indexOf(id)>-1}).length}
 function audGroups(){
   var seen={};AGRP.forEach(function(g){g[1].forEach(function(id){seen[id]=1})});
   var rest=AUD.filter(function(a){return !seen[a.id]}).map(function(a){return a.id});
@@ -1572,7 +1956,7 @@ function audGroups(){
   if(rest.length)groups[groups.length-1][1]=groups[groups.length-1][1].concat(rest);
   return groups.map(function(g){
     var btns=g[1].filter(function(id){return AI[id]}).map(function(id){var a=AI[id];
-      return '<button type="button" class="ab" data-ptog="a:'+id+'" aria-pressed="'+(!!PS.jobs[id])+'">'+esc(ASHORT[id]||a.n.replace(/（.*?）/g,''))+'</button>'}).join('');
+      return '<button type="button" class="ab" data-ptog="a:'+id+'" aria-label="'+esc(ASHORT[id]||a.n.replace(/（.*?）/g,''))+' '+a.pol.length+' 首，打開專輯" aria-pressed="'+(!!PS.jobs[id])+'">'+covName(ASHORT[id]||a.n.replace(/（.*?）/g,''))+'<span class="ct">'+a.pol.length+' 首</span></button>'}).join('');
     return '<div class="agh">'+g[0]+'</div><div class="audg">'+btns+'</div>';
   }).join('');
 }
@@ -1586,6 +1970,104 @@ function meHTML(){
   if(r.wide.length)h+='<details class="pcat" data-pk="mewide"'+(POPEN.mewide?' open':'')+'><summary><b>全縣都適用</b><small>'+r.wide.length+'</small></summary>'+r.wide.map(polRow2).join('')+'</details>';
   return h;
 }
+var ALBV=document.createElement('div');ALBV.className='albv';ALBV.id='albv';ALBV.hidden=true;document.body.appendChild(ALBV);
+var ALBFROM=null,ALBRM=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+function albInfo(b){
+  var p=b.dataset.ptog.split(':'),k=p[1],name,tr;
+  if(p[0]==='t'){var t=TOWNS.filter(function(x){return x.id===k})[0];name=t?t.n:k;tr=POL.filter(function(q){return !q.bg&&q.tw&&q.tw.indexOf(k)>-1})}
+  else{var a=AI[k];name=ASHORT[k]||(a?a.n.replace(/（.*?）/g,''):k);tr=a?a.pol.map(function(id){return PBY[id]}):[]}
+  return {kind:p[0],id:k,name:name,tr:tr};
+}
+function discSVG(name,cbg,c1,c2,u){
+  u=u||'';var h=cbg.match(/#[0-9a-fA-F]{6}/g)||['#8A7560','#6E5C4A'],a=h[0],z=h[1]||h[0],n=esc(name);
+  return '<svg viewBox="0 0 200 200" aria-hidden="true"><defs>'+
+   '<linearGradient id="dkr'+u+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6f9ff"/><stop offset=".25" stop-color="#ffd9f0"/><stop offset=".5" stop-color="#d9fff0"/><stop offset=".75" stop-color="#fff3c2"/><stop offset="1" stop-color="#d6e2ff"/></linearGradient>'+
+   '<linearGradient id="dkl'+u+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+a+'"/><stop offset="1" stop-color="'+z+'"/></linearGradient>'+
+   '<path id="dkp'+u+'" d="M100,100 m-69,0 a69,69 0 1,1 138,0 a69,69 0 1,1 -138,0"/></defs>'+
+   '<circle cx="100" cy="100" r="98" fill="url(#dkr'+u+')"/><circle cx="100" cy="100" r="98" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>'+
+   '<circle cx="100" cy="100" r="88" fill="url(#dkl'+u+')"/>'+
+   '<circle cx="100" cy="100" r="81" fill="none" stroke="'+c1+'" stroke-width="1.2" stroke-dasharray="1.5 3.5" opacity=".85"/>'+
+   '<circle cx="100" cy="100" r="50" fill="none" stroke="'+c2+'" stroke-width="1.2" opacity=".55"/><circle cx="100" cy="100" r="40" fill="none" stroke="'+c2+'" stroke-width="1.2" opacity=".55"/>'+
+   '<text font-family="Noto Serif TC,serif" font-weight="900" font-size="14" letter-spacing="2" fill="'+c1+'"><textPath href="#dkp'+u+'">'+n+'　宜蘭政見　①林國漳　'+n+'　宜蘭政見　①林國漳</textPath></text>'+
+   '<path d="M100 56l4.5 15 15 4.5-15 4.5-4.5 15-4.5-15-15-4.5 15-4.5z" fill="'+c1+'" opacity=".9"/>'+
+   '<circle cx="100" cy="100" r="25" fill="#F6EFD8" opacity=".96"/><circle cx="100" cy="100" r="12" fill="#2a2a24" opacity=".22"/><circle cx="100" cy="100" r="8.5" fill="#FFF6DA"/></svg>';
+}
+function albOpen(b){
+  var info=albInfo(b),cs=getComputedStyle(b),g=function(n,d){return (cs.getPropertyValue(n)||d).trim()};
+  var cbg=g('--cbg','#8A7560'),c1=g('--c1','#fff'),c2=g('--c2','#fff'),cfr=g('--cfr','#fff'),sel=b.getAttribute('aria-pressed')==='true';
+  var sb=info.kind==='t'?((ICONS[info.id]||[])[1]||''):'';
+  var tr=info.tr.map(function(p,i){return '<li><button type="button" class="trk" data-trkt="'+p.id+'" aria-expanded="false"><b>'+(i<9?'0':'')+(i+1)+'</b><span>'+esc(p.t)+'</span></button><div class="trkd" hidden><p>'+esc(p.s||'')+'</p><div class="trka"><button type="button" class="albv-b sm pri" data-trk="'+p.id+'">看完整政見</button>'+(p.bg?'':'<button type="button" class="albv-b sm" data-trkcard="'+p.id+'">存成圖卡</button>')+'</div></div></li>'}).join('')||'<li class="none">這張專輯目前沒有曲目</li>';
+  ALBFROM=b;
+  ALBV.innerHTML='<div class="albv-bg" data-albx></div><div class="albv-box" role="dialog" aria-modal="true" aria-label="'+esc(info.name)+'專輯">'+
+   '<div class="albv-stage"><div class="albv-disc">'+discSVG(info.name,cbg,c1,c2)+'</div>'+
+   '<div class="albv-flip"><div class="albv-face albv-cover" style="--cbg:'+cbg+';--c1:'+c1+';--c2:'+c2+';--cfr:'+cfr+'">'+covName(info.name)+(sb?'<span class="sb">'+esc(sb)+'</span>':'')+'<span class="ct">'+info.tr.length+' 首</span></div>'+
+   '<div class="albv-face albv-back"><h3>'+esc(info.name)+'　曲目</h3><ol class="tl">'+tr+'</ol></div></div></div>'+
+   '<div class="albv-acts"><button type="button" class="albv-b" data-albflip>翻到背面看曲目</button>'+(info.kind==='t'?'<button type="button" class="albv-b tcard" data-albcard="'+info.id+'">存成鄉鎮圖卡</button>':'')+'<button type="button" class="albv-b pri" data-albbag aria-pressed="'+sel+'">'+(sel?'已在購物袋裡（點一下拿出來）':'放進購物袋')+'</button><button type="button" class="albv-b" data-albx>關閉</button></div></div>';
+  ALBV.hidden=false;document.body.classList.add('albopen');
+  void ALBV.offsetWidth;ALBV.classList.add('on');
+  var f=ALBV.querySelector('[data-albflip]');if(f)f.focus();
+}
+function albFly(){
+  var cv=ALBV.querySelector('.albv-cover'),bag=$('#mebag');if(!cv||!bag||ALBRM||!cv.animate)return;
+  var a=cv.getBoundingClientRect(),z=bag.getBoundingClientRect();if(!z.width)return;
+  var c=cv.cloneNode(true);c.className='albv-cover albv-fly';
+  c.style.cssText=cv.style.cssText+';position:fixed;left:'+a.left+'px;top:'+a.top+'px;width:'+a.width+'px;height:'+a.height+'px;z-index:100;margin:0;pointer-events:none';
+  document.body.appendChild(c);
+  var dx=(z.left+z.width/2)-(a.left+a.width/2),dy=(z.top+z.height/2)-(a.top+a.height/2);
+  var an=c.animate([{transform:'translate(0,0) scale(1) rotate(0deg)',opacity:1},{transform:'translate('+(dx*.45)+'px,'+(dy*.45-90)+'px) scale(.5) rotate(-8deg)',opacity:1,offset:.5},{transform:'translate('+dx+'px,'+dy+'px) scale(.07) rotate(14deg)',opacity:.3}],{duration:650,easing:'cubic-bezier(.45,0,.7,.4)'});
+  an.onfinish=function(){c.remove();bag.classList.add('bump');setTimeout(function(){bag.classList.remove('bump')},460)};
+}
+function albClose(){
+  if(ALBV.hidden)return;ALBV.classList.remove('on','is-back');document.body.classList.remove('albopen');
+  var done=function(){ALBV.hidden=true;ALBV.innerHTML='';try{if(ALBFROM&&ALBFROM.focus)ALBFROM.focus()}catch(e){}};
+  if(ALBRM)done();else setTimeout(done,260);
+}
+ALBV.addEventListener('click',function(e){
+  var t=e.target;if(t.closest('[data-albx]')){albClose();return}
+  var fl=t.closest('[data-albflip]');if(fl){var back=ALBV.classList.toggle('is-back');fl.textContent=back?'翻回封面':'翻到背面看曲目';return}
+  var bg=t.closest('[data-albbag]');if(bg&&ALBFROM){togglePersona(ALBFROM);var on=ALBFROM.getAttribute('aria-pressed')==='true';bg.setAttribute('aria-pressed',on);bg.textContent=on?'已在購物袋裡（點一下拿出來）':'放進購物袋';if(on)albFly();return}
+  var ac=t.closest('[data-albcard]');if(ac){openTownCard(ac.dataset.albcard);return}
+  var tt=t.closest('[data-trkt]');if(tt){var dd=tt.nextElementSibling,op=tt.getAttribute('aria-expanded')==='true';tt.setAttribute('aria-expanded',!op);if(dd)dd.hidden=op;return}
+  var tcd=t.closest('[data-trkcard]');if(tcd){openPolCard(tcd.dataset.trkcard);return}
+  var tk=t.closest('[data-trk]');if(tk){var id=tk.dataset.trk;albClose();selectPolicy(id)}
+});
+document.addEventListener('keydown',function(e){
+  if(ALBV.hidden)return;if(e.key==='Escape'){albClose();return}
+  if(e.key==='Tab'){var f=[].slice.call(ALBV.querySelectorAll('button')).filter(function(x){return x.offsetParent!==null});if(!f.length)return;var i=f.indexOf(document.activeElement);if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}}
+});
+var MUS=[{f:'music/chusheng.mp3',t:'宜蘭未來的希望',s:'出征版'},{f:'music/kaixuan.mp3',t:'宜蘭未來的希望',s:'凱旋版'}];
+var MP={a:null,i:0,on:false};
+function mpEnsure(){if(MP.a)return MP.a;var a=new Audio();a.preload='none';a.addEventListener('ended',function(){mpGo((MP.i+1)%MUS.length,true)});a.addEventListener('play',mpPaint);a.addEventListener('pause',mpPaint);a.addEventListener('error',function(){var m=$('#mpmsg');if(m)m.textContent='這首歌暫時無法播放，請稍後再試。'});MP.a=a;return a}
+function mpGo(i,play){var a=mpEnsure();MP.i=i;a.src=MUS[i].f;if(play){var p=a.play();if(p&&p.catch)p.catch(function(){mpPaint()})}mpPaint()}
+function mpToggle(){var a=mpEnsure();if(!a.src||a.src==='')mpGo(MP.i,true);else if(a.paused){var p=a.play();if(p&&p.catch)p.catch(function(){})}else a.pause();mpPaint()}
+function mpStop(){if(MP.a){MP.a.pause();MP.a.removeAttribute('src');try{MP.a.load()}catch(e){}}MP.on=false;mpPaint();var pn=$('#mpanel');if(pn)pn.hidden=true}
+function mpPaint(){
+  var a=MP.a,playing=!!(a&&a.src&&!a.paused&&!a.ended),has=!!(a&&a.getAttribute('src'));
+  var bar=$('#mpbar');if(!bar)return;
+  bar.hidden=!has;bar.classList.toggle('playing',playing);
+  var t=$('#mpt');if(t)t.textContent=MUS[MP.i].t+'（'+MUS[MP.i].s+'）';
+  var b=$('#mpplay');if(b){b.textContent=playing?'暫停':'播放';b.setAttribute('aria-pressed',playing)}
+  Array.prototype.forEach.call(document.querySelectorAll('[data-mpi]'),function(x){var on=+x.dataset.mpi===MP.i&&has;x.classList.toggle('cur',on);x.setAttribute('aria-pressed',on&&playing)});
+  document.body.classList.toggle('mplay',has);
+}
+(function(){
+  var h='<div id="mpanel" class="mpanel" hidden role="dialog" aria-label="競選歌曲"><div class="mph"><b>競選歌曲首發</b><button type="button" class="mpx" data-mpclose aria-label="關閉選單">✕</button></div>'+
+   MUS.map(function(m,i){return '<button type="button" class="mptr" data-mpi="'+i+'"><span class="mpn">'+(i+1)+'</span><span class="mptt"><b>'+m.t+'</b><small>'+m.s+'</small></span><span class="mpg">聽</span></button>'}).join('')+
+   '<p class="mpn2" id="mpmsg">點一首就會開始播放，可以邊看政見邊聽。</p></div>'+
+   '<div id="mpbar" class="mpbar" hidden role="region" aria-label="音樂播放器"><span class="mpd" aria-hidden="true"></span><span class="mpt" id="mpt"></span><button type="button" id="mpplay" class="mpb">播放</button><button type="button" class="mpb" data-mpnext>下一首</button><button type="button" class="mpb" data-mpstop>關掉音樂</button></div>';
+  var w=document.createElement('div');w.id='mpwrap';w.innerHTML=h;document.body.appendChild(w);
+  w.addEventListener('click',function(e){var t=e.target;
+    if(t.closest('[data-mpclose]')){$('#mpanel').hidden=true;return}
+    var tr=t.closest('[data-mpi]');if(tr){mpGo(+tr.dataset.mpi,true);return}
+    if(t.closest('#mpplay')){mpToggle();return}
+    if(t.closest('[data-mpnext]')){mpGo((MP.i+1)%MUS.length,true);return}
+    if(t.closest('[data-mpstop]')){mpStop();return}
+  });
+  document.addEventListener('click',function(e){
+    var o=e.target.closest('[data-music],.portrait .pimg');if(!o)return;
+    var pn=$('#mpanel');pn.hidden=!pn.hidden;if(!pn.hidden){var f=pn.querySelector('[data-mpi]');if(f)f.focus()}
+  });
+})();
 function togglePersona(b){
   var p=b.dataset.ptog.split(':'),k=p[1];
   if(p[0]==='t')PS.towns[k]=!PS.towns[k];else PS.jobs[k]=!PS.jobs[k];
@@ -1596,7 +2078,7 @@ function updateMeBar(){
   var any=Object.keys(PS.towns).some(function(k){return PS.towns[k]})||Object.keys(PS.jobs).some(function(k){return PS.jobs[k]});
   var show=any&&!S.sel&&!S.q.trim();
   bar.hidden=!show;document.body.classList.toggle('hasbar',show);
-  if(show){var r=personaMatches();$('#mego').textContent='看適合我的政見（'+(r.arr.length+r.extra.length+r.wide.length)+' 項）'}
+  if(show){var bn=Object.keys(PS.towns).filter(function(k){return PS.towns[k]}).length+Object.keys(PS.jobs).filter(function(k){return PS.jobs[k]}).length;$('#mebagn').textContent=bn;var r=personaMatches();$('#mego').textContent='看適合我的政見（'+(r.arr.length+r.extra.length+r.wide.length)+' 項）'}
 }
 function personaControls(home){
   var ticks=[0,6,17,39,64,100].map(function(v){return '<span style="left:'+v+'%">'+v+'</span>'}).join('');
@@ -1868,7 +2350,8 @@ function bind(){
 }
 $('#pbody').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
-  if(b.dataset.ptog){togglePersona(b);return}
+  if(b.dataset.ptog){albOpen(b);return}
+  if('wallcard' in b.dataset){openWallCard();return}
   if('about' in b.dataset){S.sel={type:'about'};setHL();refresh();return}if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
   if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){goBack()}
@@ -1995,7 +2478,7 @@ var VID=[
 var VBY={};
 VID=VID.map(function(a,i){var o={id:a[0],t:a[1],n:a[2],g:a[3],pol:a[4].filter(function(x){return PBY[x]}),h:a[5]==='h',i:i};VBY[o.id]=o;return o});
 function vN(n){if(n>=10000){var x=Math.round(n/1000)/10;return (x%1?x.toFixed(1):x)+' 萬'}return String(n).replace(/\B(?=(\d{3})+$)/g,',')}
-var VPLAY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="#fff"/></svg>';
+var VPLAY='<span class="pdisc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="#fff"/></svg></span>';
 function vList(g){
   if(g==='new')return VID.slice(0,8);
   if(g==='hot')return VID.slice().sort(function(a,b){return b.n-a.n||a.i-b.i}).slice(0,10);
@@ -2030,7 +2513,7 @@ function vMoreHTML(){
 function vMore(){VMORE+=3;var el=$('#vmb');if(el)el.innerHTML=vMoreHTML()}
 function videoSection(){
   var s=vSecs();
-  return '<div class="sec" id="vhd">短影音<small>'+VID.length+' 支・觀看數 '+VID_AS+' 統計</small></div>'+
+  return '<div class="sec" id="vhd">現場 MV<small>'+VID.length+' 支・觀看數 '+VID_AS+' 統計</small></div>'+
    '<div id="vsec">'+vBlock('hot','熱門','觀看次數最多的 '+s.hot.length+' 支',s.hot)+vBlock('nw','最新','最近發布的 '+s.nw.length+' 支',s.nw)+
    vBlock('hao','《還好有國漳》系列','受過國漳協助的人，說他們眼中的國漳（'+s.hao.length+' 支）',s.hao)+vBlock('gai','#237 宜蘭蓋漳系列','走訪各鄉鎮市，跟鄉親面對面（'+s.gai.length+' 支）',s.gai)+
    vBlock('wide','形象影片','在地服務三十年、競選形象與重要活動（'+s.wide.length+' 支）',s.wide)+
@@ -2251,47 +2734,44 @@ function cvWrap(c,s,w,max){
 function rrect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
 function cvHead(c,W){
   c.textBaseline='alphabetic';c.textAlign='left';
-  c.fillStyle='#9ADB7A';c.fillRect(0,0,W,16);
-  c.font='900 38px '+CV_F;c.fillText('林國漳找政見',64,100);
+  c.fillStyle='#E0C85C';c.font='900 40px '+CV_S;c.fillText('林國漳找政見',64,104);
 }
 function cvFoot(c,W){
-  c.fillStyle='#9ADB7A';c.fillRect(64,1176,W-128,4);
-  c.font='900 64px '+CV_F;c.fillText(typeof SLOGAN==='string'&&SLOGAN?SLOGAN:'林國漳',64,1252);
-  c.fillStyle='#fff';c.font='700 32px '+CV_F;
-  if(BALLOT_NO){
-    var t1='宜蘭縣長候選人',w1=c.measureText(t1).width,bx=64+w1+14+22;
-    c.fillText(t1,64,1300);
-    c.fillStyle='#9ADB7A';c.beginPath();c.arc(bx,1289,22,0,Math.PI*2);c.fill();
-    c.fillStyle='#0A1D38';c.font='900 28px '+CV_F;c.textAlign='center';c.fillText(String(BALLOT_NO),bx,1299);c.textAlign='left';
-    c.fillStyle='#fff';c.font='700 32px '+CV_F;c.fillText('林國漳',bx+22+14,1300);
-  }else c.fillText('宜蘭縣長候選人 林國漳',64,1300);
+  c.fillStyle='#1B1B18';c.fillRect(28,1180,W-56,142);c.fillStyle='#E0C85C';c.fillRect(28,1176,W-56,4);
+  c.textAlign='left';c.fillStyle='#E0C85C';c.font='900 46px '+CV_S;c.fillText('宜蘭縣長候選人 ①林國漳',64,1262);
+    c.textAlign='right';c.fillStyle='#FFF6DA';c.font='800 32px '+CV_F;c.fillText('林國漳找政見',W-64,1280);c.textAlign='left';
 }
 function cvNew(){var cv=document.createElement('canvas');cv.width=1080;cv.height=1350;return cv}
-function cvBG(c,W,H){var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0A1D38');g.addColorStop(1,'#173A66');c.fillStyle=g;c.fillRect(0,0,W,H)}
+function cvBG(c,W,H){
+  c.fillStyle='#A63A35';c.fillRect(0,0,W,H);
+  var g=c.createRadialGradient(W*.3,H*.2,60,W*.5,H*.5,H*.85);g.addColorStop(0,'rgba(255,255,255,.10)');g.addColorStop(1,'rgba(0,0,0,.16)');c.fillStyle=g;c.fillRect(0,0,W,H);
+  c.strokeStyle='#E0C85C';c.lineWidth=28;c.strokeRect(14,14,W-28,H-28);
+  c.setLineDash([2,12]);c.lineCap='round';c.lineWidth=3;c.strokeStyle='rgba(255,246,218,.6)';c.strokeRect(44,44,W-88,H-88);c.setLineDash([]);
+}
 function drawCard(){
   var r=personaMatches(),any=r.ids.length||r.tw.length,list=[],seen={};
   if(any)r.arr.filter(function(x){return !x.p.bg}).map(function(x){return x.p}).concat(r.extra,r.wide).forEach(function(p){if(!seen[p.id]){seen[p.id]=1;list.push(p)}});
   else WALL.forEach(function(w){var p=PBY[w[0]];if(p&&!seen[p.id]){seen[p.id]=1;list.push(p)}});
   var who=r.ids.map(function(id){return AI[id].n.replace(/（.*?）/g,'')}).concat(r.tw.map(townName));
   var W=1080,H=1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d');
-  var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'#0A1D38');g.addColorStop(1,'#173A66');c.fillStyle=g;c.fillRect(0,0,W,H);
+  cvBG(c,W,H);
   cvHead(c,W);
-  c.fillStyle='#fff';c.font='900 96px '+CV_F;c.fillText('我的專屬政見單',64,232);
-  c.fillStyle='#9FB8DA';c.font='700 38px '+CV_F;
+  c.fillStyle='#fff';c.font='900 96px '+CV_S;c.fillText('我的專屬政見單',64,232);
+  c.fillStyle='#F1DFC0';c.font='700 38px '+CV_F;
   var wl=who.length?cvWrap(c,who.join('・'),W-128,2):['全縣重點政見'];
   wl.forEach(function(s,i){c.fillText(s,64,300+i*50)});
-  c.fillStyle='#9ADB7A';c.font='900 44px '+CV_F;
+  c.fillStyle='#E0C85C';c.font='900 44px '+CV_F;
   c.fillText(any?'共 '+list.length+' 項政見和你有關':'先看這 '+list.length+' 項重點政見',64,420);
   var y=462,RH=108,rows=list.slice(0,6);
   rows.forEach(function(p,i){
     var cc=CATS[p.c],yy=y+i*RH;
     c.fillStyle='rgba(255,255,255,.18)';c.fillRect(64,yy+RH-2,W-128,2);
     c.fillStyle=cc.c;c.beginPath();c.arc(100,yy+46,34,0,Math.PI*2);c.fill();
-    c.fillStyle='#0A1D38';c.font='900 34px '+CV_F;c.textAlign='center';c.fillText(cc.n.slice(0,1),100,yy+58);c.textAlign='left';
+    c.fillStyle='#1B1B18';c.font='900 34px '+CV_F;c.textAlign='center';c.fillText(cc.n.slice(0,1),100,yy+58);c.textAlign='left';
     c.fillStyle='#fff';c.font='800 44px '+CV_F;c.fillText(cvFit(c,p.t,W-176-64),164,yy+46);
-    c.fillStyle='#9FB8DA';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+86);
+    c.fillStyle='#F1DFC0';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+86);
   });
-  if(list.length>rows.length){c.fillStyle='#9ADB7A';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-rows.length)+' 項，到網站看全部',64,y+rows.length*RH+44)}
+  if(list.length>rows.length){c.fillStyle='#E0C85C';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-rows.length)+' 項，到網站看全部',64,y+rows.length*RH+44)}
   cvFoot(c,W);
   return {cv:cv,count:list.length};
 }
@@ -2322,26 +2802,26 @@ function drawPolCard(p){
   cvBG(c,W,H);cvHead(c,W);
   c.font='900 34px '+CV_F;var cw=c.measureText(cc.n).width+48;
   c.fillStyle=cc.c;rrect(c,64,150,cw,56,28);c.fill();
-  c.fillStyle='#0A1D38';c.fillText(cc.n,88,190);
-  c.fillStyle='#9FB8DA';c.font='700 30px '+CV_F;c.fillText('候選人承諾',64+cw+20,190);
+  c.fillStyle='#1B1B18';c.fillText(cc.n,88,190);
+  c.fillStyle='#F1DFC0';c.font='700 30px '+CV_F;c.fillText('候選人承諾',64+cw+20,190);
   var tfs=78,tl;
-  [112,98,88,78].some(function(f){tfs=f;c.font='900 '+f+'px '+CV_F;tl=cvWrap(c,p.t,W-128,4);return f===78||(tl.length<=3&&(tl.length===1||tl[tl.length-1].length>=2))});
+  [112,98,88,78].some(function(f){tfs=f;c.font='900 '+f+'px '+CV_S;tl=cvWrap(c,p.t,W-128,4);return f===78||(tl.length<=3&&(tl.length===1||tl[tl.length-1].length>=2))});
   var lh=Math.round(tfs*1.28);
   c.font='600 46px '+CV_F;
   var sl=cvWrap(c,p.s,W-128,kn.length?(tl.length>=4?3:4):7);
   var H0=(tl.length-1)*lh+tfs+50+(sl.length-1)*66+46+(kn.length?60+200:0);
   var top=240+Math.max(20,(910-H0)*.35),y=top+tfs*.85;
-  c.fillStyle='#fff';c.font='900 '+tfs+'px '+CV_F;
+  c.fillStyle='#E0C85C';c.font='900 '+tfs+'px '+CV_S;
   tl.forEach(function(s,i){c.fillText(s,64,y+i*lh)});
   var sy=y+(tl.length-1)*lh+96;
-  c.fillStyle='#C9D8EE';c.font='600 46px '+CV_F;
+  c.fillStyle='#F1DFC0';c.font='600 46px '+CV_F;
   sl.forEach(function(s,i){c.fillText(s,64,sy+i*66)});
   if(kn.length){
     var n=Math.min(3,kn.length),gap=20,bw=(W-128-gap*(n-1))/n,by=sy+(sl.length-1)*66+60;
     kn.slice(0,n).forEach(function(k,i){
       var bx=64+i*(bw+gap),fs=88;
       c.fillStyle=cc.c;rrect(c,bx,by,bw,200,22);c.fill();
-      c.fillStyle='#0A1D38';
+      c.fillStyle='#1B1B18';
       do{c.font='900 '+fs+'px '+CV_F;fs-=4}while(c.measureText(k[0]).width>bw-32&&fs>32);
       c.textAlign='center';c.fillText(k[0],bx+bw/2,by+96);
       c.font='700 28px '+CV_F;
@@ -2383,27 +2863,44 @@ var CV_S='"Songti TC","Noto Serif TC","STSong","PMingLiU",serif';
 function fzPoem(id){return FZP[id]||FZ_DEF}
 function fzGrade(id){var s=0;for(var i=0;i<id.length;i++)s+=id.charCodeAt(i);return '大吉籤'}
 function drawFortuneImg(p,no,total,day){
-  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),RED='#C8372D',BR='#3A1A10',po=fzPoem(p.id);
-  c.fillStyle='#FFF4D6';c.fillRect(0,0,W,H);
-  c.strokeStyle=RED;c.lineWidth=18;c.strokeRect(24,24,W-48,H-48);c.lineWidth=4;c.strokeRect(54,54,W-108,H-108);
-  c.textBaseline='alphabetic';c.textAlign='center';
-  c.fillStyle=RED;c.font='900 44px '+CV_F;c.fillText(day?'今日一籤　'+day:'宜蘭政見籤',W/2,140);
-  c.font='900 150px '+CV_S;c.fillText('第 '+no+' 籤',W/2,310);
-  var bx=270,by=370,bw=540,bh=500,cw=bw/4;
-  c.fillStyle='rgba(255,255,255,.45)';c.fillRect(bx,by,bw,bh);
-  c.strokeStyle=BR;c.lineWidth=4;c.strokeRect(bx,by,bw,bh);
-  c.lineWidth=2;c.strokeStyle='#C9A27F';
-  for(var k=1;k<4;k++){c.beginPath();c.moveTo(bx+k*cw,by+14);c.lineTo(bx+k*cw,by+bh-14);c.stroke()}
-  c.fillStyle=BR;c.font='900 60px '+CV_S;
-  po.forEach(function(line,i){
-    var x=bx+bw-cw/2-i*cw;
-    for(var j=0;j<line.length;j++)c.fillText(line[j],x,by+68+j*66);
-  });
-  c.fillStyle=BR;c.font='900 52px '+CV_F;
-  var tl=cvWrap(c,shortT(p.t),W-200,2);
-  tl.forEach(function(s,i){c.fillText(s,W/2,980+i*66)});
-  c.fillStyle='#8A5A40';c.font='600 26px '+CV_F;c.fillText('籤詩為創作，政見為候選人承諾',W/2,1212);
-  c.fillStyle=BR;c.font='800 38px '+CV_F;c.fillText('林國漳找政見',W/2,1266);
+  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),RED='#A63A35',GOLD='#E0C85C',INK='#1B1B18',CRM='#FFF6DA',po=fzPoem(p.id),cat=CATS[p.c]?CATS[p.c].n:'';
+  c.fillStyle=RED;c.fillRect(0,0,W,H);
+  var g=c.createRadialGradient(W*.3,H*.2,60,W*.5,H*.5,H*.85);g.addColorStop(0,'rgba(255,255,255,.10)');g.addColorStop(1,'rgba(0,0,0,.16)');c.fillStyle=g;c.fillRect(0,0,W,H);
+  c.strokeStyle=GOLD;c.lineWidth=36;c.strokeRect(18,18,W-36,H-36);
+  c.setLineDash([2,12]);c.lineCap='round';c.lineWidth=4;c.strokeStyle='rgba(255,246,218,.7)';c.strokeRect(62,62,W-124,H-124);c.setLineDash([]);
+  c.textBaseline='alphabetic';c.textAlign='left';
+  if(day){c.fillStyle=GOLD;c.font='700 34px '+CV_F;c.fillText('今日一籤　'+day,110,128)}
+  // header row: grade pill + 第N籤 + 共 N 支
+  c.fillStyle=GOLD;var gr=fzGrade(p.id);c.font='900 40px '+CV_S;var gw=c.measureText(gr).width+56;
+  c.beginPath();c.moveTo(110+34,150);c.arcTo(110+gw,150,110+gw,222,34);c.arcTo(110+gw,222,110,222,34);c.arcTo(110,222,110,150,34);c.arcTo(110,150,110+gw,150,34);c.closePath();c.fill();
+  c.fillStyle=INK;c.fillText(gr,110+28,203);
+  var x=110+gw+34;
+  c.fillStyle=CRM;c.font='900 54px '+CV_S;c.fillText('第',x,205);x+=62;
+  c.font='900 150px '+CV_S;c.fillText(String(no),x,214);x+=c.measureText(String(no)).width+8;
+  c.font='900 54px '+CV_S;c.fillText('籤',x,205);x+=70;
+  c.font='700 32px '+CV_F;c.fillStyle='rgba(255,246,218,.88)';c.fillText('共 '+total+' 支',x,205);
+  // poem box
+  var bw=580,bh=540,bx=(W-bw)/2,by=262,cw=bw/4;
+  c.fillStyle=CRM;c.fillRect(bx,by,bw,bh);c.strokeStyle=INK;c.lineWidth=5;c.strokeRect(bx,by,bw,bh);
+  c.lineWidth=2;c.strokeStyle='rgba(27,27,24,.35)';for(var k=1;k<4;k++){c.beginPath();c.moveTo(bx+k*cw,by+14);c.lineTo(bx+k*cw,by+bh-14);c.stroke()}
+  c.textAlign='center';c.fillStyle=INK;c.font='900 58px '+CV_S;
+  po.forEach(function(line,i){var cx=bx+bw-cw/2-i*cw;for(var j=0;j<line.length;j++)c.fillText(line[j],cx,by+74+j*66)});
+  // dotted divider, category pill
+  c.setLineDash([2,10]);c.lineWidth=3;c.strokeStyle='rgba(255,246,218,.6)';c.beginPath();c.moveTo(110,838);c.lineTo(W-110,838);c.stroke();c.setLineDash([]);
+  c.textAlign='left';c.font='900 30px '+CV_F;var cw2=c.measureText(cat).width+44;
+  c.fillStyle=INK;c.beginPath();c.moveTo(110+26,866);c.arcTo(110+cw2,866,110+cw2,918,26);c.arcTo(110+cw2,918,110,918,26);c.arcTo(110,918,110,866,26);c.arcTo(110,866,110+cw2,866,26);c.closePath();c.fill();
+  c.fillStyle=GOLD;c.fillText(cat,132,905);
+  // title + summary
+  c.fillStyle=GOLD;c.font='900 74px '+CV_S;
+  var tl=cvWrap(c,shortT(p.t),W-220,2);tl.forEach(function(s,i){c.fillText(s,110,1000+i*88)});
+  var sy=1000+tl.length*88+8;
+  c.fillStyle=CRM;c.font='600 34px '+CV_F;
+  var sl=cvWrap(c,(p.s||''),W-220,2);sl.forEach(function(s,i){c.fillText(s,110,sy+i*48)});
+  // footer band
+  c.fillStyle=INK;c.fillRect(0,H-132,W,132);c.fillStyle=GOLD;c.fillRect(0,H-136,W,4);
+  c.fillStyle=GOLD;c.font='900 42px '+CV_S;c.fillText('宜蘭縣長候選人 ①林國漳',100,H-70);
+  c.fillStyle='rgba(255,246,218,.8)';c.font='600 24px '+CV_F;c.fillText('籤詩為創作，政見為候選人承諾',100,H-30);
+  c.textAlign='right';c.fillStyle=CRM;c.font='800 32px '+CV_F;c.fillText('林國漳找政見',W-100,H-52);
   return cv;
 }
 var QZ=[
@@ -2442,40 +2939,29 @@ function drawQuizCard(id){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),t=TOWNS[TI[id]];
   var loc=polForTown(id).filter(match),cty=POL.filter(function(p){return !p.bg&&p.tw==='all'&&!localTo(p,id)&&match(p)}),list=loc.length?loc:cty;
   c.textBaseline='alphabetic';c.textAlign='left';
-  c.fillStyle='#F6F9F1';c.fillRect(0,0,W,H);
-  c.fillStyle='#15803D';c.font='900 36px '+CV_F;c.fillText('林國漳找政見',64,100);
-  c.fillStyle='#4B6B57';c.font='700 52px '+CV_F;c.fillText('我是',64,210);
+  cvBG(c,W,H);cvHead(c,W);
+  c.fillStyle='#F1DFC0';c.font='700 52px '+CV_F;c.fillText('我是',64,210);
   var nm=qzShort(t)+'人',fs=230;
-  c.font='900 '+fs+'px '+CV_F;
-  while(fs>120&&c.measureText(nm).width>W-128){fs-=10;c.font='900 '+fs+'px '+CV_F}
+  c.font='900 '+fs+'px '+CV_S;
+  while(fs>120&&c.measureText(nm).width>W-128){fs-=10;c.font='900 '+fs+'px '+CV_S}
   var nw=c.measureText(nm).width;
-  c.fillStyle='#FFD95A';rrect(c,52,330,Math.min(nw+24,W-104),84,20);c.fill();
-  c.fillStyle='#14532D';c.fillText(nm,64,440);
-  c.fillStyle='#26382D';c.font='600 46px '+CV_F;
+  c.fillStyle='#E0C85C';c.fillText(nm,64,440);c.fillRect(64,466,Math.min(nw,W-128)*.45,10);
+  c.fillStyle='#FFF6DA';c.font='600 46px '+CV_F;
   cvWrap(c,QT[id]||'',W-128,2).forEach(function(s,i){c.fillText(s,64,540+i*68)});
   if(FOODS[id]){
-    c.fillStyle='#fff';c.strokeStyle='#CFE0C6';c.lineWidth=3;rrect(c,64,690,W-128,86,43);c.fill();c.stroke();
-    c.fillStyle='#15803D';c.font='800 40px '+CV_F;c.fillText(cvFit(c,'在地美食　'+FOODS[id],W-128-80),104,747);
+    c.fillStyle='rgba(27,27,24,.4)';c.strokeStyle='#E0C85C';c.lineWidth=3;rrect(c,64,690,W-128,86,43);c.fill();c.stroke();
+    c.fillStyle='#E0C85C';c.font='800 40px '+CV_F;c.fillText(cvFit(c,'在地美食　'+FOODS[id],W-128-80),104,747);
   }
-  c.fillStyle='#4B6B57';c.font='700 40px '+CV_F;
+  c.fillStyle='#F1DFC0';c.font='700 40px '+CV_F;
   c.fillText(cvFit(c,loc.length?'林國漳的'+t.n+'政見':t.n+'也適用的全縣政見',W-128),64,860);
   list.slice(0,3).forEach(function(p,i){
     var y=890+i*96;
-    c.fillStyle='#fff';rrect(c,64,y,W-128,86,28);c.fill();
-    c.fillStyle='#15803D';c.beginPath();c.arc(124,y+43,26,0,Math.PI*2);c.fill();
+    c.fillStyle='#FFF6DA';rrect(c,64,y,W-128,86,12);c.fill();
+    c.fillStyle='#A63A35';c.beginPath();c.arc(124,y+43,26,0,Math.PI*2);c.fill();
     c.fillStyle='#fff';c.font='900 30px '+CV_F;c.textAlign='center';c.fillText(String(i+1),124,y+54);c.textAlign='left';
-    c.fillStyle='#14532D';c.font='800 46px '+CV_F;c.fillText(cvFit(c,shortT(p.t),W-128-110-24),174,y+59);
+    c.fillStyle='#1B1B18';c.font='800 46px '+CV_F;c.fillText(cvFit(c,shortT(p.t),W-128-110-24),174,y+59);
   });
-  c.fillStyle='#15803D';c.fillRect(0,1196,W,154);
-  c.fillStyle='#fff';c.font='900 64px '+CV_F;c.fillText(typeof SLOGAN==='string'&&SLOGAN?SLOGAN:'林國漳',64,1252);
-  c.font='700 32px '+CV_F;
-  if(BALLOT_NO){
-    var t1='宜蘭縣長候選人',w1=c.measureText(t1).width,bx=64+w1+14+22;
-    c.fillText(t1,64,1304);
-    c.fillStyle='#FFD95A';c.beginPath();c.arc(bx,1293,22,0,Math.PI*2);c.fill();
-    c.fillStyle='#14532D';c.font='900 28px '+CV_F;c.textAlign='center';c.fillText(String(BALLOT_NO),bx,1303);c.textAlign='left';
-    c.fillStyle='#fff';c.font='700 32px '+CV_F;c.fillText('林國漳',bx+36,1304);
-  }else c.fillText('宜蘭縣長候選人 林國漳',64,1304);
+  cvFoot(c,W);
   return cv;
 }
 function showQuiz(){
@@ -2618,24 +3104,24 @@ function drawTownCard(id){
   var loc=polForTown(id).filter(match),cty=POL.filter(function(p){return !p.bg&&p.tw==='all'&&!localTo(p,id)&&match(p)});
   cvBG(c,W,H);cvHead(c,W);
   c.font='900 34px '+CV_F;var kt='鄉鎮市・'+t.g,cw=c.measureText(kt).width+48;
-  c.fillStyle=TC[TI[id]];rrect(c,64,150,cw,56,28);c.fill();c.fillStyle='#0A1D38';c.fillText(kt,88,190);
-  c.fillStyle='#fff';c.font='900 140px '+CV_F;c.fillText(t.n,64,350);
+  c.fillStyle='#E0C85C';rrect(c,64,150,cw,56,28);c.fill();c.fillStyle='#1B1B18';c.fillText(kt,88,190);
+  c.fillStyle='#fff';c.font='900 150px '+CV_S;c.fillText(t.n,64,350);
   if(o[1]){
-    c.fillStyle='#9ADB7A';c.font='900 46px '+CV_F;c.fillText('在地代表：'+o[1],64,440);
-    c.fillStyle='#C9D8EE';c.font='600 36px '+CV_F;cvWrap(c,o[2],W-128,2).forEach(function(s,i){c.fillText(s,64,498+i*52)});
+    c.fillStyle='#E0C85C';c.font='900 46px '+CV_F;c.fillText('在地代表：'+o[1],64,440);
+    c.fillStyle='#F1DFC0';c.font='600 36px '+CV_F;cvWrap(c,o[2],W-128,2).forEach(function(s,i){c.fillText(s,64,498+i*52)});
   }
   var list=loc.length?loc:cty;
-  c.fillStyle='#9ADB7A';c.font='900 44px '+CV_F;
+  c.fillStyle='#E0C85C';c.font='900 44px '+CV_F;
   c.fillText(cvFit(c,loc.length?loc.length+' 項在地政見':'目前沒有專屬於'+t.n+'的政見，全縣適用 '+cty.length+' 項',W-128),64,640);
   list.slice(0,4).forEach(function(p,i){
     var cc=CATS[p.c],yy=668+i*104;
     c.fillStyle='rgba(255,255,255,.18)';c.fillRect(64,yy+100,W-128,2);
     c.fillStyle=cc.c;c.beginPath();c.arc(100,yy+44,32,0,Math.PI*2);c.fill();
-    c.fillStyle='#0A1D38';c.font='900 32px '+CV_F;c.textAlign='center';c.fillText(cc.n.slice(0,1),100,yy+55);c.textAlign='left';
+    c.fillStyle='#1B1B18';c.font='900 32px '+CV_F;c.textAlign='center';c.fillText(cc.n.slice(0,1),100,yy+55);c.textAlign='left';
     c.fillStyle='#fff';c.font='800 42px '+CV_F;c.fillText(cvFit(c,p.t,W-176-64),164,yy+44);
-    c.fillStyle='#9FB8DA';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+84);
+    c.fillStyle='#F1DFC0';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+84);
   });
-  if(list.length>4){c.fillStyle='#9ADB7A';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-4)+' 項，到網站看全部',64,1138)}
+  if(list.length>4){c.fillStyle='#E0C85C';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-4)+' 項，到網站看全部',64,1138)}
   cvFoot(c,W);
   return cv;
 }
@@ -2643,11 +3129,11 @@ function openTownCard(id){var t=TOWNS[TI[id]];if(t)openImg(drawTownCard(id),t.n+
 function drawWallCard(){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d');
   cvBG(c,W,H);cvHead(c,W);
-  c.fillStyle='#fff';c.font='900 96px '+CV_F;c.fillText('重點數字',64,250);
+  c.fillStyle='#fff';c.font='900 96px '+CV_S;c.fillText('重點數字',64,250);
   var bw=(W-128-24)/2,bh=190;
   WALL.forEach(function(w,i){
     var cc=CATS[PBY[w[0]].c],bx=64+(i%2)*(bw+24),by=300+Math.floor(i/2)*(bh+22),fs=88;
-    c.fillStyle='#10263F';rrect(c,bx,by,bw,bh,20);c.fill();
+    c.fillStyle='rgba(27,27,24,.38)';rrect(c,bx,by,bw,bh,14);c.fill();
     c.fillStyle=cc.c;c.fillRect(bx,by+24,8,bh-48);
     do{c.font='900 '+fs+'px '+CV_F;fs-=4}while(c.measureText(w[1]).width>bw-64&&fs>36);
     c.fillStyle=cc.c;c.fillText(w[1],bx+36,by+96);
@@ -2657,9 +3143,10 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/29 第 105 版';
-$('#mego').onclick=function(){openPersona()};
-$('#mecl').onclick=function(){PS.jobs={};PS.towns={};panel()};
+var BUILD='10/30 第 108 版';
+$('#mego').onclick=function(){albClose();openPersona()};
+$('#mecard').onclick=function(){albClose();openCard()};
+$('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
 (function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
 var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
 if(/[?&]xl=1/.test(location.search))XL=true;
@@ -2671,16 +3158,19 @@ function setXL(v){
 }
 $('#xlbtn').onclick=function(){setXL(!XL)};
 /* 候選人號次：抽籤後把 null 改成號碼，例如 var BALLOT_NO=3; */
-var BALLOT_NO=1,SLOGAN='團結作伙拚 宜蘭1定贏';
+var BALLOT_NO=1,SLOGAN='';
 function ballot(){
   var el=$('#ballot');if(!el)return;
   if(BALLOT_NO){el.className='ballot';el.innerHTML='宜蘭縣長候選人<b>'+esc(BALLOT_NO)+'</b>林國漳';if(SLOGAN&&!$('#slogan'))el.insertAdjacentHTML('afterend','<div class="slogan" id="slogan">'+esc(SLOGAN)+'</div>')}
   else{el.className='ballot pending';el.textContent='號次：抽籤後公布'}
 }
 function countdown(){var d=Math.ceil((new Date(2026,10,28)-new Date())/86400000);$('#cd').textContent=d>0?d+' 天':(d===0?'今天':'已投票')}
+function mkHeroCD(){var p=$('#portrait');if(!p||p.querySelector('.hcd'))return;var d=document.createElement('div');d.className='hcd';d.setAttribute('aria-hidden','true');d.innerHTML=discSVG('宜蘭政見','#A63A35,#6E1B25','#E0C85C','#F6EFD8','h');p.insertBefore(d,p.firstChild)}
+mkHeroCD();
 countdown();ballot();buildMap();buildShields();buildPins();buildChips();buildLegend();bind();
 homeView(true);panel();paint();setXL(XL);applyHash();window.addEventListener('hashchange',applyHash);
 })();
 </script>
+<script>document.addEventListener('click',function(e){var b=e.target.closest('.topnav button');if(!b)return;var t=document.getElementById(b.dataset.go);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})});</script>
 </body>
 </html>
