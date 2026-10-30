@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="宜蘭縣長候選人林國漳的政見：選你住的地方和身分，找到跟你有關的政見，也能看短影音。">
+<meta name="description" content="宜蘭縣長候選人林國漳的金曲：選你住的地方和身分，找到跟你有關的金曲，也能看短影音。">
 <title>宜蘭金曲①次看懂</title>
-<meta name="description" content="宜蘭縣長候選人林國漳的政見：選你住的地方和身分，找到跟你有關的政見，也能看短影音。">
+<meta name="description" content="宜蘭縣長候選人林國漳的金曲：選你住的地方和身分，找到跟你有關的金曲，也能看短影音。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="宜蘭金曲①次看懂">
 <meta property="og:title" content="宜蘭金曲①次看懂｜宜蘭縣長候選人">
-<meta property="og:description" content="選你住的地方和身分，找到跟你有關的政見。">
+<meta property="og:description" content="選你住的地方和身分，找到跟你有關的金曲。">
 <meta property="og:url" content="https://hanyingyilan.github.io/yilan-policy-map/">
 <meta property="og:image" content="https://hanyingyilan.github.io/yilan-policy-map/og.png">
 <meta property="og:image:width" content="1200">
@@ -1240,7 +1240,7 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
   <section class="mapbox" id="mapbox">
     <svg id="map" aria-label="宜蘭縣地圖，可拖曳、縮放，點選鄉鎮、道路或圖釘"></svg>
     <div id="labels"></div>
-    <div class="chips" id="chips" role="group" aria-label="政見類別"></div>
+    <div class="chips" id="chips" role="group" aria-label="金曲類別"></div>
     <div class="tools">
       <button type="button" id="bgtoggle" aria-pressed="true">重大建設</button>
       <button type="button" id="sharebtn" aria-expanded="false">分享連結</button>
@@ -1253,7 +1253,7 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
     <div class="tour" id="tour"></div>
     <div class="tip" id="tip"></div>
   </section>
-  <aside class="panel" role="main" aria-label="政見清單與內容">
+  <aside class="panel" role="main" aria-label="金曲清單與內容">
     <nav class="topnav" aria-label="頁面導覽"><span class="tnb"><i aria-hidden="true"></i>宜蘭金曲</span><button type="button" data-go="s-play">玩一玩</button><button type="button" data-go="s-town">尋得家鄉金曲</button><button type="button" data-go="s-who">找你那一張</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button><button type="button" class="tnl" data-music><i aria-hidden="true"></i>聽歌</button></nav>
     <div class="brand">
       <div class="sticker">距離投票日 11/28<b id="cd"></b></div>
@@ -1262,11 +1262,11 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
       <div class="hbtns" id="hbtns"></div>
       <div class="portrait" id="portrait"><div class="pimg"><img src="photos/album.jpg" alt="林國漳 宜蘭未來的希望 專輯封面" width="184" height="230" decoding="async" onerror="var p=this.closest('.portrait');p.classList.add('empty');this.remove()"></div><button type="button" class="mplaybtn" data-music aria-label="聽競選歌曲"><i aria-hidden="true"></i>聽歌</button><span class="ptag"><b>林國漳</b><small>宜蘭縣長候選人</small></span></div>
     </div>
-    <div class="sbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋政見、鄉鎮或道路" aria-label="搜尋"></div>
+    <div class="sbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋金曲、鄉鎮或道路" aria-label="搜尋"></div>
     <div class="pbody" id="pbody"></div>
   </aside>
 </div>
-<div id="mebar" hidden><span class="mebag" id="mebag" role="status"><svg viewBox="0 0 40 46" aria-hidden="true"><path d="M8 16h24l3 26H5z" fill="#A63A35"/><path d="M13 16v-4a7 7 0 0 1 14 0v4" fill="none" stroke="#A63A35" stroke-width="3"/></svg><span class="t">購物袋裡有</span><b class="n" id="mebagn">0</b><span class="t">張</span></span><button type="button" class="mecard" id="mecard">做成圖卡</button><button type="button" id="mego">看適合我的政見</button><button type="button" id="mecl">清除</button></div>
+<div id="mebar" hidden><span class="mebag" id="mebag" role="status"><svg viewBox="0 0 40 46" aria-hidden="true"><path d="M8 16h24l3 26H5z" fill="#A63A35"/><path d="M13 16v-4a7 7 0 0 1 14 0v4" fill="none" stroke="#A63A35" stroke-width="3"/></svg><span class="t">購物袋裡有</span><b class="n" id="mebagn">0</b><span class="t">張</span></span><button type="button" class="mecard" id="mecard">做成圖卡</button><button type="button" id="mego">看適合我的金曲</button><button type="button" id="mecl">清除</button></div>
 <script>
 (function(){
 'use strict';
@@ -1274,7 +1274,7 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
 var CATS={
   traffic:{n:'交通',c:'#E0C85C'},industry:{n:'產業人才',c:'#D99A5B'},agri:{n:'農業',c:'#B9CC74'},
   sea:{n:'海洋漁業',c:'#7FC4C0'},tour:{n:'觀光文化',c:'#F2A6C4'},env:{n:'環境防災食安',c:'#8FCFA5'},
-  care:{n:'長者醫療社福',c:'#F3D9A4'},kids:{n:'托育教育',c:'#F29C8A'},ind:{n:'原住民族',c:'#C9A27A'},safe:{n:'治安交通安全',c:'#B9B2D6'},vision:{n:'施政理念',c:'#8FA3B8'},town:{n:'鄉鎮在地政見',c:'#9CC3E0'}
+  care:{n:'長者醫療社福',c:'#F3D9A4'},kids:{n:'托育教育',c:'#F29C8A'},ind:{n:'原住民族',c:'#C9A27A'},safe:{n:'治安交通安全',c:'#B9B2D6'},vision:{n:'施政理念',c:'#8FA3B8'},town:{n:'鄉鎮在地金曲',c:'#9CC3E0'}
 };
 var TOWNS=[
   {id:'toucheng',n:'頭城鎮',g:'溪北',lab:[121.823,24.858]},
@@ -1536,7 +1536,7 @@ var POL=[
 {id:'E04',
  c:'env',
  t:"食安三道防線",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"突擊稽查、檢驗量能、預防下架；中央地方聯手建立食安網。",
  b:["食安三道防線：突擊稽查、檢驗量能、預防下架。", "主張「中央地方聯手，建立臺灣食安安全網」。","2026 年 7 月中聯油脂大豆沙拉油苯駢芘超標事件後，提出具體把關作為，主張「從制度面與資源面雙管齊下，確保宜蘭鄉親都能吃得安心」。","每月聯合稽查：嚴格落實《宜蘭縣飲食健康權自治條例》的規定，全面阻絕黑心食品。","編列足夠的食安查驗預算：擴大與縣內專業實驗室合作，提升抽驗的精準度與效率。"],
  tw:'all',
@@ -1558,7 +1558,7 @@ var POL=[
  src:[]},
 {id:'N01',
  c:'care',
- t:"宜蘭新美力：新住民四大政見",
+ t:"宜蘭新美力：新住民四大金曲",
  d:"2026/1/11 發布",
  s:"從補助到培力，讓新住民成為公共事務的共同決策者。",
  b:["決策參與：強化新住民事務委員會功能，大幅增加新住民代表進入決策層級。", "法律與財稅權益保障：擴充新住民法律與財稅諮詢服務。", "實質助學支持：年所得未達 60 萬元的新住民家庭，國小到大專都有助學金（國小 6,000 元、國中 10,000 元、高中 14,000 元、大專 20,000 元）。", "文化溯根：「返鄉不只是旅行」計畫，補助新二代回父母原鄉交流，每案最高 10 萬元。", "背景：新住民約 9,716 人，占總人口約 2.2%；2025 年已成立「新住民諮詢站」。"],
@@ -1608,7 +1608,7 @@ var POL=[
  pl:[],
  src:[],
  },
-{id:'K03',c:'kids',t:'教育政見：打造宜蘭大教室',d:"2026/9/10 發布",
+{id:'K03',c:'kids',t:'教育金曲：打造宜蘭大教室',d:"2026/9/10 發布",
  s:'「打造宜蘭大教室・培育未來新世代」：學生、家長、教師三個面向。',
  b:['學生：分年補足國小平板缺口、成立「宜蘭 AI 與 STEAM 教育中心」；建構「宜蘭學」與一校一亮點；推動「外語說宜蘭」；六大特色技職學群。','家長：延續免學費與教科書補助；補助學校更新保溫設備（每校約 15 萬）、優先選用在地有機食材；偏鄉與高需求地區增設公幼與非營利幼兒園；整合 0–6 歲托育、幼教與早療；增加特教助理員與心理師；新住民家庭語言銜接與課後扶助。','教師：成立行政減量小組、導入 AI 校務系統；規劃「教師法律與輔導管教支持系統」，提供諮詢與校安事件 SOP；提高清掃補助，由清潔團隊打掃校園；因應少子化推動小班精緻教育與小校轉型；全面檢討幼兒園師生比。'],
  tw:'all',rd:[],pl:[],src:[]},
@@ -1642,7 +1642,7 @@ var POL=[
 {id:'X01',
  c:'town',
  t:"羅東鎮：大羅東水網、羅東之心與鐵路高架",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"治水、都市重構、交通與夜經濟四條主軸。",
  b:["都市重構：「大羅東南北水網」區段徵收，把羅東都市計畫外緣保護區變更為治水防災用地，總面積約 105.17 公頃；用大型蓄滯洪設施結合水網，目標把治水標準提升到 50 年保護標準。", "第二行政中心與「羅東綠網」：地政、戶政、財稅、警察、消防與國稅局等機關遷入第二行政中心，市區騰出的公務機關用地變更為綠地，串接中山公園。", "「羅東之心」鎮民廣場：羅東鎮公所立體停車場地下化，整合鎮公所、鎮前廣場、中山公園與夜市，打造休閒、商業、觀光兼具的中心廣場。", "推動巷道美學、老舊與危老建物的都市更新。", "交通：宜蘭到羅東段鐵路高架捷運化，消除平交道與陸橋，活化後火車站商圈；羅東轉運站升級為「智慧綠色交通核心」，完成第二期商業設施（原規劃 7 層樓），並興建東側公園用地地下停車場；新闢「高鐵快」，由宜蘭市縣民大道延伸到羅東傳藝路（轉運站旁）；規劃國華國中地下停車場。", "夜經濟：建立以人本為主的觀光夜市，改善空間景觀與路廊，完善中山公園環境與照明。", "水環境：「羅東水脈絡再現」計畫；北成圳以保護老樹為核心做生態修復；「水撲滿」滯洪（運動公園等學校與公園綠地）；擴充月眉抽水站；推動都市計畫區外污水下水道接管。"],
  tw:["luodong"],
@@ -1652,7 +1652,7 @@ var POL=[
 {id:'X02',
  c:'town',
  t:"員山鄉：水水員山、童玩公園與山林慢旅",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"水源頭鄉鎮的水環境、觀光與交通。",
  b:["觀光亮點：加速員山童玩公園開發，定位為宜蘭童玩產業的研創引擎，結合溫泉探勘成果興建標準溫泉游泳池；爭取大湖風景區改由縣府直接維管、增闢聯外道路；開發雙連埤為農村再生示範，推動有機村，結合福山植物園人潮與古水圳文化。", "交通：加速宜蘭 B 聯絡道員山段（嵐峰進士路口至台 7 線，全長 3,751 公尺）；爭取台 2 庚線員山段；優化小黃公車「黃 1 線」（宜蘭轉運站至大礁溪橋）。", "「水水員山」總體計畫：全鄉分成埤塘區、水源區、休閒農業區，分區提出美化與產業建設；噶瑪蘭水路漫遊（員山至西門橋建 2 座簡易碼頭、水域遊程）；辦理大湖排水治理；推動「淺山湧泉生活圈」，傳承結頭份社區的生態湧泉與歌仔戲文化。", "山林：環山步道環二段「礁溪員山癒療線」，串聯佛光大學、小礁溪越嶺路到礁溪；整合福山植物園、林道、埤塘與休閒農場，推動農村社區山林探索體驗。", "文化與環境：客家重要聚落，爭取客委會資源做實質環境改善，辦客家文化節慶；12 鄉鎮同步布建微型森林。"],
  tw:["yuanshan"],
@@ -1662,9 +1662,9 @@ var POL=[
 {id:'X03',
  c:'town',
  t:"宜蘭市：舊城振興、交通與水岸",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"舊城更新、聯絡道、醫療與縫合宜蘭河。",
- b:["舊城振興：協助推動宜蘭南北館活化與周邊商圈街廓整備；「老屋點燈」，縣府統一承租舊城區閒置商家、招募青年設店並補貼租金；推動自主都市更新；在文化中心增設青年交流中心。", "交通：宜蘭到羅東段鐵路高架捷運化，活化宜蘭車站周邊商圈；宜蘭 A 聯絡道（台 9 線環市東路至中山路，1,350 公尺）、宜蘭 B 聯絡道（嵐峰進士路口至台 7 線員山路段，3,751 公尺）；強化火車站與轉運站接駁；宜蘭國小、中山國小共用操場興建 2 層地下停車場；YouBike 先在宜蘭市區布點；優化小黃公車「黃 1 線」；提升東區雨水下水道等公共設施。", "產業與醫療：協助宜蘭科學園區興建標準廠房招商，整合宜蘭大學城南校區資源，推動「人工智慧研究園區」；爭取設立宜蘭醫學中心，減少縣民遠赴外地就醫。", "水岸與文化：縫合宜蘭河與宜蘭城，慶和橋周邊跨越水防道路連接宜蘭河，打造西堤遠眺文學步道；噶瑪蘭水路漫遊（船運、獨木舟、SUP、簡易碼頭）；傳承宜蘭水燈節。", "高鐵特區另見獨立政見。"],
+ b:["舊城振興：協助推動宜蘭南北館活化與周邊商圈街廓整備；「老屋點燈」，縣府統一承租舊城區閒置商家、招募青年設店並補貼租金；推動自主都市更新；在文化中心增設青年交流中心。", "交通：宜蘭到羅東段鐵路高架捷運化，活化宜蘭車站周邊商圈；宜蘭 A 聯絡道（台 9 線環市東路至中山路，1,350 公尺）、宜蘭 B 聯絡道（嵐峰進士路口至台 7 線員山路段，3,751 公尺）；強化火車站與轉運站接駁；宜蘭國小、中山國小共用操場興建 2 層地下停車場；YouBike 先在宜蘭市區布點；優化小黃公車「黃 1 線」；提升東區雨水下水道等公共設施。", "產業與醫療：協助宜蘭科學園區興建標準廠房招商，整合宜蘭大學城南校區資源，推動「人工智慧研究園區」；爭取設立宜蘭醫學中心，減少縣民遠赴外地就醫。", "水岸與文化：縫合宜蘭河與宜蘭城，慶和橋周邊跨越水防道路連接宜蘭河，打造西堤遠眺文學步道；噶瑪蘭水路漫遊（船運、獨木舟、SUP、簡易碼頭）；傳承宜蘭水燈節。", "高鐵特區另見獨立金曲。"],
  tw:["yilan"],
  rd:["tra"],
  pl:["oldcity", "yilan_c"],
@@ -1672,7 +1672,7 @@ var POL=[
 {id:'X04',
  c:'town',
  t:"五結鄉：大閘門、蘭陽大橋與冬山河",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"治水工程、路網與中興文創、52甲濕地。",
  b:["交通：二結聯絡道延伸三星（全長 11.3 公里，國 5 銜接台 9 的優先段已通車），爭取自台 9 線延伸；蘭陽大橋全橋改建（因梁底低於計畫洪水位），並保存活化舊橋；研議台 62 線延伸到利澤工業區；爭取蘭陽溪堤防道路在五結端銜接台 2 線；中里火車站配合高架化改建，與中興文創園區整合；設置五結轉運站、強化共乘站。", "治水：五結防潮閘門（大閘門）改建，全台最寬（30.5 公尺）的新式殼式閘門，兼具防洪、觀光與生態，並增設一座抽水站；二結、四結排水治理；二結排水高速公路橋下游護岸改善；增設冬山河主流抽水站；五結排水景觀營造。", "環境：利澤焚化廠 ROT 升級，導入 AI 檢測，轉型為資源循環園區。", "產業與觀光：冬山河流域產業大聯盟（整合傳藝中心、52 甲濕地、親水公園等），以冬山河親水公園溫泉區為核心；親水公園加速溫泉開發，提供社區老人理療；串聯壯圍沙丘藝術節、傳藝與童玩節的夏季嘉年華；善用冬山河水上運動中心與鐵人三項運動中心，推動風帆船、獨木舟、馬拉松、鐵人三項；開發冬山河濱海生態園區（C 據點）、大二結水文化圈，優化利澤國際偶戲藝術村。", "52 甲國際濕地：辦理「52 甲國際濕地地景博覽會」（漂流木地景創作）；核心區約 297 公頃，以徵收或租用取得管理權，徵收前先給生態獎勵金；還地於民，重新檢討河川區域。", "文創與都市：活化中興文創園區，修復 49、50、51 號等歷史建物作青創基地；辦理五結學進地區都市計畫通盤檢討。"],
  tw:["wujie"],
@@ -1682,7 +1682,7 @@ var POL=[
 {id:'X05',
  c:'town',
  t:"三星鄉：安農溪、林鐵與路網",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"東西向交通、運動觀光與溫泉地熱。",
  b:["軌道與路網：規劃森林鐵路復駛，補足東西向大眾運輸缺口；二結聯絡道延伸三星；196 線（上將路）大義到歪仔歪橋路段拓寬；台 7 丙線（三星路）改善易肇事路段的燈光與交安設施；台 2 庚線西移，並在葫蘆堵橋與泰雅大橋之間增建新橋。", "運動觀光：利用安農溪興建人工輕艇激流標桿競賽場地與訓練中心，爭取主辦亞洲盃輕艇激流標桿賽，營造「生態運動大公園」；結合泛舟觀光與生態保育。", "溫泉與能源：紅柴林溫泉區開發，結合耕莘護專、聖母護專與休閒農業區做溫泉理療；爭取長埤湖國有土地開發，結合清水地熱與清水 BOT 案，促成觀光金三角；推動平地地熱發電（鳩之澤、清水、土場等）。", "環境與公共設施：三星水資源回收中心（日處理量 2,500 噸）與關鍵管網；尚義村、尚賢村多功能活動中心；納入勁水大縣章；三星客家環境改善計畫。", "農業：強化三星蔥品牌，農藥減半、有機倍增；引入 AI 監測與無人機技術解決農村缺工；農業保險補助提高到 9.5 成。"],
  tw:["sanxing"],
@@ -1692,7 +1692,7 @@ var POL=[
 {id:'X06',
  c:'town',
  t:"大同鄉：活力原鄉、山林與防災",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"原鄉文化、泰雅山徑、林下經濟與公共建設。",
  b:["原鄉與文化：定位為「活力原鄉」；把崙埤河濱公園建為泰雅部落園區；推動「原住民族部落事務組長」機制；支持原住民文化學校的祭儀教育，活化大同鄉泰雅文化館。", "觀光：建構「宜蘭泰雅山徑」（部落林道、獵徑與古道）、溯溪漂流；芃芃溫泉合法化，建立「縣府輔導、公所執行、部落共管」模式；推動棲蘭山檜木林登錄世界遺產，評估檜木林纜車；規劃太平山到羅東／宜蘭的森林鐵路復駛；整合鳩之澤、清水地熱、芃芃溫泉成溫泉療癒廊帶。", "農業：四南菜區輔導冷鏈系統與大型灌排設施；林下經濟合法化，輔導段木香菇、金線蓮、養蜂。", "公共建設：降低自來水延管每戶負擔；新建南山消防分隊辦公廳舍；設置山坡地監測與土石流預警；加強英樂便道等易受災路段維護；維持思源派出所量能。", "社福：55 歲以上原住民健保費全額補助；原鄉托育合作社結合族語保母獎助；55 歲以上原住民列為帶狀疱疹疫苗「弱勢全免」。"],
  tw:["datong"],
@@ -1702,7 +1702,7 @@ var POL=[
 {id:'X07',
  c:'town',
  t:"壯圍鄉：抽水站、噶瑪蘭水路與濱海博覽會",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"治水、水域觀光與軍事遺構轉青創。",
  b:["治水：新建壯東、新社、廍後、社頭與十三股大排車路頭—時潮抽水站；整治十三股大排護岸；壯東與廍後海岸生態環境營造（滯洪、防災、生態、休憩）；獎勵青年在礁溪、壯圍、五結的閒置魚塭做低密度生態養殖，並確保滯洪功能。", "水路與觀光：噶瑪蘭水路漫遊（東港榕樹公園至壯圍國中，建 6 座簡易碼頭）；宜蘭河出海口船運；蘭陽溪口生態魅力園區；傳承撈鰻苗與牽罟文化；壯圍濱海生態博覽會（漂流木地景藝術）；獎勵太平洋馬拉松等龜山朝日系列活動；爭取東北角及宜蘭濱海風景區管理處遷到壯圍沙丘。", "產業：把濱海自行車道旁的廢棄軍事營區撥用，規劃為地方青創基地；推廣哈密瓜故鄉與新南休閒農業區活動。", "交通：爭取蘭陽溪堤防道路在壯圍、五結端銜接台 2 線；縣鄉道與農路、產業道路改善；強化共乘站；強化公共運輸接駁。", "環境：布建微型森林；納入勁水大縣章全流域治理。"],
  tw:["zhuangwei"],
@@ -1712,7 +1712,7 @@ var POL=[
 {id:'X08',
  c:'town',
  t:"南澳鄉：蘇花改交流道、碧候溫泉與水資源",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"交通門戶、溫泉與原鄉福利。",
  b:["交通：爭取蘇花改增設南澳交流道；南澳車站打造成原民元素門戶，推動「泰雅商圈」；改建金岳大橋，連接碧候溫泉動線；降低自來水延管負擔。", "觀光：碧候溫泉（部落祕湯）以「縣府輔導、公所執行、部落共管」模式解決合約與管理問題；東岳冷泉結合粉鳥林漁港發展山海旅遊線；宜蘭泰雅山徑；朝陽與粉鳥林遊艇碼頭；南澳農場結合北溪堤防整治活化；白米溪流域延伸規劃戶外探險園區。", "環境：興建南澳水資源回收中心（日處理量 700 噸）；治理南澳溪與東澳溪。", "農業：高冷蔬菜冷鏈與灌排設施；林下養蜂、段木香菇、金線蓮。", "社福：55 歲以上原住民健保費全額補助；帶狀疱疹疫苗「弱勢全免」；部落事務組長；原鄉托育合作社；支持文化學校祭儀教育。"],
  tw:["nanao"],
@@ -1722,7 +1722,7 @@ var POL=[
 {id:'X09',
  c:'town',
  t:"礁溪鄉：溫泉康養、污水系統與路網",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"溫泉觀光升級、水質整治與交通。",
  b:["溫泉：礁溪溫泉節擴大為全縣溫泉觀光季（每年 10 月至次年 2 月），整合冷熱泉並推出「宜蘭溫泉泡湯卡」；結合跑馬古道、抹茶山發展運動理療產業；五峰旗瀑布景區設施與體驗升級；整合礁溪、蘇澳與三星紅柴林的蘭陽溫泉康養廊帶。", "交通：台 62 線延伸礁溪，作為國 5 的貨運替代廊道；礁溪轉運站升級為「智慧綠色交通核心」；宜 6 線（十六結路至林尾路，2,480 公尺）拓寬 15 公尺，預計 2027 年完成規劃；YouBike 先在礁溪市區布點；恢復小黃公車「黃 3 線」（武暖、玉田）。", "水環境：礁溪污水下水道系統，水資源回收中心日處理量 9,600 噸，並擴大接管到林美村等非都市計畫地區；湯圍溪河道生態修補；得子口溪水質整治，推動上游畜牧離牧；濱海閒置魚塭低密度生態養殖並確保滯洪。", "山徑與文化：雪山麓徑環二段「礁溪員山癒療線」，爭取納入國家綠道，串聯跑馬古道、聖母登山步道（抹茶山）、林美石磐、佛光大學至小礁溪越嶺路；二龍河「跪姿龍舟賽」品牌；閒置公地布建微型森林。"],
  tw:["jiaoxi"],
@@ -1732,7 +1732,7 @@ var POL=[
 {id:'X10',
  c:'town',
  t:"頭城鎮：台62延伸、數位衝浪與五漁村",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"交通重構、山海觀光與水岸再生。",
  b:["交通：台 62 線延伸頭城（北宜快速道路），路線全長約 45 公里，定位為物流專用替代路線與國 5 分流；爭取鐵路高架化自四城延伸到頭城，加密班次實現通勤捷運化；頭城烏石港轉運站升級為「智慧綠色交通核心」並整合 TPASS；濱海公路（台 2 線）轉型為「文化與慢旅廊道」；YouBike 先在頭城市區布點，並串接石城—烏石港自行車專用道。", "觀光與海洋：「山海三度空間國際觀光」，整合飛行傘、衝浪、賞鯨與老街；烏石港周邊「數位衝浪者中心」；漁鐵五漁村軸線；活化烏石港遊艇碼頭，營造「民宿一條街」與「現撈仔一條街」；雪山麓徑溪北人文療癒線（草嶺古道、桃源谷、石空古道、外澳拔雅、梗枋石空）。", "水環境：爭取頭城污水下水道系統；頭城河（舊河道）生活水岸，建立藍綠慢行軸帶，串聯老街、烏石港與蘭陽博物館；推動自主防災社區與智慧防汛監測。", "產業：利用烏石港製冰廠建立冷鏈系統，輔導農業導入 AI 監測；整合蘭陽博物館家族資源，推動「生活即文化」的人文旅遊。"],
  tw:["toucheng"],
@@ -1742,7 +1742,7 @@ var POL=[
 {id:'X11',
  c:'town',
  t:"蘇澳鎮：蘇澳溪分洪、港灣觀光與污水系統",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"旗艦治水、交通轉型與藍色經濟。",
  b:["治水：蘇澳溪分洪工程，長約 2.4 公里、直徑 10.2 公尺的分洪隧道，把 80% 洪峰流量排入內埤海岸，預計 2029 年完工；新建新馬抽水站；全面檢討蘇澳與新馬地區雨水下水道。", "交通：蘇澳轉運站升級為「智慧綠色交通核心」並整合 TPASS；研議台 62 線延伸到蘇澳龍德與五結利澤工業區；蘇花改與蘇花安（預計 2032 年完工）承擔過境車流，舊蘇花公路（台 9 線）轉型為山海景觀旅遊路線；YouBike 從蘇澳市區延伸到南方澳。", "港灣觀光：重新評估連結蘇澳港、砲台山與冷泉公園的高空纜車，解決南方澳停車問題；爭取蘇澳港與日本與那國島、石垣島直航或郵輪停泊；打造朝陽、粉鳥林遊艇碼頭。", "區域亮點：武荖坑轉型戶外探險園區（全縣水陸運動賽事基地）；整合蘇澳冷泉、東岳冷泉與礁溪、三星溫泉成蘭陽溫泉康養廊帶；新城溪生態廊道。", "環境與公平：蘇澳污水下水道第一期，水資源回收中心日處理量 10,000 噸；提升蘇澳與南澳山區的公共運輸可近性。"],
  tw:["suao"],
@@ -1752,7 +1752,7 @@ var POL=[
 {id:'X12',
  c:'town',
  t:"冬山鄉：交流道、抽水站與冬山河藍色公路",
- d:"各鄉鎮在地政見",
+ d:"各鄉鎮在地金曲",
  s:"路網、治水與水域觀光。",
  b:["交通：爭取增設國道 5 號冬山交流道，緩解冬山市區與 191 線壅塞；冬山聯絡道（台 2 線→成興路→義成路→丸山五路）；改建宜冬橋並提高梁底高程以利船隻通過；YouBike 先在冬山老街與火車站布點；復駛小黃公車「黃 2 線」（太和、順安、永美）。", "治水：新建武淵、珍珠、武罕抽水站與冬山河主流抽水站；執行 13 份排水截彎取直工程；納入勁水大縣章，並在公有閒置空間布建微型森林。", "冬山河藍色公路升級：大規模清淤；航線延伸到「水火同源」，串聯生態綠舟與傳藝中心成觀光金三角；引進電動太陽能船隊；河段建置常態裝置藝術與夜間燈飾；開放獨木舟、SUP 與划船。", "觀光亮點：丸山地區計畫，串聯丸山水圳公園、舊寮溪、太員八寶湧泉區與丸山遺址（遺址上部分私有地仍待徵收）；強化梅花湖遊憩帶並延伸到三清宮步道；冬山河遊憩帶往山區延伸到寒溪部落；冬山河流域產業大聯盟，推動溫泉康養與深度旅遊。"],
  tw:["dongshan"],
@@ -2016,7 +2016,7 @@ var TOURS=[
  {id:'suao',t:'蘇澳：智慧海灣',x:'台灣智慧海灣、國際藍色公路、冷鏈與漁船收購、蘇澳溪分洪，朝陽漁港客家交流中心。'},
  {id:'datong',t:'大同：挺部落、顧原民',x:'開發要有族人知情同意，改善部落道路橋梁，太平山國際森林園區。'},
  {id:'nanao',t:'南澳：海岸與山林',x:'頭城五漁村到南澳的海岸觀光帶、神秘沙灘園區，雪山麓徑南段。'},
- {id:null,t:'回到全縣',x:'點任何鄉鎮、道路或圖釘，都能看到完整政見。'}
+ {id:null,t:'回到全縣',x:'點任何鄉鎮、道路或圖釘，都能看到完整金曲。'}
 ];
 
 function numSize(s,max,avail){var w=0;for(var i=0;i<s.length;i++)w+=s.charCodeAt(i)>255?1:0.5;return Math.max(18,Math.min(max,Math.floor(avail/Math.max(1,w))))}
@@ -2085,24 +2085,24 @@ function panel(){
   var el=$('#pbody'),h='',s=S.sel,q=S.q.trim();
   if(s&&s.type==='about'){
     h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">關於本頁</div><h2>資料與限制</h2></div><ul class="about">'+
-     '<li>內容整理自公開資料，共 '+candCount()+' 項候選人政見。</li>'+'</ul>';
+     '<li>內容整理自公開資料，共 '+candCount()+' 項候選人金曲。</li>'+'</ul>';
   }else if(s&&s.type==='town'){
     var t=TOWNS[TI[s.id]],loc=polForTown(s.id).filter(match),cty=POL.filter(function(p){return !p.bg&&p.tw==='all'&&!localTo(p,s.id)&&match(p)}),bg=POL.filter(function(p){return p.bg&&localTo(p,s.id)&&match(p)});
     h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><h2>'+esc(t.n)+'</h2></div>';
-    if(!loc.length)h+='<p class="empty">'+esc(t.n)+'目前沒有專屬政見，下面是全縣都適用的。</p>';
-    if(loc.length)h+='<div class="sec">'+esc(t.n)+'的政見<small>'+loc.length+'</small></div>'+loc.map(polRow2).join('');
+    if(!loc.length)h+='<p class="empty">'+esc(t.n)+'目前沒有專屬金曲，下面是全縣都適用的。</p>';
+    if(loc.length)h+='<div class="sec">'+esc(t.n)+'的金曲<small>'+loc.length+'</small></div>'+loc.map(polRow2).join('');
     [['cty','全縣都適用',cty],['bg','重大建設',bg]].forEach(function(g){
       if(g[2].length)h+='<details class="pcat" data-pk="'+g[0]+'"'+(POPEN[g[0]]?' open':'')+'><summary><b>'+g[1]+'</b><small>'+g[2].length+'</small></summary>'+g[2].map(polRow2).join('')+'</details>';
     });
     h+='<button type="button" class="persbtn ghost" data-tcard="'+s.id+'">存成'+esc(t.n)+'圖卡</button>';
   }else if(s&&s.type==='road'){
     var r=RMETA[s.id],pr=polForRoad(s.id).filter(match);
-    h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">主要幹道</div><h2>'+esc(r.n)+'</h2><p class="lede">'+(r.dash?'虛線是尚未興建的構想或計畫，位置僅為示意。':'沿線相關的政見與建設。')+'</p></div>';
-    if(!pr.length)h+='<p class="empty">目前沒有找到與這條路直接相關的政見。</p>';
+    h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">主要幹道</div><h2>'+esc(r.n)+'</h2><p class="lede">'+(r.dash?'虛線是尚未興建的構想或計畫，位置僅為示意。':'沿線相關的金曲與建設。')+'</p></div>';
+    if(!pr.length)h+='<p class="empty">目前沒有找到與這條路直接相關的金曲。</p>';
     h+=listCards(pr,pr.length<=2);
   }else if(s&&s.type==='pin'){
     var pl=PLACES[s.id],pp=polForPlace(s.id).filter(match);
-    h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">地點</div><h2>'+esc(pl[0])+'</h2><p class="lede">鎖定這個地點的政見與建設。</p></div>'+listCards(pp,pp.length<=2);
+    h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">地點</div><h2>'+esc(pl[0])+'</h2><p class="lede">鎖定這個地點的金曲與建設。</p></div>'+listCards(pp,pp.length<=2);
   }else if(s&&s.type==='bio'){
     h+=bioView();
   }else if(s&&s.type==='persona'){
@@ -2111,8 +2111,8 @@ function panel(){
     var A=AI[s.id],ap=A.pol.map(function(id){return PBY[id]}).filter(match);
     h+='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><h2>'+esc(A.n.replace(/（.*?）/g,''))+'</h2></div>';
     h+='<div class="need"><p>'+esc(A.need.split('；')[0].replace(/。$/,''))+'。</p></div>';
-    h+='<div class="sec">相關政見<small>'+ap.length+'</small></div>'+ap.map(polRow2).join('');
-    if(!ap.length)h+='<p class="empty">目前的類別篩選下沒有符合的政見。</p>';
+    h+='<div class="sec">相關金曲<small>'+ap.length+'</small></div>'+ap.map(polRow2).join('');
+    if(!ap.length)h+='<p class="empty">目前的類別篩選下沒有符合的金曲。</p>';
   }else if(s&&s.type==='policy'){
     h+='<button class="back" type="button" data-back>← 返回上一頁</button>'+cardHTML(PBY[s.id],true);
   }else{
@@ -2130,7 +2130,7 @@ function panel(){
       arr.forEach(function(p){h+=polRow2(p)});
       h+='</details>';
     });
-    h+='</div>';if(!any)h+='<p class="empty">沒有符合的政見。</p>';
+    h+='</div>';if(!any)h+='<p class="empty">沒有符合的金曲。</p>';
     h+='</section>';
     if(!q)h+=footHTML();
   }
@@ -2187,7 +2187,7 @@ function audGroups(){
 function meNames(){var n=[];AUD.forEach(function(a){if(PS.jobs[a.id])n.push(a.n.replace(/（.*?）/g,''))});TOWNS.forEach(function(t){if(PS.towns[t.id])n.push(t.n)});return n}
 function meHTML(){
   var r=personaMatches(),a=r.arr.map(function(x){return x.p});
-  var h='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><h2>適合你的政見</h2></div><p class="mesum">'+esc(meNames().join('、'))+'</p>';
+  var h='<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><h2>適合你的金曲</h2></div><p class="mesum">'+esc(meNames().join('、'))+'</p>';
   if(!a.length&&!r.extra.length&&!r.wide.length)h+='<p class="empty">還沒有選條件，請按「返回」選你住的地方或身分。</p>';
   if(a.length)h+='<div class="sec">跟你有關<small>'+a.length+'</small></div>'+a.map(polRow2).join('');
   if(r.extra.length)h+='<div class="sec">你住的地方<small>'+r.extra.length+'</small></div>'+r.extra.map(polRow2).join('');
@@ -2227,7 +2227,7 @@ function albOpen(b){
   var info=albInfo(b),cs=getComputedStyle(b),g=function(n,d){return (cs.getPropertyValue(n)||d).trim()};
   var cbg=g('--cbg','#8A7560'),c1=g('--c1','#fff'),c2=g('--c2','#fff'),cfr=g('--cfr','#fff'),sel=b.getAttribute('aria-pressed')==='true';
   var sb=info.kind==='t'?((ICONS[info.id]||[])[1]||''):'';
-  var tr=info.tr.map(function(p,i){return '<li><button type="button" class="trk" data-trkt="'+p.id+'" aria-expanded="false"><b>'+(i<9?'0':'')+(i+1)+'</b><span>'+esc(p.t)+'</span></button><div class="trkd" hidden><p>'+esc(p.s||'')+'</p><div class="trka"><button type="button" class="albv-b sm pri" data-trk="'+p.id+'">看完整政見</button>'+(p.bg?'':'<button type="button" class="albv-b sm" data-trkcard="'+p.id+'">存成圖卡</button>')+'</div></div></li>'}).join('')||'<li class="none">這張專輯目前沒有曲目</li>';
+  var tr=info.tr.map(function(p,i){return '<li><button type="button" class="trk" data-trkt="'+p.id+'" aria-expanded="false"><b>'+(i<9?'0':'')+(i+1)+'</b><span>'+esc(p.t)+'</span></button><div class="trkd" hidden><p>'+esc(p.s||'')+'</p><div class="trka"><button type="button" class="albv-b sm pri" data-trk="'+p.id+'">看完整金曲</button>'+(p.bg?'':'<button type="button" class="albv-b sm" data-trkcard="'+p.id+'">存成圖卡</button>')+'</div></div></li>'}).join('')||'<li class="none">這張專輯目前沒有曲目</li>';
   ALBFROM=b;
   ALBV.innerHTML='<div class="albv-bg" data-albx></div><div class="albv-box" role="dialog" aria-modal="true" aria-label="'+esc(info.name)+'專輯">'+
    '<div class="albv-stage"><div class="albv-disc">'+discSVG(info.name,'#A63A35,#6E1B25','#E0C85C','#F6EFD8')+'</div>'+
@@ -2309,18 +2309,18 @@ function updateMeBar(){
   var any=Object.keys(PS.towns).some(function(k){return PS.towns[k]})||Object.keys(PS.jobs).some(function(k){return PS.jobs[k]});
   var show=any&&!S.sel&&!S.q.trim();
   bar.hidden=!show;document.body.classList.toggle('hasbar',show);
-  if(show){var bn=Object.keys(PS.towns).filter(function(k){return PS.towns[k]}).length+Object.keys(PS.jobs).filter(function(k){return PS.jobs[k]}).length;$('#mebagn').textContent=bn;var r=personaMatches();$('#mego').textContent='看適合我的政見（'+(r.arr.length+r.extra.length+r.wide.length)+' 項）'}
+  if(show){var bn=Object.keys(PS.towns).filter(function(k){return PS.towns[k]}).length+Object.keys(PS.jobs).filter(function(k){return PS.jobs[k]}).length;$('#mebagn').textContent=bn;var r=personaMatches();$('#mego').textContent='看適合我的金曲（'+(r.arr.length+r.extra.length+r.wide.length)+' 項）'}
 }
 function personaControls(home){
   var ticks=[0,6,17,39,64,100].map(function(v){return '<span style="left:'+v+'%">'+v+'</span>'}).join('');
   var jobs=AUD.filter(function(a){return a.k==='job'}).map(function(a){return '<button type="button" data-pjob="'+a.id+'" aria-pressed="'+(!!PS.jobs[a.id])+'">'+esc(a.n)+'</button>'}).join('');
   var towns=TOWNS.map(function(t){return '<button type="button" data-ptown="'+t.id+'" aria-pressed="'+(!!PS.towns[t.id])+'">'+esc(t.n)+'</button>'}).join('');
   var head=home
-    ?'<div class="head sm"><h2>找跟我有關的政見</h2></div>'
+    ?'<div class="head sm"><h2>找跟我有關的金曲</h2></div>'
     :'<button class="back" type="button" data-back>← 返回上一頁</button><div class="head"><div class="kind">個人化</div><h2>我的條件</h2></div>';
   var cta=home
-    ?'<div class="cta"><button type="button" class="seebtn" id="seeres">看政見<small id="resn"></small></button><button type="button" class="tourbtn alt" id="tourgo">開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的政見單（圖片）</button></div>'
-    :'<div class="cta"><button type="button" class="tourbtn" id="tourgo">用這個條件開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的政見單（圖片）</button></div>';
+    ?'<div class="cta"><button type="button" class="seebtn" id="seeres">看金曲<small id="resn"></small></button><button type="button" class="tourbtn alt" id="tourgo">開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的金曲單（圖片）</button></div>'
+    :'<div class="cta"><button type="button" class="tourbtn" id="tourgo">用這個條件開始導覽<small id="tourn"></small></button><button type="button" class="cardbtn" data-card>做成我的金曲單（圖片）</button></div>';
   return head+
    '<div class="agebox'+(home?' nostick':'')+'"><label class="agetop"><input type="checkbox" id="pAgeOn"'+(PS.ageOn?' checked':'')+'> 依年齡篩選</label>'+
    '<div class="agev"><b id="pAgeV">'+PS.age+'</b><span>歲</span><em id="pAgeG"></em></div>'+
@@ -2328,7 +2328,7 @@ function personaControls(home){
    '<div class="ageticks">'+ticks+'</div></div>'+
    '<div class="sec">職業與身分</div><div class="aud pjobs" id="pJobs">'+jobs+'</div>'+
    '<div class="sec">地區</div><div class="aud pjobs" id="pTowns">'+towns+'</div>'+
-   '<label class="pall"><input type="checkbox" id="pAllOn"'+(PS.allOn?' checked':'')+'> 同時顯示全縣都適用的政見<small id="pAllN" style="opacity:.75"></small></label>'+
+   '<label class="pall"><input type="checkbox" id="pAllOn"'+(PS.allOn?' checked':'')+'> 同時顯示全縣都適用的金曲<small id="pAllN" style="opacity:.75"></small></label>'+
    '<div class="prow"><button type="button" class="btn2" id="pClear">全部清除</button><button type="button" class="go" id="pFit">在地圖上看全部</button></div>'+
    cta+
    (home?'':'<div id="presult"></div>');
@@ -2346,7 +2346,7 @@ function tourList(){
 function tourExtra(s){
   if(!s.id)return '';var r=personaMatches();if(!r.ids.length)return '';
   var n=r.arr.filter(function(x){return localTo(x.p,s.id)}).length;
-  return n?'　和你的條件有關：'+n+' 項在地政見':'';
+  return n?'　和你的條件有關：'+n+' 項在地金曲':'';
 }
 function updatePersona(){
   var r=personaMatches(),box=$('#presult');
@@ -2362,12 +2362,12 @@ function updatePersona(){
     r.ids.forEach(function(id){var A=AI[id];h+='<div class="need"><b>'+esc(A.n)+'</b><p>'+esc(A.need)+'</p></div>'});
     var tn=r.tw.map(townName).join('、');
     if(!any){
-      h+='<div class="sec">全部政見　'+cand.length+'</div>';
+      h+='<div class="sec">全部金曲　'+cand.length+'</div>';
       cand.forEach(function(p){h+=personaRow(p,'')});
     }else{
       if(r.ids.length){
-        h+='<div class="sec">符合的政見　'+r.arr.length+(r.tw.length?'　<small>'+esc(tn)+(PS.allOn?'＋全縣':'')+'</small>':'')+'</div>';
-        if(!r.arr.length)h+='<p class="empty">'+(r.tw.length?'這個組合目前沒有對應的政見，可以勾選「同時顯示全縣都適用的政見」，或減少地區。':'目前沒有符合的政見。')+'</p>';
+        h+='<div class="sec">符合的金曲　'+r.arr.length+(r.tw.length?'　<small>'+esc(tn)+(PS.allOn?'＋全縣':'')+'</small>':'')+'</div>';
+        if(!r.arr.length)h+='<p class="empty">'+(r.tw.length?'這個組合目前沒有對應的金曲，可以勾選「同時顯示全縣都適用的金曲」，或減少地區。':'目前沒有符合的金曲。')+'</p>';
         r.arr.forEach(function(x){
           var sub=x.a.map(function(id){return esc(AI[id].n.replace(/（.*?）/g,''))}).join('・');
           if(x.loc)sub='在地・'+(x.p.tw==='all'?[]:x.p.tw).concat(x.p.lt||[]).filter(function(t){return r.tw.indexOf(t)>-1}).map(function(t){return esc(townName(t))}).join('、')+'　'+sub;
@@ -2375,11 +2375,11 @@ function updatePersona(){
         });
       }
       if(r.extra.length){
-        h+='<div class="sec">'+esc(tn)+' 的在地政見　'+r.extra.length+'</div>';
+        h+='<div class="sec">'+esc(tn)+' 的在地金曲　'+r.extra.length+'</div>';
         r.extra.forEach(function(p){h+=personaRow(p,'')});
       }
       if(r.wide.length){
-        h+='<div class="sec">全縣都適用的政見　'+r.wide.length+'</div>';
+        h+='<div class="sec">全縣都適用的金曲　'+r.wide.length+'</div>';
         r.wide.forEach(function(p){h+=personaRow(p,'')});
       }
     }
@@ -2560,7 +2560,7 @@ function bind(){
   function hover(e){
     var t=e.target,txt='';
     var pin=t.closest&&t.closest('[data-pin]'),rd=t.closest&&t.closest('[data-road]'),tw=t.closest&&t.closest('[data-town]'),cl=t.closest&&t.closest('[data-cl]');
-    if(pin)txt=PLACES[pin.dataset.pin][0];else if(cl)txt=CL[+cl.dataset.cl].m.length+' 個地點，點一下放大';else if(rd)txt=RMETA[rd.dataset.road].n;else if(tw){var T=TOWNS[TI[tw.dataset.town]];txt=T.n+'・'+polForTown(T.id).filter(match).length+' 項在地政見'}
+    if(pin)txt=PLACES[pin.dataset.pin][0];else if(cl)txt=CL[+cl.dataset.cl].m.length+' 個地點，點一下放大';else if(rd)txt=RMETA[rd.dataset.road].n;else if(tw){var T=TOWNS[TI[tw.dataset.town]];txt=T.n+'・'+polForTown(T.id).filter(match).length+' 項在地金曲'}
     if(txt){var r=box.getBoundingClientRect();tip.textContent=txt;tip.style.display='block';tip.style.left=Math.min(r.width-160,e.clientX-r.left+12)+'px';tip.style.top=(e.clientY-r.top+14)+'px'}else tip.style.display='none';
   }
   function clickAt(e){
@@ -2629,7 +2629,7 @@ var VID_AS='10/28';
 var VG=[
  ['new','最新','最近發布的 8 支。'],
  ['hot','熱門','觀看次數最高的 10 支。'],
- ['pol','政見說明','把政見講清楚。每支影片都連到地圖上對應的政見，在政見頁也找得到。'],
+ ['pol','金曲說明','把金曲講清楚。每支影片都連到地圖上對應的金曲，在金曲頁也找得到。'],
  ['kai','開漳宜蘭','《開漳宜蘭》與《好運開漳》：走進老店、市集與日常，看宜蘭的人情味。'],
  ['gai','237 宜蘭蓋漳','走訪各鄉鎮市，跟鄉親面對面。'],
  ['friend','朋友說國漳','《如果有國漳》《還好有國漳》：認識他多年的朋友與受過協助的人，說他們眼中的國漳。'],
@@ -2725,7 +2725,7 @@ function vCard(v){
   var fb='https://www.facebook.com/reel/'+v.id+'/',c=VGC[v.g];
   var media='<div class="vmw" style="--vc:'+c+'">'+VPLAY+(SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" data-src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" title="'+esc(v.t)+'" loading="lazy" allowfullscreen onload="this.style.opacity=1;this.parentNode.classList.add(\'ld\')" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>':'<span class="vpn">私人預覽版不能播放<br>請開公開網站觀看</span>')+'</div>';
   var pl=v.pol.slice(0,2).map(function(p){return '<button type="button" class="who" data-pol="'+p+'">'+esc(vShort(PBY[p].t))+'</button>'}).join('');
-  return '<article class="vcard'+(v.h?' h':'')+'" style="--vc:'+c+'">'+media+'<div class="vb"><h3>'+esc(v.t)+'</h3><div class="vm"><i>'+esc(VGN[v.g])+'</i></div>'+(pl?'<div class="vpl2">政見：'+pl+'</div>':'')+'</div></article>';
+  return '<article class="vcard'+(v.h?' h':'')+'" style="--vc:'+c+'">'+media+'<div class="vb"><h3>'+esc(v.t)+'</h3><div class="vm"><i>'+esc(VGN[v.g])+'</i></div>'+(pl?'<div class="vpl2">金曲：'+pl+'</div>':'')+'</div></article>';
 }
 var VMORE=3;
 function vSer(v){return /《還好有國漳》/.test(v.t)?'hao':(/^#237/.test(v.t)?'gai':'')}
@@ -2791,7 +2791,7 @@ function openVid(id){
   var emb=SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&autoplay=true&width=360&t=0" title="'+esc(v.t)+'" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"'+(v.h?' class="vh16"':'')+'></iframe>'
    :'<div class="vnoemb"><span>私人預覽版不能播放。<br>請開公開網站觀看。</span></div>';
   var line='https://line.me/R/msg/text/?'+encodeURIComponent(v.t+'｜林國漳\n'+link);
-  var rel=v.pol.length?'<div class="vmr"><b>這支影片談到的政見</b>'+v.pol.map(function(p){return '<button type="button" class="vr" data-mp="'+p+'">'+esc(PBY[p].t)+'</button>'}).join('')+'</div>':'';
+  var rel=v.pol.length?'<div class="vmr"><b>這支影片談到的金曲</b>'+v.pol.map(function(p){return '<button type="button" class="vr" data-mp="'+p+'">'+esc(PBY[p].t)+'</button>'}).join('')+'</div>':'';
   var m=document.createElement('div');m.className='vmo';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label','播放影片');m.style.setProperty('--vc',c);
   m.innerHTML='<div class="vmc"><button type="button" class="vmx" aria-label="關閉">×</button><div class="vpl">'+emb+'</div><h3>'+esc(v.t)+'</h3><div class="vmm"><i>'+esc(VGN[v.g])+'</i></div>'+
    '<div class="vma"><a href="'+line+'" target="_blank" rel="noopener">傳到 LINE</a><button type="button" class="vcp">複製連結</button>'+'</div>'+rel+
@@ -2821,13 +2821,13 @@ function curKey(){
 }
 function keyTitle(k){
   var i=k.indexOf('-'),ty=i<0?k:k.slice(0,i),id=i<0?'':k.slice(i+1);
-  if(ty==='t'&&TI[id]!==undefined)return townName(id)+'的政見與建設';
+  if(ty==='t'&&TI[id]!==undefined)return townName(id)+'的金曲與建設';
   if(ty==='p'&&PBY[id])return PBY[id].t;
-  if(ty==='r'&&RMETA[id])return RMETA[id].n+'沿線的政見';
-  if(ty==='a'&&AI[id])return AI[id].n+'的政見';
-  if(ty==='l'&&PLACES[id])return PLACES[id][0]+'的政見與建設';
-  if(ty==='c'&&CATS[id])return CATS[id].n+'政見';
-  if(ty==='me')return '依年齡、職業與地區找政見';
+  if(ty==='r'&&RMETA[id])return RMETA[id].n+'沿線的金曲';
+  if(ty==='a'&&AI[id])return AI[id].n+'的金曲';
+  if(ty==='l'&&PLACES[id])return PLACES[id][0]+'的金曲與建設';
+  if(ty==='c'&&CATS[id])return CATS[id].n+'金曲';
+  if(ty==='me')return '依年齡、職業與地區找金曲';
   if(ty==='bio')return '林國漳的經歷';
   if(ty==='videos')return '林國漳的影片';
   return '';
@@ -2869,7 +2869,7 @@ function shareURL(){
 }
 function shareText(){var k=curKey(),t=k?keyTitle(k):'';return (t?t+'｜':'')+'宜蘭金曲①次看懂（宜蘭縣長候選人）'}
 function openShare(){
-  var box=$('#sharebox'),url=shareURL(),k=curKey(),title=k?keyTitle(k):'全縣政見';
+  var box=$('#sharebox'),url=shareURL(),k=curKey(),title=k?keyTitle(k):'全縣金曲';
   var line='https://line.me/R/msg/text/?'+encodeURIComponent(shareText()+'\n'+url);
   box.innerHTML='<div class="sh-k">分享這一頁</div><div class="sh-n">'+esc(title)+'</div>'+
     '<input id="shurl" type="text" readonly value="'+esc(url)+'" aria-label="連結">'+
@@ -2912,7 +2912,7 @@ var ICONS={
 };
 function iconBox(id){var o=ICONS[id];if(!o)return '';return '<div class="need loc"><b>在地代表：'+esc(o[1])+'</b><p>'+esc(o[2])+'</p><button class="go" type="button" data-tcard="'+id+'">存成鄉鎮圖卡</button></div>'}
 
-/* ================= overlay + 抽政見籤 + 我的政見單 ================= */
+/* ================= overlay + 抽金曲籤 + 我的金曲單 ================= */
 var OV=document.createElement('div');OV.className='ov';OV.id='ov';OV.hidden=true;document.body.appendChild(OV);
 var ovLast=null,FZ={tok:0,last:null};
 function ovOpen(html,key){
@@ -2949,12 +2949,12 @@ function drawFortune(daily,fid){
     var h='<div class="fzc" style="--cc:'+c.c+'">'+(daily?'<div class="fzday">今日一籤　'+dayLabel()+'</div>':'')+'<div class="fzno"><span class="fzgr">'+gr+'</span>第<b>'+(i+1)+'</b>籤<small>共 '+cand.length+' 支</small></div>'+
       '<div class="fzpoem" aria-label="籤詩">'+po.map(function(l){return '<span>'+esc(l)+'</span>'}).join('')+'</div>'+
       '<div class="fzjie"><span class="fzcat">'+esc(c.n)+'</span><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p></div><div class="fznote">籤詩為創作，政見以內容為準</div></div>'+
-      '<div class="ovb"><button type="button" class="pri" data-fzsee>看這項政見</button><button type="button" data-fzagain>再抽一支</button><button type="button" data-fzimg>存成籤紙圖</button></div>'+
+      '<div class="ovb"><button type="button" class="pri" data-fzsee>看這項金曲</button><button type="button" data-fzagain>再抽一支</button><button type="button" data-fzimg>存成籤紙圖</button></div>'+
       '<div class="ovb"><a class="line" href="'+esc(lineHref((daily?'今日一籤「':'我抽到「')+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜宜蘭金曲①次看懂',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
     ovOpen(h,'fz');if(daily)markDay();
     OV.querySelector('[data-fzsee]').onclick=function(){ovClose();selectPolicy(p.id);try{window.scrollTo({top:0})}catch(x){}};
     OV.querySelector('[data-fzagain]').onclick=function(){drawFortune()};
-    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length,daily?dayLabel():''),(daily?'今日一籤「':'我抽到「')+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜宜蘭金曲①次看懂',url,'林國漳-政見籤.png',null,daily?'daily':'f-'+p.id)};
+    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length,daily?dayLabel():''),(daily?'今日一籤「':'我抽到「')+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜宜蘭金曲①次看懂',url,'林國漳-金曲籤.png',null,daily?'daily':'f-'+p.id)};
     var a=OV.querySelector('[data-fzagain]');if(a&&a.focus)a.focus();
   },reduce?0:1100);
 }
@@ -2997,12 +2997,12 @@ function drawCard(){
   var W=1080,H=1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d');
   cvBG(c,W,H);
   cvHead(c,W);
-  c.fillStyle='#fff';c.font='900 96px '+CV_S;c.fillText('我的專屬政見單',64,232);
+  c.fillStyle='#fff';c.font='900 96px '+CV_S;c.fillText('我的專屬金曲單',64,232);
   c.fillStyle='#F1DFC0';c.font='700 38px '+CV_F;
-  var wl=who.length?cvWrap(c,who.join('・'),W-128,2):['全縣重點政見'];
+  var wl=who.length?cvWrap(c,who.join('・'),W-128,2):['全縣重點金曲'];
   wl.forEach(function(s,i){c.fillText(s,64,300+i*50)});
   c.fillStyle='#E0C85C';c.font='900 44px '+CV_F;
-  c.fillText(any?'共 '+list.length+' 項政見和你有關':'先看這 '+list.length+' 項重點政見',64,420);
+  c.fillText(any?'共 '+list.length+' 項金曲和你有關':'先看這 '+list.length+' 項重點金曲',64,420);
   var y=462,RH=108,rows=list.slice(0,6);
   rows.forEach(function(p,i){
     var cc=CATS[p.c],yy=y+i*RH;
@@ -3036,7 +3036,7 @@ function openImg(cv,txt,url,fname,extra,ext){
 }
 function openCard(){
   var d=drawCard();
-  openImg(d.cv,'我的專屬政見單（'+d.count+' 項）｜宜蘭金曲①次看懂',SHARE_BASE?SHARE_BASE+'s/me/':location.href.split('#')[0]+'#me','林國漳-我的政見單.png');
+  openImg(d.cv,'我的專屬金曲單（'+d.count+' 項）｜宜蘭金曲①次看懂',SHARE_BASE?SHARE_BASE+'s/me/':location.href.split('#')[0]+'#me','林國漳-我的金曲單.png');
 }
 function drawPolCard(p){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),cc=CATS[p.c],kn=KN[p.id]||[],X=88,TW=W-X*2;
@@ -3197,7 +3197,7 @@ function drawQuizCard(id){
     c.fillStyle='#E0C85C';c.font='800 40px '+CV_F;c.fillText(cvFit(c,'在地美食　'+FOODS[id],W-128-80),104,747);
   }
   c.fillStyle='#F1DFC0';c.font='700 40px '+CV_F;
-  c.fillText(cvFit(c,loc.length?'林國漳的'+t.n+'政見':t.n+'也適用的全縣政見',W-128),64,860);
+  c.fillText(cvFit(c,loc.length?'林國漳的'+t.n+'金曲':t.n+'也適用的全縣金曲',W-128),64,860);
   list.slice(0,3).forEach(function(p,i){
     var y=890+i*96;
     c.fillStyle='#FFF6DA';rrect(c,64,y,W-128,86,12);c.fill();
@@ -3224,7 +3224,7 @@ function showQuizResult(id0){
   var id=id0||quizResult(),t=TOWNS[TI[id]];
   if(!id0){stat('quiz/done','測驗完成');stat('quiz/result/'+id,'測驗結果：'+t.n)}
   openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜宜蘭金曲①次看懂',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
-    '<button type="button" data-qzagain>再測一次</button><button type="button" data-qzsee>看'+esc(t.n)+'的政見</button>','qr-'+id);
+    '<button type="button" data-qzagain>再測一次</button><button type="button" data-qzsee>看'+esc(t.n)+'的金曲</button>','qr-'+id);
   OV.querySelector('[data-qzagain]').onclick=openQuiz;
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
 }
@@ -3356,7 +3356,7 @@ function drawTownCard(id){
   }
   var list=loc.length?loc:cty;
   c.fillStyle='#E0C85C';c.font='900 44px '+CV_F;
-  c.fillText(cvFit(c,loc.length?loc.length+' 項在地政見':'目前沒有專屬於'+t.n+'的政見，全縣適用 '+cty.length+' 項',W-128),64,640);
+  c.fillText(cvFit(c,loc.length?loc.length+' 項在地金曲':'目前沒有專屬於'+t.n+'的金曲，全縣適用 '+cty.length+' 項',W-128),64,640);
   list.slice(0,4).forEach(function(p,i){
     var cc=CATS[p.c],yy=668+i*104;
     c.fillStyle='rgba(255,255,255,.18)';c.fillRect(64,yy+100,W-128,2);
@@ -3369,7 +3369,7 @@ function drawTownCard(id){
   cvFoot(c,W);
   return cv;
 }
-function openTownCard(id){var t=TOWNS[TI[id]];if(t)openImg(drawTownCard(id),t.n+'的政見與建設｜宜蘭金曲①次看懂',townURL(id),'林國漳-'+id+'.png')}
+function openTownCard(id){var t=TOWNS[TI[id]];if(t)openImg(drawTownCard(id),t.n+'的金曲與建設｜宜蘭金曲①次看懂',townURL(id),'林國漳-'+id+'.png')}
 function drawWallCard(){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d');
   cvBG(c,W,H);cvHead(c,W);
@@ -3389,7 +3389,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 132 版';
+var BUILD='10/30 第 133 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
