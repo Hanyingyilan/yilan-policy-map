@@ -1298,6 +1298,44 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
 }
 @media (max-width:340px){.brand .hbtns{flex-wrap:wrap!important}}
 @media (min-width:701px){.brand .covrow .covbtn{min-height:24px!important;padding:0 10px!important;font-size:11px!important;border-width:1px}}
+/* v143 phone hero: one-line title, full-width cover, countdown + share side by side; cover-switch chip rides the cover's top corner */
+.portrait{position:relative}
+.portrait>.covbtn{position:absolute;top:-13px;right:12px;z-index:3;display:inline-flex;align-items:center;justify-content:center;min-height:26px;padding:0 11px;border:1.5px solid #1B1B18;border-radius:999px;background:#E0C85C;color:#1B1B18;font:900 12px var(--sans,"Noto Sans TC",sans-serif);cursor:pointer;white-space:nowrap;box-shadow:none}
+.portrait>.covbtn:hover{background:#FFF6DA}
+.portrait>.covbtn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media (min-width:701px){.portrait>.covbtn{font-size:13px;min-height:28px}}
+@media (max-width:700px){
+  .brand{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"h h" "p p" "s x"!important;grid-template-rows:auto auto auto!important;column-gap:10px!important;row-gap:18px!important;align-items:stretch!important}
+  .brand h1{font-size:clamp(26px,8.6vw,38px)!important;line-height:1.15!important;white-space:nowrap;margin-bottom:-4px!important}
+  .brand h1 br{display:none}
+  .brand h1 .c1{margin-left:.15em}
+  .brand .portrait{width:100%!important;max-width:440px;justify-self:center}
+  .brand .covrow{margin-top:10px!important}
+  .brand .covrow .mplaybtn{width:100%!important;min-height:40px!important;font-size:14px!important}
+  .brand .sticker{justify-self:stretch!important;text-align:center;font-size:clamp(10px,3vw,13px)!important;padding:7px 6px 9px!important;border-radius:20px!important;white-space:nowrap}
+  .brand .sticker b{font-size:clamp(28px,8.6vw,40px)!important}
+  .brand .hbtns{justify-self:stretch!important;align-self:stretch!important;display:flex}
+  .brand .hbtns button{width:100%;justify-content:center;min-height:36px!important;font-size:14px!important}
+}
+/* v143 easter eggs */
+.coldbtn{display:block;width:100%;margin-top:14px;min-height:48px;border:0;border-radius:6px;background:#1B1B18;color:#E0C85C;font:900 17px var(--serif);letter-spacing:.12em;cursor:pointer}
+.coldbtn:focus-visible{outline:3px solid #A63A35;outline-offset:3px}
+.coldc{position:relative;margin:26px 0 4px;padding:20px 18px 16px;background:#A63A35;color:#FFF6DA;border:3px solid #E0C85C;border-radius:8px;outline:1.5px dashed rgba(224,200,92,.65);outline-offset:-10px}
+.coldh{font:900 15px var(--sans,"Noto Sans TC",sans-serif);letter-spacing:.1em;color:#E0C85C}
+.coldq{margin:14px 0 6px;font:900 24px/1.45 var(--serif)}
+.colda{margin:10px 0 4px;padding-top:10px;border-top:1.5px dashed rgba(224,200,92,.6);font:900 22px/1.5 var(--hand,var(--serif));color:#FFE9A8}
+.coldb{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.coldb button{min-height:44px;padding:0 16px;border:2px solid #E0C85C;border-radius:999px;background:transparent;color:#FFF6DA;font:900 15px var(--sans,"Noto Sans TC",sans-serif);cursor:pointer}
+.coldb button.pri{background:#E0C85C;color:#1B1B18}
+.coldb button[hidden],.coldl[hidden]{display:none}
+.coldl{display:block;margin-top:12px;text-align:center;color:#FFE9A8;font:800 14px var(--sans,"Noto Sans TC",sans-serif);text-decoration:underline;text-underline-offset:3px}
+#toast{position:fixed;left:50%;bottom:92px;z-index:130;max-width:min(88vw,420px);transform:translate(-50%,12px);opacity:0;pointer-events:none;padding:11px 18px;border-radius:12px;background:#1B1B18;color:#FFF6DA;border:2px solid #E0C85C;font:800 15px/1.5 var(--sans,"Noto Sans TC",sans-serif);text-align:center;transition:opacity .25s,transform .25s}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.brand .sticker{cursor:pointer}
+body.votegold .hcd{filter:sepia(.85) saturate(2.6) hue-rotate(-10deg) brightness(1.3)}
+body.votegold .brand .sticker{background:#E0C85C!important;color:#6E1B25!important}
+body.votegold .brand .sticker b{color:#1B1B18!important}
+@media (prefers-reduced-motion:reduce){#toast{transition:none}}
 </style>
 </head>
 <body>
@@ -1311,7 +1349,6 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
     <div class="tools">
       <button type="button" id="bgtoggle" aria-pressed="true">重大建設</button>
       <button type="button" id="sharebtn" aria-expanded="false">分享連結</button>
-      <button type="button" id="xlbtn" aria-pressed="false">字放大</button>
     </div>
     <div class="sharebox" id="sharebox" hidden></div>
     <div class="legend" id="legend"></div>
@@ -2337,7 +2374,7 @@ document.addEventListener('keydown',function(e){
 });
 var MUS=[{f:'music/chusheng.mp3',t:'宜蘭未來的希望',s:'出發版'},{f:'music/kaixuan.mp3',t:'宜蘭未來的希望',s:'凱旋版'}];
 var MP={a:null,i:0,on:false};
-function mpEnsure(){if(MP.a)return MP.a;var a=new Audio();a.preload='none';a.addEventListener('ended',function(){mpGo((MP.i+1)%MUS.length,true)});a.addEventListener('play',mpPaint);a.addEventListener('pause',mpPaint);a.addEventListener('error',function(){var m=$('#mpmsg');if(m)m.textContent='這首歌暫時無法播放，請稍後再試。'});MP.a=a;return a}
+function mpEnsure(){if(MP.a)return MP.a;var a=new Audio();a.preload='none';a.addEventListener('ended',function(){if(MP.i===MUS.length-1)toast('謝謝收聽，投票日記得投①');mpGo((MP.i+1)%MUS.length,true)});a.addEventListener('play',mpPaint);a.addEventListener('pause',mpPaint);a.addEventListener('error',function(){var m=$('#mpmsg');if(m)m.textContent='這首歌暫時無法播放，請稍後再試。'});MP.a=a;return a}
 function mpGo(i,play){var a=mpEnsure();MP.i=i;a.src=MUS[i].f;if(play){var p=a.play();if(p&&p.catch)p.catch(function(){mpPaint()})}mpPaint()}
 function mpToggle(){var a=mpEnsure();if(!a.src||a.src==='')mpGo(MP.i,true);else if(a.paused){var p=a.play();if(p&&p.catch)p.catch(function(){})}else a.pause();mpPaint()}
 function mpStop(){if(MP.a){MP.a.pause();MP.a.removeAttribute('src');try{MP.a.load()}catch(e){}}MP.on=false;mpPaint();var pn=$('#mpanel');if(pn)pn.hidden=true}
@@ -2657,7 +2694,7 @@ $('#pbody').addEventListener('click',function(e){
   if(b.dataset.ptog){albOpen(b);return}
   if('wallcard' in b.dataset){openWallCard();return}
   if('about' in b.dataset){S.sel={type:'about'};setHL();refresh();return}if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
-  if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
+  if('cold' in b.dataset)openCold();else if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){goBack()}
 });
 var qt=null;$('#q').addEventListener('input',function(e){
@@ -3014,6 +3051,7 @@ function drawFortune(daily,fid){
   ovOpen('<div class="fzt'+(reduce?'':' shake')+'">'+TUBE+'</div><p class="fzh">'+(reduce?'':'搖一搖…')+'</p>','fz');
   setTimeout(function(){
     if(tok!==FZ.tok||OV.hidden)return;
+    if(!daily&&!fid&&Math.random()<.15){coldCard(coldPick(),'這支籤有點冷','再抽一支');return}
     var c=CATS[p.c],url=fzURL(p.id),po=fzPoem(p.id),gr=fzGrade(p.id);
     var h='<div class="fzc" style="--cc:'+c.c+'">'+(daily?'<div class="fzday">今日一籤　'+dayLabel()+'</div>':'')+'<div class="fzno"><span class="fzgr">'+gr+'</span>第<b>'+(i+1)+'</b>籤<small>共 '+cand.length+' 支</small></div>'+
       '<div class="fzpoem" aria-label="籤詩">'+po.map(function(l){return '<span>'+esc(l)+'</span>'}).join('')+'</div>'+
@@ -3168,7 +3206,7 @@ function funBox(){
   return '<div class="sec">玩一玩</div><div class="fun"><div class="ftiles">'+
     '<button type="button" class="ft t1 fday" '+(dayDone()?'data-fortune':'data-daily')+'>'+ic.t+'<strong class="fl">抽一支籤</strong>'+(dayDone()?'':'<i class="fnew">今天還沒抽</i>')+'</button>'+
     '<button type="button" class="ft t2" data-bless>'+ic.b+'<strong class="fl">祝福卡</strong></button>'+
-    '<button type="button" class="ft t3" data-quiz>'+ic.q+'<strong class="fl">鄉鎮測驗</strong></button></div></div>';
+    '<button type="button" class="ft t3" data-quiz>'+ic.q+'<strong class="fl">鄉鎮測驗</strong></button></div><button type="button" class="coldbtn" data-cold>今日一冷</button></div>';
 }
 var FZP={"T01":["北宜快路穿山近","高鐵新途接海遙","一高二快成一網","家家出入笑相邀"],"T02":["羅東站畔人潮湧","蘇澳灣中帆影高","五站連環通四境","行程順暢無煩勞"],"T03":["通衢縱貫田疇闊","小巷橫連戶牖寬","四縱六橫成脈絡","鄉鄰相往笑聲歡"],"T04":["單車穿巷人皆便","綠運聯程低碳清","一卡暢遊縣內外","鄉鄉往返皆通行"],"T05":["頭礁兩地車聲近","高架北延軌道通","不必平交道口候","歸途平穩笑聲同"],"T06":["湯煙裊裊行人靜","漫步悠然腳印清","巷弄全歸行路客","從容一步一程輕"],"T08":["孩童放學平安返","老幼出門步道寬","接駁環連鐵與路","慈心共護步行安"],"T07":["長途北上非徒過","接駁先行準備全","產業人才皆預備","特區三諾定相連"],"I01":["百工智慧生新業","北宜雙心串此鄉","運動養生為業態","家家富足安祥康"],"I03":["青年不必離鄉遠","新系增開學路長","產學攜持育秀士","人才返里鵬程揚"],"I04":["山青水秀居宜地","產業多元藍綠昌","遷入宜蘭成樂土","人人嚮往好家鄉"],"G01":["車行有度人安泰","毒駕嚴防法網牢","共力同心織密網","歸程平順笑聲高"],"G02":["家園電線須修繕","火患預防補助來","老屋換新添保障","團圓夜夜笑顏開"],"G03":["英雄赴火無猶豫","義勇護城人力全","勤務均衡添保障","歸來安穩一家圓"],"G04":["偏鄉道路兒童穩","校外街頭守護安","步步為營防慘事","孩童笑語滿街歡"],"A01":["好農好米好蔬菜","綠色耕耘土壤肥","初保有津農戶喜","名牌遠播越洋飛"],"A02":["風霜雨露農家苦","險有雙全補助周","冷鏈送鮮無損耗","員山好物銷全洲"],"S01":["漁民出海波濤闊","港務更新產業昌","三項承擔先落實","漁民得利笑聲長"],"S02":["開蘭首邑風情古","烏石老街外澳風","帶狀觀光接海岸","年年盛事浪花紅"],"S03":["漁村五處連波岸","藍路蜿蜒碧海潮","山海同遊真樂土","人人運動樂逍遙"],"S04":["南方澳畔帆檣聚","智慧海灣科技新","港務整新迎產業","乘風破浪向前津"],"C01":["山光水色宜人美","雪嶺蜿蜒步道長","客至三圈皆有景","歡聲笑語滿蘭陽"],"C02":["山林淺徑雲煙靜","步道連綿向海潮","漫步首都成美夢","鄉鄉踏徑樂逍遙"],"C08":["一鄉一線雲山近","八景千般物產鮮","古道舊蹤尋故事","一天走遍笑相連"],"C09":["端陽鼓響龍舟競","河岸歡聲震耳遙","好戲連臺迎遠客","人文競秀躍新潮"],"C03":["蘭陽自古文風盛","書院傳承教育香","文化深耕成美景","鄉鄉弦誦承光芒"],"C04":["溫泉清澈汙流去","水岸新妝綠水清","遊客閒行河畔路","龍舟競渡浪花輕"],"C05":["山村客語風情美","廟宇三山香火隆","古調悠揚傳後世","擂茶香裡笑聲融"],"C06":["城池古蹟綿千載","戲曲傳薪萬戶和","薪火相傳台上唱","蘭陽戲裡有笙歌"],"C07":["登山划水騎行樂","健體強身氣力雄","國手栽培連賽事","全民運動笑容同"],"E01":["山林海岸千株綠","百座微森遍市鄉","綠意迴廊連一氣","青天計畫園林芳"],"E02":["江河共治連三段","污水截流碧水清","雨水回收增儲量","蘭陽盛世慶昇平"],"E03":["颱風豪雨防洪早","水利強堤固岸防","審慎把關開發案","源頭到海共安康"],"E04":["源頭管控嚴稽核","突擊抽查不放鬆","三道防關緊守護","人人吃得放心中"],"W01":["耆英持卡無憂慮","敬老卡盈點數豐","每月一千添暖意","鄉親歡喜笑聲同"],"W02":["關懷弱勢無遺憾","補助提升濟老貧","醫藥午餐皆有助","新民舊戶皆安身"],"N01":["新民遠道成宜客","培力扶持共學長","共議家園多決策","人人相待有家鄉"],"W03":["頭城父老行程遠","就近尋醫共盼安","審視增添醫療所","健康守護人人歡"],"W04":["鄉親有話隨時說","縣府開門聽眾聲","面對面談零阻隔","心聲直達政通明"],"W05":["勞工汗水人尊敬","採購公平薪給豐","健檢職能增保障","職人榮譽暖心中"],"K01":["歡迎寶寶補三萬","托育增班名額添","孕婦育兒皆有助","家家幸福笑容甜"],"K02":["孩童樂土歡聲起","教室新妝彩繪飛","接送專車皆有備","爹娘安穩樂相歸"],"K06":["孩童午飯香盈室","在地食材鮮美全","吃飯讀書皆免費","身強體壯稚顏鮮"],"K03":["師生共議辦教學","父母同心校務興","戶外課堂迎大地","兒童茁壯向高層"],"K04":["青年盼有安身處","縣府中心添住家","四百新居迎伴侶","遠端工作盡開花"],"K05":["毛孩有地歡奔跑","夜診獸醫守護家","主客同心皆善待","鄰人相伴笑如花"],"D01":["山林部落人情厚","共議先行尊族人","部落民生添福利","原鄉歲月永相親"],"V01":["全民縣長不分黨","乾淨公開選舉明","共好桃源同努力","同心作伙拚前程"],"X01":["羅東水網相連處","夜市繁華笑語喧","鐵道高懸通內外","市中心裡換新園"],"X02":["員山好水源頭近","遊憩公園樂事繁","漫步山林尋勝境","好山好水憶桃源"],"X03":["宜蘭舊市重光彩","河岸新妝兩岸歡","道路聯通醫療網","市民出入更平安"],"X04":["閘門河畔微波靜","水路縱橫文創興","保育濕原兼治水","人和地利共攀登"],"X05":["安農溪畔清波遠","林鐵蔥鄉漫步悠","路網東西添便利","溫泉地熱暖心頭"],"X06":["高山雲海鄉情厚","林下耕耘產業新","古調歌謠傳後代","防災建設護鄉民"],"X07":["壯圍濱海風光美","水站渠通歲月長","舊址新生迎創意","年年博覽展輝煌"],"X08":["蘇花改道通新路","碧候溫泉暖客途","水足糧豐安部落","南方澳裡樂如圖"],"X09":["湯鄉康養安居美","水岸整修新舊渠","路網暢通迎遠客","家家安樂福長餘"],"X10":["頭城古鎮重新貌","快線延伸向海遙","衝浪漁村皆有景","鄉親期盼笑容嬌"],"X11":["南方澳港漁帆美","溪水分流洪患輕","海港觀光迎遠客","交通暢達笑聲迎"],"X12":["冬山河畔遊人樂","水域觀光藍路寬","治水工程皆審慎","交通暢達笑聲歡"],"X13":["農民土地求公道","友善農耕護濕園","檢討範圍求合理","公平落實無虛言"]};
 var FZ_DEF=["蘭陽山海風光美", "宜縣民心團結昌", "作伙同心耕福地", "鄉親共好笑聲長"];
@@ -3458,20 +3496,12 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 142 版';
+var BUILD='10/30 第 143 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
-(function(){var hb=$('#hbtns');['#sharebtn','#xlbtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
-var XL=false;try{XL=localStorage.getItem('xl')==='1'}catch(e){}
-if(/[?&]xl=1/.test(location.search))XL=true;
-function setXL(v){
-  XL=v;document.documentElement.classList.toggle('xl',v);
-  var b=$('#xlbtn');b.setAttribute('aria-pressed',v);b.textContent=v?'字縮小':'字放大';
-  try{localStorage.setItem('xl',v?'1':'0')}catch(e){}
-  closeShare();
-}
-$('#xlbtn').onclick=function(){setXL(!XL)};
+(function(){var hb=$('#hbtns');['#sharebtn'].forEach(function(k){var b=$(k);if(b&&hb)hb.appendChild(b)})})();
+try{localStorage.removeItem('xl')}catch(e){}
 /* 候選人號次：抽籤後把 null 改成號碼，例如 var BALLOT_NO=3; */
 var BALLOT_NO=1,SLOGAN='';
 function ballot(){
@@ -3479,20 +3509,71 @@ function ballot(){
   if(BALLOT_NO){el.className='ballot';el.innerHTML='宜蘭縣長候選人<b>'+esc(BALLOT_NO)+'</b>林國漳';if(SLOGAN&&!$('#slogan'))el.insertAdjacentHTML('afterend','<div class="slogan" id="slogan">'+esc(SLOGAN)+'</div>')}
   else{el.className='ballot pending';el.textContent='號次：抽籤後公布'}
 }
-function countdown(){var d=Math.ceil((new Date(2026,10,28)-new Date())/86400000);$('#cd').textContent=d>0?d+' 天':(d===0?'今天':'已投票')}
+/* ---- v143 cold-joke easter eggs (jokes are drafts awaiting team approval) ---- */
+var COLD=[
+ {q:'三星蔥為什麼從來不迷路？',a:'因為它自帶三顆星，隨時定位。',c:'agri'},
+ {q:'稻子為什麼特別有禮貌？',a:'因為越成熟，越懂得鞠躬。',c:'agri'},
+ {q:'火車為什麼從來不迷路？',a:'因為它一直走在正軌上。',c:'traffic'},
+ {q:'雪山隧道裡最冷的是什麼？',a:'是第十次有人問：到了沒？',c:'traffic'},
+ {q:'蝦子最愛的運動是什麼？',a:'游蝦。（游泳）',c:'sea'},
+ {q:'魚為什麼不上網？',a:'怕被釣魚網站釣走。',c:'sea'},
+ {q:'礁溪的溫泉為什麼人緣好？',a:'因為它很泡容。（包容）',c:'tour'},
+ {q:'數學課本為什麼心情不好？',a:'因為它有太多問題。',c:'kids'},
+ {q:'為什麼健康檢查特別準？',a:'因為每次都一針見血。',c:'care'},
+ {q:'垃圾車為什麼最受歡迎？',a:'音樂一響，大家都跑出來。',c:'env'},
+ {q:'紅綠燈為什麼不用打卡上班？',a:'因為它一直在閃。',c:'safe'},
+ {q:'為什麼宜蘭人特別浪漫？',a:'因為每句話都很蘭漫。',c:'tour'},
+ {q:'為什麼地圖從來不會累？',a:'因為它每天都在被人指指點點。',c:'vision'},
+ {q:'牛舌餅為什麼很會聊天？',a:'因為它有一條舌頭。',c:'tour'}
+];
+var COLDLAST=-1;
+function coldToday(){var dn=Math.floor((Date.now()+8*36e5)/864e5);return dn%COLD.length}
+function coldPick(){var i;do{i=Math.floor(Math.random()*COLD.length)}while(COLD.length>1&&i===COLDLAST);return i}
+function coldCard(i,head,again,key){
+  COLDLAST=i;var j=COLD[i];
+  var h='<div class="coldc"><div class="coldh">'+esc(head)+'</div><p class="coldq">'+esc(j.q)+'</p><p class="colda" hidden>'+esc(j.a)+'</p>'+
+   '<div class="coldb"><button type="button" class="pri" data-coldrev>揭曉答案</button><button type="button" data-coldsee hidden>看相關金曲</button><button type="button" data-coldagain hidden>'+esc(again)+'</button></div>'+
+   '<a class="coldl" hidden target="_blank" rel="noopener" href="'+esc(lineHref(j.q+' '+j.a+'｜宜蘭金曲①次看懂',SHARE_BASE||pageBase()))+'">傳到 LINE 給朋友</a></div>';
+  ovOpen(h,key||'fz');
+  var rv=OV.querySelector('[data-coldrev]');
+  rv.onclick=function(){OV.querySelector('.colda').hidden=false;rv.hidden=true;['[data-coldsee]','[data-coldagain]','.coldl'].forEach(function(s){OV.querySelector(s).hidden=false});var a=OV.querySelector('[data-coldagain]');if(a&&a.focus)a.focus()};
+  OV.querySelector('[data-coldsee]').onclick=function(){var l=candList().filter(function(p){return p.c===j.c});var p=l.length?l[Math.floor(Math.random()*l.length)]:candList()[0];ovClose();selectPolicy(p.id);try{window.scrollTo({top:0})}catch(x){}};
+  OV.querySelector('[data-coldagain]').onclick=function(){again==='再抽一支'?drawFortune():coldCard(coldPick(),head,again,key)};
+  rv.focus();
+}
+function openCold(){coldCard(coldToday(),'今日一冷　'+dayLabel(),'再來一則')}
+var TOASTT=0;
+function toast(m){var t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t)}
+  t.textContent=m;t.classList.add('on');clearTimeout(TOASTT);TOASTT=setTimeout(function(){t.classList.remove('on')},3600)}
+function daysLeft(){var m=/[?&]pd=(\d{4})(\d\d)(\d\d)/.exec(location.search),now=m?new Date(+m[1],+m[2]-1,+m[3]):new Date();return Math.ceil((new Date(2026,10,28)-now)/86400000)}
+(function(){
+  var n=0,t0=0;
+  document.addEventListener('click',function(e){
+    if(e.target.closest('.portrait .pimg')){var now=Date.now();if(now-t0>3000)n=0;t0=now;n++;
+      if(n>=5){n=0;var pn=$('#mpanel');if(pn)pn.hidden=true;coldCard(coldPick(),'B 面隱藏曲　第 13 首','再來一首','fz')}}
+  });
+  var m=0,m0=0;
+  document.addEventListener('click',function(e){
+    if(e.target.closest('[data-mpnext]')){var now=Date.now();if(now-m0>8000)m=0;m0=now;m++;
+      if(m>=3){m=0;var j=COLD[coldPick()];toast('沒有第三首了，但有第三個冷笑話：'+j.q+j.a)}}
+    var st=e.target.closest('.brand .sticker');
+    if(st){var d=daysLeft();toast(d>1?'還有 '+d+' 天，冷笑話一天一則':(d===1?'明天投票，記得投①':(d===0?'今天投票，記得投①':'謝謝大家')))}
+  });
+})();
+function countdown(){var d=daysLeft();$('#cd').textContent=d>1?d+' 天':(d===1?'明天見':(d===0?'今天見':'已投票'));document.body.classList.toggle('votegold',d>=0&&d<=1)}
 function mkHeroCD(){var p=$('#portrait');if(!p||p.querySelector('.hcd'))return;var d=document.createElement('div');d.className='hcd';d.setAttribute('aria-hidden','true');d.innerHTML=discSVG('全民縣長','#A63A35,#6E1B25','#E0C85C','#F6EFD8','h');p.insertBefore(d,p.firstChild)}
 mkHeroCD();
 function mkCoverSw(){var p=$('#portrait');if(!p||p.querySelector('.covrow'))return;var img=p.querySelector('.pimg img'),b=p.querySelector('.mplaybtn');if(!img||!b)return;
   var opts=[['photos/album.jpg','專輯封面'],['photos/album2.jpg?v=4','年輕時的照片']],cur=0;try{cur=+localStorage.getItem('yl-cover')||0}catch(e){}
   var row=document.createElement('div');row.className='covrow';p.insertBefore(row,b);row.appendChild(b);
-  var cb=document.createElement('button');cb.type='button';cb.className='covbtn';cb.textContent='換封面';row.appendChild(cb);
+  var cb=document.createElement('button');cb.type='button';cb.className='covbtn';cb.textContent='換封面';p.appendChild(cb);
   function set(i){cur=i;img.src=opts[i][0];img.alt='林國漳 '+opts[i][1];cb.setAttribute('aria-label','換封面，目前是'+opts[i][1]);try{localStorage.setItem('yl-cover',String(i))}catch(e){}}
   cb.addEventListener('click',function(){set((cur+1)%opts.length)});
   set(cur);
 }
 mkCoverSw();
 countdown();ballot();buildMap();buildShields();buildPins();buildChips();buildLegend();bind();
-homeView(true);panel();paint();setXL(XL);applyHash();window.addEventListener('hashchange',applyHash);
+homeView(true);panel();paint();applyHash();window.addEventListener('hashchange',applyHash);
 })();
 </script>
 <script>(function(){var ids=['s-play','s-town','s-who','s-num','s-video','s-all'];function spy(){var y=window.innerHeight*.35,cur=null;ids.forEach(function(i){var e=document.getElementById(i);if(e&&e.getBoundingClientRect().top<=y)cur=i});Array.prototype.forEach.call(document.querySelectorAll('.topnav button[data-go]'),function(b){b.classList.toggle('cur',b.dataset.go===cur)})}window.addEventListener('scroll',spy,{passive:true});window.addEventListener('resize',spy);setTimeout(spy,600)})();
