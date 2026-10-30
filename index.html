@@ -2762,8 +2762,7 @@ function cvHead(c,W){
 function cvFoot(c,W){
   c.fillStyle='#1B1B18';c.fillRect(28,1180,W-56,142);c.fillStyle='#E0C85C';c.fillRect(28,1176,W-56,4);
   c.textAlign='left';c.fillStyle='#E0C85C';c.font='900 46px '+CV_S;c.fillText('宜蘭縣長候選人 ①林國漳',64,1262);
-    c.textAlign='right';c.fillStyle='#FFF6DA';c.font='800 32px '+CV_F;c.fillText('林國漳找政見',W-64,1280);c.textAlign='left';
-}
+  }
 function cvNew(){var cv=document.createElement('canvas');cv.width=1080;cv.height=1350;return cv}
 function cvBG(c,W,H){
   c.fillStyle='#A63A35';c.fillRect(0,0,W,H);
@@ -2923,7 +2922,7 @@ function drawFortuneImg(p,no,total,day){
   c.fillStyle=INK;c.fillRect(0,H-132,W,132);c.fillStyle=GOLD;c.fillRect(0,H-136,W,4);
   c.fillStyle=GOLD;c.font='900 42px '+CV_S;c.fillText('宜蘭縣長候選人 ①林國漳',100,H-70);
   c.fillStyle='rgba(255,246,218,.8)';c.font='600 24px '+CV_F;c.fillText('籤詩為創作，政見為候選人承諾',100,H-30);
-  c.textAlign='right';c.fillStyle=CRM;c.font='800 32px '+CV_F;c.fillText('林國漳找政見',W-100,H-52);
+  
   return cv;
 }
 var QZ=[
@@ -2968,7 +2967,7 @@ function drawQuizCard(id){
   c.font='900 '+fs+'px '+CV_S;
   while(fs>120&&c.measureText(nm).width>W-128){fs-=10;c.font='900 '+fs+'px '+CV_S}
   var nw=c.measureText(nm).width;
-  c.fillStyle='#E0C85C';c.fillText(nm,64,440);c.fillRect(64,466,Math.min(nw,W-128)*.45,10);
+  c.fillStyle='#E0C85C';c.fillText(nm,64,440);
   c.fillStyle='#FFF6DA';c.font='600 46px '+CV_F;
   cvWrap(c,QT[id]||'',W-128,2).forEach(function(s,i){c.fillText(s,64,540+i*68)});
   if(FOODS[id]){
@@ -3166,7 +3165,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/30 第 109 版';
+var BUILD='10/30 第 110 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
