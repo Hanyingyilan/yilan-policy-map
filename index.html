@@ -3336,21 +3336,23 @@ function openTownCard(id){var t=TOWNS[TI[id]];if(t)openImg(drawTownCard(id),t.n+
 function drawWallCard(){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d');
   cvBG(c,W,H);cvHead(c,W);
-  c.fillStyle='#fff';c.font='900 96px '+CV_S;c.fillText('重點數字',64,250);
+  c.fillStyle='#fff';c.font='900 110px '+CV_S;c.fillText('排行榜',64,250);
+  var P=[['#6B5645','#52433A','#F7B8E2','#FFE9F7'],['#BC4A40','#9C332E','#FFFFFF','#FFFFFF'],['#5D5A4C','#3F3C32','#F3EBD4','#F3EBD4'],['#8E2A33','#6E1B25','#E0C85C','#FFE9A8']];
   var bw=(W-128-24)/2,bh=190;
   WALL.forEach(function(w,i){
-    var cc=CATS[PBY[w[0]].c],bx=64+(i%2)*(bw+24),by=300+Math.floor(i/2)*(bh+22),fs=88;
-    c.fillStyle='rgba(27,27,24,.38)';rrect(c,bx,by,bw,bh,14);c.fill();
-    c.fillStyle=cc.c;c.fillRect(bx,by+24,8,bh-48);
-    do{c.font='900 '+fs+'px '+CV_F;fs-=4}while(c.measureText(w[1]).width>bw-64&&fs>36);
-    c.fillStyle=cc.c;c.fillText(w[1],bx+36,by+96);
-    c.fillStyle='#fff';c.font='700 32px '+CV_F;cvWrap(c,w[2],bw-64,2).forEach(function(s,j){c.fillText(s,bx+36,by+140+j*36)});
+    var p=P[i%4],bx=64+(i%2)*(bw+24),by=300+Math.floor(i/2)*(bh+22),fs=78,g=c.createLinearGradient(bx,by,bx+bw,by+bh);
+    g.addColorStop(0,p[0]);g.addColorStop(1,p[1]);c.fillStyle=g;rrect(c,bx,by,bw,bh,10);c.fill();
+    c.setLineDash([2,8]);c.lineCap='round';c.lineWidth=2.5;c.strokeStyle=p[2];c.globalAlpha=.75;rrect(c,bx+10,by+10,bw-20,bh-20,8);c.stroke();c.setLineDash([]);c.globalAlpha=1;
+    do{c.font='900 '+fs+'px '+CV_S;fs-=4}while(c.measureText(w[1]).width>bw-120&&fs>36);
+    c.fillStyle=p[2];c.fillText(w[1],bx+34,by+104);
+    c.fillStyle=p[3];c.font='700 30px '+CV_F;cvWrap(c,w[2],bw-96,2).forEach(function(s,j){c.fillText(s,bx+34,by+148+j*32)});
+    c.font='400 28px '+CV_S;c.textAlign='right';c.fillStyle=p[3];c.fillText((i<9?'0':'')+(i+1),bx+bw-30,by+52);c.textAlign='left';
   });
   cvFoot(c,W);
   return cv;
 }
-function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/30 第 123 版';
+function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
+var BUILD='10/30 第 124 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
