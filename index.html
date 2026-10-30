@@ -1231,6 +1231,31 @@ body.hasbar .mpbar{bottom:88px}
 /* large-font mode kept the hero's photo column */
 html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
 @media (min-width:1024px){html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b p" "g p"}html.xl body.sub .brand{grid-template-areas:"h" "x"}}
+
+/* v134 phone hero: tidy columns at 300-430px, single cover button, badge clear of heading */
+.covsw{display:none}
+.covrow .covbtn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:2px solid #FFF6DA;border-radius:999px;background:transparent;color:#FFF6DA;font:900 16px var(--sans,"Noto Sans TC",sans-serif);cursor:pointer;white-space:nowrap}
+.covrow .covbtn:hover{background:#FFF6DA;color:#A63A35}
+.covrow .covbtn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media (max-width:700px){
+  .brand{align-items:start}
+  .brand .sticker{white-space:nowrap;border-radius:22px;padding:6px 14px 8px;justify-self:start;max-width:100%}
+  .brand .sticker b{font-size:calc(34px*var(--ps,1))}
+  .covrow{flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:8px;margin-top:10px}
+  .covrow .mplaybtn,.covrow .covbtn{min-height:44px;width:100%;justify-content:center;padding:0 10px;font-size:15px}
+  .covrow .mplaybtn i{width:26px;height:26px}
+  .hbtns{flex-direction:column;align-items:flex-start;gap:10px}
+  .ftiles{margin-top:28px}
+  .fnew,.ftiles .ft .fnew{white-space:nowrap}
+  .ftiles .ft .fnew{top:-19px}
+  #s-play .sec,#s-play h2{margin-bottom:6px}
+}
+@media (max-width:340px){
+  .ftiles .ft .fnew{right:auto;left:2px}
+  .brand .sticker{font-size:11px;padding:5px 11px 7px}
+  .brand .sticker b{font-size:30px}
+  .covrow .mplaybtn,.covrow .covbtn{font-size:14px;min-height:42px}
+}
 </style>
 </head>
 <body>
@@ -3389,7 +3414,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 134 版';
+var BUILD='10/30 第 135 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3416,12 +3441,10 @@ mkHeroCD();
 function mkCoverSw(){var p=$('#portrait');if(!p||p.querySelector('.covrow'))return;var img=p.querySelector('.pimg img'),b=p.querySelector('.mplaybtn');if(!img||!b)return;
   var opts=[['photos/album.jpg','專輯封面'],['photos/album2.jpg?v=4','年輕時的照片']],cur=0;try{cur=+localStorage.getItem('yl-cover')||0}catch(e){}
   var row=document.createElement('div');row.className='covrow';p.insertBefore(row,b);row.appendChild(b);
-  var sw=document.createElement('div');sw.className='covsw';sw.setAttribute('role','group');sw.setAttribute('aria-label','換封面');
-  sw.innerHTML='<span>換封面</span>'+opts.map(function(o,i){return '<button type="button" data-cov="'+i+'" aria-label="'+o[1]+'" aria-pressed="'+(i===cur)+'"><img src="'+o[0]+'" alt="" width="56" height="56" loading="lazy"></button>'}).join('');
-  row.appendChild(sw);
-  function set(i){cur=i;img.src=opts[i][0];img.alt='林國漳 '+opts[i][1];Array.prototype.forEach.call(sw.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',+x.dataset.cov===i)});try{localStorage.setItem('yl-cover',String(i))}catch(e){}}
-  sw.addEventListener('click',function(e){var x=e.target.closest('[data-cov]');if(x)set(+x.dataset.cov)});
-  if(cur)set(cur);
+  var cb=document.createElement('button');cb.type='button';cb.className='covbtn';cb.textContent='換封面';row.appendChild(cb);
+  function set(i){cur=i;img.src=opts[i][0];img.alt='林國漳 '+opts[i][1];cb.setAttribute('aria-label','換封面，目前是'+opts[i][1]);try{localStorage.setItem('yl-cover',String(i))}catch(e){}}
+  cb.addEventListener('click',function(){set((cur+1)%opts.length)});
+  set(cur);
 }
 mkCoverSw();
 countdown();ballot();buildMap();buildShields();buildPins();buildChips();buildLegend();bind();
