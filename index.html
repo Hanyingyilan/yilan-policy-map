@@ -1139,6 +1139,70 @@ body.hasbar .mpbar{bottom:88px}
 /* v130 labels stay inside the dotted frame */
 @media (max-width:599px){.ftiles .ft .fl{font-size:17cqw;top:12cqw;line-height:1.06}}
 @media (min-width:600px){.ftiles .ft .fl{font-size:16cqw;top:11cqw;line-height:1.06}}
+
+/* v131 ranking tiles as album covers; video thumbs, fold rows and misc in the same palette */
+.wall{counter-reset:rk}
+.wall button,.wall button:first-child,.blk:nth-of-type(4) .wall button{counter-increment:rk;position:relative;border:0!important;border-radius:6px!important;box-shadow:0 8px 18px rgba(60,30,10,.28)!important;background:var(--cbg)!important;color:var(--c1)!important;min-height:150px;padding:24px 24px 20px!important;justify-content:flex-end}
+.wall button::before{content:"";position:absolute;inset:3.6cqw;border:.9cqw dotted var(--cfr);border-radius:3cqw;opacity:.8;pointer-events:none}
+.wall button::after{content:counter(rk,decimal-leading-zero);position:absolute;right:9cqw;top:8cqw;font:400 11cqw var(--hand);color:var(--c2);letter-spacing:.06em}
+.wall button:nth-child(4n+1){--cbg:linear-gradient(160deg,#6B5645,#52433A);--c1:#F7B8E2;--c2:#FFE9F7;--cfr:#FFC2EE}
+.wall button:nth-child(4n+2){--cbg:linear-gradient(160deg,#BC4A40,#9C332E);--c1:#fff;--c2:#fff;--cfr:#fff}
+.wall button:nth-child(4n+3){--cbg:linear-gradient(160deg,#5D5A4C,#3F3C32);--c1:#F3EBD4;--c2:#F3EBD4;--cfr:#F3EBD4}
+.wall button:nth-child(4n){--cbg:linear-gradient(160deg,#8E2A33,#6E1B25);--c1:#E0C85C;--c2:#FFE9A8;--cfr:#E0C85C}
+.wall b,.blk .wall b{color:var(--c1)!important;font-family:var(--serif)!important;font-weight:900;position:relative;z-index:1}
+.wall span{color:var(--c2)!important;position:relative;z-index:1;font-weight:700}
+.blk:nth-of-type(4){background:var(--surface);box-shadow:0 0 0 100vmax var(--surface);clip-path:inset(0 -100vmax);color:var(--txt)}
+.blk:nth-of-type(4)>.sec{color:var(--txt)}
+.wallact .persbtn{background:#A63A35;color:#fff}
+.wallact .persbtn:hover{background:#8E2A33}
+.vmw{background:linear-gradient(160deg,#6B5645,#52433A)}
+.vcard:nth-child(3n+2) .vmw{background:linear-gradient(160deg,#BC4A40,#9C332E)}
+.vcard:nth-child(3n) .vmw{background:linear-gradient(160deg,#8E2A33,#6E1B25)}
+.vcard .vm i{color:#7A221E!important}
+.vcard{background:#fff;border:2px solid #1B1B18}
+.vd>summary b,.vd>summary{color:var(--txt)}
+.vd>summary::after{color:#A63A35}
+.pcat{border:0}
+.pcat>summary::after{color:#A63A35}
+.back{background:#fff;border:2px solid #1B1B18;border-radius:6px;box-shadow:none;font-family:var(--serif);font-weight:900}
+.pc{border-left-color:#A63A35;background:#fff;border-radius:6px}
+.pc h4{font-family:var(--serif);font-weight:900}
+.pc .dot{background:#A63A35!important}
+.pc .kn div{background:#F3E9C6!important;border-radius:6px}
+.badge{border-color:#A63A35;color:#7A221E}
+.row .ic{border-radius:50%}
+.foot{background:#1B1B18;color:#E0C85C;padding-bottom:40px}
+.foot button{color:#FFF6DA}
+.foot::before{content:"";display:block}
+#mebar{background:#1B1B18;border-top:3px solid #E0C85C}
+#mebar .mecard,#mecl{background:transparent;color:#FFF6DA;border:2px solid #FFF6DA}
+#mego{background:#E0C85C;color:#1B1B18}
+.mebag{color:#FFF6DA}
+.mebag .n{background:#E0C85C;color:#1B1B18}
+
+/* v132 all-policies cards as covers in category colours; full-bleed footer */
+.pcat[data-pk="traffic"]:not([open]){--pc:#E0C85C}
+.pcat[data-pk="industry"]:not([open]){--pc:#D99A5B}
+.pcat[data-pk="agri"]:not([open]){--pc:#B9CC74}
+.pcat[data-pk="sea"]:not([open]){--pc:#7FC4C0}
+.pcat[data-pk="tour"]:not([open]){--pc:#F2A6C4}
+.pcat[data-pk="env"]:not([open]){--pc:#8FCFA5}
+.pcat[data-pk="care"]:not([open]){--pc:#F3D9A4}
+.pcat[data-pk="kids"]:not([open]){--pc:#F29C8A}
+.pcat[data-pk="ind"]:not([open]){--pc:#C9A27A}
+.pcat[data-pk="safe"]:not([open]){--pc:#B9B2D6}
+.pcat[data-pk="vision"]:not([open]){--pc:#FFF6DA}
+.pcat[data-pk="town"]:not([open]){--pc:#9CC3E0}
+@media (min-width:1024px){
+ .pcats .pcat:not([open]){background:linear-gradient(160deg,var(--pc),color-mix(in srgb,var(--pc) 78%,#1B1B18));position:relative;border-radius:6px;box-shadow:0 8px 18px rgba(60,30,10,.2)}
+ .pcats .pcat:not([open])::before{content:"";position:absolute;inset:8px;border:2px dotted rgba(27,27,24,.55);border-radius:6px;pointer-events:none}
+ .pcats .pcat:not([open])>summary b{font-family:var(--serif);font-weight:900;color:#1B1B18;font-size:calc(19px*var(--ps,1))}
+ .pcats .pcat:not([open])>summary small{color:#1B1B18;font-family:var(--hand);font-size:calc(15px*var(--ps,1))}
+ .pcats .pcat:not([open])>summary::before{background:#1B1B18}
+ .pcats .pcat:not([open])>summary::after{color:#1B1B18}
+}
+@media (max-width:1023px){.pcat:not([open]){background:linear-gradient(160deg,var(--pc),color-mix(in srgb,var(--pc) 80%,#1B1B18))}.pcat:not([open])>summary b{font-family:var(--serif);color:#1B1B18}.pcat:not([open])>summary small,.pcat:not([open])>summary::after{color:#1B1B18}}
+.foot{box-shadow:0 0 0 100vmax #1B1B18;clip-path:inset(0 -100vmax);margin:56px 0 0;padding:44px 16px 48px}
 </style>
 </head>
 <body>
@@ -3286,7 +3350,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/30 第 121 版';
+var BUILD='10/30 第 123 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
