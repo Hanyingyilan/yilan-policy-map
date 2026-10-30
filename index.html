@@ -1093,6 +1093,44 @@ body.hasbar .mpbar{bottom:88px}
 
 .wallact{padding:0 16px}
 @media (min-width:1024px){.wallact{padding:0}}
+
+/* v126 play tiles in the album-cover language */
+.ftiles .ft,.ftiles .ft.fday{position:relative;display:block;aspect-ratio:1.1;min-height:0;height:auto;padding:0;text-align:left;overflow:visible;border:0;border-radius:6px;container-type:inline-size;box-shadow:0 8px 18px rgba(60,30,10,.22)}
+.ftiles .ft::before{content:"";position:absolute;inset:3.6cqw;border:.9cqw dotted currentColor;border-radius:3cqw;opacity:.75;pointer-events:none}
+.ftiles .ft .fl{position:absolute;left:9cqw;top:9cqw;writing-mode:vertical-rl;text-orientation:upright;font:900 19cqw/1.08 var(--serif);letter-spacing:.02em;margin:0;white-space:nowrap}
+.ftiles .ft svg,.ftiles .ft:hover svg{position:absolute;right:8cqw;bottom:8cqw;width:30cqw;height:30cqw;stroke:currentColor;stroke-width:2.4;margin:0}
+.ftiles .ft.t1,.ftiles .ft.t1.fday{background:linear-gradient(160deg,#E8D272,#D2B440);color:#7A221E}
+.ftiles .ft.t2,.ftiles .ft.t2.fday{background:linear-gradient(160deg,#BC4A40,#9C332E);color:#fff}
+.ftiles .ft.t3,.ftiles .ft.t3.fday{background:linear-gradient(160deg,#B9CC74,#8BA64A);color:#13331D}
+.ftiles .ft.t1 svg,.ftiles .ft.t2 svg,.ftiles .ft.t3 svg{stroke:currentColor}
+.ftiles .ft .fnew{z-index:2;top:-10px;right:8px}
+.ftiles .ft:hover{transform:translateY(-6px);box-shadow:0 14px 24px rgba(60,30,10,.3)}
+.ftiles{gap:16px}
+@media (min-width:1024px){.ftiles{gap:24px;max-width:1000px}}
+@media (prefers-reduced-motion:reduce){.ftiles .ft:hover{transform:none}}
+
+.ftiles .ft .fl{top:13cqw}
+.ftiles .ft .fnew{top:-14px}
+@media (max-width:599px){.ftiles .ft,.ftiles .ft.fday{aspect-ratio:.92}.ftiles .ft .fl{font-size:21cqw;top:14cqw}}
+@media (min-width:1024px){.ftiles{max-width:none}.ftiles .ft .fl{font-size:21cqw}}
+
+/* v127 ranking numbers scale with the card so they never overflow */
+.wall button,.wall button:first-child{container-type:inline-size;overflow:hidden;min-width:0}
+.wall b,.blk .wall b{font-size:16.5cqw!important;line-height:1.05;white-space:nowrap;max-width:100%}
+.wall span{overflow-wrap:anywhere}
+@media (min-width:1024px){.wall b,.blk .wall b{font-size:16.5cqw!important}}
+
+/* v128 all-policies: opened category reads as a clean track list; keep category order */
+@media (min-width:1024px){
+  .pcats{grid-auto-flow:row!important}
+  .pcats .pcat[open]>summary{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:16px!important;min-height:0!important;padding:20px 72px 20px 24px!important}
+  .pcats .pcat[open]>summary b{flex:0 1 auto;text-align:left;font-size:calc(22px*var(--ps,1))}
+  .pcats .pcat[open]>summary small{margin:0 0 0 auto;font-size:calc(15px*var(--ps,1))}
+  .pcats .pcat[open]>summary::after{right:26px!important;top:50%!important;transform:translateY(-50%)!important}
+  .pcats .pcat[open] .row{padding:14px 24px;border-top:1px solid var(--line)}
+  .pcats .pcat[open] .row .t{font-size:calc(16px*var(--ps,1))}
+}
+.pcat[open]>summary{border-bottom:2px solid #E0C85C}
 </style>
 </head>
 <body>
@@ -3240,7 +3278,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/30 第 115 版';
+var BUILD='10/30 第 118 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
