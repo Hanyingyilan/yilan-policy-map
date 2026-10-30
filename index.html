@@ -1389,6 +1389,15 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 }
 @media (min-width:1024px) and (max-width:1180px){.topnav .tnb{display:none!important}.topnav button[data-go]{font-size:15px!important;padding:0 12px!important}}
 @media (prefers-reduced-motion:reduce){.brand .hcd{transition:none!important}}
+/* v151 player seek bar */
+.mpseek{order:-1;flex:1 1 100%;display:flex;align-items:center;gap:10px;min-width:260px;font:700 13px var(--sans,"Noto Sans TC",sans-serif);color:#FFF6DA;font-variant-numeric:tabular-nums}
+.mpseek input{flex:1;min-width:0;height:28px;margin:0;padding:0;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;--p:0%}
+.mpseek input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,#E0C85C var(--p),rgba(255,246,218,.32) var(--p))}
+.mpseek input::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#E0C85C;border:2px solid #1B1B18;margin-top:-7px}
+.mpseek input::-moz-range-track{height:6px;border-radius:3px;background:rgba(255,246,218,.32)}
+.mpseek input::-moz-range-progress{height:6px;border-radius:3px;background:#E0C85C}
+.mpseek input::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#E0C85C;border:2px solid #1B1B18}
+.mpseek input:focus-visible{outline:3px solid #fff;outline-offset:2px;border-radius:4px}
 </style>
 </head>
 <body>
@@ -2444,8 +2453,15 @@ function mpPaint(){
   var h='<div id="mpanel" class="mpanel" hidden role="dialog" aria-label="競選歌曲"><div class="mph"><b>競選歌曲首發</b><button type="button" class="mpx" data-mpclose aria-label="關閉選單">✕</button></div>'+
    MUS.map(function(m,i){return '<button type="button" class="mptr" data-mpi="'+i+'"><span class="mpn">'+(i+1)+'</span><span class="mptt"><b>'+m.t+'</b><small>'+m.s+'</small></span><span class="mpg">聽</span></button>'}).join('')+
    '<p class="mpn2" id="mpmsg" role="status"></p></div>'+
-   '<div id="mpbar" class="mpbar" hidden role="region" aria-label="音樂播放器"><span class="mpd" aria-hidden="true"></span><span class="mpt" id="mpt"></span><button type="button" id="mpplay" class="mpb">播放</button><button type="button" class="mpb" data-mpnext>下一首</button><button type="button" class="mpb" data-mpstop>關掉音樂</button></div>';
+   '<div id="mpbar" class="mpbar" hidden role="region" aria-label="音樂播放器"><span class="mpd" aria-hidden="true"></span><div class="mpseek"><span id="mpcur">0:00</span><input type="range" id="mpseek" min="0" max="1000" value="0" step="1" aria-label="播放進度"><span id="mpdur">0:00</span></div><span class="mpt" id="mpt"></span><button type="button" id="mpplay" class="mpb">播放</button><button type="button" class="mpb" data-mpnext>下一首</button><button type="button" class="mpb" data-mpstop>關掉音樂</button></div>';
   var w=document.createElement('div');w.id='mpwrap';w.innerHTML=h;document.body.appendChild(w);
+  (function(){var sk=$('#mpseek'),cu=$('#mpcur'),du=$('#mpdur'),bar=$('#mpbar'),drag=false;
+    function fm(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+    function upd(){var a=MP.a,d=a&&a.duration;if(d&&isFinite(d)){du.textContent=fm(d);if(!drag){sk.value=Math.round(a.currentTime/d*1000);sk.style.setProperty('--p',a.currentTime/d*100+'%')}cu.textContent=fm(drag?sk.value/1000*d:a.currentTime)}else{du.textContent='0:00';cu.textContent='0:00';sk.value=0;sk.style.setProperty('--p','0%')}}
+    sk.addEventListener('input',function(){drag=true;var a=MP.a;sk.style.setProperty('--p',sk.value/10+'%');if(a&&isFinite(a.duration))cu.textContent=fm(sk.value/1000*a.duration)});
+    sk.addEventListener('change',function(){var a=MP.a;if(a&&isFinite(a.duration))a.currentTime=sk.value/1000*a.duration;drag=false;upd()});
+    setInterval(function(){if(!bar.hidden)upd()},250);
+  })();
   w.addEventListener('click',function(e){var t=e.target;
     if(t.closest('[data-mpclose]')){$('#mpanel').hidden=true;return}
     var tr=t.closest('[data-mpi]');if(tr){mpGo(+tr.dataset.mpi,true);return}
@@ -3553,7 +3569,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 150 版';
+var BUILD='10/30 第 151 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
