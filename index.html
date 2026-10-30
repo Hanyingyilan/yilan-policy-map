@@ -3051,6 +3051,7 @@ function drawFortune(daily,fid){
   ovOpen('<div class="fzt'+(reduce?'':' shake')+'">'+TUBE+'</div><p class="fzh">'+(reduce?'':'搖一搖…')+'</p>','fz');
   setTimeout(function(){
     if(tok!==FZ.tok||OV.hidden)return;
+    if(daily&&Math.floor((Date.now()+8*36e5)/864e5)%7===3){coldCard(coldToday(),'今日一籤　'+dayLabel()+'　這支籤有點冷','再抽一支');markDay();return}
     if(!daily&&!fid&&Math.random()<.15){coldCard(coldPick(),'這支籤有點冷','再抽一支');return}
     var c=CATS[p.c],url=fzURL(p.id),po=fzPoem(p.id),gr=fzGrade(p.id);
     var h='<div class="fzc" style="--cc:'+c.c+'">'+(daily?'<div class="fzday">今日一籤　'+dayLabel()+'</div>':'')+'<div class="fzno"><span class="fzgr">'+gr+'</span>第<b>'+(i+1)+'</b>籤<small>共 '+cand.length+' 支</small></div>'+
@@ -3496,7 +3497,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 143 版';
+var BUILD='10/30 第 144 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
