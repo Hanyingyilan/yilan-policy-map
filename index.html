@@ -1267,6 +1267,16 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
 .wall b .wu{font-family:var(--serif);font-weight:900;font-size:15cqw;margin-top:2cqw}
 .wall span{position:absolute;right:8cqw;top:9cqw;left:auto;bottom:auto;writing-mode:vertical-rl;text-orientation:upright;font-family:var(--hand);font-size:9cqw;line-height:1.15;letter-spacing:.06em;max-height:74cqw;margin:0;display:block;overflow:visible}
 @media (max-width:700px){.wall{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* v138 hero: identity pill removed, phone buttons compact so they never push the layout */
+.brand .ballot{display:none!important}
+@media (max-width:700px){
+  .brand .hbtns{gap:6px}
+  .brand .hbtns button{min-height:34px!important;padding:0 14px!important;font-size:13px!important;line-height:1}
+  .brand .covrow{gap:6px;margin-top:8px}
+  .brand .covrow .mplaybtn,.brand .covrow .covbtn{min-height:34px!important;padding:0 12px!important;font-size:13px!important;gap:6px;border-width:1.5px}
+  .brand .covrow .mplaybtn i{width:20px;height:20px}
+}
 </style>
 </head>
 <body>
@@ -3427,7 +3437,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 137 版';
+var BUILD='10/30 第 138 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
