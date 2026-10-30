@@ -2754,8 +2754,11 @@ var VMO=null;
 function closeVid(){
   if(VMO){VMO.remove();VMO=null;document.body.style.overflow=''}
 }
+/* one video at a time: when a Facebook player gets the click, reset the other players so they stop */
+function stopVids(except){Array.prototype.forEach.call(document.querySelectorAll('.vmw iframe'),function(f){if(f===except||!f.src||f.src==='about:blank')return;var u=f.src;f.style.opacity=0;f.parentNode.classList.remove('ld');f.src='about:blank';setTimeout(function(){f.src=u},60)})}
+window.addEventListener('blur',function(){setTimeout(function(){var a=document.activeElement;if(a&&a.tagName==='IFRAME'&&a.closest('.vmw'))stopVids(a)},0)});
 function openVid(id){
-  var v=VBY[id];if(!v)return;closeVid();
+  var v=VBY[id];if(!v)return;stopVids();closeVid();
   var fb='https://www.facebook.com/reel/'+id+'/',link=(SHARE_BASE||location.href.split('#')[0])+'#v-'+id,c=VGC[v.g];
   var emb=SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&autoplay=true&width=360&t=0" title="'+esc(v.t)+'" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"'+(v.h?' class="vh16"':'')+'></iframe>'
    :'<div class="vnoemb"><span>私人預覽版不能播放。<br>請開公開網站觀看。</span></div>';
@@ -3351,7 +3354,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 127 版';
+var BUILD='10/30 第 128 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
