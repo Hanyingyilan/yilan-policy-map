@@ -1005,6 +1005,28 @@ body.hasbar .mpbar{bottom:88px}
 #mpplay{background:#E0C85C;color:#1B1B18}
 @media (max-width:480px){.mpbar{left:8px;right:8px;bottom:8px;max-width:none}body.hasbar .mpbar{bottom:96px}.mpt{max-width:none;flex:1 1 100%}}
 @media (prefers-reduced-motion:reduce){.mplay .mplaybtn i,.mpbar.playing .mpd{animation:none}}
+
+/* v116 quiz tile: no black */
+.ft.t3,.ft.t3.fday{background:#B9CC74;border-color:#B9CC74;color:#1B1B18}
+.ft.t3 svg{stroke:#1B1B18}
+.mpn2:empty{display:none}
+
+/* v117 play tiles: bigger icons and labels, calmer proportions */
+.ftiles .ft{gap:14px;min-height:150px}
+.ftiles .ft svg{width:64px;height:64px;stroke-width:2.2}
+.ftiles .ft .fl{font-size:calc(17px*var(--ps,1));line-height:1.2}
+@media (min-width:600px){.ftiles .ft{min-height:200px}.ftiles .ft svg{width:96px;height:96px}.ftiles .ft .fl{font-size:calc(19px*var(--ps,1))}}
+@media (min-width:1024px){.ftiles .ft,.ftiles .ft.fday{min-height:280px;gap:22px}.ftiles .ft svg{width:132px;height:132px;stroke-width:2}.ftiles .ft .fl{font-size:calc(22px*var(--ps,1))}}
+
+/* v118 cover side text and count: larger */
+.tb .sb,.ab .sb,.albv-cover .sb{font-size:11cqw;line-height:1.12;letter-spacing:.02em;max-height:76cqw;top:7.5cqw;font-weight:700}
+.tb .ct,.ab .ct,.albv-cover .ct{font-size:9cqw}
+
+/* v119 desktop covers are smaller in px, so the side text scales up and may wrap to a second column */
+@media (min-width:1024px){
+  .tb .sb,.ab .sb{font-size:14cqw;line-height:1.1;letter-spacing:0;max-height:70cqw;overflow:visible;top:7cqw;right:6cqw}
+  .tb .ct,.ab .ct{font-size:11cqw}
+}
 </style>
 </head>
 <body>
@@ -1897,7 +1919,7 @@ function panel(){
   }else{
     h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>現場 MV</button></div>';
     h+='<section class="blk" id="s-play">'+funBox()+'</section>';
-    h+='<section class="blk" id="s-town"><div class="sec">找你家那一張<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-label="'+esc(t.n)+' '+townCount(t.id)+' 首，打開專輯" aria-pressed="'+(!!PS.towns[t.id])+'">'+covName(t.n)+'<span class="sb">'+esc((ICONS[t.id]||[])[1]||'')+'</span><span class="ct">'+townCount(t.id)+' 首</span></button>'}).join('')+'</div></section>';
+    h+='<section class="blk" id="s-town"><div class="sec">找你家那一張<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-label="'+esc(t.n)+' '+townCount(t.id)+' 首，打開專輯" aria-pressed="'+(!!PS.towns[t.id])+'">'+covName(t.n)+'<span class="sb">'+sbHTML((ICONS[t.id]||[])[1]||'')+'</span><span class="ct">'+townCount(t.id)+' 首</span></button>'}).join('')+'</div></section>';
     h+='<section class="blk" id="s-who"><div class="sec">找你那一張<small>可複選</small></div>'+audGroups()+'</section>';
     h+='<section class="blk" id="s-num"><div class="sec">排行榜</div><div class="wall">'+WALL.slice(0,4).map(function(w){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div><div class="wallact"><button type="button" class="persbtn" data-wallcard>存成排行榜圖卡</button></div></section>';
     h+='<section class="blk" id="s-video">'+videoSection()+'</section>';
@@ -1947,6 +1969,7 @@ var AGRP=[['家庭與年齡',['a_baby','a_student','a_youth','a_adult','a_senior
   ['工作與通勤',['j_farmer','j_fisher','j_worker','j_teacher','j_startup','j_tour','j_shop','j_sports','j_culture','j_commuter']],
   ['族群與性別',['j_indig','j_hakka','j_newres','j_women']]];
 var ASHORT={a_student:'學生與家長',j_startup:'創業與青創',j_tour:'旅宿餐飲觀光',j_sports:'運動與體育',j_culture:'藝文工作者',j_women:'女性'};
+function sbHTML(s){var n=s.length;if(n<=4)return esc(s);var h=Math.ceil(n/2);return esc(s.slice(0,h))+'<br>'+esc(s.slice(h))}
 function covName(n){var l=n.length;if(l<=3)return '<span class="nm v">'+esc(n)+'</span>';var f=l===4?2:3;return '<span class="nm h">'+esc(n.slice(0,f))+'<br>'+esc(n.slice(f))+'</span>'}
 function townCount(id){return POL.filter(function(p){return !p.bg&&p.tw&&p.tw.indexOf(id)>-1}).length}
 function audGroups(){
@@ -2000,7 +2023,7 @@ function albOpen(b){
   ALBFROM=b;
   ALBV.innerHTML='<div class="albv-bg" data-albx></div><div class="albv-box" role="dialog" aria-modal="true" aria-label="'+esc(info.name)+'專輯">'+
    '<div class="albv-stage"><div class="albv-disc">'+discSVG(info.name,cbg,c1,c2)+'</div>'+
-   '<div class="albv-flip"><div class="albv-face albv-cover" style="--cbg:'+cbg+';--c1:'+c1+';--c2:'+c2+';--cfr:'+cfr+'">'+covName(info.name)+(sb?'<span class="sb">'+esc(sb)+'</span>':'')+'<span class="ct">'+info.tr.length+' 首</span></div>'+
+   '<div class="albv-flip"><div class="albv-face albv-cover" style="--cbg:'+cbg+';--c1:'+c1+';--c2:'+c2+';--cfr:'+cfr+'">'+covName(info.name)+(sb?'<span class="sb">'+sbHTML(sb)+'</span>':'')+'<span class="ct">'+info.tr.length+' 首</span></div>'+
    '<div class="albv-face albv-back"><h3>'+esc(info.name)+'　曲目</h3><ol class="tl">'+tr+'</ol></div></div></div>'+
    '<div class="albv-acts"><button type="button" class="albv-b" data-albflip>翻到背面看曲目</button>'+(info.kind==='t'?'<button type="button" class="albv-b tcard" data-albcard="'+info.id+'">存成鄉鎮圖卡</button>':'')+'<button type="button" class="albv-b pri" data-albbag aria-pressed="'+sel+'">'+(sel?'已在購物袋裡（點一下拿出來）':'放進購物袋')+'</button><button type="button" class="albv-b" data-albx>關閉</button></div></div>';
   ALBV.hidden=false;document.body.classList.add('albopen');
@@ -2053,7 +2076,7 @@ function mpPaint(){
 (function(){
   var h='<div id="mpanel" class="mpanel" hidden role="dialog" aria-label="競選歌曲"><div class="mph"><b>競選歌曲首發</b><button type="button" class="mpx" data-mpclose aria-label="關閉選單">✕</button></div>'+
    MUS.map(function(m,i){return '<button type="button" class="mptr" data-mpi="'+i+'"><span class="mpn">'+(i+1)+'</span><span class="mptt"><b>'+m.t+'</b><small>'+m.s+'</small></span><span class="mpg">聽</span></button>'}).join('')+
-   '<p class="mpn2" id="mpmsg">點一首就會開始播放，可以邊看政見邊聽。</p></div>'+
+   '<p class="mpn2" id="mpmsg" role="status"></p></div>'+
    '<div id="mpbar" class="mpbar" hidden role="region" aria-label="音樂播放器"><span class="mpd" aria-hidden="true"></span><span class="mpt" id="mpt"></span><button type="button" id="mpplay" class="mpb">播放</button><button type="button" class="mpb" data-mpnext>下一首</button><button type="button" class="mpb" data-mpstop>關掉音樂</button></div>';
   var w=document.createElement('div');w.id='mpwrap';w.innerHTML=h;document.body.appendChild(w);
   w.addEventListener('click',function(e){var t=e.target;
@@ -3143,7 +3166,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜林國漳找政見',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/30 第 108 版';
+var BUILD='10/30 第 109 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
