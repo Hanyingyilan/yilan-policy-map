@@ -1347,6 +1347,21 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 /* v145b keep the spinning CD from covering the title on desktop */
 .brand h1{position:relative;z-index:1}
 @media (min-width:1024px){.hcd{left:-16%;width:80%}}
+/* v146 hero: phone = centred stack with a bigger countdown; desktop = split with title top-left, countdown + share anchored bottom-left */
+@media (max-width:700px){
+  .brand{grid-template-columns:minmax(0,3fr) minmax(0,2fr)!important}
+  .brand h1{text-align:center;justify-self:center}
+  .brand .sticker{font-size:clamp(11px,3.3vw,14px)!important;padding:9px 8px 11px!important;border-radius:24px!important}
+  .brand .sticker b{font-size:clamp(38px,12vw,56px)!important;line-height:1.05}
+  .brand .hbtns button{min-height:44px!important;font-size:15px!important}
+}
+@media (min-width:1024px){
+  .brand{grid-template-columns:minmax(0,1fr) minmax(480px,600px)!important;grid-template-areas:"h p" "e p" "s p" "x p"!important;grid-template-rows:auto 1fr auto auto!important;align-items:stretch!important;gap:18px 72px!important;padding:56px 0 64px!important}
+  .brand h1{align-self:start}
+  .brand .sticker{align-self:end!important;justify-self:start!important}
+  .brand .hbtns{align-self:end!important}
+  .brand .portrait{align-self:center!important}
+}
 </style>
 </head>
 <body>
@@ -3508,7 +3523,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 145 版';
+var BUILD='10/30 第 146 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
