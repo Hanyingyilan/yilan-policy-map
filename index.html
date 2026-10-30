@@ -3351,7 +3351,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 126 版';
+var BUILD='10/30 第 127 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3376,7 +3376,7 @@ function countdown(){var d=Math.ceil((new Date(2026,10,28)-new Date())/86400000)
 function mkHeroCD(){var p=$('#portrait');if(!p||p.querySelector('.hcd'))return;var d=document.createElement('div');d.className='hcd';d.setAttribute('aria-hidden','true');d.innerHTML=discSVG('全民縣長','#A63A35,#6E1B25','#E0C85C','#F6EFD8','h');p.insertBefore(d,p.firstChild)}
 mkHeroCD();
 function mkCoverSw(){var p=$('#portrait');if(!p||p.querySelector('.covrow'))return;var img=p.querySelector('.pimg img'),b=p.querySelector('.mplaybtn');if(!img||!b)return;
-  var opts=[['photos/album.jpg','專輯封面'],['photos/album2.jpg?v=3','年輕時的照片']],cur=0;try{cur=+localStorage.getItem('yl-cover')||0}catch(e){}
+  var opts=[['photos/album.jpg','專輯封面'],['photos/album2.jpg?v=4','年輕時的照片']],cur=0;try{cur=+localStorage.getItem('yl-cover')||0}catch(e){}
   var row=document.createElement('div');row.className='covrow';p.insertBefore(row,b);row.appendChild(b);
   var sw=document.createElement('div');sw.className='covsw';sw.setAttribute('role','group');sw.setAttribute('aria-label','換封面');
   sw.innerHTML='<span>換封面</span>'+opts.map(function(o,i){return '<button type="button" data-cov="'+i+'" aria-label="'+o[1]+'" aria-pressed="'+(i===cur)+'"><img src="'+o[0]+'" alt="" width="56" height="56" loading="lazy"></button>'}).join('');
