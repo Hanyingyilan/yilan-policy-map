@@ -1259,10 +1259,13 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
 
 /* v135 ranking tiles as square covers; number printed from data-n (iOS ignores counters on buttons) */
 .wall button,.wall button:first-child,.blk:nth-of-type(4) .wall button{aspect-ratio:1;min-height:0!important;padding:0!important;display:block!important;text-align:left}
-.wall button::after{content:attr(data-n)!important;left:9cqw;right:auto;top:8cqw;font-size:13cqw}
 .wall button::before{inset:4cqw;border-width:.8cqw}
-.wall b,.blk .wall b{position:absolute;left:9cqw;right:6cqw;top:30cqw;font-size:15.5cqw!important;line-height:1.1;white-space:nowrap;overflow:hidden}
-.wall span{position:absolute;left:9cqw;right:9cqw;bottom:9cqw;font-size:9.6cqw;line-height:1.3;margin:0;display:block}
+.wall button::after{content:attr(data-n)!important;left:auto;right:8cqw;top:auto;bottom:7cqw;font-size:10cqw}
+.wall b,.blk .wall b{position:absolute;left:9cqw;top:10cqw;right:auto;display:block;font-size:inherit!important;line-height:1;white-space:nowrap;overflow:visible}
+.wall b i{display:block;font-style:normal;line-height:1.02}
+.wall b .wn{font-family:var(--serif);font-weight:900;letter-spacing:-.02em}
+.wall b .wu{font-family:var(--serif);font-weight:900;font-size:15cqw;margin-top:2cqw}
+.wall span{position:absolute;right:8cqw;top:9cqw;left:auto;bottom:auto;writing-mode:vertical-rl;text-orientation:upright;font-family:var(--hand);font-size:9cqw;line-height:1.15;letter-spacing:.06em;max-height:74cqw;margin:0;display:block;overflow:visible}
 @media (max-width:700px){.wall{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 </style>
 </head>
@@ -2052,6 +2055,8 @@ var TOURS=[
  {id:null,t:'回到全縣',x:'點任何鄉鎮、道路或圖釘，都能看到完整金曲。'}
 ];
 
+var WCAP={'縣政中心青年婚育宅':['縣政中心','青年婚育宅']};function wallCap(s){var l=WCAP[s];return l?l.map(esc).join('<br>'):esc(s)}
+function wallNum(s){var m=/^([\d,.%]+)(.*)$/.exec(s),n=m?m[1]:'',u=m?m[2]:s,w=0;for(var i=0;i<n.length;i++)w+=n[i]===','||n[i]==='.'?.3:n[i]==='%'?.85:.58;var f=n?Math.floor(Math.min(27,58/Math.max(w,1))):0;return '<b>'+(n?'<i class="wn" style="font-size:'+f+'cqw">'+esc(n)+'</i>':'')+'<i class="wu"'+(n?'':' style="font-size:16cqw"')+'>'+esc(u)+'</i></b>'}
 function numSize(s,max,avail){var w=0;for(var i=0;i<s.length;i++)w+=s.charCodeAt(i)>255?1:0.5;return Math.max(18,Math.min(max,Math.floor(avail/Math.max(1,w))))}
 
 var AUD=[
@@ -2153,7 +2158,7 @@ function panel(){
     h+='<section class="blk" id="s-play">'+funBox()+'</section>';
     h+='<section class="blk" id="s-town"><div class="sec">尋得家鄉金曲<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-label="'+esc(t.n)+' '+townCount(t.id)+' 首，打開專輯" aria-pressed="'+(!!PS.towns[t.id])+'">'+covName(t.n)+'<span class="sb">'+sbHTML((ICONS[t.id]||[])[1]||'')+'</span><span class="ct">'+townCount(t.id)+' 首</span></button>'}).join('')+'</div></section>';
     h+='<section class="blk" id="s-who"><div class="sec">找你那一張<small>可複選</small></div>'+audGroups()+'</section>';
-    h+='<section class="blk" id="s-num"><div class="sec">排行榜</div><div class="wall">'+WALL.slice(0,4).map(function(w,wi){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" data-n="0'+(wi+1)+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div><div class="wallact"><button type="button" class="persbtn" data-wallcard>存成排行榜圖卡</button></div></section>';
+    h+='<section class="blk" id="s-num"><div class="sec">排行榜</div><div class="wall">'+WALL.slice(0,4).map(function(w,wi){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" data-n="0'+(wi+1)+'" style="--cc:'+CATS[p.c].c+'">'+wallNum(w[1])+'<span>'+wallCap(w[2])+'</span></button>'}).join('')+'</div><div class="wallact"><button type="button" class="persbtn" data-wallcard>存成排行榜圖卡</button></div></section>';
     h+='<section class="blk" id="s-video">'+videoSection()+'</section>';
     var any=false,tot=0;Object.keys(CATS).forEach(function(k){tot+=POL.filter(function(p){return p.c===k&&match(p)}).length});
     h+='<section class="blk" id="s-all"><div class="sec">全部曲目<small>'+tot+'</small></div><div class="pcats">';
@@ -3422,7 +3427,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 136 版';
+var BUILD='10/30 第 137 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
