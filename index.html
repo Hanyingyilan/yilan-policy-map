@@ -1376,6 +1376,19 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 .ftiles .ft.t4 svg{stroke:currentColor}
 @media (min-width:600px){.ftiles{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
 @media (max-width:599px){.ftiles{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* v150 hero: CD half out of the sleeve (slides further when the cover is pressed), one-line top nav, no 玩一玩 heading */
+#s-play>.sec{display:none}
+.topnav button,.topnav .tnb{white-space:nowrap;flex:none}
+@media (min-width:1024px){
+  .topnav{gap:clamp(6px,1.2vw,22px)!important}
+  .brand h1{font-size:clamp(60px,5.9vw,100px)!important}
+  .brand{grid-template-columns:minmax(0,1fr) minmax(420px,50%)!important;column-gap:40px!important}
+  .brand .hcd{width:100%!important;left:-6%!important;top:0!important;transform:translateX(-36%);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+  .brand .portrait.cdout .hcd{transform:translateX(-46%)}
+  .brand .portrait.cdout .hcd svg{animation-duration:5s}
+}
+@media (min-width:1024px) and (max-width:1180px){.topnav .tnb{display:none!important}.topnav button[data-go]{font-size:15px!important;padding:0 12px!important}}
+@media (prefers-reduced-motion:reduce){.brand .hcd{transition:none!important}}
 </style>
 </head>
 <body>
@@ -1398,7 +1411,7 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
     <div class="tip" id="tip"></div>
   </section>
   <aside class="panel" role="main" aria-label="金曲清單與內容">
-    <nav class="topnav" aria-label="頁面導覽"><span class="tnb"><i aria-hidden="true"></i>宜蘭金曲</span><button type="button" data-go="s-play">玩一玩</button><button type="button" data-go="s-town">尋得家鄉金曲</button><button type="button" data-go="s-who">想聽哪一張</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button><button type="button" class="tnl" data-music><i aria-hidden="true"></i>聽歌</button></nav>
+    <nav class="topnav" aria-label="頁面導覽"><span class="tnb"><i aria-hidden="true"></i>宜蘭金曲</span><button type="button" data-go="s-town">尋得家鄉金曲</button><button type="button" data-go="s-who">想聽哪一張</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button><button type="button" class="tnl" data-music><i aria-hidden="true"></i>聽歌</button></nav>
     <div class="brand">
       <div class="sticker">距離投票日 11/28<b id="cd"></b></div>
       <h1 aria-label="宜蘭金曲，一次看懂">宜蘭金曲<br><span class="c1" aria-hidden="true">1</span>次看懂</h1>
@@ -2440,6 +2453,7 @@ function mpPaint(){
     if(t.closest('[data-mpnext]')){mpGo((MP.i+1)%MUS.length,true);return}
     if(t.closest('[data-mpstop]')){mpStop();return}
   });
+  (function(){var pn=document.getElementById('mpanel');if(!pn||!window.MutationObserver)return;new MutationObserver(function(){var p=document.getElementById('portrait');if(p)p.classList.toggle('cdout',!pn.hidden)}).observe(pn,{attributes:true,attributeFilter:['hidden']})})();
   document.addEventListener('click',function(e){
     var o=e.target.closest('[data-music],.portrait .pimg');if(!o)return;
     var pn=$('#mpanel');pn.hidden=!pn.hidden;if(!pn.hidden){var f=pn.querySelector('[data-mpi]');if(f)f.focus()}
@@ -3539,7 +3553,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 149 版';
+var BUILD='10/30 第 150 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
