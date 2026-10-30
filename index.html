@@ -1362,6 +1362,15 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
   .brand .hbtns{align-self:end!important}
   .brand .portrait{align-self:center!important}
 }
+/* v147 desktop hero: title, countdown and share grouped and centred against the cover; listen button centred under it */
+@media (min-width:1024px){
+  .brand{grid-template-columns:minmax(0,1fr) minmax(400px,42%)!important;grid-template-areas:"e p" "h p" "s p" "x p" "f p"!important;grid-template-rows:1fr auto auto auto 1fr!important;align-content:stretch!important;align-items:start!important;row-gap:26px!important;column-gap:64px!important;padding:64px 0 72px!important}
+  .brand h1{align-self:end!important;font-size:clamp(64px,7vw,112px)!important}
+  .brand .sticker{align-self:start!important}
+  .brand .hbtns{align-self:start!important}
+  .brand .portrait{grid-row:1 / span 5;align-self:center!important}
+  .brand .covrow{display:none!important}
+}
 </style>
 </head>
 <body>
@@ -3523,7 +3532,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 146 版';
+var BUILD='10/30 第 147 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
