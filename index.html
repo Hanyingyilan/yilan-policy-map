@@ -1256,6 +1256,14 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
   .brand .sticker b{font-size:30px}
   .covrow .mplaybtn,.covrow .covbtn{font-size:14px;min-height:42px}
 }
+
+/* v135 ranking tiles as square covers; number printed from data-n (iOS ignores counters on buttons) */
+.wall button,.wall button:first-child,.blk:nth-of-type(4) .wall button{aspect-ratio:1;min-height:0!important;padding:0!important;display:block!important;text-align:left}
+.wall button::after{content:attr(data-n)!important;left:9cqw;right:auto;top:8cqw;font-size:13cqw}
+.wall button::before{inset:4cqw;border-width:.8cqw}
+.wall b,.blk .wall b{position:absolute;left:9cqw;right:6cqw;top:30cqw;font-size:15.5cqw!important;line-height:1.1;white-space:nowrap;overflow:hidden}
+.wall span{position:absolute;left:9cqw;right:9cqw;bottom:9cqw;font-size:9.6cqw;line-height:1.3;margin:0;display:block}
+@media (max-width:700px){.wall{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 </style>
 </head>
 <body>
@@ -2145,7 +2153,7 @@ function panel(){
     h+='<section class="blk" id="s-play">'+funBox()+'</section>';
     h+='<section class="blk" id="s-town"><div class="sec">尋得家鄉金曲<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-label="'+esc(t.n)+' '+townCount(t.id)+' 首，打開專輯" aria-pressed="'+(!!PS.towns[t.id])+'">'+covName(t.n)+'<span class="sb">'+sbHTML((ICONS[t.id]||[])[1]||'')+'</span><span class="ct">'+townCount(t.id)+' 首</span></button>'}).join('')+'</div></section>';
     h+='<section class="blk" id="s-who"><div class="sec">找你那一張<small>可複選</small></div>'+audGroups()+'</section>';
-    h+='<section class="blk" id="s-num"><div class="sec">排行榜</div><div class="wall">'+WALL.slice(0,4).map(function(w){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div><div class="wallact"><button type="button" class="persbtn" data-wallcard>存成排行榜圖卡</button></div></section>';
+    h+='<section class="blk" id="s-num"><div class="sec">排行榜</div><div class="wall">'+WALL.slice(0,4).map(function(w,wi){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" data-n="0'+(wi+1)+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div><div class="wallact"><button type="button" class="persbtn" data-wallcard>存成排行榜圖卡</button></div></section>';
     h+='<section class="blk" id="s-video">'+videoSection()+'</section>';
     var any=false,tot=0;Object.keys(CATS).forEach(function(k){tot+=POL.filter(function(p){return p.c===k&&match(p)}).length});
     h+='<section class="blk" id="s-all"><div class="sec">全部曲目<small>'+tot+'</small></div><div class="pcats">';
@@ -3414,7 +3422,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 135 版';
+var BUILD='10/30 第 136 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
