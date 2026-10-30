@@ -1291,6 +1291,13 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
   .brand .hbtns button{padding:0 10px!important;font-size:12px!important;white-space:nowrap}
 }
 @media (max-width:340px){.brand .hbtns{gap:5px}.brand .hbtns button{padding:0 8px!important;font-size:11.5px!important}}
+/* v142 bigger cover on phones, tiny cover-switch chip */
+@media (max-width:700px){
+  .brand .portrait{width:clamp(132px,47vw,230px)}
+  .brand .covrow .covbtn{min-height:22px!important;padding:0 8px!important;font-size:10.5px!important;border-width:1px}
+}
+@media (max-width:340px){.brand .hbtns{flex-wrap:wrap!important}}
+@media (min-width:701px){.brand .covrow .covbtn{min-height:24px!important;padding:0 10px!important;font-size:11px!important;border-width:1px}}
 </style>
 </head>
 <body>
@@ -3451,7 +3458,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 141 版';
+var BUILD='10/30 第 142 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
