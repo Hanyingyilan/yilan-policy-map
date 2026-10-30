@@ -3321,12 +3321,12 @@ function fontReady(txt,cb){
 function blGen(nm,w){
   var k=bpPick('p',BP.length),wish=w||BL[bpPick('w',BL.length)];
   bpLoad(k,function(img){fontReady('祝福'+nm+wish,function(){
-    openImg(drawBlessCard(nm,wish,img,BP[k][1]),'林國漳祝福'+nm+'：'+wish+'｜宜蘭金曲①次看懂',blURL(),'林國漳-1定贏祝福卡.png','<button type="button" data-blagain>再抽一張</button>');
+    openImg(drawBlessCard(nm,wish,img,BP[k][1]),'林國漳祝福'+nm+'：'+wish+'｜宜蘭金曲①次看懂',blURL(),'林國漳-宜蘭祝福卡.png','<button type="button" data-blagain>再抽一張</button>');
     var a=OV.querySelector('[data-blagain]');if(a)a.onclick=function(){blGen(nm,w)};
   })});
 }
 function openBless(){
-  ovOpen('<h3 class="blh">🧧 「1定贏」祝福卡</h3><p class="ovn" style="margin-top:0">輸入名字，隨機抽一張林國漳的照片，配上一句祝福，做成圖卡傳給朋友。</p>'+
+  ovOpen('<h3 class="blh">🧧 宜蘭祝福卡</h3><p class="ovn" style="margin-top:0">輸入名字，隨機抽一張林國漳的照片，配上一句祝福，做成圖卡傳給朋友。</p>'+
     '<label class="blf">名字（最多 8 字）<input id="blname" maxlength="8" autocomplete="off" enterkeyhint="next" placeholder="例如：阿嬤、阿公、全家"></label>'+
     '<label class="blf">想自己寫祝福的話（最多 14 字，不寫就隨機）<input id="blwish" maxlength="14" autocomplete="off" enterkeyhint="go" placeholder="例如：身體健康，天天開心"></label>'+
     '<div class="ovb"><button type="button" class="pri" id="blgo">抽一張祝福卡</button></div>','bless');
@@ -3389,7 +3389,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 133 版';
+var BUILD='10/30 第 134 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
