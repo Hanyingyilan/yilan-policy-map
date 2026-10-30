@@ -1976,7 +1976,7 @@ var KN={
  K01:[['3萬','凍卵補助'],['倍增','0–2歲托育'],['12鄉鎮','假日臨托']],
  K02:[['100所','學校照明體檢'],['12歲以下','免門票'],['8年','藏書倍增']],
  K03:[['15萬','每校午餐保溫設備']],
- K04:[['400戶','青年婚育宅'],['約22億','5年'],['−300元','城際TPASS月票']]
+ K04:[['400戶','青年婚育宅'],['約22億','5年'],['降低300元','城際TPASS月票']]
 };
 var WALL=[['W01','12,000點','敬老卡每年額度'],['E01','300座','微型森林'],['A01','2,000公頃','有機農業面積'],['K04','400戶','縣政中心青年婚育宅'],['E02','75%','污水接管率目標'],['C01','千萬人次','觀光每年目標'],['W02','3萬元','每胎生育津貼'],['C02','8鄉鎮','雪山麓徑串聯']];
 var TOURS=[
@@ -2035,7 +2035,7 @@ function audFor(pid){return AUD.filter(function(a){return a.pol.indexOf(pid)>-1}
 function cardHTML(p,open){
   var c=CATS[p.c];
   var h='<article class="pc" style="--cc:'+(p.bg?'#9FB8DA':c.c)+'"><header><span class="dot" style="background:'+c.c+'"></span><span>'+esc(c.n)+'</span>';
-  h+=p.bg?'<span class="badge bg">既有計畫</span>':'<span class="badge">候選人承諾</span>';
+  h+=p.bg?'<span class="badge bg">既有計畫</span>':'<span class="badge">林國漳提出</span>';
   if(p.v===0)h+='<span class="badge v0" title="細節尚待確認">待確認</span>';
   h+='</header><h4>'+esc(p.t)+'</h4><p>'+esc(p.s)+'</p>';
   if(KN[p.id])h+='<div class="kn">'+KN[p.id].map(function(k){return '<div><b style="font-size:'+numSize(k[0],34,88)+'px">'+esc(k[0])+'</b><span>'+esc(k[1])+'</span></div>'}).join('')+'</div>';
@@ -2418,11 +2418,15 @@ function selectPin(id){
   S.sel={type:'pin',id:id};var rd={};polForPlace(id).forEach(function(x){x.rd.forEach(function(r){rd[r]=1})});
   setHL([],Object.keys(rd),[id]);refresh();var q=P(PLACES[id][1],PLACES[id][2]);flyView(q[0],q[1]+10,Math.min(V.s,.22));
 }
+var HOMEY=0;
+function keepY(){if(!S.sel)HOMEY=window.pageYOffset||document.documentElement.scrollTop||HOMEY}
+function restoreY(){var y=HOMEY;[0,80,300,700].forEach(function(t){setTimeout(function(){window.scrollTo(0,y)},t)})}
+document.addEventListener('click',function(){keepY()},true);
 function goBack(){
   var f=S.from;S.from=null;
-  if(f&&f.type==='town')selectTown(f.id);else if(f&&f.type==='aud')selectAud(f.id);else if(f&&f.type==='persona')openPersona();else clearSel();
+  if(f&&f.type==='town')selectTown(f.id);else if(f&&f.type==='aud')selectAud(f.id);else if(f&&f.type==='persona')openPersona();else{clearSel();restoreY()}
 }
-function selectPolicy(id){
+function selectPolicy(id){keepY();
   var p=PBY[id];S.from=(S.sel&&S.sel.type!=='policy')?S.sel:(S.sel&&S.sel.type==='policy'?S.from:null);S.sel={type:'policy',id:id};
   var tw=p.tw==='all'?[]:p.tw.slice();(p.lt||[]).forEach(function(t){if(tw.indexOf(t)<0)tw.push(t)});
   setHL(tw,p.rd,p.pl);refresh();
@@ -3010,7 +3014,7 @@ function drawPolCard(p){
   c.font='900 34px '+CV_F;var cw=c.measureText(cc.n).width+48;
   c.fillStyle=cc.c;rrect(c,64,150,cw,56,28);c.fill();
   c.fillStyle='#1B1B18';c.fillText(cc.n,88,190);
-  c.fillStyle='#F1DFC0';c.font='700 30px '+CV_F;c.fillText('候選人承諾',64+cw+20,190);
+  c.fillStyle='#F1DFC0';c.font='700 30px '+CV_F;c.fillText('林國漳提出',64+cw+20,190);
   var tfs=78,tl;
   [112,98,88,78].some(function(f){tfs=f;c.font='900 '+f+'px '+CV_S;tl=cvWrap(c,p.t,W-128,4);return f===78||(tl.length<=3&&(tl.length===1||tl[tl.length-1].length>=2))});
   var lh=Math.round(tfs*1.28);
@@ -3352,7 +3356,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 124 版';
+var BUILD='10/30 第 125 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
