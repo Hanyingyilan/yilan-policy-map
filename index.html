@@ -1278,6 +1278,19 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
   .brand .covrow .mplaybtn i{width:20px;height:20px}
 }
 @media (max-width:700px){html.xl .brand .sticker{font-size:11.5px!important;padding:6px 12px 8px!important}html.xl .brand .sticker b{font-size:34px!important}}
+/* v140 cover-switch chip: small, sits beside the listen button */
+.brand .covrow .covbtn{min-height:30px!important;padding:0 12px!important;font-size:12px!important;border-width:1.5px;width:auto!important;flex:none}
+@media (max-width:700px){
+  .brand .covrow{flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;justify-content:flex-start;gap:6px}
+  .brand .covrow .mplaybtn{flex:1 1 auto;width:auto!important;min-width:0}
+  .brand .covrow .covbtn{min-height:26px!important;padding:0 9px!important;font-size:11px!important}
+}
+/* v141 share + large-font buttons share one row */
+@media (max-width:700px){
+  .brand .hbtns{flex-direction:row!important;flex-wrap:nowrap!important;align-items:center;gap:6px}
+  .brand .hbtns button{padding:0 10px!important;font-size:12px!important;white-space:nowrap}
+}
+@media (max-width:340px){.brand .hbtns{gap:5px}.brand .hbtns button{padding:0 8px!important;font-size:11.5px!important}}
 </style>
 </head>
 <body>
@@ -3438,7 +3451,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 139 版';
+var BUILD='10/30 第 141 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
