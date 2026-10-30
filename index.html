@@ -2266,7 +2266,7 @@ document.addEventListener('keydown',function(e){
   if(ALBV.hidden)return;if(e.key==='Escape'){albClose();return}
   if(e.key==='Tab'){var f=[].slice.call(ALBV.querySelectorAll('button')).filter(function(x){return x.offsetParent!==null});if(!f.length)return;var i=f.indexOf(document.activeElement);if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}}
 });
-var MUS=[{f:'music/chusheng.mp3',t:'宜蘭未來的希望',s:'出征版'},{f:'music/kaixuan.mp3',t:'宜蘭未來的希望',s:'凱旋版'}];
+var MUS=[{f:'music/chusheng.mp3',t:'宜蘭未來的希望',s:'出發版'},{f:'music/kaixuan.mp3',t:'宜蘭未來的希望',s:'凱旋版'}];
 var MP={a:null,i:0,on:false};
 function mpEnsure(){if(MP.a)return MP.a;var a=new Audio();a.preload='none';a.addEventListener('ended',function(){mpGo((MP.i+1)%MUS.length,true)});a.addEventListener('play',mpPaint);a.addEventListener('pause',mpPaint);a.addEventListener('error',function(){var m=$('#mpmsg');if(m)m.textContent='這首歌暫時無法播放，請稍後再試。'});MP.a=a;return a}
 function mpGo(i,play){var a=mpEnsure();MP.i=i;a.src=MUS[i].f;if(play){var p=a.play();if(p&&p.catch)p.catch(function(){mpPaint()})}mpPaint()}
@@ -3389,7 +3389,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 131 版';
+var BUILD='10/30 第 132 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
