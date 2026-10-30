@@ -1131,6 +1131,14 @@ body.hasbar .mpbar{bottom:88px}
   .pcats .pcat[open] .row .t{font-size:calc(16px*var(--ps,1))}
 }
 .pcat[open]>summary{border-bottom:2px solid #E0C85C}
+
+/* v129 play tiles: label always fits; second cover has gold frame baked in */
+@media (min-width:600px){.ftiles .ft,.ftiles .ft.fday{aspect-ratio:1}.ftiles .ft .fl{font-size:17cqw;top:11cqw}}
+.portrait .pimg img{background:#E0C85C}
+
+/* v130 labels stay inside the dotted frame */
+@media (max-width:599px){.ftiles .ft .fl{font-size:17cqw;top:12cqw;line-height:1.06}}
+@media (min-width:600px){.ftiles .ft .fl{font-size:16cqw;top:11cqw;line-height:1.06}}
 </style>
 </head>
 <body>
@@ -1154,7 +1162,7 @@ body.hasbar .mpbar{bottom:88px}
     <div class="tip" id="tip"></div>
   </section>
   <aside class="panel" role="main" aria-label="政見清單與內容">
-    <nav class="topnav" aria-label="頁面導覽"><span class="tnb"><i aria-hidden="true"></i>宜蘭金曲</span><button type="button" data-go="s-play">玩一玩</button><button type="button" data-go="s-town">尋得家鄉那一張</button><button type="button" data-go="s-who">找你那一張</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button><button type="button" class="tnl" data-music><i aria-hidden="true"></i>聽歌</button></nav>
+    <nav class="topnav" aria-label="頁面導覽"><span class="tnb"><i aria-hidden="true"></i>宜蘭金曲</span><button type="button" data-go="s-play">玩一玩</button><button type="button" data-go="s-town">尋得家鄉金曲</button><button type="button" data-go="s-who">找你那一張</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button><button type="button" class="tnl" data-music><i aria-hidden="true"></i>聽歌</button></nav>
     <div class="brand">
       <div class="sticker">距離投票日 11/28<b id="cd"></b></div>
       <h1 aria-label="宜蘭金曲，一次看懂">宜蘭金曲<br><span class="c1" aria-hidden="true">1</span>次看懂</h1>
@@ -2023,7 +2031,7 @@ function panel(){
   }else{
     h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>現場 MV</button></div>';
     h+='<section class="blk" id="s-play">'+funBox()+'</section>';
-    h+='<section class="blk" id="s-town"><div class="sec">尋得家鄉那一張<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-label="'+esc(t.n)+' '+townCount(t.id)+' 首，打開專輯" aria-pressed="'+(!!PS.towns[t.id])+'">'+covName(t.n)+'<span class="sb">'+sbHTML((ICONS[t.id]||[])[1]||'')+'</span><span class="ct">'+townCount(t.id)+' 首</span></button>'}).join('')+'</div></section>';
+    h+='<section class="blk" id="s-town"><div class="sec">尋得家鄉金曲<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-label="'+esc(t.n)+' '+townCount(t.id)+' 首，打開專輯" aria-pressed="'+(!!PS.towns[t.id])+'">'+covName(t.n)+'<span class="sb">'+sbHTML((ICONS[t.id]||[])[1]||'')+'</span><span class="ct">'+townCount(t.id)+' 首</span></button>'}).join('')+'</div></section>';
     h+='<section class="blk" id="s-who"><div class="sec">找你那一張<small>可複選</small></div>'+audGroups()+'</section>';
     h+='<section class="blk" id="s-num"><div class="sec">排行榜</div><div class="wall">'+WALL.slice(0,4).map(function(w){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" style="--cc:'+CATS[p.c].c+'"><b style="font-size:'+numSize(w[1],44,150)+'px">'+esc(w[1])+'</b><span>'+esc(w[2])+'</span></button>'}).join('')+'</div><div class="wallact"><button type="button" class="persbtn" data-wallcard>存成排行榜圖卡</button></div></section>';
     h+='<section class="blk" id="s-video">'+videoSection()+'</section>';
@@ -3278,7 +3286,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'林國漳政見重點數字｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'林國漳-重點數字.png')}
-var BUILD='10/30 第 118 版';
+var BUILD='10/30 第 121 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3300,10 +3308,10 @@ function ballot(){
   else{el.className='ballot pending';el.textContent='號次：抽籤後公布'}
 }
 function countdown(){var d=Math.ceil((new Date(2026,10,28)-new Date())/86400000);$('#cd').textContent=d>0?d+' 天':(d===0?'今天':'已投票')}
-function mkHeroCD(){var p=$('#portrait');if(!p||p.querySelector('.hcd'))return;var d=document.createElement('div');d.className='hcd';d.setAttribute('aria-hidden','true');d.innerHTML=discSVG('宜蘭政見','#A63A35,#6E1B25','#E0C85C','#F6EFD8','h');p.insertBefore(d,p.firstChild)}
+function mkHeroCD(){var p=$('#portrait');if(!p||p.querySelector('.hcd'))return;var d=document.createElement('div');d.className='hcd';d.setAttribute('aria-hidden','true');d.innerHTML=discSVG('全民縣長','#A63A35,#6E1B25','#E0C85C','#F6EFD8','h');p.insertBefore(d,p.firstChild)}
 mkHeroCD();
 function mkCoverSw(){var p=$('#portrait');if(!p||p.querySelector('.covrow'))return;var img=p.querySelector('.pimg img'),b=p.querySelector('.mplaybtn');if(!img||!b)return;
-  var opts=[['photos/album.jpg','專輯封面'],['photos/album2.jpg?v=2','年輕時的照片']],cur=0;try{cur=+localStorage.getItem('yl-cover')||0}catch(e){}
+  var opts=[['photos/album.jpg','專輯封面'],['photos/album2.jpg?v=3','年輕時的照片']],cur=0;try{cur=+localStorage.getItem('yl-cover')||0}catch(e){}
   var row=document.createElement('div');row.className='covrow';p.insertBefore(row,b);row.appendChild(b);
   var sw=document.createElement('div');sw.className='covsw';sw.setAttribute('role','group');sw.setAttribute('aria-label','換封面');
   sw.innerHTML='<span>換封面</span>'+opts.map(function(o,i){return '<button type="button" data-cov="'+i+'" aria-label="'+o[1]+'" aria-pressed="'+(i===cur)+'"><img src="'+o[0]+'" alt="" width="56" height="56" loading="lazy"></button>'}).join('');
