@@ -1336,6 +1336,17 @@ body.votegold .hcd{filter:sepia(.85) saturate(2.6) hue-rotate(-10deg) brightness
 body.votegold .brand .sticker{background:#E0C85C!important;color:#6E1B25!important}
 body.votegold .brand .sticker b{color:#1B1B18!important}
 @media (prefers-reduced-motion:reduce){#toast{transition:none}}
+/* v145 desktop/tablet hero: bigger cover, calmer cold-joke button */
+.coldbtn{margin-top:22px}
+@media (min-width:701px){.coldbtn{width:auto;min-width:220px;padding:0 36px;margin:26px auto 0;border-radius:999px}}
+@media (min-width:701px) and (max-width:1023px){.brand .portrait{width:clamp(220px,38vw,340px)}}
+@media (min-width:1024px){
+  .brand{grid-template-columns:minmax(0,1fr) minmax(440px,620px)!important;gap:20px 64px!important;padding:56px 0 72px!important}
+  .brand .portrait{width:100%}
+}
+/* v145b keep the spinning CD from covering the title on desktop */
+.brand h1{position:relative;z-index:1}
+@media (min-width:1024px){.hcd{left:-16%;width:80%}}
 </style>
 </head>
 <body>
@@ -3497,7 +3508,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 144 版';
+var BUILD='10/30 第 145 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3512,20 +3523,20 @@ function ballot(){
 }
 /* ---- v143 cold-joke easter eggs (jokes are drafts awaiting team approval) ---- */
 var COLD=[
- {q:'三星蔥為什麼從來不迷路？',a:'因為它自帶三顆星，隨時定位。',c:'agri'},
  {q:'稻子為什麼特別有禮貌？',a:'因為越成熟，越懂得鞠躬。',c:'agri'},
  {q:'火車為什麼從來不迷路？',a:'因為它一直走在正軌上。',c:'traffic'},
- {q:'雪山隧道裡最冷的是什麼？',a:'是第十次有人問：到了沒？',c:'traffic'},
- {q:'蝦子最愛的運動是什麼？',a:'游蝦。（游泳）',c:'sea'},
  {q:'魚為什麼不上網？',a:'怕被釣魚網站釣走。',c:'sea'},
- {q:'礁溪的溫泉為什麼人緣好？',a:'因為它很泡容。（包容）',c:'tour'},
- {q:'數學課本為什麼心情不好？',a:'因為它有太多問題。',c:'kids'},
  {q:'為什麼健康檢查特別準？',a:'因為每次都一針見血。',c:'care'},
  {q:'垃圾車為什麼最受歡迎？',a:'音樂一響，大家都跑出來。',c:'env'},
- {q:'紅綠燈為什麼不用打卡上班？',a:'因為它一直在閃。',c:'safe'},
- {q:'為什麼宜蘭人特別浪漫？',a:'因為每句話都很蘭漫。',c:'tour'},
  {q:'為什麼地圖從來不會累？',a:'因為它每天都在被人指指點點。',c:'vision'},
- {q:'牛舌餅為什麼很會聊天？',a:'因為它有一條舌頭。',c:'tour'}
+ {q:'為什麼冰箱總是很有自信？',a:'因為它很會冷靜。',c:'vision'},
+ {q:'蔥為什麼很會交朋友？',a:'因為它很蔥明。（聰明）',c:'agri'},
+ {q:'魚最喜歡上哪一科？',a:'魚文。（語文）',c:'sea'},
+ {q:'公車為什麼很沉穩？',a:'因為它每一站都站得很穩。',c:'traffic'},
+ {q:'烏龜過馬路為什麼要很久？',a:'因為牠在等龜定的綠燈。（規定）',c:'safe'},
+ {q:'鉛筆為什麼很有學問？',a:'因為它每天都在寫作。',c:'kids'},
+ {q:'泡湯的人為什麼都很樂觀？',a:'因為他們都泡持希望。（抱持）',c:'tour'},
+ {q:'為什麼回收箱很有人緣？',a:'因為它很會收買人心。',c:'env'}
 ];
 var COLDLAST=-1;
 function coldToday(){var dn=Math.floor((Date.now()+8*36e5)/864e5);return dn%COLD.length}
