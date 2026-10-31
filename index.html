@@ -3069,7 +3069,7 @@ var RECPV=/[?&]rec=1/.test(location.search);
 var RECL=REC.filter(function(r){return r.vid||RECPV});
 function recSection(){
   if(!RECL.length)return '';
-  return '<section class="blk" id="s-rec"><div class="sec">他們推薦林國漳<small>'+RECL.length+' 位</small></div><div class="recg">'+RECL.map(function(r,i){
+  return '<section class="blk" id="s-rec"><div class="sec">嘉賓隆重推薦<small>'+RECL.length+' 位</small></div><div class="recg">'+RECL.map(function(r,i){
     return '<button type="button" class="rc" data-rec="'+i+'" aria-label="播放：'+esc(r.who+' '+r.nm)+'推薦林國漳">'+
      '<span class="rcv">'+(r.img?'<img src="'+esc(r.img)+'" alt="" loading="lazy">':'<span class="rcph">照片待補</span>')+'</span>'+
      '<span class="rcb"><span class="rcd" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5z" fill="currentColor"/></svg></span><span class="rcn"><small>'+esc(r.who)+'</small><b>'+esc(r.nm)+'</b></span><em>推薦林國漳</em></span></button>'}).join('')+'</div></section>'
@@ -3083,7 +3083,7 @@ function openRec(i){
   document.body.appendChild(m);document.body.style.overflow='hidden';VMO=m;
   var x=m.querySelector('.vmx');if(x&&x.focus)x.focus();
 }
-(function(){if(!RECL.length)return;var nv=document.querySelector('.topnav button[data-go="s-town"]');if(!nv)return;var b=document.createElement('button');b.type="button";b.dataset.go='s-rec';b.textContent='他們推薦';nv.parentNode.insertBefore(b,nv)})();
+(function(){if(!RECL.length)return;var nv=document.querySelector('.topnav button[data-go="s-town"]');if(!nv)return;var b=document.createElement('button');b.type="button";b.dataset.go='s-rec';b.textContent='嘉賓隆重推薦';nv.parentNode.insertBefore(b,nv)})();
 function videoSection(){
   var s=vSecs();
   return '<div class="sec" id="vhd">現場 MV<small>'+VID.length+' 支</small></div>'+
@@ -3731,7 +3731,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',SHARE_BASE||location.href.split('#')[0],'宜蘭大歌廳-排行榜.png')}
-var BUILD='10/31 第 163 版';
+var BUILD='10/31 第 164 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
