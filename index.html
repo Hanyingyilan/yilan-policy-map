@@ -1303,7 +1303,7 @@ html.xl .brand{grid-template-areas:"h p" "s p" "x p" "b b" "g g"}
 .portrait>.covbtn{position:absolute;top:-13px;right:12px;z-index:3;display:inline-flex;align-items:center;justify-content:center;min-height:26px;padding:0 11px;border:1.5px solid #1B1B18;border-radius:999px;background:#E0C85C;color:#1B1B18;font:900 12px var(--sans,"Noto Sans TC",sans-serif);cursor:pointer;white-space:nowrap;box-shadow:none}
 .portrait>.covbtn:hover{background:#FFF6DA}
 .portrait>.covbtn:focus-visible{outline:3px solid #fff;outline-offset:2px}
-@media (min-width:701px){.portrait>.covbtn{font-size:13px;min-height:28px}}
+@media (min-width:701px){.portrait>.covbtn{font-size:16px;min-height:38px;padding:0 18px;top:-18px;right:16px}}
 @media (max-width:700px){
   .brand{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"h h" "p p" "s x"!important;grid-template-rows:auto auto auto!important;column-gap:10px!important;row-gap:18px!important;align-items:stretch!important}
   .brand h1{font-size:clamp(26px,8.6vw,38px)!important;line-height:1.15!important;white-space:nowrap;margin-bottom:-4px!important}
@@ -1381,10 +1381,10 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 .topnav button,.topnav .tnb{white-space:nowrap;flex:none}
 @media (min-width:1024px){
   .topnav{gap:clamp(6px,1.2vw,22px)!important}
-  .brand h1{font-size:clamp(60px,5.9vw,100px)!important}
+  .brand h1{font-size:clamp(60px,5.4vw,78px)!important}
   .brand{grid-template-columns:minmax(0,1fr) minmax(420px,50%)!important;column-gap:40px!important}
-  .brand .hcd{width:100%!important;left:-6%!important;top:0!important;transform:translateX(-36%);transition:transform .8s cubic-bezier(.22,1,.36,1)}
-  .brand .portrait.cdout .hcd{transform:translateX(-46%)}
+  .brand .hcd{width:100%!important;left:-6%!important;top:0!important;transform:translateX(-32%);transition:transform .8s cubic-bezier(.22,1,.36,1)}
+  .brand .portrait.cdout .hcd{transform:translateX(-37%)}
   .brand .portrait.cdout .hcd svg{animation-duration:5s}
 }
 @media (min-width:1024px) and (max-width:1180px){.topnav .tnb{display:none!important}.topnav button[data-go]{font-size:15px!important;padding:0 12px!important}}
@@ -1398,6 +1398,29 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 .mpseek input::-moz-range-progress{height:6px;border-radius:3px;background:#E0C85C}
 .mpseek input::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#E0C85C;border:2px solid #1B1B18}
 .mpseek input:focus-visible{outline:3px solid #fff;outline-offset:2px;border-radius:4px}
+/* v152 phone: pressing the cover slides the CD out of the sleeve's bottom edge, pressing again slides it back */
+@media (max-width:700px){
+  .brand .portrait{container-type:inline-size;transition:margin-bottom .6s cubic-bezier(.22,1,.36,1)}
+  .brand .hcd{display:block;width:62cqw;height:62cqw;left:19cqw;top:20cqw;opacity:0;pointer-events:none;transform:translateY(0) scale(.92);transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .35s}
+  .brand .hcd svg{animation:hspin 14s linear infinite}
+  .brand .portrait.cdout{margin-bottom:calc(min(100vw - 32px,440px)*.34 - 36px)}
+  .brand .portrait.cdout .hcd{opacity:1;transform:translateY(52cqw) scale(1);pointer-events:auto;cursor:pointer}
+  .brand .portrait.cdout .hcd svg{animation-duration:4s}
+  .brand .portrait.cdout .covrow{visibility:hidden}
+  .mpanel{top:auto;bottom:10px;transform:translateX(-50%)}
+}
+@media (prefers-reduced-motion:reduce){.brand .hcd,.brand .portrait{transition:none!important}}
+/* v153 desktop hero: smaller CD overhang so it never reaches the title; sub-page header back to one line */
+@media (min-width:1024px){
+  .brand{grid-template-columns:minmax(0,1fr) minmax(380px,40%)!important;column-gap:40px!important}
+  .brand h1{font-size:min(78px,5.4vw)!important}
+  .brand .hcd{width:80%!important;left:0!important;top:10%!important;transform:translateX(-48%)}
+  .brand .portrait.cdout .hcd{transform:translateX(-56%)}
+  body.sub .brand{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"h" "x"!important;grid-template-rows:auto!important;padding:40px 0 20px!important}
+  body.sub .brand h1{font-size:36px!important;align-self:center!important}
+  body.sub .brand h1 br{display:none}
+  body.sub .brand h1 .c1{margin:0 .2em}
+}
 </style>
 </head>
 <body>
@@ -2471,7 +2494,7 @@ function mpPaint(){
   });
   (function(){var pn=document.getElementById('mpanel');if(!pn||!window.MutationObserver)return;new MutationObserver(function(){var p=document.getElementById('portrait');if(p)p.classList.toggle('cdout',!pn.hidden)}).observe(pn,{attributes:true,attributeFilter:['hidden']})})();
   document.addEventListener('click',function(e){
-    var o=e.target.closest('[data-music],.portrait .pimg');if(!o)return;
+    var o=e.target.closest('[data-music],.portrait .pimg');if(!o)return;if(o.matches('.portrait .pimg')&&window.matchMedia('(max-width:700px)').matches){var pp=$('#portrait');if(pp)pp.classList.toggle('cdout');return}
     var pn=$('#mpanel');pn.hidden=!pn.hidden;if(!pn.hidden){var f=pn.querySelector('[data-mpi]');if(f)f.focus()}
   });
 })();
@@ -3121,8 +3144,8 @@ function drawFortune(daily,fid){
   ovOpen('<div class="fzt'+(reduce?'':' shake')+'">'+TUBE+'</div><p class="fzh">'+(reduce?'':'搖一搖…')+'</p>','fz');
   setTimeout(function(){
     if(tok!==FZ.tok||OV.hidden)return;
-    if(daily&&Math.floor((Date.now()+8*36e5)/864e5)%7===3){coldCard(coldToday(),'今日一籤　'+dayLabel()+'　這支籤有點冷','再抽一支');markDay();return}
-    if(!daily&&!fid&&Math.random()<.15){coldCard(coldPick(),'這支籤有點冷','再抽一支');return}
+    if(daily&&Math.floor((Date.now()+8*36e5)/864e5)%3===1){coldCard(coldToday(),'今日一籤　'+dayLabel()+'　這支籤有點冷','再抽一支');markDay();return}
+    if(!daily&&!fid&&Math.random()<.3){coldCard(coldPick(),'這支籤有點冷','再抽一支');return}
     var c=CATS[p.c],url=fzURL(p.id),po=fzPoem(p.id),gr=fzGrade(p.id);
     var h='<div class="fzc" style="--cc:'+c.c+'">'+(daily?'<div class="fzday">今日一籤　'+dayLabel()+'</div>':'')+'<div class="fzno"><span class="fzgr">'+gr+'</span>第<b>'+(i+1)+'</b>籤<small>共 '+cand.length+' 支</small></div>'+
       '<div class="fzpoem" aria-label="籤詩">'+po.map(function(l){return '<span>'+esc(l)+'</span>'}).join('')+'</div>'+
@@ -3279,7 +3302,7 @@ function funBox(){
     '<button type="button" class="ft t1 fday" '+(dayDone()?'data-fortune':'data-daily')+'>'+ic.t+'<strong class="fl">抽一支籤</strong>'+(dayDone()?'':'<i class="fnew">今天還沒抽</i>')+'</button>'+
     '<button type="button" class="ft t2" data-bless>'+ic.b+'<strong class="fl">祝福卡</strong></button>'+
     '<button type="button" class="ft t3" data-quiz>'+ic.q+'<strong class="fl">鄉鎮測驗</strong></button>'+
-    '<button type="button" class="ft t4" data-cold>'+ic.c+'<strong class="fl">今日一冷</strong></button></div></div>';
+    '<button type="button" class="ft t4" data-cold>'+ic.c+'<strong class="fl">'+(nightNow()?'深夜一冷':'今日一冷')+'</strong></button></div></div>';
 }
 var FZP={"T01":["北宜快路穿山近","高鐵新途接海遙","一高二快成一網","家家出入笑相邀"],"T02":["羅東站畔人潮湧","蘇澳灣中帆影高","五站連環通四境","行程順暢無煩勞"],"T03":["通衢縱貫田疇闊","小巷橫連戶牖寬","四縱六橫成脈絡","鄉鄰相往笑聲歡"],"T04":["單車穿巷人皆便","綠運聯程低碳清","一卡暢遊縣內外","鄉鄉往返皆通行"],"T05":["頭礁兩地車聲近","高架北延軌道通","不必平交道口候","歸途平穩笑聲同"],"T06":["湯煙裊裊行人靜","漫步悠然腳印清","巷弄全歸行路客","從容一步一程輕"],"T08":["孩童放學平安返","老幼出門步道寬","接駁環連鐵與路","慈心共護步行安"],"T07":["長途北上非徒過","接駁先行準備全","產業人才皆預備","特區三諾定相連"],"I01":["百工智慧生新業","北宜雙心串此鄉","運動養生為業態","家家富足安祥康"],"I03":["青年不必離鄉遠","新系增開學路長","產學攜持育秀士","人才返里鵬程揚"],"I04":["山青水秀居宜地","產業多元藍綠昌","遷入宜蘭成樂土","人人嚮往好家鄉"],"G01":["車行有度人安泰","毒駕嚴防法網牢","共力同心織密網","歸程平順笑聲高"],"G02":["家園電線須修繕","火患預防補助來","老屋換新添保障","團圓夜夜笑顏開"],"G03":["英雄赴火無猶豫","義勇護城人力全","勤務均衡添保障","歸來安穩一家圓"],"G04":["偏鄉道路兒童穩","校外街頭守護安","步步為營防慘事","孩童笑語滿街歡"],"A01":["好農好米好蔬菜","綠色耕耘土壤肥","初保有津農戶喜","名牌遠播越洋飛"],"A02":["風霜雨露農家苦","險有雙全補助周","冷鏈送鮮無損耗","員山好物銷全洲"],"S01":["漁民出海波濤闊","港務更新產業昌","三項承擔先落實","漁民得利笑聲長"],"S02":["開蘭首邑風情古","烏石老街外澳風","帶狀觀光接海岸","年年盛事浪花紅"],"S03":["漁村五處連波岸","藍路蜿蜒碧海潮","山海同遊真樂土","人人運動樂逍遙"],"S04":["南方澳畔帆檣聚","智慧海灣科技新","港務整新迎產業","乘風破浪向前津"],"C01":["山光水色宜人美","雪嶺蜿蜒步道長","客至三圈皆有景","歡聲笑語滿蘭陽"],"C02":["山林淺徑雲煙靜","步道連綿向海潮","漫步首都成美夢","鄉鄉踏徑樂逍遙"],"C08":["一鄉一線雲山近","八景千般物產鮮","古道舊蹤尋故事","一天走遍笑相連"],"C09":["端陽鼓響龍舟競","河岸歡聲震耳遙","好戲連臺迎遠客","人文競秀躍新潮"],"C03":["蘭陽自古文風盛","書院傳承教育香","文化深耕成美景","鄉鄉弦誦承光芒"],"C04":["溫泉清澈汙流去","水岸新妝綠水清","遊客閒行河畔路","龍舟競渡浪花輕"],"C05":["山村客語風情美","廟宇三山香火隆","古調悠揚傳後世","擂茶香裡笑聲融"],"C06":["城池古蹟綿千載","戲曲傳薪萬戶和","薪火相傳台上唱","蘭陽戲裡有笙歌"],"C07":["登山划水騎行樂","健體強身氣力雄","國手栽培連賽事","全民運動笑容同"],"E01":["山林海岸千株綠","百座微森遍市鄉","綠意迴廊連一氣","青天計畫園林芳"],"E02":["江河共治連三段","污水截流碧水清","雨水回收增儲量","蘭陽盛世慶昇平"],"E03":["颱風豪雨防洪早","水利強堤固岸防","審慎把關開發案","源頭到海共安康"],"E04":["源頭管控嚴稽核","突擊抽查不放鬆","三道防關緊守護","人人吃得放心中"],"W01":["耆英持卡無憂慮","敬老卡盈點數豐","每月一千添暖意","鄉親歡喜笑聲同"],"W02":["關懷弱勢無遺憾","補助提升濟老貧","醫藥午餐皆有助","新民舊戶皆安身"],"N01":["新民遠道成宜客","培力扶持共學長","共議家園多決策","人人相待有家鄉"],"W03":["頭城父老行程遠","就近尋醫共盼安","審視增添醫療所","健康守護人人歡"],"W04":["鄉親有話隨時說","縣府開門聽眾聲","面對面談零阻隔","心聲直達政通明"],"W05":["勞工汗水人尊敬","採購公平薪給豐","健檢職能增保障","職人榮譽暖心中"],"K01":["歡迎寶寶補三萬","托育增班名額添","孕婦育兒皆有助","家家幸福笑容甜"],"K02":["孩童樂土歡聲起","教室新妝彩繪飛","接送專車皆有備","爹娘安穩樂相歸"],"K06":["孩童午飯香盈室","在地食材鮮美全","吃飯讀書皆免費","身強體壯稚顏鮮"],"K03":["師生共議辦教學","父母同心校務興","戶外課堂迎大地","兒童茁壯向高層"],"K04":["青年盼有安身處","縣府中心添住家","四百新居迎伴侶","遠端工作盡開花"],"K05":["毛孩有地歡奔跑","夜診獸醫守護家","主客同心皆善待","鄰人相伴笑如花"],"D01":["山林部落人情厚","共議先行尊族人","部落民生添福利","原鄉歲月永相親"],"V01":["全民縣長不分黨","乾淨公開選舉明","共好桃源同努力","同心作伙拚前程"],"X01":["羅東水網相連處","夜市繁華笑語喧","鐵道高懸通內外","市中心裡換新園"],"X02":["員山好水源頭近","遊憩公園樂事繁","漫步山林尋勝境","好山好水憶桃源"],"X03":["宜蘭舊市重光彩","河岸新妝兩岸歡","道路聯通醫療網","市民出入更平安"],"X04":["閘門河畔微波靜","水路縱橫文創興","保育濕原兼治水","人和地利共攀登"],"X05":["安農溪畔清波遠","林鐵蔥鄉漫步悠","路網東西添便利","溫泉地熱暖心頭"],"X06":["高山雲海鄉情厚","林下耕耘產業新","古調歌謠傳後代","防災建設護鄉民"],"X07":["壯圍濱海風光美","水站渠通歲月長","舊址新生迎創意","年年博覽展輝煌"],"X08":["蘇花改道通新路","碧候溫泉暖客途","水足糧豐安部落","南方澳裡樂如圖"],"X09":["湯鄉康養安居美","水岸整修新舊渠","路網暢通迎遠客","家家安樂福長餘"],"X10":["頭城古鎮重新貌","快線延伸向海遙","衝浪漁村皆有景","鄉親期盼笑容嬌"],"X11":["南方澳港漁帆美","溪水分流洪患輕","海港觀光迎遠客","交通暢達笑聲迎"],"X12":["冬山河畔遊人樂","水域觀光藍路寬","治水工程皆審慎","交通暢達笑聲歡"],"X13":["農民土地求公道","友善農耕護濕園","檢討範圍求合理","公平落實無虛言"]};
 var FZ_DEF=["蘭陽山海風光美", "宜縣民心團結昌", "作伙同心耕福地", "鄉親共好笑聲長"];
@@ -3569,7 +3592,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/30 第 151 版';
+var BUILD='10/31 第 153 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3589,15 +3612,15 @@ var COLD=[
  {q:'魚為什麼不上網？',a:'怕被釣魚網站釣走。',c:'sea'},
  {q:'為什麼健康檢查特別準？',a:'因為每次都一針見血。',c:'care'},
  {q:'垃圾車為什麼最受歡迎？',a:'音樂一響，大家都跑出來。',c:'env'},
- {q:'為什麼地圖從來不會累？',a:'因為它每天都在被人指指點點。',c:'vision'},
- {q:'為什麼冰箱總是很有自信？',a:'因為它很會冷靜。',c:'vision'},
- {q:'蔥為什麼很會交朋友？',a:'因為它很蔥明。（聰明）',c:'agri'},
- {q:'魚最喜歡上哪一科？',a:'魚文。（語文）',c:'sea'},
- {q:'公車為什麼很沉穩？',a:'因為它每一站都站得很穩。',c:'traffic'},
- {q:'烏龜過馬路為什麼要很久？',a:'因為牠在等龜定的綠燈。（規定）',c:'safe'},
- {q:'鉛筆為什麼很有學問？',a:'因為它每天都在寫作。',c:'kids'},
- {q:'泡湯的人為什麼都很樂觀？',a:'因為他們都泡持希望。（抱持）',c:'tour'},
- {q:'為什麼回收箱很有人緣？',a:'因為它很會收買人心。',c:'env'}
+ {q:'什麼動物最容易迷路？',a:'麋鹿。（迷路）',c:'traffic'},
+ {q:'什麼刀最長？',a:'屠龍刀，因為 too long。',c:'vision'},
+ {q:'飛機飛那麼高，為什麼不會撞到星星？',a:'因為星星會閃。',c:'tour'},
+ {q:'什麼東西越洗越髒？',a:'水。',c:'env'},
+ {q:'什麼門永遠關不上？',a:'球門。',c:'kids'},
+ {q:'什麼蛋最不能吃？',a:'笨蛋。',c:'agri'},
+ {q:'為什麼樹從來不怕迷路？',a:'因為它有根據。',c:'safe'},
+ {q:'什麼魚最不會游泳？',a:'木魚。',c:'sea'},
+ {q:'老師為什麼戴墨鏡？',a:'因為學生的未來太光明了。',c:'kids'}
 ];
 var COLDLAST=-1;
 function coldToday(){var dn=Math.floor((Date.now()+8*36e5)/864e5);return dn%COLD.length}
@@ -3614,27 +3637,21 @@ function coldCard(i,head,again,key){
   OV.querySelector('[data-coldagain]').onclick=function(){again==='再抽一支'?drawFortune():coldCard(coldPick(),head,again,key)};
   rv.focus();
 }
-function openCold(){coldCard(coldToday(),'今日一冷　'+dayLabel(),'再來一則')}
+function nightNow(){var h=new Date().getHours();return h>=23||h<5}
+function openCold(){coldCard(coldToday(),(nightNow()?'深夜一冷　':'今日一冷　')+dayLabel(),'再來一則')}
 var TOASTT=0;
 function toast(m){var t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t)}
   t.textContent=m;t.classList.add('on');clearTimeout(TOASTT);TOASTT=setTimeout(function(){t.classList.remove('on')},3600)}
 function daysLeft(){var m=/[?&]pd=(\d{4})(\d\d)(\d\d)/.exec(location.search),now=m?new Date(+m[1],+m[2]-1,+m[3]):new Date();return Math.ceil((new Date(2026,10,28)-now)/86400000)}
 (function(){
-  var n=0,t0=0;
-  document.addEventListener('click',function(e){
-    if(e.target.closest('.portrait .pimg')){var now=Date.now();if(now-t0>3000)n=0;t0=now;n++;
-      if(n>=5){n=0;var pn=$('#mpanel');if(pn)pn.hidden=true;coldCard(coldPick(),'B 面隱藏曲　第 13 首','再來一首','fz')}}
-  });
   var m=0,m0=0;
   document.addEventListener('click',function(e){
     if(e.target.closest('[data-mpnext]')){var now=Date.now();if(now-m0>8000)m=0;m0=now;m++;
       if(m>=3){m=0;var j=COLD[coldPick()];toast('沒有第三首了，但有第三個冷笑話：'+j.q+j.a)}}
-    var st=e.target.closest('.brand .sticker');
-    if(st){var d=daysLeft();toast(d>1?'還有 '+d+' 天，冷笑話一天一則':(d===1?'明天投票，記得投①':(d===0?'今天投票，記得投①':'謝謝大家')))}
   });
 })();
-function countdown(){var d=daysLeft();$('#cd').textContent=d>1?d+' 天':(d===1?'明天見':(d===0?'今天見':'已投票'));document.body.classList.toggle('votegold',d>=0&&d<=1)}
-function mkHeroCD(){var p=$('#portrait');if(!p||p.querySelector('.hcd'))return;var d=document.createElement('div');d.className='hcd';d.setAttribute('aria-hidden','true');d.innerHTML=discSVG('全民縣長','#A63A35,#6E1B25','#E0C85C','#F6EFD8','h');p.insertBefore(d,p.firstChild)}
+function countdown(){var d=daysLeft();$('#cd').textContent=d>1?d+' 天':(d===1?'明天見':(d===0?'今天見':'已投票'))}
+function mkHeroCD(){var p=$('#portrait');if(!p||p.querySelector('.hcd'))return;var d=document.createElement('div');d.className='hcd';d.setAttribute('aria-hidden','true');d.setAttribute('data-music','');d.innerHTML=discSVG('全民縣長','#A63A35,#6E1B25','#E0C85C','#F6EFD8','h');p.insertBefore(d,p.firstChild)}
 mkHeroCD();
 function mkCoverSw(){var p=$('#portrait');if(!p||p.querySelector('.covrow'))return;var img=p.querySelector('.pimg img'),b=p.querySelector('.mplaybtn');if(!img||!b)return;
   var opts=[['photos/album.jpg','專輯封面'],['photos/album2.jpg?v=4','年輕時的照片']],cur=0;try{cur=+localStorage.getItem('yl-cover')||0}catch(e){}
