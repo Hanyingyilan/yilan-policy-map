@@ -1413,9 +1413,12 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 /* v153 desktop hero: smaller CD overhang so it never reaches the title; sub-page header back to one line */
 @media (min-width:1024px){
   .brand{grid-template-columns:minmax(0,1fr) minmax(380px,40%)!important;column-gap:40px!important}
-  .brand h1{font-size:min(78px,5.4vw)!important}
+  .brand h1{font-size:min(112px,7.8vw)!important}
   .brand .hcd{width:80%!important;left:0!important;top:10%!important;transform:translateX(-48%)}
   .brand .portrait.cdout .hcd{transform:translateX(-56%)}
+  .brand{--fs:min(112px,7.8vw)}
+  .brand .sticker{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:calc(var(--fs)*.22)!important;width:calc(var(--fs)*4.3)!important;justify-self:start!important;padding:calc(var(--fs)*.1) calc(var(--fs)*.3)!important;border-radius:999px!important;font-size:calc(var(--fs)*.24)!important;white-space:nowrap!important}
+  .brand .sticker b{font-size:calc(var(--fs)*.52)!important;line-height:1.1!important}
   body.sub .brand{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"h" "x"!important;grid-template-rows:auto!important;padding:40px 0 20px!important}
   body.sub .brand h1{font-size:36px!important;align-self:center!important}
   body.sub .brand h1 br{display:none}
@@ -3592,7 +3595,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/31 第 153 版';
+var BUILD='10/31 第 155 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
