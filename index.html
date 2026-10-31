@@ -1502,8 +1502,8 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 /* v162 disco ball: bigger, shimmering, click = party mode (music + light beams + confetti); endorsement name band wraps by unit */
 .dbeams{display:none}
 @media (min-width:1024px){
-  .brand{--bw:clamp(112px,10.5vw,160px)}
-  .disco{width:var(--bw)!important;top:22px;pointer-events:auto!important;cursor:pointer;animation:dswing 5s ease-in-out infinite,dglow 2.4s ease-in-out infinite!important}
+  .brand{--bw:clamp(96px,8.8vw,132px);--dt:-4px}
+  .disco{width:var(--bw)!important;top:var(--dt)!important;pointer-events:auto!important;cursor:pointer;animation:dswing 5s ease-in-out infinite,dglow 2.4s ease-in-out infinite!important}
   .disco:focus-visible{outline:3px solid #FFF6DA;outline-offset:6px;border-radius:50%}
   .disco svg{filter:drop-shadow(0 8px 12px rgba(0,0,0,.35)) drop-shadow(0 0 14px rgba(255,232,150,.55))!important}
   .disco .dsl{animation:dsroll 3.4s linear infinite}
@@ -1518,7 +1518,7 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
   .disco .s6{left:96%;top:70%;width:8%;animation-delay:1.5s!important}
   .dbeams{display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;opacity:0;transition:opacity .5s}
   .brand.discoon .dbeams{opacity:1}
-  .dbeams .bm{position:absolute;left:calc(var(--fs)*5 + 12px + var(--bw)/2);top:calc(22px + var(--bw)*.92);width:1100px;height:150px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(255,244,190,.6),rgba(255,244,190,0) 85%);clip-path:polygon(0 47%,100% 0,100% 100%,0 53%);mix-blend-mode:screen;animation:dsw var(--t,7s) ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+  .dbeams .bm{position:absolute;left:calc(var(--fs)*5 + 12px + var(--bw)/2);top:calc(var(--dt) + var(--bw)*.92);width:1100px;height:150px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(255,244,190,.6),rgba(255,244,190,0) 85%);clip-path:polygon(0 47%,100% 0,100% 100%,0 53%);mix-blend-mode:screen;animation:dsw var(--t,7s) ease-in-out infinite alternate;animation-delay:var(--d,0s)}
   .dbeams .bm.r{background:linear-gradient(90deg,rgba(255,176,164,.5),rgba(255,176,164,0) 85%)}
   .dbeams .bm.w{background:linear-gradient(90deg,rgba(255,255,255,.5),rgba(255,255,255,0) 85%)}
   .dbeams .cf{position:absolute;border-radius:1px;pointer-events:none}
@@ -1582,6 +1582,7 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 .ab.bk[aria-pressed="true"] .bkc{background:#A63A35;box-shadow:inset 0 0 0 4px #FFF6DA}
 .ab.bk:hover{background:rgba(224,200,92,.28)}
 .ab.bk:focus-visible{outline:3px solid #1B1B18;outline-offset:-3px}
+@media (min-width:1500px){.brand{--dt:-16px}}
 </style>
 </head>
 <body>
@@ -1604,7 +1605,7 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
     <div class="tip" id="tip"></div>
   </section>
   <aside class="panel" role="main" aria-label="金曲清單與內容">
-    <nav class="topnav" aria-label="頁面導覽"><span class="tnb"><i aria-hidden="true"></i>宜蘭大歌廳</span><button type="button" data-go="s-town">尋得家鄉金曲</button><button type="button" data-go="s-who">想聽哪一張</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button><button type="button" class="tnl" data-music><i aria-hidden="true"></i>聽歌</button></nav>
+    <nav class="topnav" aria-label="頁面導覽"><span class="tnb"><i aria-hidden="true"></i>宜蘭大歌廳</span><button type="button" data-go="s-town">尋得家鄉金曲</button><button type="button" data-go="s-who">點歌本</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button><button type="button" class="tnl" data-music><i aria-hidden="true"></i>聽歌</button></nav>
     <div class="brand">
       <div class="sticker">距離投票日 11/28<b id="cd"></b></div>
       <h1 aria-label="宜蘭大歌廳，一次看全部">宜蘭大歌廳<br><span class="l2"><span class="c1" aria-hidden="true">1</span><span>次</span><span>看</span><span>全</span><span>部</span></span></h1>
@@ -2472,7 +2473,7 @@ function panel(){
     h+='<section class="blk" id="s-play">'+funBox()+'</section>';
     h+=recSection();
     h+='<section class="blk" id="s-town"><div class="sec">尋得家鄉金曲<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-label="'+esc(t.n)+' '+townCount(t.id)+' 首，打開專輯" aria-pressed="'+(!!PS.towns[t.id])+'">'+covName(t.n)+'<span class="sb">'+sbHTML((ICONS[t.id]||[])[1]||'')+'</span><span class="ct">'+townCount(t.id)+' 首</span></button>'}).join('')+'</div></section>';
-    h+='<section class="blk" id="s-who"><div class="sec">想聽哪一張<small>可複選</small></div>'+audGroups()+'</section>';
+    h+='<section class="blk" id="s-who"><div class="sec">'+(BOOK?'點歌本':'想聽哪一張')+'<small>可複選</small></div>'+audGroups()+'</section>';
     h+='<section class="blk" id="s-num"><div class="sec">排行榜</div><div class="wall">'+WALL.slice(0,4).map(function(w,wi){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" data-n="0'+(wi+1)+'" style="--cc:'+CATS[p.c].c+'">'+wallNum(w[1])+'<span>'+wallCap(w[2])+'</span></button>'}).join('')+'</div><div class="wallact"><button type="button" class="persbtn" data-wallcard>存成排行榜圖卡</button></div></section>';
     h+='<section class="blk" id="s-video">'+videoSection()+'</section>';
     var any=false,tot=0;Object.keys(CATS).forEach(function(k){tot+=POL.filter(function(p){return p.c===k&&match(p)}).length});
@@ -3269,7 +3270,7 @@ function openShare(){
   var line='https://line.me/R/msg/text/?'+encodeURIComponent(shareText()+'\n'+url);
   box.innerHTML='<div class="sh-k">分享這一頁</div><div class="sh-n">'+esc(title)+'</div>'+
     '<input id="shurl" type="text" readonly value="'+esc(url)+'" aria-label="連結">'+
-    '<div class="sh-r"><a class="line" href="'+line+'" target="_blank" rel="noopener">分享到 LINE</a><button type="button" id="shcopy">複製連結</button>'+(navigator.share?'<button type="button" id="shnative">更多方式…</button>':'')+'</div>'+
+    '<div class="sh-r"><a class="line" href="'+line+'" target="_blank" rel="noopener">分享到 LINE</a><button type="button" id="shcopy">複製連結</button></div>'+
     '<div class="sh-m" id="shmsg" role="status"></div>';
   box.hidden=false;$('#sharebtn').setAttribute('aria-expanded','true');
   var msg=function(t){$('#shmsg').textContent=t};
@@ -3278,7 +3279,6 @@ function openShare(){
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){fallback()})}else fallback();
     function fallback(){var i=$('#shurl');i.focus();i.select();try{document.execCommand('copy');done()}catch(e){msg('請長按連結選取後複製')}}
   };
-  if($('#shnative'))$('#shnative').onclick=function(){navigator.share({title:title,text:shareText(),url:url}).catch(function(){})};
 }
 function closeShare(){var b=$('#sharebox');if(!b||b.hidden)return;b.hidden=true;$('#sharebtn').setAttribute('aria-expanded','false')}
 (function(){var b=$('#sharebox');if(b&&b.parentNode!==document.body)document.body.appendChild(b)})();
@@ -3790,7 +3790,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',SHARE_BASE||location.href.split('#')[0],'宜蘭大歌廳-排行榜.png')}
-var BUILD='10/31 第 166 版';
+var BUILD='10/31 第 167 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
