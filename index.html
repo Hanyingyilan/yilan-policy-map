@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="宜蘭縣長候選人林國漳的金曲：選你住的地方和身分，找到跟你有關的金曲，也能看短影音。">
-<title>宜蘭金曲①次看懂</title>
+<title>宜蘭大歌廳①次看全部</title>
 <meta name="description" content="宜蘭縣長候選人林國漳的金曲：選你住的地方和身分，找到跟你有關的金曲，也能看短影音。">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="宜蘭金曲①次看懂">
-<meta property="og:title" content="宜蘭金曲①次看懂｜宜蘭縣長候選人">
+<meta property="og:site_name" content="宜蘭大歌廳①次看全部">
+<meta property="og:title" content="宜蘭大歌廳①次看全部｜宜蘭縣長候選人">
 <meta property="og:description" content="選你住的地方和身分，找到跟你有關的金曲。">
 <meta property="og:url" content="https://hanyingyilan.github.io/yilan-policy-map/">
 <meta property="og:image" content="https://hanyingyilan.github.io/yilan-policy-map/og.png">
@@ -1476,6 +1476,29 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 @keyframes dswing{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 @keyframes dtw{0%,100%{opacity:.15;transform:scale(.5)}50%{opacity:1;transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.disco,.disco .sp{animation:none!important}.disco .sp{opacity:.8}}
+/* v161 endorsement covers: landscape album sleeves */
+.recg{display:grid;gap:22px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:700px){.recg{grid-template-columns:repeat(2,minmax(0,1fr))}.recg .rc:last-child:nth-child(odd){grid-column:1/-1;width:calc(50% - 11px);justify-self:center}}
+.rc{position:relative;display:block;width:100%;padding:0;border:6px solid #E0C85C;border-radius:4px;background:#1B1B18;overflow:hidden;cursor:pointer;text-align:left;box-shadow:0 10px 24px rgba(27,27,24,.22);transition:transform .2s cubic-bezier(.4,0,.2,1)}
+.rc:hover,.rc:focus-visible{transform:translateY(-3px)}
+.rc:focus-visible{outline:3px solid #1B1B18;outline-offset:3px}
+.rcv{display:block;aspect-ratio:16/9;background:linear-gradient(135deg,#A63A35,#6E1B25)}
+.rcv img{display:block;width:100%;height:100%;object-fit:cover}
+.rcph{display:grid;place-items:center;width:100%;height:100%;color:rgba(255,246,218,.55);font:900 clamp(20px,3vw,30px) var(--serif)}
+.rc::after{content:"";position:absolute;inset:10px 10px calc(clamp(56px,6.4vw,74px) + 10px);border:2px dotted rgba(255,246,218,.75);pointer-events:none}
+.rcd{flex:none;display:grid;place-items:center;width:clamp(38px,4vw,46px);aspect-ratio:1;border-radius:50%;background:#E0C85C;color:#1B1B18}
+.rcd svg{width:52%;margin-left:6%}
+.rcb{display:flex;align-items:center;gap:14px;min-height:clamp(56px,6.4vw,74px);padding:6px 18px;background:#1B1B18;color:#FFF6DA}
+.rcn{display:flex;align-items:baseline;gap:10px;min-width:0;flex:1}
+.rcn small{font:700 clamp(14px,1.6vw,17px) var(--sans,"Noto Sans TC",sans-serif);color:#E0C85C}
+.rcn b{font:900 clamp(22px,2.6vw,30px)/1.1 var(--serif);color:#E0C85C}
+.rcb em{font:900 clamp(16px,1.9vw,22px) var(--serif);font-style:normal;color:#FFF6DA;white-space:nowrap}
+.rmo .vmc{width:min(960px,100%)}
+.rpl{margin:26px 0 10px}
+.rpl video,.rpl .rcph.big{display:block;width:100%;aspect-ratio:16/9;background:#000;border-radius:4px}
+.rpl .rcph.big{background:linear-gradient(135deg,#A63A35,#6E1B25);position:relative}
+.rpl .rcph.big img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (prefers-reduced-motion:reduce){.rc{transition:none}}
 </style>
 </head>
 <body>
@@ -1498,7 +1521,7 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
     <div class="tip" id="tip"></div>
   </section>
   <aside class="panel" role="main" aria-label="金曲清單與內容">
-    <nav class="topnav" aria-label="頁面導覽"><span class="tnb"><i aria-hidden="true"></i>宜蘭金曲</span><button type="button" data-go="s-town">尋得家鄉金曲</button><button type="button" data-go="s-who">想聽哪一張</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button><button type="button" class="tnl" data-music><i aria-hidden="true"></i>聽歌</button></nav>
+    <nav class="topnav" aria-label="頁面導覽"><span class="tnb"><i aria-hidden="true"></i>宜蘭大歌廳</span><button type="button" data-go="s-town">尋得家鄉金曲</button><button type="button" data-go="s-who">想聽哪一張</button><button type="button" data-go="s-num">排行榜</button><button type="button" data-go="s-video">現場 MV</button><button type="button" data-go="s-all">全部曲目</button><button type="button" class="tnl" data-music><i aria-hidden="true"></i>聽歌</button></nav>
     <div class="brand">
       <div class="sticker">距離投票日 11/28<b id="cd"></b></div>
       <h1 aria-label="宜蘭大歌廳，一次看全部">宜蘭大歌廳<br><span class="l2"><span class="c1" aria-hidden="true">1</span><span>次</span><span>看</span><span>全</span><span>部</span></span></h1>
@@ -2364,6 +2387,7 @@ function panel(){
   }else{
     h+='<div class="qrow"><button type="button" data-bio>認識林國漳</button><button type="button" data-videos>現場 MV</button></div>';
     h+='<section class="blk" id="s-play">'+funBox()+'</section>';
+    h+=recSection();
     h+='<section class="blk" id="s-town"><div class="sec">尋得家鄉金曲<small>可複選</small></div><div class="towns">'+TOWNS.map(function(t){return '<button type="button" class="tb" style="--tc:'+TC[TI[t.id]]+'" data-ptog="t:'+t.id+'" aria-label="'+esc(t.n)+' '+townCount(t.id)+' 首，打開專輯" aria-pressed="'+(!!PS.towns[t.id])+'">'+covName(t.n)+'<span class="sb">'+sbHTML((ICONS[t.id]||[])[1]||'')+'</span><span class="ct">'+townCount(t.id)+' 首</span></button>'}).join('')+'</div></section>';
     h+='<section class="blk" id="s-who"><div class="sec">想聽哪一張<small>可複選</small></div>'+audGroups()+'</section>';
     h+='<section class="blk" id="s-num"><div class="sec">排行榜</div><div class="wall">'+WALL.slice(0,4).map(function(w,wi){var p=PBY[w[0]];return '<button type="button" data-pol="'+w[0]+'" data-n="0'+(wi+1)+'" style="--cc:'+CATS[p.c].c+'">'+wallNum(w[1])+'<span>'+wallCap(w[2])+'</span></button>'}).join('')+'</div><div class="wallact"><button type="button" class="persbtn" data-wallcard>存成排行榜圖卡</button></div></section>';
@@ -2451,7 +2475,7 @@ function albInfo(b){
 function discSVG(name,cbg,c1,c2,u){
   u=u||'';var h=cbg.match(/#[0-9a-fA-F]{6}/g)||['#8A7560','#6E5C4A'],a=h[0],z=h[1]||h[0],n=esc(name);
   function ring(txt,font,circ){var len=txt.length,ls=Math.max(0,circ/len-font);return {t:esc(txt),ls:ls.toFixed(2)}}
-  var o=ring('宜蘭金曲　①林國漳　宜蘭金曲　①林國漳　',14,2*Math.PI*71);
+  var o=ring('宜蘭大歌廳　①林國漳　宜蘭大歌廳　①林國漳　',14,2*Math.PI*71);
   var L=name.length+1,k=Math.max(2,Math.floor(24/L)),txt='';for(var i=0;i<k;i++)txt+=name+'　';
   var m=ring(txt,13,2*Math.PI*55);
   return '<svg viewBox="0 0 200 200" aria-hidden="true"><defs>'+
@@ -2842,7 +2866,7 @@ $('#pbody').addEventListener('click',function(e){
   if(b.dataset.ptog){albOpen(b);return}
   if('wallcard' in b.dataset){openWallCard();return}
   if('about' in b.dataset){S.sel={type:'about'};setHL();refresh();return}if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
-  if('cold' in b.dataset)openCold();else if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
+  if(b.dataset.rec!==undefined)openRec(+b.dataset.rec);else if('cold' in b.dataset)openCold();else if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){goBack()}
 });
 var qt=null;$('#q').addEventListener('input',function(e){
@@ -3000,6 +3024,27 @@ function vMoreHTML(){
   return '<div class="vgrid">'+r.slice(0,VMORE).map(vCard).join('')+'</div>'+(left>0?'<button type="button" class="persbtn" data-vmore>看更多影片（還有 '+left+' 支）</button>':'');
 }
 function vMore(){VMORE+=3;var el=$('#vmb');if(el)el.innerHTML=vMoreHTML()}
+/* ---- v161 endorsements: landscape album covers (videos + cover photos are added to REC; nothing shows until REC has entries; ?rec=1 previews placeholders) ---- */
+var REC=[/* {who:'前總統',nm:'姓名',img:'photos/rec-1.jpg',vid:'videos/rec-1.mp4'} */];
+var RECDEMO=/[?&]rec=1/.test(location.search)&&!REC.length;
+var RECL=RECDEMO?[{who:'前總統',nm:'蔡英文'},{who:'副總統',nm:'蕭美琴'},{who:'行政院秘書長',nm:'張惇涵'},{who:'前行政院長',nm:'游錫堃'}]:REC;
+function recSection(){
+  if(!RECL.length)return '';
+  return '<section class="blk" id="s-rec"><div class="sec">他們推薦林國漳<small>'+RECL.length+' 位</small></div><div class="recg">'+RECL.map(function(r,i){
+    return '<button type="button" class="rc" data-rec="'+i+'" aria-label="播放：'+esc(r.who+' '+r.nm)+'推薦林國漳">'+
+     '<span class="rcv">'+(r.img?'<img src="'+esc(r.img)+'" alt="" loading="lazy">':'<span class="rcph">照片待補</span>')+'</span>'+
+     '<span class="rcb"><span class="rcd" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5z" fill="currentColor"/></svg></span><span class="rcn"><small>'+esc(r.who)+'</small><b>'+esc(r.nm)+'</b></span><em>推薦林國漳</em></span></button>'}).join('')+'</div></section>'
+}
+function openRec(i){
+  var r=RECL[i];if(!r)return;stopVids();closeVid();
+  var pl=r.vid?'<video controls autoplay playsinline src="'+esc(r.vid)+'"'+(r.img?' poster="'+esc(r.img)+'"':'')+'></video>':'<div class="rcph big">'+(RECDEMO?'影片待補':'')+(r.img?'<img src="'+esc(r.img)+'" alt="">':'')+'</div>';
+  var m=document.createElement('div');m.className='vmo rmo';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label',r.who+' '+r.nm+'推薦林國漳');
+  m.innerHTML='<div class="vmc"><button type="button" class="vmx" aria-label="關閉">×</button><div class="rpl">'+pl+'</div><h3>'+esc(r.who+' '+r.nm)+'　推薦林國漳</h3></div>';
+  m.addEventListener('click',function(e){if(e.target===m||e.target.closest('.vmx'))closeVid()});
+  document.body.appendChild(m);document.body.style.overflow='hidden';VMO=m;
+  var x=m.querySelector('.vmx');if(x&&x.focus)x.focus();
+}
+(function(){if(!RECL.length)return;var nv=document.querySelector('.topnav button[data-go="s-town"]');if(!nv)return;var b=document.createElement('button');b.type="button";b.dataset.go='s-rec';b.textContent='他們推薦';nv.parentNode.insertBefore(b,nv)})();
 function videoSection(){
   var s=vSecs();
   return '<div class="sec" id="vhd">現場 MV<small>'+VID.length+' 支</small></div>'+
@@ -3088,7 +3133,7 @@ function keyTitle(k){
 }
 function syncHash(){
   var k=curKey();
-  document.title=(k?keyTitle(k)+'｜':'')+'宜蘭金曲①次看懂';
+  document.title=(k?keyTitle(k)+'｜':'')+'宜蘭大歌廳①次看全部';
   try{if(history.replaceState)history.replaceState(null,'',location.pathname+location.search+(k?'#'+k:''))}catch(e){}
 }
 function applyHash(){
@@ -3121,7 +3166,7 @@ function shareURL(){
   if(SHARE_BASE)return SHARE_BASE+(k?'s/'+k+'/':'');
   return location.href.split('#')[0]+(k?'#'+k:'');
 }
-function shareText(){var k=curKey(),t=k?keyTitle(k):'';return (t?t+'｜':'')+'宜蘭金曲①次看懂（宜蘭縣長候選人）'}
+function shareText(){var k=curKey(),t=k?keyTitle(k):'';return (t?t+'｜':'')+'宜蘭大歌廳①次看全部（宜蘭縣長候選人）'}
 function openShare(){
   var box=$('#sharebox'),url=shareURL(),k=curKey(),title=k?keyTitle(k):'全縣金曲';
   var line='https://line.me/R/msg/text/?'+encodeURIComponent(shareText()+'\n'+url);
@@ -3206,11 +3251,11 @@ function drawFortune(daily,fid){
       '<div class="fzpoem" aria-label="籤詩">'+po.map(function(l){return '<span>'+esc(l)+'</span>'}).join('')+'</div>'+
       '<div class="fzjie"><span class="fzcat">'+esc(c.n)+'</span><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p></div><div class="fznote">籤詩為創作，政見以內容為準</div></div>'+
       '<div class="ovb"><button type="button" class="pri" data-fzsee>看這項金曲</button><button type="button" data-fzagain>再抽一支</button><button type="button" data-fzimg>存成籤紙圖</button></div>'+
-      '<div class="ovb"><a class="line" href="'+esc(lineHref((daily?'今日一籤「':'我抽到「')+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜宜蘭金曲①次看懂',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
+      '<div class="ovb"><a class="line" href="'+esc(lineHref((daily?'今日一籤「':'我抽到「')+gr+'」第 '+(i+1)+' 籤：'+p.t+'｜宜蘭大歌廳①次看全部',url))+'" target="_blank" rel="noopener">傳到 LINE 給朋友</a></div>';
     ovOpen(h,'fz');if(daily)markDay();
     OV.querySelector('[data-fzsee]').onclick=function(){ovClose();selectPolicy(p.id);try{window.scrollTo({top:0})}catch(x){}};
     OV.querySelector('[data-fzagain]').onclick=function(){drawFortune()};
-    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length,daily?dayLabel():''),(daily?'今日一籤「':'我抽到「')+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜宜蘭金曲①次看懂',url,'林國漳-金曲籤.png',null,daily?'daily':'f-'+p.id)};
+    OV.querySelector('[data-fzimg]').onclick=function(){openImg(drawFortuneImg(p,i+1,cand.length,daily?dayLabel():''),(daily?'今日一籤「':'我抽到「')+fzGrade(p.id)+'」第 '+(i+1)+' 籤：'+p.t+'｜宜蘭大歌廳①次看全部',url,'林國漳-金曲籤.png',null,daily?'daily':'f-'+p.id)};
     var a=OV.querySelector('[data-fzagain]');if(a&&a.focus)a.focus();
   },reduce?0:1100);
 }
@@ -3232,7 +3277,7 @@ function cvWrap(c,s,w,max){
 function rrect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
 function cvHead(c,W){
   c.textBaseline='alphabetic';c.textAlign='left';
-  c.fillStyle='#E0C85C';c.font='900 40px '+CV_S;c.fillText('宜蘭金曲',64,104);
+  c.fillStyle='#E0C85C';c.font='900 40px '+CV_S;c.fillText('宜蘭大歌廳',64,104);
 }
 function cvFoot(c,W){
   c.fillStyle='#1B1B18';c.fillRect(28,1180,W-56,142);c.fillStyle='#E0C85C';c.fillRect(28,1176,W-56,4);
@@ -3292,7 +3337,7 @@ function openImg(cv,txt,url,fname,extra,ext){
 }
 function openCard(){
   var d=drawCard();
-  openImg(d.cv,'我的專屬金曲單（'+d.count+' 項）｜宜蘭金曲①次看懂',SHARE_BASE?SHARE_BASE+'s/me/':location.href.split('#')[0]+'#me','林國漳-我的金曲單.png');
+  openImg(d.cv,'我的專屬金曲單（'+d.count+' 項）｜宜蘭大歌廳①次看全部',SHARE_BASE?SHARE_BASE+'s/me/':location.href.split('#')[0]+'#me','林國漳-我的金曲單.png');
 }
 function drawPolCard(p){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),cc=CATS[p.c],kn=KN[p.id]||[],X=88,TW=W-X*2;
@@ -3332,7 +3377,7 @@ function drawPolCard(p){
   cvFoot(c,W);
   return cv;
 }
-function openPolCard(id){var p=PBY[id];if(p)openImg(drawPolCard(p),p.t+'｜宜蘭金曲①次看懂',polURL(id),'林國漳-'+id+'.png')}
+function openPolCard(id){var p=PBY[id];if(p)openImg(drawPolCard(p),p.t+'｜宜蘭大歌廳①次看全部',polURL(id),'林國漳-'+id+'.png')}
 function pageBase(){return location.href.split('#')[0]}
 function fzURL(id){return SHARE_BASE?SHARE_BASE+'s/f-'+id+'/':pageBase()+'#f-'+id}
 function qzURL(id){return SHARE_BASE?SHARE_BASE+'s/q-'+id+'/':pageBase()+'#quiz'}
@@ -3481,7 +3526,7 @@ function showQuiz(){
 function showQuizResult(id0){
   var id=id0||quizResult(),t=TOWNS[TI[id]];
   if(!id0){stat('quiz/done','測驗完成');stat('quiz/result/'+id,'測驗結果：'+t.n)}
-  openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜宜蘭金曲①次看懂',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
+  openImg(drawQuizCard(id),'我是「'+qzShort(t)+'人」！你是哪個鄉鎮人？｜宜蘭大歌廳①次看全部',qzURL(id),'林國漳-我是'+qzShort(t)+'人.png',
     '<button type="button" data-qzagain>再測一次</button><button type="button" data-qzsee>看'+esc(t.n)+'的金曲</button>','qr-'+id);
   OV.querySelector('[data-qzagain]').onclick=openQuiz;
   OV.querySelector('[data-qzsee]').onclick=function(){ovClose();selectTown(id);try{window.scrollTo({top:0})}catch(x){}};
@@ -3579,7 +3624,7 @@ function fontReady(txt,cb){
 function blGen(nm,w){
   var k=bpPick('p',BP.length),wish=w||BL[bpPick('w',BL.length)];
   bpLoad(k,function(img){fontReady('祝福'+nm+wish,function(){
-    openImg(drawBlessCard(nm,wish,img,BP[k][1]),'林國漳祝福'+nm+'：'+wish+'｜宜蘭金曲①次看懂',blURL(),'林國漳-宜蘭祝福卡.png','<button type="button" data-blagain>再抽一張</button>');
+    openImg(drawBlessCard(nm,wish,img,BP[k][1]),'林國漳祝福'+nm+'：'+wish+'｜宜蘭大歌廳①次看全部',blURL(),'林國漳-宜蘭祝福卡.png','<button type="button" data-blagain>再抽一張</button>');
     var a=OV.querySelector('[data-blagain]');if(a)a.onclick=function(){blGen(nm,w)};
   })});
 }
@@ -3627,7 +3672,7 @@ function drawTownCard(id){
   cvFoot(c,W);
   return cv;
 }
-function openTownCard(id){var t=TOWNS[TI[id]];if(t)openImg(drawTownCard(id),t.n+'的金曲與建設｜宜蘭金曲①次看懂',townURL(id),'林國漳-'+id+'.png')}
+function openTownCard(id){var t=TOWNS[TI[id]];if(t)openImg(drawTownCard(id),t.n+'的金曲與建設｜宜蘭大歌廳①次看全部',townURL(id),'林國漳-'+id+'.png')}
 function drawWallCard(){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d');
   cvBG(c,W,H);cvHead(c,W);
@@ -3646,8 +3691,8 @@ function drawWallCard(){
   cvFoot(c,W);
   return cv;
 }
-function openWallCard(){openImg(drawWallCard(),'宜蘭金曲排行榜｜宜蘭金曲①次看懂',SHARE_BASE||location.href.split('#')[0],'宜蘭金曲-排行榜.png')}
-var BUILD='10/31 第 159 版';
+function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',SHARE_BASE||location.href.split('#')[0],'宜蘭大歌廳-排行榜.png')}
+var BUILD='10/31 第 161 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3684,7 +3729,7 @@ function coldCard(i,head,again,key){
   COLDLAST=i;var j=COLD[i];
   var h='<div class="coldc"><div class="coldh">'+esc(head)+'</div><p class="coldq">'+esc(j.q)+'</p><p class="colda" hidden>'+esc(j.a)+'</p>'+
    '<div class="coldb"><button type="button" class="pri" data-coldrev>揭曉答案</button><button type="button" data-coldsee hidden>看相關金曲</button><button type="button" data-coldagain hidden>'+esc(again)+'</button></div>'+
-   '<a class="coldl" hidden target="_blank" rel="noopener" href="'+esc(lineHref(j.q+' '+j.a+'｜宜蘭金曲①次看懂',SHARE_BASE||pageBase()))+'">傳到 LINE 給朋友</a></div>';
+   '<a class="coldl" hidden target="_blank" rel="noopener" href="'+esc(lineHref(j.q+' '+j.a+'｜宜蘭大歌廳①次看全部',SHARE_BASE||pageBase()))+'">傳到 LINE 給朋友</a></div>';
   ovOpen(h,key||'fz');
   var rv=OV.querySelector('[data-coldrev]');
   rv.onclick=function(){OV.querySelector('.colda').hidden=false;rv.hidden=true;['[data-coldsee]','[data-coldagain]','.coldl'].forEach(function(s){OV.querySelector(s).hidden=false});var a=OV.querySelector('[data-coldagain]');if(a&&a.focus)a.focus()};
@@ -3723,7 +3768,7 @@ countdown();ballot();buildMap();buildShields();buildPins();buildChips();buildLeg
 homeView(true);panel();paint();applyHash();window.addEventListener('hashchange',applyHash);
 })();
 </script>
-<script>(function(){var ids=['s-play','s-town','s-who','s-num','s-video','s-all'];function spy(){var y=window.innerHeight*.35,cur=null;ids.forEach(function(i){var e=document.getElementById(i);if(e&&e.getBoundingClientRect().top<=y)cur=i});Array.prototype.forEach.call(document.querySelectorAll('.topnav button[data-go]'),function(b){b.classList.toggle('cur',b.dataset.go===cur)})}window.addEventListener('scroll',spy,{passive:true});window.addEventListener('resize',spy);setTimeout(spy,600)})();
+<script>(function(){var ids=['s-play','s-rec','s-town','s-who','s-num','s-video','s-all'];function spy(){var y=window.innerHeight*.35,cur=null;ids.forEach(function(i){var e=document.getElementById(i);if(e&&e.getBoundingClientRect().top<=y)cur=i});Array.prototype.forEach.call(document.querySelectorAll('.topnav button[data-go]'),function(b){b.classList.toggle('cur',b.dataset.go===cur)})}window.addEventListener('scroll',spy,{passive:true});window.addEventListener('resize',spy);setTimeout(spy,600)})();
 document.addEventListener('click',function(e){var b=e.target.closest('.topnav button[data-go]');if(!b)return;var t=document.getElementById(b.dataset.go);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})});</script>
 </body>
 </html>
