@@ -1482,10 +1482,10 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 .rc{position:relative;display:block;width:100%;padding:0;border:6px solid #E0C85C;border-radius:4px;background:#1B1B18;overflow:hidden;cursor:pointer;text-align:left;box-shadow:0 10px 24px rgba(27,27,24,.22);transition:transform .2s cubic-bezier(.4,0,.2,1)}
 .rc:hover,.rc:focus-visible{transform:translateY(-3px)}
 .rc:focus-visible{outline:3px solid #1B1B18;outline-offset:3px}
-.rcv{display:block;aspect-ratio:16/9;background:linear-gradient(135deg,#A63A35,#6E1B25)}
+.rcv{display:block;aspect-ratio:1800/990;background:linear-gradient(135deg,#A63A35,#6E1B25)}
 .rcv img{display:block;width:100%;height:100%;object-fit:cover}
 .rcph{display:grid;place-items:center;width:100%;height:100%;color:rgba(255,246,218,.55);font:900 clamp(20px,3vw,30px) var(--serif)}
-.rc::after{content:"";position:absolute;inset:10px 10px calc(clamp(56px,6.4vw,74px) + 10px);border:2px dotted rgba(255,246,218,.75);pointer-events:none}
+
 .rcd{flex:none;display:grid;place-items:center;width:clamp(38px,4vw,46px);aspect-ratio:1;border-radius:50%;background:#E0C85C;color:#1B1B18}
 .rcd svg{width:52%;margin-left:6%}
 .rcb{display:flex;align-items:center;gap:14px;min-height:clamp(56px,6.4vw,74px);padding:6px 18px;background:#1B1B18;color:#FFF6DA}
@@ -1495,10 +1495,48 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 .rcb em{font:900 clamp(16px,1.9vw,22px) var(--serif);font-style:normal;color:#FFF6DA;white-space:nowrap}
 .rmo .vmc{width:min(960px,100%)}
 .rpl{margin:26px 0 10px}
-.rpl video,.rpl .rcph.big{display:block;width:100%;aspect-ratio:16/9;background:#000;border-radius:4px}
+.rpl video,.rpl .rcph.big{display:block;width:100%;aspect-ratio:1800/990;background:#000;border-radius:4px}
 .rpl .rcph.big{background:linear-gradient(135deg,#A63A35,#6E1B25);position:relative}
 .rpl .rcph.big img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 @media (prefers-reduced-motion:reduce){.rc{transition:none}}
+/* v162 disco ball: bigger, shimmering, click = party mode (music + light beams + confetti); endorsement name band wraps by unit */
+.dbeams{display:none}
+@media (min-width:1024px){
+  .brand{--bw:clamp(112px,10.5vw,160px)}
+  .disco{width:var(--bw)!important;top:22px;pointer-events:auto!important;cursor:pointer;animation:dswing 5s ease-in-out infinite,dglow 2.4s ease-in-out infinite!important}
+  .disco:focus-visible{outline:3px solid #FFF6DA;outline-offset:6px;border-radius:50%}
+  .disco svg{filter:drop-shadow(0 8px 12px rgba(0,0,0,.35)) drop-shadow(0 0 14px rgba(255,232,150,.55))!important}
+  .disco .dsl{animation:dsroll 3.4s linear infinite}
+  .brand.discoon .disco .dsl{animation-duration:1.3s}
+  .disco .dst{transform-box:fill-box;transform-origin:center;animation:dstw 1.8s ease-in-out infinite}
+  .disco .sp{background:#FFF6DA;animation-duration:1.9s!important}
+  .disco .s1{left:94%;top:46%;width:17%}
+  .disco .s2{left:-22%;top:70%;width:13%}
+  .disco .s3{left:84%;top:84%;width:11%}
+  .disco .s4{left:6%;top:38%;width:12%;animation-delay:.6s!important}
+  .disco .s5{left:50%;top:104%;width:10%;animation-delay:1.1s!important}
+  .disco .s6{left:96%;top:70%;width:8%;animation-delay:1.5s!important}
+  .dbeams{display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;opacity:0;transition:opacity .5s}
+  .brand.discoon .dbeams{opacity:1}
+  .dbeams .bm{position:absolute;left:calc(var(--fs)*5 + 12px + var(--bw)/2);top:calc(22px + var(--bw)*.92);width:1100px;height:150px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(255,244,190,.6),rgba(255,244,190,0) 85%);clip-path:polygon(0 47%,100% 0,100% 100%,0 53%);mix-blend-mode:screen;animation:dsw var(--t,7s) ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+  .dbeams .bm.r{background:linear-gradient(90deg,rgba(255,176,164,.5),rgba(255,176,164,0) 85%)}
+  .dbeams .bm.w{background:linear-gradient(90deg,rgba(255,255,255,.5),rgba(255,255,255,0) 85%)}
+  .dbeams .cf{position:absolute;border-radius:1px;pointer-events:none}
+}
+@keyframes dsroll{to{transform:translateX(52px)}}
+@keyframes dstw{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+@keyframes dglow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18)}}
+@keyframes dsw{from{transform:translateY(-50%) rotate(var(--a1))}to{transform:translateY(-50%) rotate(var(--a2))}}
+@media (prefers-reduced-motion:reduce){.disco .dsl,.disco .dst,.dbeams .bm{animation:none!important}.disco .dst{opacity:.8}}
+.rc{container-type:inline-size}
+.rcn small,.rcn b{white-space:nowrap;word-break:keep-all}
+@container (max-width:470px){
+  .rcn{flex-direction:column;align-items:flex-start;gap:0}
+  .rcn small{font-size:13px;line-height:1.3}
+  .rcn b{font-size:clamp(20px,5.6cqw,26px)}
+  .rcb{gap:10px;padding:6px 14px}
+  .rcb em{font-size:clamp(15px,4.2cqw,19px)}
+}
 </style>
 </head>
 <body>
@@ -2543,6 +2581,7 @@ function mpGo(i,play){var a=mpEnsure();MP.i=i;a.src=MUS[i].f;if(play){var p=a.pl
 function mpToggle(){var a=mpEnsure();if(!a.src||a.src==='')mpGo(MP.i,true);else if(a.paused){var p=a.play();if(p&&p.catch)p.catch(function(){})}else a.pause();mpPaint()}
 function mpStop(){if(MP.a){MP.a.pause();MP.a.removeAttribute('src');try{MP.a.load()}catch(e){}}MP.on=false;mpPaint();var pn=$('#mpanel');if(pn)pn.hidden=true}
 function mpPaint(){
+  if(typeof discoSync==='function')discoSync();
   var a=MP.a,playing=!!(a&&a.src&&!a.paused&&!a.ended),has=!!(a&&a.getAttribute('src'));
   var bar=$('#mpbar');if(!bar)return;
   bar.hidden=!has;bar.classList.toggle('playing',playing);
@@ -3025,9 +3064,9 @@ function vMoreHTML(){
 }
 function vMore(){VMORE+=3;var el=$('#vmb');if(el)el.innerHTML=vMoreHTML()}
 /* ---- v161 endorsements: landscape album covers (videos + cover photos are added to REC; nothing shows until REC has entries; ?rec=1 previews placeholders) ---- */
-var REC=[/* {who:'前總統',nm:'姓名',img:'photos/rec-1.jpg',vid:'videos/rec-1.mp4'} */];
-var RECDEMO=/[?&]rec=1/.test(location.search)&&!REC.length;
-var RECL=RECDEMO?[{who:'前總統',nm:'蔡英文'},{who:'副總統',nm:'蕭美琴'},{who:'行政院秘書長',nm:'張惇涵'},{who:'前行政院長',nm:'游錫堃'}]:REC;
+var REC=[{who:'前總統',nm:'蔡英文',img:'photos/rec-1.jpg'},{who:'副總統',nm:'蕭美琴',img:'photos/rec-2.jpg'},{who:'行政院秘書長',nm:'張惇涵',img:'photos/rec-3.jpg'},{who:'前行政院長',nm:'游錫堃',img:'photos/rec-4.jpg'}/* vid:'videos/rec-N.mp4' is added when the video arrives; a card only goes public once it has vid */];
+var RECPV=/[?&]rec=1/.test(location.search);
+var RECL=REC.filter(function(r){return r.vid||RECPV});
 function recSection(){
   if(!RECL.length)return '';
   return '<section class="blk" id="s-rec"><div class="sec">他們推薦林國漳<small>'+RECL.length+' 位</small></div><div class="recg">'+RECL.map(function(r,i){
@@ -3037,7 +3076,7 @@ function recSection(){
 }
 function openRec(i){
   var r=RECL[i];if(!r)return;stopVids();closeVid();
-  var pl=r.vid?'<video controls autoplay playsinline src="'+esc(r.vid)+'"'+(r.img?' poster="'+esc(r.img)+'"':'')+'></video>':'<div class="rcph big">'+(RECDEMO?'影片待補':'')+(r.img?'<img src="'+esc(r.img)+'" alt="">':'')+'</div>';
+  var pl=r.vid?'<video controls autoplay playsinline src="'+esc(r.vid)+'"'+(r.img?' poster="'+esc(r.img)+'"':'')+'></video>':'<div class="rcph big">'+(r.vid?'':'影片待補')+(r.img?'<img src="'+esc(r.img)+'" alt="">':'')+'</div>';
   var m=document.createElement('div');m.className='vmo rmo';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label',r.who+' '+r.nm+'推薦林國漳');
   m.innerHTML='<div class="vmc"><button type="button" class="vmx" aria-label="關閉">×</button><div class="rpl">'+pl+'</div><h3>'+esc(r.who+' '+r.nm)+'　推薦林國漳</h3></div>';
   m.addEventListener('click',function(e){if(e.target===m||e.target.closest('.vmx'))closeVid()});
@@ -3692,7 +3731,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',SHARE_BASE||location.href.split('#')[0],'宜蘭大歌廳-排行榜.png')}
-var BUILD='10/31 第 161 版';
+var BUILD='10/31 第 163 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3753,7 +3792,9 @@ function daysLeft(){var m=/[?&]pd=(\d{4})(\d\d)(\d\d)/.exec(location.search),now
 function countdown(){var d=daysLeft();$('#cd').textContent=d>1?d+' 天':(d===1?'明天見':(d===0?'今天見':'已投票'))}
 function mkHeroCD(){var p=$('#portrait');if(!p||p.querySelector('.hcd'))return;var d=document.createElement('div');d.className='hcd';d.setAttribute('aria-hidden','true');d.setAttribute('data-music','');d.innerHTML=discSVG('全民縣長','#A63A35,#6E1B25','#E0C85C','#F6EFD8','h');p.insertBefore(d,p.firstChild)}
 mkHeroCD();
-function mkDisco(){var b=document.querySelector('.brand');if(!b||b.querySelector('.disco'))return;var d=document.createElement('div');d.className='disco';d.setAttribute('aria-hidden','true');d.innerHTML='<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" focusable="false"><defs><radialGradient id="dsg" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#FFF6DA"/><stop offset=".55" stop-color="#D9CFB4"/><stop offset="1" stop-color="#8E8470"/></radialGradient><clipPath id="dsc"><circle cx="50" cy="92" r="44"/></clipPath></defs><line x1="50" y1="0" x2="50" y2="46" stroke="#E0C85C" stroke-width="2"/><rect x="44" y="44" width="12" height="7" rx="2" fill="#E0C85C"/><circle cx="50" cy="92" r="44" fill="url(#dsg)"/><g clip-path="url(#dsc)"><g fill-opacity=".9"><rect x="58" y="66" width="13" height="13" fill="#E0C85C"/><rect x="32" y="92" width="13" height="13" fill="#E0C85C"/><rect x="58" y="105" width="13" height="13" fill="#E0C85C"/><rect x="32" y="66" width="13" height="13" fill="#A63A35"/><rect x="45" y="105" width="13" height="13" fill="#A63A35"/><rect x="71" y="79" width="13" height="13" fill="#A63A35"/><rect x="45" y="79" width="13" height="13" fill="#fff"/><rect x="71" y="105" width="13" height="13" fill="#fff"/><rect x="19" y="79" width="13" height="13" fill="#fff"/></g><g stroke="#1B1B18" stroke-opacity=".3" stroke-width=".9" fill="none"><path d="M0 66H100M0 79H100M0 92H100M0 105H100M0 118H100"/><ellipse cx="50" cy="92" rx="40" ry="44"/><ellipse cx="50" cy="92" rx="28" ry="44"/><ellipse cx="50" cy="92" rx="13" ry="44"/><path d="M50 48V136"/></g></g><ellipse cx="37" cy="70" rx="10" ry="5" fill="#fff" fill-opacity=".6" transform="rotate(-35 37 70)"/></svg><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i>';b.appendChild(d)}
+function mkDisco(){var b=document.querySelector('.brand');if(!b||b.querySelector('.disco'))return;var d=document.createElement('div');d.className='disco';d.setAttribute('role','button');d.setAttribute('tabindex','0');d.setAttribute('aria-label','開派對：播放音樂');d.innerHTML='<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" focusable="false"><defs><pattern id="dsp" width="52" height="26" patternUnits="userSpaceOnUse"><g stroke="#1B1B18" stroke-opacity=".45" stroke-width=".6"><rect x="0" y="0" width="13" height="13" fill="#E0C85C"/><rect x="13" y="0" width="13" height="13" fill="#FFF6DA"/><rect x="26" y="0" width="13" height="13" fill="#A63A35"/><rect x="39" y="0" width="13" height="13" fill="#CFC6AE"/><rect x="0" y="13" width="13" height="13" fill="#fff"/><rect x="13" y="13" width="13" height="13" fill="#F3E3A0"/><rect x="26" y="13" width="13" height="13" fill="#C9605A"/><rect x="39" y="13" width="13" height="13" fill="#E8E0C8"/></g></pattern><radialGradient id="dss" cx="42%" cy="36%" r="70%"><stop offset="0" stop-color="#1B1B18" stop-opacity="0"/><stop offset=".55" stop-color="#1B1B18" stop-opacity=".05"/><stop offset="1" stop-color="#1B1B18" stop-opacity=".62"/></radialGradient><clipPath id="dsc"><circle cx="50" cy="92" r="44"/></clipPath></defs><line x1="50" y1="0" x2="50" y2="46" stroke="#E0C85C" stroke-width="2"/><rect x="44" y="44" width="12" height="7" rx="2" fill="#E0C85C"/><circle cx="50" cy="92" r="44" fill="#CFC6AE"/><g clip-path="url(#dsc)"><g class="dsl"><rect x="-52" y="40" width="204" height="104" fill="url(#dsp)"/></g><circle cx="50" cy="92" r="44" fill="url(#dss)"/><g stroke="#1B1B18" stroke-opacity=".3" stroke-width=".8" fill="none"><path d="M0 66H100M0 79H100M0 92H100M0 105H100M0 118H100"/><ellipse cx="50" cy="92" rx="30" ry="44"/><ellipse cx="50" cy="92" rx="14" ry="44"/><path d="M50 48V136"/></g><ellipse cx="36" cy="70" rx="12" ry="6" fill="#fff" fill-opacity=".7" transform="rotate(-35 36 70)"/></g><path class="dst" style="animation-delay:0s" transform="translate(34 84) scale(1.5)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:0.5s" transform="translate(66 76) scale(1.2)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:1.0s" transform="translate(58 108) scale(1.7)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:1.5s" transform="translate(40 112) scale(1)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:0.2s" transform="translate(72 98) scale(1.1)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:0.8s" transform="translate(48 64) scale(1)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/></svg><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i><i class="sp s5"></i><i class="sp s6"></i>';var bm=document.createElement('div');bm.className='dbeams';bm.setAttribute('aria-hidden','true');bm.innerHTML='<i class="bm" style="--a1:5deg;--a2:55deg;--t:6s"></i><i class="bm" style="--a1:35deg;--a2:95deg;--t:8s;--d:-2s"></i><i class="bm r" style="--a1:70deg;--a2:125deg;--t:7s;--d:-4s"></i><i class="bm" style="--a1:100deg;--a2:160deg;--t:9s;--d:-1s"></i><i class="bm w" style="--a1:130deg;--a2:175deg;--t:6.5s;--d:-3s"></i>';b.appendChild(bm);b.appendChild(d);function go(){var a=MP.a,pl=a&&a.src&&!a.paused;if(pl){a.pause();return}if(!a||!a.src)mpGo(0,true);else{var p=a.play();if(p&&p.catch)p.catch(function(){})}discoBurst()}d.addEventListener('click',go);d.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})}
+function discoSync(){var b=document.querySelector('.brand');if(b)b.classList.toggle('discoon',!!(MP.a&&MP.a.src&&!MP.a.paused))}
+function discoBurst(){var d=document.querySelector('.disco'),bm=document.querySelector('.dbeams');if(!d||!bm||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;var br=bm.getBoundingClientRect(),r=d.getBoundingClientRect(),cx=r.left-br.left+r.width/2,cy=r.top-br.top+r.height*.66,cl=['#E0C85C','#FFF6DA','#A63A35','#fff','#F3E3A0'];for(var i=0;i<34;i++){var e=document.createElement('i');e.className='cf';e.style.cssText='left:'+cx+'px;top:'+cy+'px;background:'+cl[i%5]+';width:'+(6+Math.random()*7)+'px;height:'+(8+Math.random()*10)+'px';bm.appendChild(e);var an=Math.random()*Math.PI*2,dist=90+Math.random()*260;e.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+Math.cos(an)*dist+'px,'+(Math.sin(an)*dist+90)+'px) rotate('+(Math.random()*720-360)+'deg)',opacity:0}],{duration:1300+Math.random()*900,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=(function(x){return function(){x.remove()}})(e)}}
 mkDisco();
 function mkCoverSw(){var p=$('#portrait');if(!p||p.querySelector('.covrow'))return;var img=p.querySelector('.pimg img'),b=p.querySelector('.mplaybtn');if(!img||!b)return;
   var opts=[['photos/album.jpg','專輯封面'],['photos/album2.jpg?v=4','年輕時的照片']],cur=0;try{cur=+localStorage.getItem('yl-cover')||0}catch(e){}
