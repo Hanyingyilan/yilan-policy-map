@@ -16,10 +16,10 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hanyingyilan.github.io/yilan-policy-map/og.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Iansui&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Iansui&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Iansui&display=swap"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Noto+Serif+TC:wght@900&display=swap">
 <style>
 /* Layout concept: a campaign poster that happens to be a map.
    Deep-ocean blue everywhere, one colour block per township, a lime accent for anything you can act on.
@@ -27,8 +27,8 @@
 :root{
   --ink:#0A1D38; --ink2:#102B4D; --ink3:#173A66; --edge:#2A4A72; --txt:#F4F8FF; --mut:#9FB8DA;
   --lime:#9ADB7A; --coral:#FF6B57; --sea:#0B2A52; --nb:#143F70;
-  --f-sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  --f-num:"Big Shoulders Display","Noto Sans TC",Impact,sans-serif;
+  --f-sans:"PingFang TC","Noto Sans TC","Noto Sans CJK TC","Source Han Sans TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
+  --f-num:"Big Shoulders Display","PingFang TC","Noto Sans TC",Impact,sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -1503,7 +1503,7 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 .dbeams{display:none}
 @media (min-width:1024px){
   .brand{--bw:clamp(96px,8.8vw,132px);--dt:-4px}
-  .disco{width:var(--bw)!important;top:var(--dt)!important;pointer-events:auto!important;cursor:pointer;animation:dswing 5s ease-in-out infinite,dglow 2.4s ease-in-out infinite!important}
+  .disco{left:calc(var(--bl,0px) + var(--fs)*5 + 12px)!important;width:var(--bw)!important;top:var(--dt)!important;pointer-events:auto!important;cursor:pointer;animation:dswing 5s ease-in-out infinite,dglow 2.4s ease-in-out infinite!important}
   .disco:focus-visible{outline:3px solid #FFF6DA;outline-offset:6px;border-radius:50%}
   .disco svg{filter:drop-shadow(0 8px 12px rgba(0,0,0,.35)) drop-shadow(0 0 14px rgba(255,232,150,.55))!important}
   .disco .dsl{animation:dsroll 3.4s linear infinite}
@@ -1518,7 +1518,7 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
   .disco .s6{left:96%;top:70%;width:8%;animation-delay:1.5s!important}
   .dbeams{display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;opacity:0;transition:opacity .5s}
   .brand.discoon .dbeams{opacity:1}
-  .dbeams .bm{position:absolute;left:calc(var(--fs)*5 + 12px + var(--bw)/2);top:calc(var(--dt) + var(--bw)*.92);width:1100px;height:150px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(255,244,190,.6),rgba(255,244,190,0) 85%);clip-path:polygon(0 47%,100% 0,100% 100%,0 53%);mix-blend-mode:screen;animation:dsw var(--t,7s) ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+  .dbeams .bm{position:absolute;left:calc(var(--bl,0px) + var(--fs)*5 + 12px + var(--bw)/2);top:calc(var(--dt) + var(--bw)*.92);width:1100px;height:150px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(255,244,190,.6),rgba(255,244,190,0) 85%);clip-path:polygon(0 47%,100% 0,100% 100%,0 53%);mix-blend-mode:screen;animation:dsw var(--t,7s) ease-in-out infinite alternate;animation-delay:var(--d,0s)}
   .dbeams .bm.r{background:linear-gradient(90deg,rgba(255,176,164,.5),rgba(255,176,164,0) 85%)}
   .dbeams .bm.w{background:linear-gradient(90deg,rgba(255,255,255,.5),rgba(255,255,255,0) 85%)}
   .dbeams .cf{position:absolute;border-radius:1px;pointer-events:none}
@@ -1583,9 +1583,67 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
 .ab.bk:hover{background:rgba(224,200,92,.28)}
 .ab.bk:focus-visible{outline:3px solid #1B1B18;outline-offset:-3px}
 @media (min-width:1500px){.brand{--dt:-16px}}
+/* v168 accessibility: skip link, fallback focus ring (keyboard only), bigger tap targets for the smallest controls */
+.skip{position:fixed;left:12px;top:-80px;z-index:200;padding:12px 18px;border-radius:6px;background:#FFF6DA;color:#1B1B18;font:900 17px var(--sans,sans-serif);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.skip:focus{top:12px;outline:3px solid #1B1B18;outline-offset:2px}
+button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-visible,input:focus-visible,video:focus-visible{outline:3px solid var(--fo,#1B1B18);outline-offset:3px}
+.topnav,.brand,.mpbar,.mpanel,.rcb{--fo:#FFF6DA}
+.who{min-height:36px}
+.portrait>.covbtn,.brand .covrow .covbtn{min-height:32px!important}
+.mq{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:120;width:min(92vw,420px);padding:16px 18px 18px;border:4px solid #1B1B18;border-radius:8px;background:#FFF6DA;color:#1B1B18;box-shadow:0 12px 32px rgba(0,0,0,.4);font-family:var(--sans,sans-serif)}
+.mq b{display:block;font:900 22px var(--serif)}
+.mq p{margin:6px 0 12px;font-size:16px;line-height:1.5}
+.mqb{display:flex;gap:10px}
+.mqb button{flex:1;min-height:48px;border:3px solid #1B1B18;border-radius:8px;background:#fff;font:900 18px var(--sans,sans-serif);color:#1B1B18;cursor:pointer}
+.mqb .pri{background:#E0C85C}
+/* v168 phone hero: same stage as desktop (bulbs, hanging disco ball, spotlight, ticket) rearranged for a narrow screen: title in two lines on the left, ball hangs on its right */
+@media (max-width:700px){
+  .brand{--fs:clamp(40px,12.5vw,56px);--bw:clamp(60px,19vw,88px);--dt:-2px;--bl:16px;padding-top:calc(20px + 24px)!important}
+  .brand h1{font-size:var(--fs)!important;line-height:1.08!important;text-align:left!important;justify-self:start!important;width:max-content!important;white-space:normal!important;margin:0!important}
+  .brand h1 br{display:inline!important}
+  .brand h1 .l2{display:flex;justify-content:space-between;align-items:center;margin:0!important}
+  .brand h1 .l2>span:not(.c1){margin:0!important}
+  .brand h1 .c1{margin:0!important;width:1.16em!important;height:1.16em!important;vertical-align:-.03em}
+  .bulbs{display:block;position:absolute;left:50%;top:26px;width:100vw;height:14px;transform:translateX(-50%);z-index:2;pointer-events:none}
+  .bulbs i{position:absolute;inset:0;background:radial-gradient(circle,#FFF6C8 0 2px,#F0D56A 3px 4px,rgba(240,213,106,.35) 5px,rgba(240,213,106,0) 7px) 0 0/34px 14px repeat-x;animation:blb 1.4s steps(1) infinite}
+  .bulbs i+i{background-position:17px 0;animation-delay:-.7s}
+  .disco{display:block;position:absolute;z-index:2;top:var(--dt);left:calc(var(--bl) + var(--fs)*5 + 12px);width:var(--bw);aspect-ratio:100/140;transform-origin:50% 0;animation:dswing 5s ease-in-out infinite,dglow 2.4s ease-in-out infinite;cursor:pointer}
+  .disco svg{display:block;width:100%;height:100%;filter:drop-shadow(0 6px 8px rgba(0,0,0,.3)) drop-shadow(0 0 10px rgba(255,232,150,.5))}
+  .disco .dsl{animation:dsroll 3.4s linear infinite}
+  .brand.discoon .disco .dsl{animation-duration:1.3s}
+  .disco .dst{transform-box:fill-box;transform-origin:center;animation:dstw 1.8s ease-in-out infinite}
+  .disco .sp{position:absolute;width:15%;aspect-ratio:1;background:#FFF6DA;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:dtw 1.9s ease-in-out infinite}
+  .disco .s1{left:92%;top:46%}.disco .s2{left:-18%;top:70%;width:11%}.disco .s3{left:80%;top:84%;width:10%}.disco .s4{left:4%;top:36%;width:11%;animation-delay:.6s}.disco .s5,.disco .s6{display:none}
+  .dbeams{display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;opacity:0;transition:opacity .5s}
+  .brand.discoon .dbeams{opacity:1}
+  .dbeams .bm{position:absolute;left:calc(var(--bl) + var(--fs)*5 + 12px + var(--bw)/2);top:calc(var(--dt) + var(--bw)*.92);width:700px;height:110px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(255,244,190,.6),rgba(255,244,190,0) 85%);clip-path:polygon(0 47%,100% 0,100% 100%,0 100%);mix-blend-mode:screen;animation:dsw var(--t,7s) ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+  .dbeams .bm.r{background:linear-gradient(90deg,rgba(255,176,164,.5),rgba(255,176,164,0) 85%)}
+  .dbeams .bm.w{background:linear-gradient(90deg,rgba(255,255,255,.5),rgba(255,255,255,0) 85%)}
+  .dbeams .cf{position:absolute;border-radius:1px;pointer-events:none}
+  .spot{display:block;position:absolute;inset:0;z-index:3;pointer-events:none}
+  .spot::before{content:"";position:absolute;left:-2%;right:-2%;top:-34px;height:calc(100% + 34px);background:linear-gradient(180deg,rgba(255,246,200,.18),rgba(255,246,200,.06) 60%,rgba(255,246,200,0));clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);-webkit-mask-image:linear-gradient(90deg,transparent,#000 24%,#000 76%,transparent);mask-image:linear-gradient(90deg,transparent,#000 24%,#000 76%,transparent);mix-blend-mode:screen}
+  .brand.discoon .spot{animation:spp 1.1s ease-in-out infinite alternate}
+  body .brand .hbtns #sharebtn{position:relative!important;min-height:48px!important;padding:0 10px 0 50px!important;border:0!important;border-radius:6px!important;background:#FFF6DA!important;color:#1B1B18!important;font:900 16px var(--serif)!important;white-space:nowrap;box-shadow:0 4px 10px rgba(0,0,0,.28);
+    -webkit-mask:radial-gradient(circle 7px at 0 50%,transparent 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 7px at 100% 50%,transparent 97%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 7px at 0 50%,transparent 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 7px at 100% 50%,transparent 97%,#000) right/51% 100% no-repeat}
+  body .brand .hbtns #sharebtn::before{content:"1";position:absolute;left:0;top:0;bottom:0;width:40px;display:grid;place-items:center;font:900 18px var(--serif);color:#A63A35;background:radial-gradient(circle at 50% 50%,#E0C85C 14px,transparent 15px);border-right:2px dashed rgba(27,27,24,.4)}
+}
+@media (max-width:700px) and (prefers-reduced-motion:reduce){.disco,.disco .dsl,.disco .dst,.disco .sp,.bulbs i,.dbeams .bm{animation:none!important}}
+/* v169 town info: 美食 / 特色 / 景點 */
+.tinfo{display:grid;gap:10px;margin:12px 0 6px}
+.tir{display:flex;gap:10px;align-items:flex-start}
+.tir b{flex:none;min-width:2.6em;padding-top:5px;font:900 16px var(--serif);color:#A63A35}
+.tir span{display:flex;flex-wrap:wrap;gap:6px}
+.tir i{font:700 15px/1.3 var(--sans,sans-serif);font-style:normal;padding:4px 10px;border:2px solid #1B1B18;border-radius:999px;background:#fff;color:#1B1B18}
+.albv-back .tinfo{margin:2px 0 10px;gap:4px}
+.albv-back .tir{gap:8px}
+.albv-back .tir b{min-width:2.4em;padding-top:0;font-size:14px;line-height:1.5}
+.albv-back .tir span{display:block;font-size:14px;line-height:1.5}
+.albv-back .tir i{display:inline;padding:0;border:0;background:none;font:700 14px/1.5 var(--sans,sans-serif)}
+.albv-back .tir i+i::before{content:"、"}
 </style>
 </head>
 <body>
+<a class="skip" href="#s-play">跳到主要內容</a>
 
 
 <div class="app">
@@ -1611,7 +1669,7 @@ body.votegold .brand .sticker b{color:#1B1B18!important}
       <h1 aria-label="宜蘭大歌廳，一次看全部">宜蘭大歌廳<br><span class="l2"><span class="c1" aria-hidden="true">1</span><span>次</span><span>看</span><span>全</span><span>部</span></span></h1>
       <div class="ballot" id="ballot" aria-label="候選人號次"></div>
       <div class="hbtns" id="hbtns"></div>
-      <div class="portrait" id="portrait"><div class="pimg"><img src="photos/album.jpg" alt="林國漳 宜蘭未來的希望 專輯封面" width="184" height="230" decoding="async" onerror="var p=this.closest('.portrait');p.classList.add('empty');this.remove()"></div><button type="button" class="mplaybtn" data-music aria-label="聽競選歌曲"><i aria-hidden="true"></i>聽歌</button><span class="ptag"><b>林國漳</b><small>宜蘭縣長候選人</small></span></div>
+      <div class="portrait" id="portrait"><div class="pimg"><img src="photos/album.jpg" alt="林國漳 宜蘭未來的希望 專輯封面" width="184" height="230" decoding="async" fetchpriority="high" onerror="var p=this.closest('.portrait');p.classList.add('empty');this.remove()"></div><button type="button" class="mplaybtn" data-music aria-label="聽競選歌曲"><i aria-hidden="true"></i>聽歌</button><span class="ptag"><b>林國漳</b><small>宜蘭縣長候選人</small></span></div>
     </div>
     <div class="sbox"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋金曲、鄉鎮或道路" aria-label="搜尋"></div>
     <div class="pbody" id="pbody"></div>
@@ -2522,7 +2580,7 @@ var AGRP=[['家庭與年齡',['a_baby','a_student','a_youth','a_adult','a_senior
   ['工作與通勤',['j_farmer','j_fisher','j_worker','j_teacher','j_startup','j_tour','j_shop','j_sports','j_culture','j_commuter']],
   ['族群與性別',['j_indig','j_hakka','j_newres','j_women']]];
 var ASHORT={a_student:'學生與家長',j_startup:'創業與青創',j_tour:'旅宿餐飲觀光',j_sports:'運動與體育',j_culture:'藝文工作者',j_women:'女性'};
-var SBRK={'福山植物園':['福山','植物園'],'傳統藝術中心':['傳統藝術','中心'],'林業文化園區':['林業文化','園區'],'朝陽國家步道':['朝陽','國家步道']};
+var SBRK={'福山植物園':['福山','植物園'],'傳統藝術中心':['傳統藝術','中心'],'林業文化園區':['林業文化','園區'],'金岳部落、澳花瀑布、南澳古道':['金岳部落','澳花瀑布','南澳古道']};
 function sbHTML(s){if(SBRK[s])return SBRK[s].map(esc).join('<br>');var n=s.length;if(n<=4)return esc(s);var h=Math.ceil(n/2);return esc(s.slice(0,h))+'<br>'+esc(s.slice(h))}
 var BRK={'旅宿餐飲觀光':['旅宿','餐飲','觀光'],'教師與教保員':['教師與','教保員'],'創業與青創':['創業與','青創'],'運動與體育':['運動與','體育'],'藝文工作者':['藝文','工作者'],'學生與家長':['學生與','家長'],'幼兒家庭':['幼兒','家庭'],'在地商家':['在地','商家'],'毛孩飼主':['毛孩','飼主'],'原住民族':['原住','民族'],'客家族群':['客家','族群']};
 function covName(n){var l=n.length;if(l<=3)return '<span class="nm v">'+esc(n)+'</span>';var b=BRK[n];if(!b){var f=l===4?2:3;b=[n.slice(0,f),n.slice(f)]}return '<span class="nm h'+(b.length>2?' h3':'')+'">'+b.map(esc).join('<br>')+'</span>'}
@@ -2599,7 +2657,7 @@ function albOpen(b){
   ALBV.innerHTML='<div class="albv-bg" data-albx></div><div class="albv-box" role="dialog" aria-modal="true" aria-label="'+esc(info.name)+'專輯">'+
    '<div class="albv-stage"><div class="albv-disc">'+discSVG(info.name,'#A63A35,#6E1B25','#E0C85C','#F6EFD8')+'</div>'+
    '<div class="albv-flip"><div class="albv-face albv-cover" style="--cbg:'+cbg+';--c1:'+c1+';--c2:'+c2+';--cfr:'+cfr+'">'+covName(info.name)+(sb?'<span class="sb">'+sbHTML(sb)+'</span>':'')+'<span class="ct">'+info.tr.length+' 首</span></div>'+
-   '<div class="albv-face albv-back"><h3>'+esc(info.name)+'　曲目</h3><ol class="tl">'+tr+'</ol></div></div></div>'+
+   '<div class="albv-face albv-back"><h3>'+esc(info.name)+'　曲目</h3>'+(info.kind==='t'?tinfoHTML(info.id):'')+'<ol class="tl">'+tr+'</ol></div></div></div>'+
    '<div class="albv-acts"><button type="button" class="albv-b" data-albflip>翻到背面看曲目</button>'+(info.kind==='t'?'<button type="button" class="albv-b tcard" data-albcard="'+info.id+'">存成鄉鎮圖卡</button>':'')+'<button type="button" class="albv-b pri" data-albbag aria-pressed="'+sel+'">'+(sel?'已在購物袋裡（點一下拿出來）':'放進購物袋')+'</button><button type="button" class="albv-b" data-albx>關閉</button></div></div>';
   ALBV.hidden=false;document.body.classList.add('albopen');
   void ALBV.offsetWidth;ALBV.classList.add('on');
@@ -3305,9 +3363,22 @@ var ICONS={
  sanxing:['🌱','三星蔥','蔥白特別長，是三星最有名的農產，和白蒜、銀柳、上將梨並稱當地四寶。'],
  suao:['🧊','蘇澳冷泉','全球少見的冷泉，夏天泡起來特別涼快，南方澳也是三大漁業重鎮之一。'],
  datong:['⛰️','太平山','國家森林遊樂區，有翠峰湖與見晴懷古步道，也是泰雅族的家鄉。'],
- nanao:['🌅','朝陽國家步道','全長約 2.2 公里，沿途可以俯瞰南澳灣與烏石鼻海岸。']
+ nanao:['🌅','金岳部落、澳花瀑布、南澳古道','']
 };
-function iconBox(id){var o=ICONS[id];if(!o)return '';return '<div class="need loc"><b>在地代表：'+esc(o[1])+'</b><p>'+esc(o[2])+'</p><button class="go" type="button" data-tcard="'+id+'">存成鄉鎮圖卡</button></div>'}
+var TINFO={toucheng:{f:['芋冰','大溪漁港海鮮'],t:['頭城搶孤','漁港文化','衝浪'],s:['頭城老街','烏石港','蘭陽博物館']},
+ jiaoxi:{f:['蔥油餅','玉田香腸'],t:['溫泉','溫泉空心菜','金棗'],s:['湯圍溝溫泉公園','五峰旗瀑布','跑馬古道']},
+ zhuangwei:{f:['花生','哈密瓜'],t:['沙丘海岸','沙地花生','瓜果農產'],s:['壯圍沙丘生態園區','永鎮海濱公園','東港榕樹公園']},
+ yilan:{f:['炸醬麵','麻醬麵','蒜味肉羹'],t:['舊城文化','紅露酒','幾米公園'],s:['宜蘭酒廠','幾米廣場','宜蘭設治紀念館']},
+ yuanshan:{f:['魚丸米粉','脆皮臭豆腐'],t:['湧泉','生態農遊'],s:['望龍埤','福山植物園']},
+ wujie:{f:['炭烤燒餅','來來牛排'],t:['傳統工藝','戲曲文化','宜蘭國際童玩藝術節'],s:['冬山河親水公園','國立傳統藝術中心','中興文化創意園區']},
+ luodong:{f:['糕渣','卜肉','當歸羊肉湯','包心粉圓'],t:['林業歷史','夜市文化','商圈美食'],s:['羅東林業文化園區（羅東林場）','羅東夜市']},
+ dongshan:{f:['米粉羹','手工麻糬'],t:['自行車漫遊','田園風光'],s:['梅花湖','冬山河生態綠舟','新寮瀑布']},
+ sanxing:{f:['三星蔥油餅','卜肉','蔥捲餅','上將梨'],t:['三星蔥','白蒜','銀柳'],s:['天送埤車站','三星青蔥文化館','安農溪']},
+ suao:{f:['鮮魚湯','飛虎魚丸','南方澳米糕'],t:['冷泉','鯖魚','漁港文化'],s:['蘇澳冷泉','南方澳漁港','豆腐岬']},
+ datong:{f:['打那雞（刺蔥雞）','山豬肉刈包','馬告香腸'],t:['泰雅文化','玉蘭茶','山林雲海'],s:['太平山國家森林遊樂區','翠峰湖','見晴懷古步道']},
+ nanao:{f:['香蕉糯米飯','小米醃豬肉'],t:['泰雅部落文化','小米飲食','山林生態'],s:['金岳部落','澳花瀑布','南澳古道']}};
+function tinfoHTML(id){var o=TINFO[id];if(!o)return '';var r=[['美食',o.f],['特色',o.t],['景點',o.s]];return '<div class="tinfo">'+r.map(function(x){return '<div class="tir"><b>'+x[0]+'</b><span>'+x[1].map(function(i){return '<i>'+esc(i)+'</i>'}).join('')+'</span></div>'}).join('')+'</div>'}
+function iconBox(id){var o=ICONS[id];if(!o)return '';return '<div class="need loc"><b>在地代表：'+esc(o[1])+'</b><p>'+esc(o[2])+'</p>'+tinfoHTML(id)+'<button class="go" type="button" data-tcard="'+id+'">存成鄉鎮圖卡</button></div>'}
 
 /* ================= overlay + 抽金曲籤 + 我的金曲單 ================= */
 var OV=document.createElement('div');OV.className='ov';OV.id='ov';OV.hidden=true;document.body.appendChild(OV);
@@ -3396,22 +3467,29 @@ function drawCard(){
   var W=1080,H=1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d');
   cvBG(c,W,H);
   cvHead(c,W);
-  c.fillStyle='#fff';c.font='900 96px '+CV_S;c.fillText('我的專屬金曲單',64,232);
-  c.fillStyle='#F1DFC0';c.font='700 38px '+CV_F;
+  c.fillStyle='#fff';c.font='900 96px '+CV_S;c.fillText('我的點歌單',64,232);
+  c.fillStyle='#F1DFC0';c.font='700 36px '+CV_F;
   var wl=who.length?cvWrap(c,who.join('・'),W-128,2):['全縣重點金曲'];
-  wl.forEach(function(s,i){c.fillText(s,64,300+i*50)});
-  c.fillStyle='#E0C85C';c.font='900 44px '+CV_F;
-  c.fillText(any?'共 '+list.length+' 項金曲和你有關':'先看這 '+list.length+' 項重點金曲',64,420);
-  var y=462,RH=108,rows=list.slice(0,6);
+  wl.forEach(function(s,i){c.fillText(s,64,292+i*46)});
+  /* the request slip */
+  var PX=64,PW=W-128,PY=372,PH=760,rows=list.slice(0,6),RH=98;
+  c.save();c.shadowColor='rgba(0,0,0,.32)';c.shadowBlur=26;c.shadowOffsetY=10;c.fillStyle='#FFF6DA';rrect(c,PX,PY,PW,PH,10);c.fill();c.restore();
+  c.fillStyle='#FFF6DA';rrect(c,PX,PY,PW,PH,10);c.fill();c.lineWidth=4;c.strokeStyle='#1B1B18';c.stroke();
+  c.fillStyle='#1B1B18';c.fillRect(PX+2,PY+2,PW-4,74);
+  c.fillStyle='#E0C85C';c.font='900 46px '+CV_S;c.fillText('點歌單',PX+34,PY+55);
+  c.textAlign='right';c.font='800 36px '+CV_F;c.fillText((any?'共 ':'重點 ')+list.length+' 首',PX+PW-34,PY+54);c.textAlign='left';
+  c.fillStyle='#A63A35';[PY+PH-70].forEach(function(yy){c.save();c.setLineDash([4,10]);c.lineWidth=3;c.strokeStyle='rgba(27,27,24,.45)';c.beginPath();c.moveTo(PX+22,yy);c.lineTo(PX+PW-22,yy);c.stroke();c.restore()});
   rows.forEach(function(p,i){
-    var cc=CATS[p.c],yy=y+i*RH;
-    c.fillStyle='rgba(255,255,255,.18)';c.fillRect(64,yy+RH-2,W-128,2);
-    c.fillStyle=cc.c;c.beginPath();c.arc(100,yy+46,34,0,Math.PI*2);c.fill();
-    c.fillStyle='#1B1B18';c.font='900 34px '+CV_F;c.textAlign='center';c.fillText(cc.n.slice(0,1),100,yy+58);c.textAlign='left';
-    c.fillStyle='#fff';c.font='800 44px '+CV_F;c.fillText(cvFit(c,p.t,W-176-64),164,yy+46);
-    c.fillStyle='#F1DFC0';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+86);
+    var cc=CATS[p.c],yy=PY+90+i*RH;
+    c.fillStyle='#A63A35';c.font='900 38px '+CV_S;c.fillText((i<9?'00':'0')+(i+1),PX+34,yy+58);
+    c.fillStyle='#1B1B18';c.font='900 40px '+CV_F;c.fillText(cvFit(c,p.t,PW-34-124-100),PX+160,yy+50);
+    c.fillStyle='#6B5E49';c.font='600 26px '+CV_F;c.fillText(cc.n,PX+160,yy+86);
+    c.fillStyle=cc.c;c.beginPath();c.arc(PX+PW-60,yy+50,30,0,Math.PI*2);c.fill();
+    c.fillStyle='#1B1B18';c.font='900 30px '+CV_F;c.textAlign='center';c.fillText(cc.n.slice(0,1),PX+PW-60,yy+61);c.textAlign='left';
+    if(i<rows.length-1){c.save();c.setLineDash([3,8]);c.lineWidth=2;c.strokeStyle='rgba(27,27,24,.38)';c.beginPath();c.moveTo(PX+30,yy+RH-4);c.lineTo(PX+PW-30,yy+RH-4);c.stroke();c.restore()}
   });
-  if(list.length>rows.length){c.fillStyle='#E0C85C';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-rows.length)+' 項，到網站看全部',64,y+rows.length*RH+44)}
+  c.fillStyle='#A63A35';c.font='800 32px '+CV_F;
+  c.fillText(list.length>rows.length?'還有 '+(list.length-rows.length)+' 首，到網站看全部':'宜蘭大歌廳　①次看全部',PX+34,PY+PH-24);
   cvFoot(c,W);
   return {cv:cv,count:list.length};
 }
@@ -3435,7 +3513,7 @@ function openImg(cv,txt,url,fname,extra,ext){
 }
 function openCard(){
   var d=drawCard();
-  openImg(d.cv,'我的專屬金曲單（'+d.count+' 項）｜宜蘭大歌廳①次看全部',SHARE_BASE?SHARE_BASE+'s/me/':location.href.split('#')[0]+'#me','林國漳-我的金曲單.png');
+  openImg(d.cv,'我的點歌單（'+d.count+' 首）｜宜蘭大歌廳①次看全部',SHARE_BASE?SHARE_BASE+'s/me/':location.href.split('#')[0]+'#me','林國漳-我的點歌單.png');
 }
 function drawPolCard(p){
   var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),cc=CATS[p.c],kn=KN[p.id]||[],X=88,TW=W-X*2;
@@ -3557,7 +3635,7 @@ var QZ=[
  {q:'逛街逛到一半肚子餓，你會買？',o:[['蔥油餅加蛋',['yuanshan','luodong','jiaoxi']],['糕渣、卜肉這類傳統小吃',['toucheng','wujie','sanxing']],['包心粉圓或鮮果冰',['dongshan','jiaoxi','luodong']],['帶點山味的烤肉、小米酒香',['datong','nanao','yuanshan']]]},
  {q:'理想中的家在哪裡？',o:[['面海，每天看海',['toucheng','zhuangwei','nanao']],['山邊，空氣好、很安靜',['datong','yuanshan','nanao']],['水邊田園，有河有湖有稻田',['dongshan','wujie','sanxing']],['市區生活圈，什麼都方便',['jiaoxi','luodong','yilan']]]}
 ];
-var FOODS={toucheng:'老街小吃、烏石港海鮮',jiaoxi:'茭白筍、溫泉空心菜、蔥油餅',zhuangwei:'壯圍哈密瓜、花生',yilan:'炸醬麵、麻醬麵、餛飩麵',yuanshan:'員山魚丸、當季水果',wujie:'傳藝中心的古早味小吃',luodong:'糕渣、卜肉、夜市小吃',dongshan:'梅花湖畔的家常小吃',sanxing:'三星蔥、蔥油餅、上將梨',suao:'南方澳鮮魚湯、鮮果冰',datong:'泰雅山菜、刺蔥',nanao:'小米與刺蔥料理'};
+var FOODS={toucheng:'芋冰、大溪漁港海鮮',jiaoxi:'蔥油餅、玉田香腸',zhuangwei:'花生、哈密瓜',yilan:'炸醬麵、麻醬麵、蒜味肉羹',yuanshan:'魚丸米粉、脆皮臭豆腐',wujie:'炭烤燒餅、來來牛排',luodong:'糕渣、卜肉、當歸羊肉湯、包心粉圓',dongshan:'米粉羹、手工麻糬',sanxing:'三星蔥油餅、卜肉、蔥捲餅、上將梨',suao:'鮮魚湯、飛虎魚丸、南方澳米糕',datong:'打那雞（刺蔥雞）、山豬肉刈包、馬告香腸',nanao:'香蕉糯米飯、小米醃豬肉'};
 var QT={
  toucheng:'熱血又重情義，遇到大場面特別拚，像搶孤一樣不認輸。',
  jiaoxi:'最懂得放鬆的人，再忙也要留時間泡一泡、慢慢過。',
@@ -3595,7 +3673,7 @@ function drawQuizCard(id){
   cvWrap(c,QT[id]||'',W-128,2).forEach(function(s,i){c.fillText(s,64,540+i*68)});
   if(FOODS[id]){
     c.fillStyle='rgba(27,27,24,.4)';c.strokeStyle='#E0C85C';c.lineWidth=3;rrect(c,64,690,W-128,86,43);c.fill();c.stroke();
-    c.fillStyle='#E0C85C';c.font='800 40px '+CV_F;c.fillText(cvFit(c,'在地美食　'+FOODS[id],W-128-80),104,747);
+    c.fillStyle='#E0C85C';var fz=40,ft='在地美食　'+FOODS[id];c.font='800 '+fz+'px '+CV_F;while(fz>30&&c.measureText(ft).width>W-128-80){fz-=2;c.font='800 '+fz+'px '+CV_F}c.fillText(cvFit(c,ft,W-128-80),104,747);
   }
   c.fillStyle='#F1DFC0';c.font='700 40px '+CV_F;
   c.fillText(cvFit(c,loc.length?'林國漳的'+t.n+'金曲':t.n+'也適用的全縣金曲',W-128),64,860);
@@ -3753,20 +3831,20 @@ function drawTownCard(id){
   c.fillStyle='#fff';c.font='900 150px '+CV_S;c.fillText(t.n,64,350);
   if(o[1]){
     c.fillStyle='#E0C85C';c.font='900 46px '+CV_F;c.fillText('在地代表：'+o[1],64,440);
-    c.fillStyle='#F1DFC0';c.font='600 36px '+CV_F;cvWrap(c,o[2],W-128,2).forEach(function(s,i){c.fillText(s,64,498+i*52)});
+    var ti=TINFO[id];if(ti)[['美食',ti.f],['特色',ti.t],['景點',ti.s]].forEach(function(r,i){var fz=34,tx=r[1].join('、');c.font='700 '+fz+'px '+CV_F;while(fz>26&&c.measureText(r[0]+'　'+tx).width>W-128){fz-=2;c.font='700 '+fz+'px '+CV_F}c.fillStyle='#E0C85C';c.fillText(r[0],64,500+i*50);var lw=c.measureText(r[0]+'　').width;c.fillStyle='#F1DFC0';c.fillText(cvFit(c,tx,W-128-lw),64+lw,500+i*50)});
   }
   var list=loc.length?loc:cty;
   c.fillStyle='#E0C85C';c.font='900 44px '+CV_F;
-  c.fillText(cvFit(c,loc.length?loc.length+' 項在地金曲':'目前沒有專屬於'+t.n+'的金曲，全縣適用 '+cty.length+' 項',W-128),64,640);
-  list.slice(0,4).forEach(function(p,i){
-    var cc=CATS[p.c],yy=668+i*104;
+  c.fillText(cvFit(c,loc.length?loc.length+' 項在地金曲':'目前沒有專屬於'+t.n+'的金曲，全縣適用 '+cty.length+' 項',W-128),64,700);
+  list.slice(0,3).forEach(function(p,i){
+    var cc=CATS[p.c],yy=722+i*104;
     c.fillStyle='rgba(255,255,255,.18)';c.fillRect(64,yy+100,W-128,2);
     c.fillStyle=cc.c;c.beginPath();c.arc(100,yy+44,32,0,Math.PI*2);c.fill();
     c.fillStyle='#1B1B18';c.font='900 32px '+CV_F;c.textAlign='center';c.fillText(cc.n.slice(0,1),100,yy+55);c.textAlign='left';
     c.fillStyle='#fff';c.font='800 42px '+CV_F;c.fillText(cvFit(c,p.t,W-176-64),164,yy+44);
     c.fillStyle='#F1DFC0';c.font='600 28px '+CV_F;c.fillText(cc.n,164,yy+84);
   });
-  if(list.length>4){c.fillStyle='#E0C85C';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-4)+' 項，到網站看全部',64,1138)}
+  if(list.length>3){c.fillStyle='#E0C85C';c.font='800 32px '+CV_F;c.fillText('還有 '+(list.length-3)+' 項，到網站看全部',64,1138)}
   cvFoot(c,W);
   return cv;
 }
@@ -3790,7 +3868,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',SHARE_BASE||location.href.split('#')[0],'宜蘭大歌廳-排行榜.png')}
-var BUILD='10/31 第 167 版';
+var BUILD='10/31 第 168 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3851,10 +3929,29 @@ function daysLeft(){var m=/[?&]pd=(\d{4})(\d\d)(\d\d)/.exec(location.search),now
 function countdown(){var d=daysLeft();$('#cd').textContent=d>1?d+' 天':(d===1?'明天見':(d===0?'今天見':'已投票'))}
 function mkHeroCD(){var p=$('#portrait');if(!p||p.querySelector('.hcd'))return;var d=document.createElement('div');d.className='hcd';d.setAttribute('aria-hidden','true');d.setAttribute('data-music','');d.innerHTML=discSVG('全民縣長','#A63A35,#6E1B25','#E0C85C','#F6EFD8','h');p.insertBefore(d,p.firstChild)}
 mkHeroCD();
-function mkDisco(){var b=document.querySelector('.brand');if(!b||b.querySelector('.disco'))return;var d=document.createElement('div');d.className='disco';d.setAttribute('role','button');d.setAttribute('tabindex','0');d.setAttribute('aria-label','開派對：播放音樂');d.innerHTML='<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" focusable="false"><defs><pattern id="dsp" width="52" height="26" patternUnits="userSpaceOnUse"><g stroke="#1B1B18" stroke-opacity=".45" stroke-width=".6"><rect x="0" y="0" width="13" height="13" fill="#E0C85C"/><rect x="13" y="0" width="13" height="13" fill="#FFF6DA"/><rect x="26" y="0" width="13" height="13" fill="#A63A35"/><rect x="39" y="0" width="13" height="13" fill="#CFC6AE"/><rect x="0" y="13" width="13" height="13" fill="#fff"/><rect x="13" y="13" width="13" height="13" fill="#F3E3A0"/><rect x="26" y="13" width="13" height="13" fill="#C9605A"/><rect x="39" y="13" width="13" height="13" fill="#E8E0C8"/></g></pattern><radialGradient id="dss" cx="42%" cy="36%" r="70%"><stop offset="0" stop-color="#1B1B18" stop-opacity="0"/><stop offset=".55" stop-color="#1B1B18" stop-opacity=".05"/><stop offset="1" stop-color="#1B1B18" stop-opacity=".62"/></radialGradient><clipPath id="dsc"><circle cx="50" cy="92" r="44"/></clipPath></defs><line x1="50" y1="0" x2="50" y2="46" stroke="#E0C85C" stroke-width="2"/><rect x="44" y="44" width="12" height="7" rx="2" fill="#E0C85C"/><circle cx="50" cy="92" r="44" fill="#CFC6AE"/><g clip-path="url(#dsc)"><g class="dsl"><rect x="-52" y="40" width="204" height="104" fill="url(#dsp)"/></g><circle cx="50" cy="92" r="44" fill="url(#dss)"/><g stroke="#1B1B18" stroke-opacity=".3" stroke-width=".8" fill="none"><path d="M0 66H100M0 79H100M0 92H100M0 105H100M0 118H100"/><ellipse cx="50" cy="92" rx="30" ry="44"/><ellipse cx="50" cy="92" rx="14" ry="44"/><path d="M50 48V136"/></g><ellipse cx="36" cy="70" rx="12" ry="6" fill="#fff" fill-opacity=".7" transform="rotate(-35 36 70)"/></g><path class="dst" style="animation-delay:0s" transform="translate(34 84) scale(1.5)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:0.5s" transform="translate(66 76) scale(1.2)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:1.0s" transform="translate(58 108) scale(1.7)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:1.5s" transform="translate(40 112) scale(1)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:0.2s" transform="translate(72 98) scale(1.1)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:0.8s" transform="translate(48 64) scale(1)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/></svg><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i><i class="sp s5"></i><i class="sp s6"></i>';var bm=document.createElement('div');bm.className='dbeams';bm.setAttribute('aria-hidden','true');bm.innerHTML='<i class="bm" style="--a1:5deg;--a2:55deg;--t:6s"></i><i class="bm" style="--a1:35deg;--a2:95deg;--t:8s;--d:-2s"></i><i class="bm r" style="--a1:70deg;--a2:125deg;--t:7s;--d:-4s"></i><i class="bm" style="--a1:100deg;--a2:160deg;--t:9s;--d:-1s"></i><i class="bm w" style="--a1:130deg;--a2:175deg;--t:6.5s;--d:-3s"></i>';b.appendChild(bm);b.appendChild(d);function go(){var a=MP.a,pl=a&&a.src&&!a.paused;if(pl){a.pause();return}if(!a||!a.src)mpGo(0,true);else{var p=a.play();if(p&&p.catch)p.catch(function(){})}discoBurst()}d.addEventListener('click',go);d.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})}
+function mkDisco(){var b=document.querySelector('.brand');if(!b||b.querySelector('.disco'))return;var d=document.createElement('div');d.className='disco';d.setAttribute('role','button');d.setAttribute('tabindex','0');d.setAttribute('aria-label','開派對：播放音樂');d.innerHTML='<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" focusable="false"><defs><pattern id="dsp" width="52" height="26" patternUnits="userSpaceOnUse"><g stroke="#1B1B18" stroke-opacity=".45" stroke-width=".6"><rect x="0" y="0" width="13" height="13" fill="#E0C85C"/><rect x="13" y="0" width="13" height="13" fill="#FFF6DA"/><rect x="26" y="0" width="13" height="13" fill="#A63A35"/><rect x="39" y="0" width="13" height="13" fill="#CFC6AE"/><rect x="0" y="13" width="13" height="13" fill="#fff"/><rect x="13" y="13" width="13" height="13" fill="#F3E3A0"/><rect x="26" y="13" width="13" height="13" fill="#C9605A"/><rect x="39" y="13" width="13" height="13" fill="#E8E0C8"/></g></pattern><radialGradient id="dss" cx="42%" cy="36%" r="70%"><stop offset="0" stop-color="#1B1B18" stop-opacity="0"/><stop offset=".55" stop-color="#1B1B18" stop-opacity=".05"/><stop offset="1" stop-color="#1B1B18" stop-opacity=".62"/></radialGradient><clipPath id="dsc"><circle cx="50" cy="92" r="44"/></clipPath></defs><line x1="50" y1="0" x2="50" y2="46" stroke="#E0C85C" stroke-width="2"/><rect x="44" y="44" width="12" height="7" rx="2" fill="#E0C85C"/><circle cx="50" cy="92" r="44" fill="#CFC6AE"/><g clip-path="url(#dsc)"><g class="dsl"><rect x="-52" y="40" width="204" height="104" fill="url(#dsp)"/></g><circle cx="50" cy="92" r="44" fill="url(#dss)"/><g stroke="#1B1B18" stroke-opacity=".3" stroke-width=".8" fill="none"><path d="M0 66H100M0 79H100M0 92H100M0 105H100M0 118H100"/><ellipse cx="50" cy="92" rx="30" ry="44"/><ellipse cx="50" cy="92" rx="14" ry="44"/><path d="M50 48V136"/></g><ellipse cx="36" cy="70" rx="12" ry="6" fill="#fff" fill-opacity=".7" transform="rotate(-35 36 70)"/></g><path class="dst" style="animation-delay:0s" transform="translate(34 84) scale(1.5)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:0.5s" transform="translate(66 76) scale(1.2)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:1.0s" transform="translate(58 108) scale(1.7)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:1.5s" transform="translate(40 112) scale(1)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:0.2s" transform="translate(72 98) scale(1.1)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/><path class="dst" style="animation-delay:0.8s" transform="translate(48 64) scale(1)" d="M0-6Q0 0 6 0Q0 0 0 6Q0 0-6 0Q0 0 0-6Z" fill="#fff"/></svg><i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i><i class="sp s4"></i><i class="sp s5"></i><i class="sp s6"></i>';var bm=document.createElement('div');bm.className='dbeams';bm.setAttribute('aria-hidden','true');bm.innerHTML='<i class="bm" style="--a1:5deg;--a2:55deg;--t:6s"></i><i class="bm" style="--a1:35deg;--a2:95deg;--t:8s;--d:-2s"></i><i class="bm r" style="--a1:70deg;--a2:125deg;--t:7s;--d:-4s"></i><i class="bm" style="--a1:100deg;--a2:160deg;--t:9s;--d:-1s"></i><i class="bm w" style="--a1:130deg;--a2:175deg;--t:6.5s;--d:-3s"></i>';b.appendChild(bm);b.appendChild(d);function go(){var a=MP.a,pl=a&&a.src&&!a.paused;if(pl){a.pause();return}function start(){if(!a||!a.src)mpGo(0,true);else{var p=a.play();if(p&&p.catch)p.catch(function(){})}discoBurst()}var ok=false;try{ok=sessionStorage.getItem('mqok')==='1'}catch(e){}if(ok)start();else askMusic(function(){try{sessionStorage.setItem('mqok','1')}catch(e){}start()})}d.addEventListener('click',go);d.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})}
+function askMusic(yes){
+  var old=document.getElementById('mq');if(old)old.remove();
+  var q=document.createElement('div');q.id='mq';q.className='mq';q.setAttribute('role','dialog');q.setAttribute('aria-modal','true');q.setAttribute('aria-labelledby','mqt');
+  q.innerHTML='<b id="mqt">要播放音樂嗎？</b><p>聲音會從喇叭播出，在公共場所請先調好音量。</p><div class="mqb"><button type="button" class="pri" data-y>播放音樂</button><button type="button" data-n>不用了</button></div>';
+  function close(){q.remove();document.removeEventListener('keydown',esc)}
+  function esc(e){if(e.key==='Escape')close()}
+  q.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;close();if(b.hasAttribute('data-y'))yes()});
+  document.addEventListener('keydown',esc);document.body.appendChild(q);q.querySelector('[data-y]').focus();
+}
 function discoSync(){var b=document.querySelector('.brand');if(b)b.classList.toggle('discoon',!!(MP.a&&MP.a.src&&!MP.a.paused))}
 function discoBurst(){var d=document.querySelector('.disco'),bm=document.querySelector('.dbeams');if(!d||!bm||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;var br=bm.getBoundingClientRect(),r=d.getBoundingClientRect(),cx=r.left-br.left+r.width/2,cy=r.top-br.top+r.height*.66,cl=['#E0C85C','#FFF6DA','#A63A35','#fff','#F3E3A0'];for(var i=0;i<34;i++){var e=document.createElement('i');e.className='cf';e.style.cssText='left:'+cx+'px;top:'+cy+'px;background:'+cl[i%5]+';width:'+(6+Math.random()*7)+'px;height:'+(8+Math.random()*10)+'px';bm.appendChild(e);var an=Math.random()*Math.PI*2,dist=90+Math.random()*260;e.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+Math.cos(an)*dist+'px,'+(Math.sin(an)*dist+90)+'px) rotate('+(Math.random()*720-360)+'deg)',opacity:0}],{duration:1300+Math.random()*900,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=(function(x){return function(){x.remove()}})(e)}}
 mkDisco();
+/* v168 a11y: sections announce as headings; dialogs keep keyboard focus inside and give it back on close */
+(function(){
+  function heads(){document.querySelectorAll('.sec:not([role]),#vhd:not([role])').forEach(function(e){e.setAttribute('role','heading');e.setAttribute('aria-level','2')})}
+  var pb=document.getElementById('pbody');if(pb){heads();new MutationObserver(heads).observe(pb,{childList:true,subtree:true})}
+  var last=null,was=null;
+  document.addEventListener('click',function(e){var b=e.target.closest('button,a[href]');if(b&&!b.closest('#ov,#albv,.vmo'))last=b},true);
+  function top(){var m=document.querySelector('.vmo');if(m)return m;var a=document.getElementById('albv');if(a&&!a.hidden)return a;return null}
+  document.addEventListener('focusin',function(e){var m=top();if(m&&!m.contains(e.target)){var f=m.querySelector('button,a[href],input,video');if(f)f.focus()}});
+  setInterval(function(){var m=top();if(was&&!m&&last&&document.contains(last)&&document.activeElement===document.body){try{last.focus()}catch(x){}}was=m},400);
+})();
 function mkStage(){var b=document.querySelector('.brand'),p=document.getElementById('portrait');if(!b||b.querySelector('.bulbs'))return;
   var bu=document.createElement('div');bu.className='bulbs';bu.setAttribute('aria-hidden','true');bu.innerHTML='<i></i><i></i>';b.appendChild(bu);
   if(p&&!p.querySelector('.spot')){var sp=document.createElement('div');sp.className='spot';sp.setAttribute('aria-hidden','true');p.appendChild(sp)}}
