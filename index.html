@@ -1037,6 +1037,9 @@ body.hasbar .mpbar{bottom:88px}
 @media (min-width:1024px){.ftiles .ft,.ftiles .ft.fday{min-height:280px}}
 .nm.h3{font-size:17cqw;line-height:1.08}
 .vmw.ld .pdisc{visibility:hidden}
+.vgo{position:absolute;inset:0;z-index:3;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer}
+.vgo:focus-visible{outline:3px solid #E0C85C;outline-offset:-6px}
+.vmw.lo .pdisc{animation:hspin 1.2s linear infinite}
 @media (min-width:1024px){
   .brand .ballot{font-size:26px;gap:.35em .5em;padding:10px 26px 10px 14px}
   .brand .ballot::before{padding:4px 18px;margin-right:10px}
@@ -1675,7 +1678,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
     <div class="pbody" id="pbody"></div>
   </aside>
 </div>
-<div id="mebar" hidden><span class="mebag" id="mebag" role="status"><svg viewBox="0 0 40 46" aria-hidden="true"><path d="M8 16h24l3 26H5z" fill="#A63A35"/><path d="M13 16v-4a7 7 0 0 1 14 0v4" fill="none" stroke="#A63A35" stroke-width="3"/></svg><span class="t">購物袋裡有</span><b class="n" id="mebagn">0</b><span class="t">張</span></span><button type="button" class="mecard" id="mecard">做成圖卡</button><button type="button" id="mego">看適合我的金曲</button><button type="button" id="mecl">清除</button></div>
+<div id="mebar" hidden><span class="mebag" id="mebag" role="status"><svg viewBox="0 0 40 46" aria-hidden="true"><circle cx="20" cy="23" r="17" fill="#A63A35"/><circle cx="20" cy="23" r="9" fill="none" stroke="#E0C85C" stroke-width="1.5" stroke-dasharray="2 2"/><circle cx="20" cy="23" r="5" fill="#FFF6DA"/><circle cx="20" cy="23" r="2" fill="#A63A35"/></svg><span class="t">歌曲清單裡有</span><b class="n" id="mebagn">0</b><span class="t">張</span></span><button type="button" class="mecard" id="mecard">做成圖卡</button><button type="button" id="mego">看適合我的金曲</button><button type="button" id="mecl">清除</button></div>
 <script>
 (function(){
 'use strict';
@@ -2658,7 +2661,7 @@ function albOpen(b){
    '<div class="albv-stage"><div class="albv-disc">'+discSVG(info.name,'#A63A35,#6E1B25','#E0C85C','#F6EFD8')+'</div>'+
    '<div class="albv-flip"><div class="albv-face albv-cover" style="--cbg:'+cbg+';--c1:'+c1+';--c2:'+c2+';--cfr:'+cfr+'">'+covName(info.name)+(sb?'<span class="sb">'+sbHTML(sb)+'</span>':'')+'<span class="ct">'+info.tr.length+' 首</span></div>'+
    '<div class="albv-face albv-back"><h3>'+esc(info.name)+'　曲目</h3>'+(info.kind==='t'?tinfoHTML(info.id):'')+'<ol class="tl">'+tr+'</ol></div></div></div>'+
-   '<div class="albv-acts"><button type="button" class="albv-b" data-albflip>翻到背面看曲目</button>'+(info.kind==='t'?'<button type="button" class="albv-b tcard" data-albcard="'+info.id+'">存成鄉鎮圖卡</button>':'')+'<button type="button" class="albv-b pri" data-albbag aria-pressed="'+sel+'">'+(sel?'已在購物袋裡（點一下拿出來）':'放進購物袋')+'</button><button type="button" class="albv-b" data-albx>關閉</button></div></div>';
+   '<div class="albv-acts"><button type="button" class="albv-b" data-albflip>翻到背面看曲目</button>'+(info.kind==='t'?'<button type="button" class="albv-b tcard" data-albcard="'+info.id+'">存成鄉鎮圖卡</button>':'')+'<button type="button" class="albv-b pri" data-albbag aria-pressed="'+sel+'">'+(sel?'已在我的歌曲清單裡（點一下拿出來）':'放進我的歌曲清單')+'</button><button type="button" class="albv-b" data-albx>關閉</button></div></div>';
   ALBV.hidden=false;document.body.classList.add('albopen');
   void ALBV.offsetWidth;ALBV.classList.add('on');
   var f=ALBV.querySelector('[data-albflip]');if(f)f.focus();
@@ -2681,7 +2684,7 @@ function albClose(){
 ALBV.addEventListener('click',function(e){
   var t=e.target;if(t.closest('[data-albx]')){albClose();return}
   var fl=t.closest('[data-albflip]');if(fl){var back=ALBV.classList.toggle('is-back');fl.textContent=back?'翻回封面':'翻到背面看曲目';return}
-  var bg=t.closest('[data-albbag]');if(bg&&ALBFROM){togglePersona(ALBFROM);var on=ALBFROM.getAttribute('aria-pressed')==='true';bg.setAttribute('aria-pressed',on);bg.textContent=on?'已在購物袋裡（點一下拿出來）':'放進購物袋';if(on)albFly();return}
+  var bg=t.closest('[data-albbag]');if(bg&&ALBFROM){togglePersona(ALBFROM);var on=ALBFROM.getAttribute('aria-pressed')==='true';bg.setAttribute('aria-pressed',on);bg.textContent=on?'已在我的歌曲清單裡（點一下拿出來）':'放進我的歌曲清單';if(on)albFly();return}
   var ac=t.closest('[data-albcard]');if(ac){var tid=ac.dataset.albcard;albClose();openTownCard(tid);return}
   var tt=t.closest('[data-trkt]');if(tt){var dd=tt.nextElementSibling,op=tt.getAttribute('aria-expanded')==='true';tt.setAttribute('aria-expanded',!op);if(dd)dd.hidden=op;return}
   var tcd=t.closest('[data-trkcard]');if(tcd){var pid2=tcd.dataset.trkcard;albClose();openPolCard(pid2);return}
@@ -3021,7 +3024,7 @@ $('#pbody').addEventListener('click',function(e){
   var b=e.target.closest('button');if(!b)return;
   if(b.dataset.ptog){albOpen(b);return}
   if('wallcard' in b.dataset){openWallCard();return}
-  if('about' in b.dataset){S.sel={type:'about'};setHL();refresh();return}if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
+  if('about' in b.dataset){S.sel={type:'about'};setHL();refresh();return}if(b.dataset.vplay){vPlayInline(b);return}if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
   if(b.dataset.rec!==undefined)openRec(+b.dataset.rec);else if('cold' in b.dataset)openCold();else if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){goBack()}
 });
@@ -3157,7 +3160,7 @@ var VGS='new';
 function vShort(t){return t.split(/[：、，（]/)[0]}
 function vCard(v){
   var fb='https://www.facebook.com/reel/'+v.id+'/',c=VGC[v.g];
-  var media='<div class="vmw" style="--vc:'+c+'">'+VPLAY+(SHARE_BASE?'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" data-src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(fb)+'&show_text=false&width=360&t=0" title="'+esc(v.t)+'" loading="lazy" allowfullscreen onload="this.style.opacity=1;this.parentNode.classList.add(\'ld\')" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>':'<span class="vpn">私人預覽版不能播放<br>請開公開網站觀看</span>')+'</div>';
+  var media='<div class="vmw" style="--vc:'+c+'">'+VPLAY+(SHARE_BASE?'<button type="button" class="vgo" data-vplay="'+v.id+'" aria-label="播放：'+esc(v.t)+'"></button>':'<span class="vpn">私人預覽版不能播放<br>請開公開網站觀看</span>')+'</div>';
   var pl=v.pol.slice(0,2).map(function(p){return '<button type="button" class="who" data-pol="'+p+'">'+esc(vShort(PBY[p].t))+'</button>'}).join('');
   return '<article class="vcard'+(v.h?' h':'')+'" style="--vc:'+c+'">'+media+'<div class="vb"><h3>'+esc(v.t)+'</h3><div class="vm"><i>'+esc(VGN[v.g])+'</i></div>'+(pl?'<div class="vpl2">金曲：'+pl+'</div>':'')+'</div></article>';
 }
@@ -3183,17 +3186,17 @@ function vMore(){VMORE+=3;var el=$('#vmb');if(el)el.innerHTML=vMoreHTML()}
 /* ---- v161 endorsements: landscape album covers (videos + cover photos are added to REC; nothing shows until REC has entries; ?rec=1 previews placeholders) ---- */
 var REC=[{who:'前總統',nm:'蔡英文',img:'photos/rec-1.jpg'},{who:'副總統',nm:'蕭美琴',img:'photos/rec-2.jpg'},{who:'行政院秘書長',nm:'張惇涵',img:'photos/rec-3.jpg'},{who:'前行政院長',nm:'游錫堃',img:'photos/rec-4.jpg'}/* vid:'videos/rec-N.mp4' is added when the video arrives; a card only goes public once it has vid */];
 var RECPV=/[?&]rec=1/.test(location.search);
-var RECL=REC.filter(function(r){return r.vid||RECPV});
+var RECL=REC;
 function recSection(){
   if(!RECL.length)return '';
   return '<section class="blk" id="s-rec"><div class="sec">嘉賓隆重推薦<small>'+RECL.length+' 位</small></div><div class="recg">'+RECL.map(function(r,i){
-    return '<button type="button" class="rc" data-rec="'+i+'" aria-label="播放：'+esc(r.who+' '+r.nm)+'推薦林國漳">'+
+    return '<button type="button" class="rc" data-rec="'+i+'" aria-label="'+(r.vid?'播放：':'')+esc(r.who+' '+r.nm)+'推薦林國漳">'+
      '<span class="rcv">'+(r.img?'<img src="'+esc(r.img)+'" alt="" loading="lazy">':'<span class="rcph">照片待補</span>')+'</span>'+
-     '<span class="rcb"><span class="rcd" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5z" fill="currentColor"/></svg></span><span class="rcn"><small>'+esc(r.who)+'</small><b>'+esc(r.nm)+'</b></span><em>推薦林國漳</em></span></button>'}).join('')+'</div></section>'
+     '<span class="rcb">'+(r.vid?'<span class="rcd" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6.5v11l9-5.5z" fill="currentColor"/></svg></span>':'')+'<span class="rcn"><small>'+esc(r.who)+'</small><b>'+esc(r.nm)+'</b></span><em>推薦林國漳</em></span></button>'}).join('')+'</div></section>'
 }
 function openRec(i){
   var r=RECL[i];if(!r)return;stopVids();closeVid();
-  var pl=r.vid?'<video controls autoplay playsinline src="'+esc(r.vid)+'"'+(r.img?' poster="'+esc(r.img)+'"':'')+'></video>':'<div class="rcph big">'+(r.vid?'':'影片待補')+(r.img?'<img src="'+esc(r.img)+'" alt="">':'')+'</div>';
+  var pl=r.vid?'<video controls autoplay playsinline src="'+esc(r.vid)+'"'+(r.img?' poster="'+esc(r.img)+'"':'')+'></video>':'<div class="rcph big">'+(r.img?'<img src="'+esc(r.img)+'" alt="">':'')+'</div>';
   var m=document.createElement('div');m.className='vmo rmo';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label',r.who+' '+r.nm+'推薦林國漳');
   m.innerHTML='<div class="vmc"><button type="button" class="vmx" aria-label="關閉">×</button><div class="rpl">'+pl+'</div><h3>'+esc(r.who+' '+r.nm)+'　推薦林國漳</h3></div>';
   m.addEventListener('click',function(e){if(e.target===m||e.target.closest('.vmx'))closeVid()});
@@ -3238,7 +3241,15 @@ function closeVid(){
   if(VMO){VMO.remove();VMO=null;document.body.style.overflow=''}
 }
 /* one video at a time: when a Facebook player gets the click, reset the other players so they stop */
-function stopVids(except){Array.prototype.forEach.call(document.querySelectorAll('.vmw iframe'),function(f){if(f===except||!f.src||f.src==='about:blank')return;var u=f.src;f.style.opacity=0;f.parentNode.classList.remove('ld');f.src='about:blank';setTimeout(function(){f.src=u},60)})}
+function stopVids(except){Array.prototype.forEach.call(document.querySelectorAll('.vmw iframe'),function(f){if(f===except)return;var w=f.parentNode;w.classList.remove('ld','lo');var g=w.querySelector('.vgo');if(g)g.hidden=false;w.removeChild(f)})}
+function vPlayInline(g){
+  var w=g.parentNode,id=g.dataset.vplay,v=VBY[id];if(!v)return;stopVids();
+  var f=document.createElement('iframe');
+  f.src='https://www.facebook.com/plugins/video.php?href='+encodeURIComponent('https://www.facebook.com/reel/'+id+'/')+'&show_text=false&autoplay=true&width=360&t=0';
+  f.title=v.t;f.setAttribute('allowfullscreen','');f.setAttribute('allow','autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share');
+  f.onload=function(){f.style.opacity=1;w.classList.remove('lo');w.classList.add('ld')};
+  g.hidden=true;w.classList.add('lo');w.appendChild(f);
+}
 window.addEventListener('blur',function(){setTimeout(function(){var a=document.activeElement;if(a&&a.tagName==='IFRAME'&&a.closest('.vmw'))stopVids(a)},0)});
 function openVid(id){
   var v=VBY[id];if(!v)return;stopVids();closeVid();
@@ -3868,7 +3879,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='10/31 第 169 版';
+var BUILD='10/31 第 171 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
