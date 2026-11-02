@@ -16,10 +16,10 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hanyingyilan.github.io/yilan-policy-map/og.png?v=169">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Iansui&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Iansui&display=swap"></noscript>
+<link id="gf-hand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Iansui&display=swap" media="print"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Iansui&display=swap"></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Noto+Serif+TC:wght@900&display=swap">
+<link rel="preload" href="fonts/yl-serif.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="fonts/yl-hand.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&display=swap"><link id="gf-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&display=swap" media="print">
 <style>
 /* Layout concept: a campaign poster that happens to be a map.
    Deep-ocean blue everywhere, one colour block per township, a lime accent for anything you can act on.
@@ -798,8 +798,11 @@ body .brand h1,body .brand h1 span,body.sub .brand h1{color:var(--hero-fg);text-
   .blk{scroll-margin-top:64px}
 }
 
+/* v172: self-hosted subsets of the two display fonts (only the characters this site uses); Google Fonts stays as the fallback for anything outside the subset, e.g. names typed on the blessing card */
+@font-face{font-family:"YLSerif";src:url(fonts/yl-serif.woff2) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"YLHand";src:url(fonts/yl-hand.woff2) format("woff2");font-weight:400;font-display:swap}
 /* v107 poster-cover theme: red + gold, Noto Serif TC heavy titles, Iansui subtitles, albums as covers */
-:root{--ink:#FFF6DA;--ink2:#FFFFFF;--surface:#FFFFFF;--ink3:#FBE9B6;--tint:#FBE9B6;--line:#E8D9A8;--edge:#8A7A4A;--txt:#1B1B18;--mut:#5C5646;--lime:#A63A35;--acc:#A63A35;--acc-ink:#FFFFFF;--hero-bg:#A63A35;--hero-fg:#FFFFFF;--hero-num:#E0C85C;--rad:10px;--rad-l:12px;--pill:999px;--red:#A63A35;--gold:#E0C85C;--serif:"Noto Serif TC","Noto Sans TC",serif;--hand:"Iansui","Noto Sans TC",sans-serif}
+:root{--ink:#FFF6DA;--ink2:#FFFFFF;--surface:#FFFFFF;--ink3:#FBE9B6;--tint:#FBE9B6;--line:#E8D9A8;--edge:#8A7A4A;--txt:#1B1B18;--mut:#5C5646;--lime:#A63A35;--acc:#A63A35;--acc-ink:#FFFFFF;--hero-bg:#A63A35;--hero-fg:#FFFFFF;--hero-num:#E0C85C;--rad:10px;--rad-l:12px;--pill:999px;--red:#A63A35;--gold:#E0C85C;--serif:"YLSerif","Noto Serif TC","Noto Sans TC",serif;--hand:"YLHand","Iansui","Noto Sans TC",sans-serif}
 body{background:var(--ink)}
 /* hero */
 .brand{background:var(--red);border-radius:0;border-bottom:10px solid var(--gold);margin-bottom:0}
@@ -1644,6 +1647,8 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 .albv-back .tir i{display:inline;padding:0;border:0;background:none;font:700 14px/1.5 var(--sans,sans-serif)}
 .albv-back .tir i+i::before{content:"、"}
 </style>
+<script>/* v172: switch the Google Fonts fallbacks on only after the self-hosted subsets have loaded, so their slices are fetched just for characters the subsets lack */
+(function(){function on(id,spec){var l=document.getElementById(id);if(!l)return;var go=function(){l.media='all'};if(document.fonts&&document.fonts.load){document.fonts.load(spec).then(go,go);setTimeout(go,4000)}else go()}on('gf-serif','900 20px "YLSerif"');on('gf-hand','400 20px "YLHand"')})();</script>
 </head>
 <body>
 <a class="skip" href="#s-play">跳到主要內容</a>
@@ -2645,7 +2650,7 @@ function discSVG(name,cbg,c1,c2,u){
    '<circle cx="100" cy="100" r="88" fill="url(#dkl'+u+')"/>'+
    '<circle cx="100" cy="100" r="87" fill="none" stroke="'+c1+'" stroke-width="1.2" stroke-dasharray="1.5 3.5" opacity=".85"/>'+
    '<circle cx="100" cy="100" r="42" fill="none" stroke="'+c2+'" stroke-width="1.2" opacity=".55"/>'+
-   '<text font-family="Noto Serif TC,serif" font-weight="900" font-size="14" letter-spacing="'+o.ls+'" fill="'+c1+'"><textPath href="#dko'+u+'">'+o.t+'</textPath></text>'+
+   '<text font-family="YLSerif,Noto Serif TC,serif" font-weight="900" font-size="14" letter-spacing="'+o.ls+'" fill="'+c1+'"><textPath href="#dko'+u+'">'+o.t+'</textPath></text>'+
    '<text font-family="Noto Sans TC,sans-serif" font-weight="800" font-size="13" letter-spacing="'+m.ls+'" fill="'+c2+'"><textPath href="#dki'+u+'">'+m.t+'</textPath></text>'+
    '<circle cx="100" cy="100" r="25" fill="#F6EFD8" opacity=".96"/><circle cx="100" cy="100" r="12" fill="#2a2a24" opacity=".22"/><circle cx="100" cy="100" r="8.5" fill="#FFF6DA"/></svg>';
 }
@@ -3184,7 +3189,7 @@ function vMoreHTML(){
 }
 function vMore(){VMORE+=3;var el=$('#vmb');if(el)el.innerHTML=vMoreHTML()}
 /* ---- v161 endorsements: landscape album covers (videos + cover photos are added to REC; nothing shows until REC has entries; ?rec=1 previews placeholders) ---- */
-var REC=[{who:'前總統',nm:'蔡英文',img:'photos/rec-1.jpg'},{who:'副總統',nm:'蕭美琴',img:'photos/rec-2.jpg'},{who:'行政院秘書長',nm:'張惇涵',img:'photos/rec-3.jpg'},{who:'前行政院長',nm:'游錫堃',img:'photos/rec-4.jpg'}/* vid:'videos/rec-N.mp4' is added when the video arrives; a card only goes public once it has vid */];
+var REC=[{who:'前總統',nm:'蔡英文',img:'photos/rec-1.jpg'},{who:'副總統',nm:'蕭美琴',img:'photos/rec-2.jpg'},{who:'行政院秘書長',nm:'張惇涵',img:'photos/rec-3.jpg'},{who:'前行政院長',nm:'游錫堃',img:'photos/rec-4b.jpg'}/* vid:'videos/rec-N.mp4' is added when the video arrives; a card only goes public once it has vid */];
 var RECPV=/[?&]rec=1/.test(location.search);
 var RECL=REC;
 function recSection(){
@@ -3250,6 +3255,26 @@ function vPlayInline(g){
   f.onload=function(){f.style.opacity=1;w.classList.remove('lo');w.classList.add('ld')};
   g.hidden=true;w.classList.add('lo');w.appendChild(f);
 }
+/* v172: cards load the Facebook player (and so its own thumbnail) only while they sit in the viewport, one card at a time after scrolling settles; cards far off-screen drop it again */
+function vLazyLoad(w){
+  if(w.querySelector('iframe'))return;var g=w.querySelector('.vgo');if(!g)return;var v=VBY[g.dataset.vplay];if(!v)return;
+  var f=document.createElement('iframe');
+  f.src='https://www.facebook.com/plugins/video.php?href='+encodeURIComponent('https://www.facebook.com/reel/'+g.dataset.vplay+'/')+'&show_text=false&width=360&t=0';
+  f.title=v.t;f.setAttribute('allowfullscreen','');f.setAttribute('allow','autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share');
+  f.onload=function(){f.style.opacity=1;w.classList.remove('lo');w.classList.add('ld');g.hidden=true};
+  w.classList.add('lo');w.appendChild(f);
+}
+function vLazyUnload(w){var f=w.querySelector('iframe');if(!f)return;w.removeChild(f);w.classList.remove('ld','lo');var g=w.querySelector('.vgo');if(g)g.hidden=false}
+function vLazyInit(){
+  if(!SHARE_BASE||!window.IntersectionObserver||!window.MutationObserver)return;
+  var near=new IntersectionObserver(function(es){es.forEach(function(e){var w=e.target;
+    if(e.isIntersecting&&e.intersectionRatio>=.5){w._vis=true;if(!w._vt)w._vt=setTimeout(function(){w._vt=0;if(w._vis&&document.querySelectorAll('.vmw iframe').length<2)vLazyLoad(w)},450)}
+    else{w._vis=false;if(w._vt){clearTimeout(w._vt);w._vt=0}}})},{threshold:[0,.5]});
+  var far=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)vLazyUnload(e.target)})},{rootMargin:'120% 0px'});
+  var bind=function(){Array.prototype.forEach.call(document.querySelectorAll('.vmw'),function(w){if(w._vz)return;w._vz=1;near.observe(w);far.observe(w)})};
+  bind();new MutationObserver(bind).observe(document.getElementById('pbody')||document.body,{childList:true,subtree:true});
+}
+setTimeout(function(){try{vLazyInit()}catch(e){}},0);
 window.addEventListener('blur',function(){setTimeout(function(){var a=document.activeElement;if(a&&a.tagName==='IFRAME'&&a.closest('.vmw'))stopVids(a)},0)});
 function openVid(id){
   var v=VBY[id];if(!v)return;stopVids();closeVid();
@@ -3765,7 +3790,7 @@ function wishLines(wish){
   return [wish.slice(0,at),wish.slice(at)];
 }
 function drawBlessCard(name,wish,img,fx){
-  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),SS='"Noto Serif TC",'+CV_S,SN='"Noto Sans TC",'+CV_F;
+  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d'),SS='"YLSerif","Noto Serif TC",'+CV_S,SN='"Noto Sans TC",'+CV_F;
   function sp(v){if('letterSpacing' in c)c.letterSpacing=v}
   if(img){
     var sw=img.naturalWidth,sh=img.naturalHeight,r=W/H,cw=sw,ch=sh;
@@ -3805,7 +3830,7 @@ function fontReady(txt,cb){
   try{
     if(!document.fonts||!document.fonts.load){fin();return}
     setTimeout(fin,3500);
-    Promise.all([document.fonts.load('900 60px "Noto Serif TC"',txt),document.fonts.load('700 40px "Noto Sans TC"','宜蘭縣長候選人林國漳')]).then(fin,fin);
+    Promise.all([document.fonts.load('900 60px "YLSerif"',txt),document.fonts.load('900 60px "Noto Serif TC"',txt),document.fonts.load('700 40px "Noto Sans TC"','宜蘭縣長候選人林國漳')]).then(fin,fin);
   }catch(e){fin()}
 }
 function blGen(nm,w){
@@ -3879,7 +3904,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='10/31 第 171 版';
+var BUILD='11/2 第 174 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3907,7 +3932,13 @@ var COLD=[
  {q:'什麼蛋最不能吃？',a:'笨蛋。',c:'agri'},
  {q:'為什麼樹從來不怕迷路？',a:'因為它有根據。',c:'safe'},
  {q:'什麼魚最不會游泳？',a:'木魚。',c:'sea'},
- {q:'老師為什麼戴墨鏡？',a:'因為學生的未來太光明了。',c:'kids'}
+ {q:'老師為什麼戴墨鏡？',a:'因為學生的未來太光明了。',c:'kids'},
+ {q:'什麼車最長？',a:'塞車。',c:'traffic'},
+ {q:'什麼池不能游泳？',a:'電池。',c:'env'},
+ {q:'什麼布剪不斷？',a:'瀑布。',c:'tour'},
+ {q:'什麼雞沒有翅膀？',a:'田雞。',c:'agri'},
+ {q:'什麼海最小？',a:'腦海。',c:'sea'},
+ {q:'什麼球不能踢？',a:'地球。',c:'kids'}
 ];
 var COLDLAST=-1;
 function coldToday(){var dn=Math.floor((Date.now()+8*36e5)/864e5);return dn%COLD.length}
