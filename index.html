@@ -3920,7 +3920,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/4 第 175 版';
+var BUILD='11/4 第 176 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3975,35 +3975,52 @@ function nightNow(){var h=new Date().getHours();return h>=23||h<5}
 function openCold(){coldCard(coldToday(),(nightNow()?'深夜一冷　':'今日一冷　')+dayLabel(),'再來一則')}
 /* v175 宜蘭濃度: the fourth play tile. Twelve yes/no questions about living in Yilan, a percentage, a share card. Nothing is stored. */
 var BLOODQ=[
- '下毛毛雨不撐傘，照樣出門。',
- '去台北叫「出去」，回宜蘭叫「轉來」。',
- '聽得出宜蘭腔，自己也會講幾句。',
- '三星蔥油餅，吃得出哪一攤比較好吃。',
- '卜肉、糕渣、鴨賞、膽肝，吃過三樣以上。',
- '羅東夜市和東門夜市，各有固定要吃的那一攤。',
- '搭噶瑪蘭或首都客運，知道要在哪裡排隊。',
- '國五塞車的時候，知道走哪條路可以繞。',
- '家裡或親戚有人種田、養魚，或開民宿。',
- '童玩節的水，自己玩過或帶小孩玩過。',
- '冬天連續一個月沒太陽，已經習慣了。',
- '聽到「宜蘭囝仔」四個字，心裡會熱一下。'
+ ['下毛毛雨不撐傘，照樣出門。',1],
+ ['去台北叫「出去」，回宜蘭叫「轉來」。',1],
+ ['聽到宜蘭腔會覺得怪，自己一句都不會講。',0],
+ ['「酸酸軟軟」用台語講，尾音自然會帶「ㄨㄧ」。',1],
+ ['有自己的蔥油餅愛店。',1],
+ ['回宜蘭只會走國五，北宜公路和濱海公路一次都沒走過。',0],
+ ['卜肉、糕渣、鴨賞，都吃過。',1],
+ ['洗澡會講「洗身軀」。',1],
+ ['下雨天單手騎機車或腳踏車，另一手撐傘，練過。',1],
+ ['講話會用「勁」，像「勁好吃」。',1],
+ ['國五塞車只能乖乖排隊，不知道有別條路可以繞。',0],
+ ['宜蘭腔的尾音會轉彎，自己從來沒注意過。',0],
+ ['家裡或親戚有人種田、養魚，或開民宿。',1],
+ ['蘇澳冷泉，從來沒泡過。',0],
+ ['火車過大里、頭城，看到龜山島就知道快到家了。',1],
+ ['童玩節玩過水，自己玩或帶小孩去都算。',1],
+ ['以為宜蘭只有礁溪溫泉，其他地方都沒去過。',0],
+ ['聽到「宜蘭囝仔」四個字，心裡會熱一下。',1],
+ ['有自己喜歡吃的肉羹、麻醬麵、餛飩麵店。',1],
+ ['送過外縣市朋友奶凍捲。',1],
+ ['跟外縣市朋友介紹宜蘭，第一個想到的是吃的。',1],
+ ['「西魯肉」三個字，聽了想不出是哪道菜。',0],
+ ['花生捲冰淇淋沒吃過，也不知道裡面要加香菜。',0],
+ ['在外縣市讀書時，參加過蘭友會之類的同鄉社團。',1],
+ ['覺得去台北不遠，但溪北到溪南很遠。',1],
+ ['有人說要去「宜蘭大病院」，知道是哪一間。',1],
+ ['假日休閒會去釣魚。',1],
+ ['〈丟丟銅仔〉不用看歌詞就會唱，小時候就會了。',1]
 ];
 var BLOODT=[[90,'純正宜蘭血統','血液裡流的是蘭陽平原的雨水。'],[70,'宜蘭腔已經很重','講話的尾音騙不了人。'],[45,'半個宜蘭人','再住幾年就滿了。'],[20,'宜蘭準住民','濃度正在上升中。'],[0,'宜蘭觀光客','多來幾次，濃度就會變高。']];
 var BL={i:0,s:0};
 function bloodTier(p){for(var i=0;i<BLOODT.length;i++)if(p>=BLOODT[i][0])return BLOODT[i];return BLOODT[BLOODT.length-1]}
-function openBlood(){BL={i:0,s:0};bloodQ()}
+function bloodPick(a,k){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a.slice(0,k)}
+function openBlood(){var pos=[],rev=[];BLOODQ.forEach(function(q){(q[1]?pos:rev).push(q)});BL={i:0,s:0,q:bloodPick(bloodPick(pos,5).concat(bloodPick(rev,3)),8)};bloodQ()}
 function bloodQ(){
-  var n=BLOODQ.length,i=BL.i;
+  var n=BL.q.length,i=BL.i;
   var h='<div class="coldc bldc"><div class="coldh">血液裡的宜蘭濃度　'+(i+1)+'／'+n+'</div>'+
    '<div class="bldbar" aria-hidden="true"><i style="width:'+Math.round(i/n*100)+'%"></i></div>'+
-   '<p class="coldq">'+esc(BLOODQ[i])+'</p>'+
+   '<p class="coldq">'+esc(BL.q[i][0])+'</p>'+
    '<div class="bldb"><button type="button" class="pri" data-bl="1">是</button><button type="button" data-bl="0">不是</button></div></div>';
   if(i===0||OV.hidden||!OV.querySelector('.bldc'))ovOpen(h,'blood');else OV.querySelector('.bldc').outerHTML=h;
-  Array.prototype.forEach.call(OV.querySelectorAll('[data-bl]'),function(b){b.onclick=function(){BL.s+=+b.dataset.bl;BL.i++;if(BL.i<n)bloodQ();else bloodResult()}});
+  Array.prototype.forEach.call(OV.querySelectorAll('[data-bl]'),function(b){b.onclick=function(){if(+b.dataset.bl===BL.q[BL.i][1])BL.s++;BL.i++;if(BL.i<n)bloodQ();else bloodResult()}});
   var f=OV.querySelector('[data-bl="1"]');if(f&&f.focus)f.focus();
 }
 function bloodResult(){
-  var n=BLOODQ.length,p=Math.round(BL.s/n*100),t=bloodTier(p);
+  var n=BL.q.length,p=Math.round(BL.s/n*100),t=bloodTier(p);
   var url=SHARE_BASE?SHARE_BASE+SQ+'#blood':pageBase()+'#blood',txt='我的宜蘭濃度 '+p+'%，'+t[1]+'｜宜蘭大歌廳①次看全部';
   var h='<div class="coldc bldc bldr"><div class="coldh">血液裡的宜蘭濃度</div>'+
    '<div class="bldp"><b>'+p+'</b><i>%</i></div>'+
