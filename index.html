@@ -1739,6 +1739,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 #club .cur .c3{stroke-width:14;animation-duration:2.9s;opacity:.7}
 #club .cur .clt{font:900 34px var(--sans,"Noto Sans TC",sans-serif);paint-order:stroke;stroke:#fff;stroke-width:10;stroke-linejoin:round;text-anchor:middle;vector-effect:non-scaling-stroke}
 @keyframes curflow{from{stroke-dashoffset:0}to{stroke-dashoffset:-180}}
+#club:not(.lit) .cur,#club:not(.lit) .ct,#club:not(.lit) .cnx,#club:not(.lit) .bm,#club:not(.lit) .cb,#club:not(.lit) .tk,#club:not(.lit) .crowd,#club:not(.lit) .gl{transition:opacity .4s 0s!important;opacity:0}
 @media (prefers-reduced-motion:reduce){#club .cur path{animation:none}}
 @keyframes tkin{from{transform:scale(0) rotate(calc(var(--r,0deg) - 30deg))}to{transform:scale(var(--s,1)) rotate(var(--r,0deg))}}
 @keyframes tkfloat{from{transform:translateY(0) scale(var(--s,1)) rotate(calc(var(--r,0deg) - 5deg))}to{transform:translateY(-12px) scale(var(--s,1)) rotate(calc(var(--r,0deg) + 5deg))}}
@@ -4005,7 +4006,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/4 第 185 版';
+var BUILD='11/4 第 186 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
