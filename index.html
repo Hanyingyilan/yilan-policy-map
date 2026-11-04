@@ -1646,6 +1646,21 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 .albv-back .tir span{display:block;font-size:14px;line-height:1.5}
 .albv-back .tir i{display:inline;padding:0;border:0;background:none;font:700 14px/1.5 var(--sans,sans-serif)}
 .albv-back .tir i+i::before{content:"、"}
+
+/* v175 宜蘭濃度 */
+.bldbar{height:10px;margin:12px 0 0;border:1.5px solid rgba(224,200,92,.7);border-radius:999px;overflow:hidden;background:rgba(27,27,24,.3)}
+.bldbar i{display:block;height:100%;background:#E0C85C;transition:width .4s}
+.bldbar.big{height:18px;margin:8px 0 14px}
+.bldb{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.bldb button{min-height:60px;border:2px solid #E0C85C;border-radius:8px;background:transparent;color:#FFF6DA;font:900 24px var(--serif);cursor:pointer}
+.bldb button.pri{background:#E0C85C;color:#1B1B18}
+.bldb button:focus-visible{outline:3px solid #FFF6DA;outline-offset:2px}
+.bldp{display:flex;align-items:baseline;gap:4px;margin:10px 0 0;color:#E0C85C;font-family:var(--serif)}
+.bldp b{font-size:min(104px,24vw);font-weight:900;line-height:1}
+.bldp i{font-style:normal;font-size:38px;font-weight:900}
+.bldt{margin:6px 0 0;font:900 28px/1.3 var(--serif);color:#FFF6DA}
+.bldd{margin:6px 0 0;font:700 17px/1.5 var(--hand,var(--serif));color:#FFE9A8}
+@media (prefers-reduced-motion:reduce){.bldbar i{transition:none}}
 </style>
 <script>/* v172: switch the Google Fonts fallbacks on only after the self-hosted subsets have loaded, so their slices are fetched just for characters the subsets lack */
 (function(){function on(id,spec){var l=document.getElementById(id);if(!l)return;var go=function(){l.media='all'};if(document.fonts&&document.fonts.load){document.fonts.load(spec).then(go,go);setTimeout(go,4000)}else go()}on('gf-serif','900 20px "YLSerif"');on('gf-hand','400 20px "YLHand"')})();</script>
@@ -3030,7 +3045,7 @@ $('#pbody').addEventListener('click',function(e){
   if(b.dataset.ptog){albOpen(b);return}
   if('wallcard' in b.dataset){openWallCard();return}
   if('about' in b.dataset){S.sel={type:'about'};setHL();refresh();return}if(b.dataset.vplay){vPlayInline(b);return}if(b.dataset.vid){openVid(b.dataset.vid);return}if('videos' in b.dataset){openVideos();return}if('vmore' in b.dataset){vMore();return}
-  if(b.dataset.rec!==undefined)openRec(+b.dataset.rec);else if('cold' in b.dataset)openCold();else if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
+  if(b.dataset.rec!==undefined)openRec(+b.dataset.rec);else if('blood' in b.dataset)openBlood();else if('cold' in b.dataset)openCold();else if('bio' in b.dataset)openBio();else if('daily' in b.dataset)drawFortune(true);else if('fortune' in b.dataset)drawFortune();else if('bless' in b.dataset)openBless();else if('quiz' in b.dataset)openQuiz();else if('card' in b.dataset)openCard();else if(b.dataset.pcard)openPolCard(b.dataset.pcard);else if(b.dataset.tcard)openTownCard(b.dataset.tcard);else if('wallcard' in b.dataset)openWallCard();else if('persona' in b.dataset)openPersona();else if(b.dataset.aud)selectAud(b.dataset.aud);else if(b.dataset.town)selectTown(b.dataset.town);else if(b.dataset.road)selectRoad(b.dataset.road);else if(b.dataset.pol)selectPolicy(b.dataset.pol);
   else if(b.dataset.show)selectPolicy(b.dataset.show);else if('back' in b.dataset){goBack()}
 });
 var qt=null;$('#q').addEventListener('input',function(e){
@@ -3343,6 +3358,7 @@ function applyHash(){
     else if(ty==='v'&&VBY[id]){openVideos(VBY[id].g);openVid(id)}
     else if(ty==='f'&&PBY[id]&&!PBY[id].bg)drawFortune(false,id);
     else if(ty==='daily')drawFortune(true);
+    else if(ty==='blood')openBlood();
     else if(ty==='qr'&&TI[id]!==undefined)showQuizResult(id);
     else if(ty==='quiz')openQuiz();
     else if(ty==='bless')openBless();
@@ -3606,7 +3622,7 @@ function dayDone(){try{return localStorage.getItem('yl-fday')===String(todayKey(
 function markDay(){try{localStorage.setItem('yl-fday',String(todayKey()))}catch(e){}var n=document.querySelector('[data-daily] .fnew');if(n)n.remove();var d=document.querySelector('.fday[data-daily]');if(d){d.removeAttribute('data-daily');d.setAttribute('data-fortune','')}}
 function footHTML(){return '<div class="foot"><button type="button" data-about>關於本頁與資料限制</button>'+(STATS_CODE&&SHARE_BASE?'<br>本站以不使用 cookie 的方式統計使用人數':'')+'</div>'}
 function funBox(){
-  var ic={t:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 20h20l-3 22H17z"/><path d="M19 20V8M24 20V4M29 20V9"/></svg>',
+  var ic={d:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5s-12 14-12 23a12 12 0 0 0 24 0C36 19 24 5 24 5z"/><path d="M18 30a6 6 0 0 0 6 6"/></svg>',t:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 20h20l-3 22H17z"/><path d="M19 20V8M24 20V4M29 20V9"/></svg>',
    b:'<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="8" width="28" height="34" rx="4"/><path d="M10 18c8 8 20 8 28 0"/><circle cx="24" cy="26" r="3.5"/></svg>',
    q:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 43s13-12 13-22a13 13 0 1 0-26 0c0 10 13 22 13 22z"/><circle cx="24" cy="21" r="4.5"/></svg>',
    c:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5v38M7.5 14.5l33 19M7.5 33.5l33-19M19 8l5 4 5-4M19 40l5-4 5 4"/></svg>'};
@@ -3614,7 +3630,7 @@ function funBox(){
     '<button type="button" class="ft t1 fday" '+(dayDone()?'data-fortune':'data-daily')+'>'+ic.t+'<strong class="fl">抽一支籤</strong>'+(dayDone()?'':'<i class="fnew">今天還沒抽</i>')+'</button>'+
     '<button type="button" class="ft t2" data-bless>'+ic.b+'<strong class="fl">祝福卡</strong></button>'+
     '<button type="button" class="ft t3" data-quiz>'+ic.q+'<strong class="fl">鄉鎮測驗</strong></button>'+
-    '<button type="button" class="ft t4" data-cold>'+ic.c+'<strong class="fl">'+(nightNow()?'深夜一冷':'今日一冷')+'</strong></button></div></div>';
+    '<button type="button" class="ft t4" data-blood>'+ic.d+'<strong class="fl">宜蘭濃度</strong></button></div></div>';
 }
 var FZP={"T01":["北宜快路穿山近","高鐵新途接海遙","一高二快成一網","家家出入笑相邀"],"T02":["羅東站畔人潮湧","蘇澳灣中帆影高","五站連環通四境","行程順暢無煩勞"],"T03":["通衢縱貫田疇闊","小巷橫連戶牖寬","四縱六橫成脈絡","鄉鄰相往笑聲歡"],"T04":["單車穿巷人皆便","綠運聯程低碳清","一卡暢遊縣內外","鄉鄉往返皆通行"],"T05":["頭礁兩地車聲近","高架北延軌道通","不必平交道口候","歸途平穩笑聲同"],"T06":["湯煙裊裊行人靜","漫步悠然腳印清","巷弄全歸行路客","從容一步一程輕"],"T08":["孩童放學平安返","老幼出門步道寬","接駁環連鐵與路","慈心共護步行安"],"T07":["長途北上非徒過","接駁先行準備全","產業人才皆預備","特區三諾定相連"],"I01":["百工智慧生新業","北宜雙心串此鄉","運動養生為業態","家家富足安祥康"],"I03":["青年不必離鄉遠","新系增開學路長","產學攜持育秀士","人才返里鵬程揚"],"I04":["山青水秀居宜地","產業多元藍綠昌","遷入宜蘭成樂土","人人嚮往好家鄉"],"G01":["車行有度人安泰","毒駕嚴防法網牢","共力同心織密網","歸程平順笑聲高"],"G02":["家園電線須修繕","火患預防補助來","老屋換新添保障","團圓夜夜笑顏開"],"G03":["英雄赴火無猶豫","義勇護城人力全","勤務均衡添保障","歸來安穩一家圓"],"G04":["偏鄉道路兒童穩","校外街頭守護安","步步為營防慘事","孩童笑語滿街歡"],"A01":["好農好米好蔬菜","綠色耕耘土壤肥","初保有津農戶喜","名牌遠播越洋飛"],"A02":["風霜雨露農家苦","險有雙全補助周","冷鏈送鮮無損耗","員山好物銷全洲"],"S01":["漁民出海波濤闊","港務更新產業昌","三項承擔先落實","漁民得利笑聲長"],"S02":["開蘭首邑風情古","烏石老街外澳風","帶狀觀光接海岸","年年盛事浪花紅"],"S03":["漁村五處連波岸","藍路蜿蜒碧海潮","山海同遊真樂土","人人運動樂逍遙"],"S04":["南方澳畔帆檣聚","智慧海灣科技新","港務整新迎產業","乘風破浪向前津"],"C01":["山光水色宜人美","雪嶺蜿蜒步道長","客至三圈皆有景","歡聲笑語滿蘭陽"],"C02":["山林淺徑雲煙靜","步道連綿向海潮","漫步首都成美夢","鄉鄉踏徑樂逍遙"],"C08":["一鄉一線雲山近","八景千般物產鮮","古道舊蹤尋故事","一天走遍笑相連"],"C09":["端陽鼓響龍舟競","河岸歡聲震耳遙","好戲連臺迎遠客","人文競秀躍新潮"],"C03":["蘭陽自古文風盛","書院傳承教育香","文化深耕成美景","鄉鄉弦誦承光芒"],"C04":["溫泉清澈汙流去","水岸新妝綠水清","遊客閒行河畔路","龍舟競渡浪花輕"],"C05":["山村客語風情美","廟宇三山香火隆","古調悠揚傳後世","擂茶香裡笑聲融"],"C06":["城池古蹟綿千載","戲曲傳薪萬戶和","薪火相傳台上唱","蘭陽戲裡有笙歌"],"C07":["登山划水騎行樂","健體強身氣力雄","國手栽培連賽事","全民運動笑容同"],"E01":["山林海岸千株綠","百座微森遍市鄉","綠意迴廊連一氣","青天計畫園林芳"],"E02":["江河共治連三段","污水截流碧水清","雨水回收增儲量","蘭陽盛世慶昇平"],"E03":["颱風豪雨防洪早","水利強堤固岸防","審慎把關開發案","源頭到海共安康"],"E04":["源頭管控嚴稽核","突擊抽查不放鬆","三道防關緊守護","人人吃得放心中"],"W01":["耆英持卡無憂慮","敬老卡盈點數豐","每月一千添暖意","鄉親歡喜笑聲同"],"W02":["關懷弱勢無遺憾","補助提升濟老貧","醫藥午餐皆有助","新民舊戶皆安身"],"N01":["新民遠道成宜客","培力扶持共學長","共議家園多決策","人人相待有家鄉"],"W03":["頭城父老行程遠","就近尋醫共盼安","審視增添醫療所","健康守護人人歡"],"W04":["鄉親有話隨時說","縣府開門聽眾聲","面對面談零阻隔","心聲直達政通明"],"W05":["勞工汗水人尊敬","採購公平薪給豐","健檢職能增保障","職人榮譽暖心中"],"K01":["歡迎寶寶補三萬","托育增班名額添","孕婦育兒皆有助","家家幸福笑容甜"],"K02":["孩童樂土歡聲起","教室新妝彩繪飛","接送專車皆有備","爹娘安穩樂相歸"],"K06":["孩童午飯香盈室","在地食材鮮美全","吃飯讀書皆免費","身強體壯稚顏鮮"],"K03":["師生共議辦教學","父母同心校務興","戶外課堂迎大地","兒童茁壯向高層"],"K04":["青年盼有安身處","縣府中心添住家","四百新居迎伴侶","遠端工作盡開花"],"K05":["毛孩有地歡奔跑","夜診獸醫守護家","主客同心皆善待","鄰人相伴笑如花"],"D01":["山林部落人情厚","共議先行尊族人","部落民生添福利","原鄉歲月永相親"],"V01":["全民縣長不分黨","乾淨公開選舉明","共好桃源同努力","同心作伙拚前程"],"X01":["羅東水網相連處","夜市繁華笑語喧","鐵道高懸通內外","市中心裡換新園"],"X02":["員山好水源頭近","遊憩公園樂事繁","漫步山林尋勝境","好山好水憶桃源"],"X03":["宜蘭舊市重光彩","河岸新妝兩岸歡","道路聯通醫療網","市民出入更平安"],"X04":["閘門河畔微波靜","水路縱橫文創興","保育濕原兼治水","人和地利共攀登"],"X05":["安農溪畔清波遠","林鐵蔥鄉漫步悠","路網東西添便利","溫泉地熱暖心頭"],"X06":["高山雲海鄉情厚","林下耕耘產業新","古調歌謠傳後代","防災建設護鄉民"],"X07":["壯圍濱海風光美","水站渠通歲月長","舊址新生迎創意","年年博覽展輝煌"],"X08":["蘇花改道通新路","碧候溫泉暖客途","水足糧豐安部落","南方澳裡樂如圖"],"X09":["湯鄉康養安居美","水岸整修新舊渠","路網暢通迎遠客","家家安樂福長餘"],"X10":["頭城古鎮重新貌","快線延伸向海遙","衝浪漁村皆有景","鄉親期盼笑容嬌"],"X11":["南方澳港漁帆美","溪水分流洪患輕","海港觀光迎遠客","交通暢達笑聲迎"],"X12":["冬山河畔遊人樂","水域觀光藍路寬","治水工程皆審慎","交通暢達笑聲歡"],"X13":["農民土地求公道","友善農耕護濕園","檢討範圍求合理","公平落實無虛言"]};
 var FZ_DEF=["蘭陽山海風光美", "宜縣民心團結昌", "作伙同心耕福地", "鄉親共好笑聲長"];
@@ -3904,7 +3920,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/2 第 174 版';
+var BUILD='11/4 第 175 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3957,6 +3973,67 @@ function coldCard(i,head,again,key){
 }
 function nightNow(){var h=new Date().getHours();return h>=23||h<5}
 function openCold(){coldCard(coldToday(),(nightNow()?'深夜一冷　':'今日一冷　')+dayLabel(),'再來一則')}
+/* v175 宜蘭濃度: the fourth play tile. Twelve yes/no questions about living in Yilan, a percentage, a share card. Nothing is stored. */
+var BLOODQ=[
+ '下毛毛雨不撐傘，照樣出門。',
+ '去台北叫「出去」，回宜蘭叫「轉來」。',
+ '聽得出宜蘭腔，自己也會講幾句。',
+ '三星蔥油餅，吃得出哪一攤比較好吃。',
+ '卜肉、糕渣、鴨賞、膽肝，吃過三樣以上。',
+ '羅東夜市和東門夜市，各有固定要吃的那一攤。',
+ '搭噶瑪蘭或首都客運，知道要在哪裡排隊。',
+ '國五塞車的時候，知道走哪條路可以繞。',
+ '家裡或親戚有人種田、養魚，或開民宿。',
+ '童玩節的水，自己玩過或帶小孩玩過。',
+ '冬天連續一個月沒太陽，已經習慣了。',
+ '聽到「宜蘭囝仔」四個字，心裡會熱一下。'
+];
+var BLOODT=[[90,'純正宜蘭血統','血液裡流的是蘭陽平原的雨水。'],[70,'宜蘭腔已經很重','講話的尾音騙不了人。'],[45,'半個宜蘭人','再住幾年就滿了。'],[20,'宜蘭準住民','濃度正在上升中。'],[0,'宜蘭觀光客','多來幾次，濃度就會變高。']];
+var BL={i:0,s:0};
+function bloodTier(p){for(var i=0;i<BLOODT.length;i++)if(p>=BLOODT[i][0])return BLOODT[i];return BLOODT[BLOODT.length-1]}
+function openBlood(){BL={i:0,s:0};bloodQ()}
+function bloodQ(){
+  var n=BLOODQ.length,i=BL.i;
+  var h='<div class="coldc bldc"><div class="coldh">血液裡的宜蘭濃度　'+(i+1)+'／'+n+'</div>'+
+   '<div class="bldbar" aria-hidden="true"><i style="width:'+Math.round(i/n*100)+'%"></i></div>'+
+   '<p class="coldq">'+esc(BLOODQ[i])+'</p>'+
+   '<div class="bldb"><button type="button" class="pri" data-bl="1">是</button><button type="button" data-bl="0">不是</button></div></div>';
+  if(i===0||OV.hidden||!OV.querySelector('.bldc'))ovOpen(h,'blood');else OV.querySelector('.bldc').outerHTML=h;
+  Array.prototype.forEach.call(OV.querySelectorAll('[data-bl]'),function(b){b.onclick=function(){BL.s+=+b.dataset.bl;BL.i++;if(BL.i<n)bloodQ();else bloodResult()}});
+  var f=OV.querySelector('[data-bl="1"]');if(f&&f.focus)f.focus();
+}
+function bloodResult(){
+  var n=BLOODQ.length,p=Math.round(BL.s/n*100),t=bloodTier(p);
+  var url=SHARE_BASE?SHARE_BASE+SQ+'#blood':pageBase()+'#blood',txt='我的宜蘭濃度 '+p+'%，'+t[1]+'｜宜蘭大歌廳①次看全部';
+  var h='<div class="coldc bldc bldr"><div class="coldh">血液裡的宜蘭濃度</div>'+
+   '<div class="bldp"><b>'+p+'</b><i>%</i></div>'+
+   '<div class="bldbar big" aria-hidden="true"><i style="width:'+p+'%"></i></div>'+
+   '<p class="bldt">'+esc(t[1])+'</p><p class="bldd">'+esc(t[2])+'</p>'+
+   '<div class="coldb"><button type="button" class="pri" data-blimg>存成圖卡</button><button type="button" data-blagain>再測一次</button></div>'+
+   '<a class="coldl" target="_blank" rel="noopener" href="'+esc(lineHref(txt,url))+'">傳到 LINE 給朋友</a></div>';
+  OV.querySelector('.bldc').outerHTML=h;
+  OV.querySelector('[data-blagain]').onclick=openBlood;
+  OV.querySelector('[data-blimg]').onclick=function(){openImg(drawBloodCard(p,t),txt,url,'宜蘭濃度-'+p+'.png')};
+  var f=OV.querySelector('[data-blimg]');if(f&&f.focus)f.focus();
+}
+function drawBloodCard(p,t){
+  var W=1080,H=1350,cv=cvNew(),c=cv.getContext('2d');
+  c.textBaseline='alphabetic';c.textAlign='left';
+  cvBG(c,W,H);cvHead(c,W);
+  c.fillStyle='#F1DFC0';c.font='700 52px '+CV_F;c.fillText('血液裡的宜蘭濃度',64,210);
+  var tw=190,th=740,tx=W-64-tw,ty=270,aw=W-128-tw-48;
+  c.fillStyle='rgba(27,27,24,.35)';rrect(c,tx,ty,tw,th,tw/2);c.fill();
+  var ih=th-24,fh=Math.round(ih*p/100),fy=ty+12+ih-fh;
+  c.save();rrect(c,tx+12,ty+12,tw-24,ih,(tw-24)/2);c.clip();if(fh>0){c.fillStyle='#E0C85C';c.fillRect(tx,fy,tw,fh+120)}c.restore();
+  c.strokeStyle='#FFF6DA';c.lineWidth=6;rrect(c,tx,ty,tw,th,tw/2);c.stroke();
+  c.fillStyle='rgba(255,246,218,.7)';[25,50,75].forEach(function(k){var y=ty+12+ih*(1-k/100);c.fillRect(tx-30,y-2,20,4)});
+  var ps=p+'%',fs=300;c.fillStyle='#E0C85C';c.font='900 '+fs+'px '+CV_S;while(fs>150&&c.measureText(ps).width>aw){fs-=10;c.font='900 '+fs+'px '+CV_S}
+  c.fillText(ps,64,560);
+  var ns=96;c.fillStyle='#FFF6DA';c.font='900 '+ns+'px '+CV_S;while(ns>56&&c.measureText(t[1]).width>aw){ns-=4;c.font='900 '+ns+'px '+CV_S}
+  c.fillText(t[1],64,720);
+  c.fillStyle='#F1DFC0';c.font='600 42px '+CV_F;cvWrap(c,t[2],aw,3).forEach(function(s,i){c.fillText(s,64,810+i*62)});
+  cvFoot(c,W);return cv;
+}
 var TOASTT=0;
 function toast(m){var t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t)}
   t.textContent=m;t.classList.add('on');clearTimeout(TOASTT);TOASTT=setTimeout(function(){t.classList.remove('on')},3600)}
