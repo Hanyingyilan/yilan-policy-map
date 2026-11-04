@@ -1701,14 +1701,15 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 #club .sk{position:absolute;width:var(--w);height:auto;transform:translateY(120%);transform-origin:50% 100%;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45));will-change:transform}
 #club.lit .sk{animation:skup .55s cubic-bezier(.2,.8,.3,1.25) forwards var(--dl,0s),skjump var(--t,1s) ease-in-out infinite alternate calc(var(--dl,0s) + .55s)}
 #club .fg{position:absolute;width:5px;height:var(--h);background:#FFF6DA;border-radius:4px;box-shadow:0 0 0 3px #fff,0 3px 6px rgba(0,0,0,.35);transform:translateY(120%);transform-origin:50% 100%}
-#club .fg::after{content:"";position:absolute;left:5px;top:-2px;width:34px;height:24px;background:var(--fc,#E8413C);border-radius:4px 16px 16px 4px;box-shadow:0 0 0 4px #fff,0 4px 8px rgba(0,0,0,.35);transform-origin:0 50%;animation:fgflap .45s ease-in-out infinite alternate}
+#club .fg::after{content:"林國漳";position:absolute;left:5px;top:10px;width:30px;height:calc(var(--h)*.8);box-sizing:border-box;padding-top:34px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;text-orientation:upright;font:900 17px/1 var(--sans,"Noto Sans TC",sans-serif);letter-spacing:.12em;color:#fff;background:var(--fc,#E8413C);border-radius:3px 3px 6px 6px;box-shadow:0 0 0 4px #fff,0 4px 8px rgba(0,0,0,.35);transform-origin:0 0;animation:fgflap .6s ease-in-out infinite alternate}
+#club .fg::before{content:"1";position:absolute;left:9px;top:16px;width:22px;height:22px;border-radius:50%;background:#fff;color:var(--fc,#E8413C);font:900 15px/22px var(--sans,"Noto Sans TC",sans-serif);text-align:center;z-index:1;animation:fgflap .6s ease-in-out infinite alternate;transform-origin:-4px -6px}
 #club.lit .fg{animation:skup .55s cubic-bezier(.2,.8,.3,1.25) forwards var(--dl,0s),fgwave var(--t,1.2s) ease-in-out infinite alternate calc(var(--dl,0s) + .55s)}
 #club .ct{top:40%;z-index:4}
 @keyframes skup{from{transform:translateY(120%)}to{transform:translateY(0)}}
 @keyframes skjump{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-9%) rotate(5deg)}}
-@media (min-width:700px){#club .fg{width:7px}#club .fg::after{left:7px;width:52px;height:36px}}
+@media (min-width:700px){#club .fg{width:7px}#club .fg::after{left:7px;width:44px;padding-top:50px;font-size:26px;border-radius:4px 4px 8px 8px}#club .fg::before{left:13px;top:18px;width:32px;height:32px;font-size:22px;line-height:32px}}
 @keyframes fgwave{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
-@keyframes fgflap{from{transform:skewY(-6deg) scaleX(1)}to{transform:skewY(6deg) scaleX(.92)}}
+@keyframes fgflap{from{transform:skewY(-4deg)}to{transform:skewY(4deg)}}
 @media (prefers-reduced-motion:reduce){#club.lit .sk,#club.lit .fg{transform:none;animation:none!important}#club .fg::after{animation:none}}
 #club .isl{position:absolute;left:50%;bottom:var(--b);width:var(--w);margin-left:calc(var(--w)/-2);z-index:0;pointer-events:none}
 #club .isl svg{display:block;width:100%;height:auto;transform:translateY(130%);transform-origin:50% 100%;filter:drop-shadow(0 0 18px rgba(120,220,210,.45))}
@@ -4001,7 +4002,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/4 第 182 版';
+var BUILD='11/4 第 183 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -4160,9 +4161,15 @@ function askMusic(yes){
 var CLUBT=null,CLUBP=0;
 function clubAllowed(){try{return localStorage.getItem('yl-club')!=='off'}catch(e){return true}}
 function clubSet(on){try{localStorage.setItem('yl-club',on?'on':'off')}catch(e){}}
+var CLUBA=null,CLUBFT=null;
+function clubAudio(){if(!CLUBA){CLUBA=new Audio('music/chusheng.mp3');CLUBA.preload='auto'}return CLUBA}
+function clubFade(to,ms,done){clearInterval(CLUBFT);var a=CLUBA;if(!a){if(done)done();return}var from=a.volume,t0=Date.now();CLUBFT=setInterval(function(){var k=Math.min(1,(Date.now()-t0)/ms);try{a.volume=from+(to-from)*k}catch(e){}if(k>=1){clearInterval(CLUBFT);if(done)done()}},50)}
+function clubPrime(){if(!clubAllowed())return;if(MP.a&&MP.a.src&&!MP.a.paused)return;var a=clubAudio();try{a.pause();a.currentTime=0;a.volume=0;var p=a.play();if(p&&p.catch)p.catch(function(){})}catch(e){}}
+function clubStop(){if(!CLUBA||CLUBA.paused)return;clubFade(0,700,function(){try{CLUBA.pause()}catch(e){}})}
 function clubOn(force){
   if(!force&&!clubAllowed())return;
   if(document.getElementById('club'))return;
+  if(!(MP.a&&MP.a.src&&!MP.a.paused)){var ca=clubAudio();if(ca.paused){try{ca.currentTime=0;ca.volume=0;var cp=ca.play();if(cp&&cp.catch)cp.catch(function(){})}catch(e){}}clubFade(1,900)}
   var c=document.createElement('div');c.id='club';c.setAttribute('aria-hidden','true');
   var W=innerWidth,m=W<700,h='',i,cols=['#F3E3A0','#FFFFFF','#FFB0A4','#9FE8FF','#E0C85C','#F7A8E8'];
   var nb=m?7:11;
@@ -4189,7 +4196,7 @@ function clubOn(force){
   h+='<svg class="cur" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="curw" x1="0" x2="1"><stop offset="0" stop-color="#FF7A3D" stop-opacity="0"/><stop offset=".5" stop-color="#FF4D2E"/><stop offset="1" stop-color="#FFB03D" stop-opacity="0"/></linearGradient><linearGradient id="curc" x1="0" x2="1"><stop offset="0" stop-color="#29ABE2" stop-opacity="0"/><stop offset=".5" stop-color="#5BC8F5"/><stop offset="1" stop-color="#29ABE2" stop-opacity="0"/></linearGradient></defs><path class="c1" d="M-50 200C150 140 300 260 500 200S850 120 1050 200S1250 230 1300 200" stroke="url(#curw)"/><path class="c2" d="M-50 250C200 310 350 190 600 250S950 320 1250 250" stroke="url(#curc)"/><path class="c3" d="M-50 120C200 60 400 170 650 110S1000 50 1250 120" stroke="url(#curw)"/><text class="clt" x="700" y="178" fill="#FF4D2E">黑潮暖流</text><text class="clt" x="330" y="292" fill="#29ABE2">洋流</text></svg>';
   h+='<div class="crowd"><div class="isl" style="--w:'+(m?'84vw':'44vw')+';--b:'+(m?'26%':'28%')+'"><svg viewBox="0 0 600 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="islg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5f9a8f"/><stop offset=".35" stop-color="#2f5a56"/><stop offset="1" stop-color="#15302f"/></linearGradient></defs><path fill="url(#islg)" d="M0 172C50 160 95 140 150 112C205 84 270 62 330 70C375 76 400 104 430 128C445 140 462 146 482 140C500 134 512 118 536 114C566 110 586 134 600 150L600 172Z"/><path fill="#9fe8d8" fill-opacity=".35" d="M150 112C205 84 270 62 330 70C375 76 400 104 430 128L420 132C395 112 370 84 330 80C275 72 212 94 158 120Z"/><path class="wv" d="M-20 182Q10 174 40 182T100 182T160 182T220 182T280 182T340 182T400 182T460 182T520 182T580 182T640 182"/><path class="wv wv2" d="M-20 198Q10 190 40 198T100 198T160 198T220 198T280 198T340 198T400 198T460 198T520 198T580 198T640 198"/></svg></div>';var si=0;
   R.forEach(function(r,ri){var n=r[0];for(var k=0;k<n;k++,si++){var w=r[1]+Math.random()*(r[2]-r[1]),lx=((k+.5)/n*100-(w/innerWidth*50)+Math.random()*6-3).toFixed(1),bt=(r[3]+Math.random()*5).toFixed(0),dl=(ri*.35+Math.random()*.9).toFixed(2);
-    if(ri<2&&k%2===1)h+='<span class="fg" style="--fc:'+['#E8413C','#39B54A','#29ABE2','#FFD24D','#F06292'][si%5]+';left:'+(+lx+w/innerWidth*55).toFixed(1)+'%;bottom:'+(+bt+6)+'%;--h:'+(m?90+Math.random()*90:140+Math.random()*150).toFixed(0)+'px;--dl:'+dl+'s;--t:'+(.8+Math.random()*.7).toFixed(2)+'s;z-index:'+(r[4]+1)+'"></span>';
+    if(ri<2&&k%2===1)h+='<span class="fg" style="--fc:'+['#E8413C','#39B54A','#29ABE2','#FFD24D','#F06292'][si%5]+';left:'+(+lx+w/innerWidth*55).toFixed(1)+'%;bottom:'+(+bt+6)+'%;--h:'+(m?150+Math.random()*80:230+Math.random()*110).toFixed(0)+'px;--dl:'+dl+'s;--t:'+(.8+Math.random()*.7).toFixed(2)+'s;z-index:'+(r[4]+1)+'"></span>';
     h+='<img class="sk" alt="" src="stickers/'+STK[si%STK.length]+'.webp" style="left:'+lx+'%;bottom:'+bt+'%;--w:'+w.toFixed(0)+'px;--dl:'+dl+'s;--t:'+(.65+Math.random()*.6).toFixed(2)+'s;z-index:'+r[4]+'">'}});
   h+='</div>';
   h+='<div class="ct">'+'謝謝你邀請宜蘭人'.split('').map(function(ch,k){return '<span style="--i:'+k+'">'+ch+'</span>'}).join('')+'</div><button type="button" class="cnx">以後不要再放</button>';
@@ -4198,14 +4205,14 @@ function clubOn(force){
   requestAnimationFrame(function(){c.classList.add('on');setTimeout(function(){c.classList.add('lit')},650)});
   clearTimeout(CLUBT);CLUBT=setTimeout(clubOff,7800);
 }
-function clubOff(){var c=document.getElementById('club');if(!c)return;clearTimeout(CLUBT);c.classList.remove('lit');c.classList.remove('on');setTimeout(function(){if(c.parentNode)c.parentNode.removeChild(c)},700)}
+function clubOff(){var c=document.getElementById('club');if(!c)return;clearTimeout(CLUBT);clubStop();c.classList.remove('lit');c.classList.remove('on');setTimeout(function(){if(c.parentNode)c.parentNode.removeChild(c)},700)}
 function clubLater(){CLUBP=Date.now();clubOn()}
 document.addEventListener('visibilitychange',function(){
   if(document.hidden){if(document.getElementById('club')){clubOff();CLUBP=Date.now()}}
   else if(CLUBP&&Date.now()-CLUBP<180000){CLUBP=0;setTimeout(clubOn,500)}
 });
 if(/[?&]club=1/.test(location.search))setTimeout(function(){clubOn(true)},1500);
-document.addEventListener('click',function(e){var a=e.target.closest('a[href^="https://line.me/"],#cardshare,.vcp,#shcopy');if(!a)return;if(a.classList.contains('line')&&a.closest('#sharebox'))setTimeout(closeShare,300);setTimeout(clubLater,450)},true);
+document.addEventListener('click',function(e){var a=e.target.closest('a[href^="https://line.me/"],#cardshare,.vcp,#shcopy');if(!a)return;if(a.classList.contains('line')&&a.closest('#sharebox'))setTimeout(closeShare,300);clubPrime();setTimeout(clubLater,450)},true);
 function discoSync(){var b=document.querySelector('.brand');if(b)b.classList.toggle('discoon',!!(MP.a&&MP.a.src&&!MP.a.paused))}
 function discoBurst(){var d=document.querySelector('.disco'),bm=document.querySelector('.dbeams');if(!d||!bm||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;var br=bm.getBoundingClientRect(),r=d.getBoundingClientRect(),cx=r.left-br.left+r.width/2,cy=r.top-br.top+r.height*.66,cl=['#E0C85C','#FFF6DA','#A63A35','#fff','#F3E3A0'];for(var i=0;i<34;i++){var e=document.createElement('i');e.className='cf';e.style.cssText='left:'+cx+'px;top:'+cy+'px;background:'+cl[i%5]+';width:'+(6+Math.random()*7)+'px;height:'+(8+Math.random()*10)+'px';bm.appendChild(e);var an=Math.random()*Math.PI*2,dist=90+Math.random()*260;e.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+Math.cos(an)*dist+'px,'+(Math.sin(an)*dist+90)+'px) rotate('+(Math.random()*720-360)+'deg)',opacity:0}],{duration:1300+Math.random()*900,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=(function(x){return function(){x.remove()}})(e)}}
 mkDisco();
