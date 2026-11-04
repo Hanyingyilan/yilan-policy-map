@@ -1648,8 +1648,9 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 .albv-back .tir i+i::before{content:"、"}
 
 /* v175 宜蘭濃度 */
-.bldc .coldh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:clamp(20px,6.2vw,27px);letter-spacing:.05em;line-height:1.3}
-.bldc .bldn{font-size:.62em;letter-spacing:.08em;white-space:nowrap;opacity:.9}
+.bldc .coldh{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:baseline;gap:0;font-size:clamp(26px,8.4vw,32px);letter-spacing:.04em;line-height:1.25}
+.bldc .coldh .nw{white-space:nowrap}
+.bldc .bldn{font-size:.55em;margin-left:auto;padding-left:10px;letter-spacing:.08em;white-space:nowrap;opacity:.9;margin-left:auto}
 .bldbar{height:10px;margin:12px 0 0;border:1.5px solid rgba(224,200,92,.7);border-radius:999px;overflow:hidden;background:rgba(27,27,24,.3)}
 .bldbar i{display:block;height:100%;background:#E0C85C;transition:width .4s}
 .bldbar.big{height:18px;margin:8px 0 14px}
@@ -3922,7 +3923,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/4 第 177 版';
+var BUILD='11/4 第 178 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -4013,7 +4014,7 @@ function bloodPick(a,k){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.flo
 function openBlood(){var pos=[],rev=[];BLOODQ.forEach(function(q){(q[1]?pos:rev).push(q)});BL={i:0,s:0,q:bloodPick(bloodPick(pos,5).concat(bloodPick(rev,3)),8)};bloodQ()}
 function bloodQ(){
   var n=BL.q.length,i=BL.i;
-  var h='<div class="coldc bldc"><div class="coldh">血液裡的宜蘭濃度<span class="bldn">'+(i+1)+'／'+n+'</span></div>'+
+  var h='<div class="coldc bldc"><div class="coldh"><span class="nw">血液裡的</span><span class="nw">宜蘭濃度</span><span class="bldn">'+(i+1)+'／'+n+'</span></div>'+
    '<div class="bldbar" aria-hidden="true"><i style="width:'+Math.round(i/n*100)+'%"></i></div>'+
    '<p class="coldq">'+esc(BL.q[i][0])+'</p>'+
    '<div class="bldb"><button type="button" class="pri" data-bl="1">是</button><button type="button" data-bl="0">不是</button></div></div>';
@@ -4024,7 +4025,7 @@ function bloodQ(){
 function bloodResult(){
   var n=BL.q.length,p=Math.round(BL.s/n*100),t=bloodTier(p);
   var url=SHARE_BASE?SHARE_BASE+SQ+'#blood':pageBase()+'#blood',txt='我的宜蘭濃度 '+p+'%，'+t[1]+'｜宜蘭大歌廳①次看全部';
-  var h='<div class="coldc bldc bldr"><div class="coldh">血液裡的宜蘭濃度</div>'+
+  var h='<div class="coldc bldc bldr"><div class="coldh"><span class="nw">血液裡的</span><span class="nw">宜蘭濃度</span></div>'+
    '<div class="bldp"><b>'+p+'</b><i>%</i></div>'+
    '<div class="bldbar big" aria-hidden="true"><i style="width:'+p+'%"></i></div>'+
    '<p class="bldt">'+esc(t[1])+'</p><p class="bldd">'+esc(t[2])+'</p>'+
