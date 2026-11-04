@@ -1648,6 +1648,8 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 .albv-back .tir i+i::before{content:"、"}
 
 /* v175 宜蘭濃度 */
+.bldc .coldh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:clamp(20px,6.2vw,27px);letter-spacing:.05em;line-height:1.3}
+.bldc .bldn{font-size:.62em;letter-spacing:.08em;white-space:nowrap;opacity:.9}
 .bldbar{height:10px;margin:12px 0 0;border:1.5px solid rgba(224,200,92,.7);border-radius:999px;overflow:hidden;background:rgba(27,27,24,.3)}
 .bldbar i{display:block;height:100%;background:#E0C85C;transition:width .4s}
 .bldbar.big{height:18px;margin:8px 0 14px}
@@ -3920,7 +3922,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/4 第 176 版';
+var BUILD='11/4 第 177 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -3996,7 +3998,7 @@ var BLOODQ=[
  ['有自己喜歡吃的肉羹、麻醬麵、餛飩麵店。',1],
  ['送過外縣市朋友奶凍捲。',1],
  ['跟外縣市朋友介紹宜蘭，第一個想到的是吃的。',1],
- ['「西魯肉」三個字，聽了想不出是哪道菜。',0],
+ ['吃過西滷肉。',1],
  ['花生捲冰淇淋沒吃過，也不知道裡面要加香菜。',0],
  ['在外縣市讀書時，參加過蘭友會之類的同鄉社團。',1],
  ['覺得去台北不遠，但溪北到溪南很遠。',1],
@@ -4011,7 +4013,7 @@ function bloodPick(a,k){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.flo
 function openBlood(){var pos=[],rev=[];BLOODQ.forEach(function(q){(q[1]?pos:rev).push(q)});BL={i:0,s:0,q:bloodPick(bloodPick(pos,5).concat(bloodPick(rev,3)),8)};bloodQ()}
 function bloodQ(){
   var n=BL.q.length,i=BL.i;
-  var h='<div class="coldc bldc"><div class="coldh">血液裡的宜蘭濃度　'+(i+1)+'／'+n+'</div>'+
+  var h='<div class="coldc bldc"><div class="coldh">血液裡的宜蘭濃度<span class="bldn">'+(i+1)+'／'+n+'</span></div>'+
    '<div class="bldbar" aria-hidden="true"><i style="width:'+Math.round(i/n*100)+'%"></i></div>'+
    '<p class="coldq">'+esc(BL.q[i][0])+'</p>'+
    '<div class="bldb"><button type="button" class="pri" data-bl="1">是</button><button type="button" data-bl="0">不是</button></div></div>';
