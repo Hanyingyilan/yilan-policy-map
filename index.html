@@ -1868,6 +1868,17 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 /* v190c 圈選章印文：紅圈＋左右倒置的卜 */
 #warn .wsk{border:0;box-shadow:none;width:1.45em;height:1.45em;margin:-.725em 0 0 -.725em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='41' fill='none' stroke='%23D7262B' stroke-width='8'/%3E%3Cpath d='M50 16v68M50 48L31 66' fill='none' stroke='%23D7262B' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;opacity:0}
 #warn .wsk::after{display:none}
+
+/* v191 戒慎恐懼：所有元素依視窗高度縮放，矮視窗不溢出 */
+#warn .wbox{gap:min(clamp(6px,1.6vh,16px),1.4vh)}
+#warn .wt{font-size:min(29vw,15vh)}
+@media (min-width:700px){#warn .wt{font-size:min(14vw,21vh)}}
+#warn .wd{font-size:min(clamp(16px,4.4vw,26px),3vh)}
+#warn .wd b{font-size:min(clamp(44px,13vw,100px),10.5vh)}
+#warn .wl{font-size:min(clamp(18px,5vw,30px),3.4vh)}
+#warn .wc i{font-size:min(clamp(14px,3.8vw,19px),2.4vh);padding:.4em .8em}
+#warn .ws{font-size:min(clamp(17px,4.6vw,28px),2.25vh)}
+@media (max-height:700px){#warn .ws{font-size:min(15px,2.25vh)}#warn .wt{font-size:min(25vw,13vh)}#warn .wd b{font-size:min(40px,10vh)}}
 </style>
 <script>/* v172: switch the Google Fonts fallbacks on only after the self-hosted subsets have loaded, so their slices are fetched just for characters the subsets lack */
 (function(){function on(id,spec){var l=document.getElementById(id);if(!l)return;var go=function(){l.media='all'};if(document.fonts&&document.fonts.load){document.fonts.load(spec).then(go,go);setTimeout(go,4000)}else go()}on('gf-serif','900 20px "YLSerif"');on('gf-hand','400 20px "YLHand"')})();</script>
@@ -4129,7 +4140,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/5 第 190 版';
+var BUILD='11/5 第 191 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
