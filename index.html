@@ -1879,6 +1879,10 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 #warn .wc i{font-size:min(clamp(14px,3.8vw,19px),2.4vh);padding:.4em .8em}
 #warn .ws{font-size:min(clamp(17px,4.6vw,28px),2.25vh)}
 @media (max-height:700px){#warn .ws{font-size:min(15px,2.25vh)}#warn .wt{font-size:min(25vw,13vh)}#warn .wd b{font-size:min(40px,10vh)}}
+
+/* v192 電腦版往下捲時 .bulbs 被 doorway 動畫放大，撐出水平捲軸 */
+.brand>.bulbs{animation:none!important}
+html,body{overflow-x:clip}
 </style>
 <script>/* v172: switch the Google Fonts fallbacks on only after the self-hosted subsets have loaded, so their slices are fetched just for characters the subsets lack */
 (function(){function on(id,spec){var l=document.getElementById(id);if(!l)return;var go=function(){l.media='all'};if(document.fonts&&document.fonts.load){document.fonts.load(spec).then(go,go);setTimeout(go,4000)}else go()}on('gf-serif','900 20px "YLSerif"');on('gf-hand','400 20px "YLHand"')})();</script>
@@ -4140,7 +4144,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/5 第 191 版';
+var BUILD='11/5 第 192 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
