@@ -1770,9 +1770,26 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 #warn .wc{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 #warn .wc i{font:700 clamp(14px,3.8vw,19px) var(--sans,"Noto Sans TC",sans-serif);font-style:normal;color:#1B1B18;background:#E0C85C;border-radius:999px;padding:7px 15px;opacity:0;transform:scale(.3)}
 #warn.on .wc i{animation:wpop .42s cubic-bezier(.2,1.4,.4,1) forwards calc(2.5s + var(--i)*.16s)}
-#warn .ws{display:inline-flex;align-items:center;gap:.3em;margin-top:clamp(4px,1vh,12px);color:#fff;font:900 clamp(22px,6vw,40px)/1 var(--serif);background:#B91C2B;border:3px solid #fff;border-radius:999px;padding:.28em .7em .28em .3em;box-shadow:0 0 0 3px #B91C2B,0 0 .6em rgba(255,80,60,.7);opacity:0;transform:rotate(-25deg) scale(3)}
-#warn .ws b{width:1.3em;height:1.3em;border-radius:50%;background:#fff;color:#B91C2B;font:900 .9em/1.45em var(--sans,"Noto Sans TC",sans-serif);text-align:center;flex:0 0 auto}
-#warn.on .ws{animation:wseal .45s cubic-bezier(.2,.9,.3,1.2) forwards 3.2s,wsealbob 1.2s ease-in-out infinite alternate 3.7s}
+#warn .ws{position:relative;margin-top:clamp(6px,1.4vh,14px);opacity:0;transform:translateY(30px);font-family:var(--serif)}
+#warn.on .ws{animation:wrise .5s ease-out 2.95s forwards}
+#warn .wsc{background:#FFF8E6;color:#1B1B18;border:2px solid #1B1B18;border-radius:4px;padding:8px 12px 10px;box-shadow:0 12px 26px rgba(0,0,0,.55);transform:rotate(-3deg)}
+#warn.on .wsc{animation:wjolt .3s ease-out 3.72s}
+#warn .wsc small{display:block;font:700 clamp(11px,3vw,14px)/1 var(--serif);letter-spacing:.22em;text-align:center;margin-bottom:7px;color:#444}
+#warn .wsr{display:grid;grid-template-columns:auto auto auto;border:2px solid #1B1B18;background:#fff}
+#warn .wsr>span{display:flex;align-items:center;justify-content:center;padding:.2em .4em;font:900 clamp(24px,6.4vw,42px)/1 var(--serif);border-left:2px solid #1B1B18}
+#warn .wsx{border-left:0!important;width:1.7em;position:relative;overflow:visible}
+#warn .wsn b{display:flex;align-items:center;justify-content:center;width:1.25em;height:1.25em;border-radius:50%;border:.07em solid #1B1B18;font:900 .78em/1 var(--sans,"Noto Sans TC",sans-serif);box-sizing:border-box;padding-bottom:.02em}
+#warn .wsm{letter-spacing:.08em;padding-right:.5em!important}
+#warn .wsk{position:absolute;left:50%;top:50%;width:1.2em;height:1.2em;margin:-.6em 0 0 -.6em;border-radius:50%;border:.15em solid #D7262B;box-shadow:inset 0 0 0 .05em rgba(215,38,43,.3);opacity:0;transform:scale(1) rotate(0)}
+#warn .wsk::after{content:"";position:absolute;left:50%;top:50%;width:.28em;height:.28em;margin:-.14em 0 0 -.14em;border-radius:50%;background:#D7262B}
+#warn.on .wsk{animation:wstmp .3s ease-out forwards 3.62s}
+#warn .wsh{position:absolute;left:50%;top:50%;width:1.3em;height:1.9em;margin:-1.75em 0 0 -.65em;border-radius:.3em .3em .55em .55em;background:linear-gradient(#9B2227,#5E1114 70%,#3d0a0c);box-shadow:0 .12em .25em rgba(0,0,0,.45);opacity:0;transform:translateY(-2.2em) scale(1.7);z-index:2}
+#warn .wsh::before{content:"";position:absolute;left:.2em;right:.2em;top:.18em;height:.3em;border-radius:.15em;background:rgba(255,255,255,.18)}
+#warn.on .wsh{animation:wshdl 1s cubic-bezier(.3,.7,.3,1) forwards 3.1s}
+@keyframes wstmp{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+@keyframes wshdl{0%{opacity:0;transform:translateY(-2.2em) scale(1.7)}50%{opacity:1;transform:translateY(.15em) scale(1)}66%{opacity:1;transform:translateY(.15em) scale(1)}100%{opacity:0;transform:translateY(-2.6em) scale(1.35)}}
+@keyframes wseal{from{opacity:0;transform:rotate(-25deg) scale(3)}70%{opacity:1;transform:rotate(-6deg) scale(.94)}to{opacity:1;transform:rotate(-8deg) scale(1)}}
+@keyframes wjolt{0%{transform:rotate(-3deg) translateY(0)}40%{transform:rotate(-3.6deg) translateY(5px) scale(.985)}100%{transform:rotate(-3deg) translateY(0)}}
 @keyframes wstamp{from{opacity:0;transform:scale(2.8) rotate(-9deg)}65%{opacity:1;transform:scale(.93) rotate(1.5deg)}to{opacity:1;transform:scale(1) rotate(0)}}
 @keyframes wbreath{from{filter:drop-shadow(0 .05em 0 #4a0f12) drop-shadow(0 0 .1em rgba(230,60,40,.6))}to{filter:drop-shadow(0 .05em 0 #4a0f12) drop-shadow(0 0 .3em rgba(255,90,60,.95)) drop-shadow(0 0 .7em rgba(255,60,40,.6))}}
 @keyframes wshake{0%,21%,43%,65%,87%,100%{transform:translate(0,0)}23%,45%,67%,89%{transform:translate(-9px,5px)}26%,48%,70%,92%{transform:translate(8px,-5px)}29%,51%,73%,95%{transform:translate(-4px,2px)}}
@@ -1782,9 +1799,8 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 @keyframes wrise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes wnum{from{transform:scale(1)}to{transform:scale(1.1)}}
 @keyframes wpop{from{opacity:0;transform:scale(.3)}60%{opacity:1;transform:scale(1.15)}to{opacity:1;transform:scale(1)}}
-@keyframes wseal{from{opacity:0;transform:rotate(-25deg) scale(3)}70%{opacity:1;transform:rotate(-6deg) scale(.94)}to{opacity:1;transform:rotate(-8deg) scale(1)}}
-@keyframes wsealbob{from{transform:rotate(-8deg) scale(1)}to{transform:rotate(-5deg) scale(1.06)}}
-@media (prefers-reduced-motion:reduce){#warn .wt span,#warn .wd,#warn .wl,#warn .wc i,#warn .ws{opacity:1;transform:none;animation:none!important}#warn.on .wt,#warn.on::before,#warn.on .bk,#warn.on .wd b{animation:none!important}#warn::before{opacity:.6}#warn .ws{transform:rotate(-8deg)}}
+@media (prefers-reduced-motion:reduce){#warn .wt span,#warn .wd,#warn .wl,#warn .wc i{opacity:1;transform:none;animation:none!important}#warn.on .wt,#warn.on::before,#warn.on .bk,#warn.on .wd b{animation:none!important}#warn::before{opacity:.6}}
+@media (prefers-reduced-motion:reduce){#warn .ws,#warn .wsk{opacity:1;transform:none;animation:none!important}#warn .wsh{display:none}#warn.on .wsc{animation:none!important}}
 /* v187 宜蘭製造 */
 #club .ct{top:40%;font-size:min(21vw,13vh);letter-spacing:.05em;isolation:isolate;line-height:1.1}
 @media (min-width:700px){#club .ct{font-size:min(14vw,21vh)}}
@@ -1829,6 +1845,29 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 .bldr.pure .bldp b{background:linear-gradient(100deg,#D9B64A 0%,#FFF8D6 30%,#E0C85C 50%,#FFFFFF 65%,#D9B64A 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;display:inline-block;animation:ctshine 1.8s linear infinite,wnum .6s ease-in-out infinite alternate;filter:drop-shadow(0 0 .12em rgba(255,222,130,.9))}
 .bldr.pure .bldt{color:#FFF6DA;text-shadow:0 0 14px rgba(255,220,120,.95),0 0 30px rgba(255,200,90,.6)}
 @media (prefers-reduced-motion:reduce){#pure .pc,#pure .pf,#pure .pfl,#pure .pr{display:none}#pure .psk,#pure .psk2,#pure .ps{opacity:1;transform:none;animation:none!important}#ov .ovc.pshake,.bldr.pure .bldp b{animation:none!important}}
+
+/* v190b 真選舉票版型 */
+#warn .ws{font-size:clamp(17px,4.6vw,28px)}
+#warn .wsc{display:flex;align-items:stretch;padding:.35em;border-radius:3px;background:#FBF7EC;transform:rotate(-2deg)}
+#warn .bg{display:grid;grid-template-columns:auto auto;border:1.5px solid #1B1B18}
+#warn .bl,#warn .bc{display:flex;align-items:center;justify-content:center;border:1px solid #1B1B18;color:#1B1B18;font-family:var(--serif)}
+#warn .bl{writing-mode:vertical-rl;text-orientation:upright;font-size:.46em;font-weight:700;letter-spacing:.15em;padding:.4em .35em;background:#F1EBDB}
+#warn .bc{min-width:4.2em;padding:.15em .3em}
+#warn .wsx{height:2.3em;width:auto;position:relative}
+#warn .bn{font-size:1em}#warn .bn b{display:flex;align-items:center;justify-content:center;width:1.25em;height:1.25em;border-radius:50%;border:.07em solid #1B1B18;font:900 .8em/1 var(--sans,"Noto Sans TC",sans-serif);box-sizing:border-box}
+#warn .bm{writing-mode:vertical-rl;text-orientation:upright;font-weight:900;letter-spacing:.12em;padding:.3em 0;line-height:1}
+#warn .bp img{display:block;width:2.4em;height:3.2em;object-fit:cover;border:1px solid #1B1B18}
+#warn .bq{writing-mode:vertical-rl;text-orientation:upright;font-size:.5em;font-weight:700;letter-spacing:.12em;padding:.5em 0;line-height:1}
+#warn .bt{writing-mode:vertical-rl;text-orientation:upright;display:flex;align-items:center;font:700 .58em/1.15 var(--serif);letter-spacing:.3em;color:#1B1B18;padding:.3em .25em;margin-left:.3em;border-left:1px solid #1B1B18}
+#warn .wsk,#warn .wsh{font-size:1em}
+#warn .wt{font-size:min(29vw,16vh)}
+#warn .wd b{font-size:clamp(44px,13vw,100px)}
+@media (min-width:700px){#warn .wt{font-size:min(14vw,25vh)}}
+@media (max-height:700px){#warn .ws{font-size:15px}#warn .wt{font-size:min(25vw,13vh)}#warn .wd b{font-size:40px}}
+
+/* v190c 圈選章印文：紅圈＋左右倒置的卜 */
+#warn .wsk{border:0;box-shadow:none;width:1.45em;height:1.45em;margin:-.725em 0 0 -.725em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='41' fill='none' stroke='%23D7262B' stroke-width='8'/%3E%3Cpath d='M50 16v68M50 48L31 66' fill='none' stroke='%23D7262B' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;opacity:0}
+#warn .wsk::after{display:none}
 </style>
 <script>/* v172: switch the Google Fonts fallbacks on only after the self-hosted subsets have loaded, so their slices are fetched just for characters the subsets lack */
 (function(){function on(id,spec){var l=document.getElementById(id);if(!l)return;var go=function(){l.media='all'};if(document.fonts&&document.fonts.load){document.fonts.load(spec).then(go,go);setTimeout(go,4000)}else go()}on('gf-serif','900 20px "YLSerif"');on('gf-hand','400 20px "YLHand"')})();</script>
@@ -4090,7 +4129,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/5 第 189 版';
+var BUILD='11/5 第 190 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -4273,7 +4312,7 @@ function warnSfx(){
   for(var i=0;i<16;i++)tone(t0+1.4+Math.pow(i/16,1.6)*1.1,1400,.03,.1);
   tone(t0+2.52,880,.5,.22,'sine');tone(t0+2.52,1320,.6,.1,'sine');
   [2.56,2.72,2.88].forEach(function(d){var o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.setValueAtTime(700,t0+d);o.frequency.exponentialRampToValueAtTime(320,t0+d+.1);g.gain.setValueAtTime(.28,t0+d);g.gain.exponentialRampToValueAtTime(.001,t0+d+.12);o.connect(g);g.connect(master);o.start(t0+d);o.stop(t0+d+.15)});
-  thud(t0+3.5,110,30,.6,1.1);tone(t0+3.5,660,.9,.16,'sine');
+  thud(t0+3.66,110,30,.6,1.1);tone(t0+3.66,660,.9,.16,'sine');
   WSFX={ctx:ctx,stop:function(){try{var t=ctx.currentTime;master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(0,t+.35)}catch(e){}setTimeout(function(){live.forEach(function(o){try{o.stop()}catch(e){}});try{master.disconnect()}catch(e){}},420)}};
   return WSFX;
 }
@@ -4284,7 +4323,7 @@ function warnOn(){if(document.getElementById('warn'))return;var w=document.creat
   if(d>1)h+='<div class="wd">距離投票日<b id="wdn">'+d+'</b>天</div>';
   h+='<div class="wl">'+(d>1?'11/28 星期六，一定要去投票':(d===1?'明天就是投票日，一定要去投票':(d===0?'今天就是投票日，現在就去投票':'謝謝宜蘭鄉親')))+'</div>';
   if(d>=0)h+='<div class="wc">'+['身分證','印章','投票通知單'].map(function(t,k){return '<i style="--i:'+k+'">'+t+'</i>'}).join('')+'</div>';
-  h+='<div class="ws"><b>1</b>林國漳</div></div>';
+  h+='<div class="ws"><div class="wsc"><div class="bg"><span class="bl">圈選欄</span><span class="bc wsx"><i class="wsk"></i><i class="wsh"></i></span><span class="bl">號次</span><span class="bc bn"><b>1</b></span><span class="bl">姓名</span><span class="bc bm">林國漳</span><span class="bl">相片</span><span class="bc bp"><img src="photos/ballot.jpg" alt=""></span><span class="bl">推薦之政黨</span><span class="bc bq">民主進步黨推薦</span></div><div class="bt">宜蘭縣縣長選舉選舉票</div></div></div></div>';
   w.innerHTML=h;w.onclick=warnOff;document.body.appendChild(w);try{warnSfx()}catch(e){}try{if(navigator.vibrate)navigator.vibrate([50,190,50,190,50,190,80])}catch(e){}
   requestAnimationFrame(function(){w.classList.add('on')});
   var n=document.getElementById('wdn');if(n&&d>1&&!matchMedia('(prefers-reduced-motion:reduce)').matches){var s0=d+40,t0=0;n.textContent=s0;setTimeout(function(){function tick(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1100),e=1-Math.pow(1-p,3);n.textContent=Math.round(s0-(s0-d)*e);if(p<1&&document.getElementById('warn'))requestAnimationFrame(tick)}requestAnimationFrame(tick)},1400)}
