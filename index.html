@@ -1773,7 +1773,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 #warn .ws{position:relative;margin-top:clamp(6px,1.4vh,14px);opacity:0;transform:translateY(30px);font-family:var(--serif)}
 #warn.on .ws{animation:wrise .5s ease-out 2.95s forwards}
 #warn .wsc{background:#FFF8E6;color:#1B1B18;border:2px solid #1B1B18;border-radius:4px;padding:8px 12px 10px;box-shadow:0 12px 26px rgba(0,0,0,.55);transform:rotate(-3deg)}
-#warn.on .wsc{animation:wjolt .3s ease-out 3.72s}
+#warn.on .wsc{animation:wjolt .3s ease-out 7.97s}
 #warn .wsc small{display:block;font:700 clamp(11px,3vw,14px)/1 var(--serif);letter-spacing:.22em;text-align:center;margin-bottom:7px;color:#444}
 #warn .wsr{display:grid;grid-template-columns:auto auto auto;border:2px solid #1B1B18;background:#fff}
 #warn .wsr>span{display:flex;align-items:center;justify-content:center;padding:.2em .4em;font:900 clamp(24px,6.4vw,42px)/1 var(--serif);border-left:2px solid #1B1B18}
@@ -1782,10 +1782,10 @@ button:focus-visible,a:focus-visible,summary:focus-visible,[role=button]:focus-v
 #warn .wsm{letter-spacing:.08em;padding-right:.5em!important}
 #warn .wsk{position:absolute;left:50%;top:50%;width:1.2em;height:1.2em;margin:-.6em 0 0 -.6em;border-radius:50%;border:.15em solid #D7262B;box-shadow:inset 0 0 0 .05em rgba(215,38,43,.3);opacity:0;transform:scale(1) rotate(0)}
 #warn .wsk::after{content:"";position:absolute;left:50%;top:50%;width:.28em;height:.28em;margin:-.14em 0 0 -.14em;border-radius:50%;background:#D7262B}
-#warn.on .wsk{animation:wstmp .3s ease-out forwards 3.62s}
+#warn.on .wsk{animation:wstmp .3s ease-out forwards 7.87s}
 #warn .wsh{position:absolute;left:50%;top:50%;width:1.3em;height:1.9em;margin:-1.75em 0 0 -.65em;border-radius:.3em .3em .55em .55em;background:linear-gradient(#9B2227,#5E1114 70%,#3d0a0c);box-shadow:0 .12em .25em rgba(0,0,0,.45);opacity:0;transform:translateY(-2.2em) scale(1.7);z-index:2}
 #warn .wsh::before{content:"";position:absolute;left:.2em;right:.2em;top:.18em;height:.3em;border-radius:.15em;background:rgba(255,255,255,.18)}
-#warn.on .wsh{animation:wshdl 1s cubic-bezier(.3,.7,.3,1) forwards 3.1s}
+#warn.on .wsh{animation:wshdl 1s cubic-bezier(.3,.7,.3,1) forwards 7.35s}
 @keyframes wstmp{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 @keyframes wshdl{0%{opacity:0;transform:translateY(-2.2em) scale(1.7)}50%{opacity:1;transform:translateY(.15em) scale(1)}66%{opacity:1;transform:translateY(.15em) scale(1)}100%{opacity:0;transform:translateY(-2.6em) scale(1.35)}}
 @keyframes wseal{from{opacity:0;transform:rotate(-25deg) scale(3)}70%{opacity:1;transform:rotate(-6deg) scale(.94)}to{opacity:1;transform:rotate(-8deg) scale(1)}}
@@ -1886,6 +1886,48 @@ html,body{overflow-x:clip}
 
 /* v193 政見細節直接顯示 */
 .pc .pb{margin:10px 0 0;padding-left:1.15em;font-size:calc(14.5px*var(--ps,1));line-height:1.6}.pc .pb li{margin:5px 0}
+
+/* v196 新分類、數字框、邀請朋友放大 */
+.pcat[data-pk="newres"]:not([open]){--pc:#D8A7A0}
+.pcat[data-pk="women"]:not([open]){--pc:#C98BC4}
+.pcat[data-pk="youth"]:not([open]){--pc:#8DB6E0}
+.pcat[data-pk="newres"]>summary::before{content:"新"}
+.pcat[data-pk="women"]>summary::before{content:"女"}
+.pcat[data-pk="youth"]>summary::before{content:"青"}
+.kn b small{font-size:.46em;font-weight:900;margin-left:.1em;letter-spacing:0}
+@media (min-width:701px){
+  .brand .hbtns #sharebtn{min-height:78px;padding:0 38px 0 114px;font-size:27px;-webkit-mask:radial-gradient(circle 12px at 0 50%,transparent 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,transparent 97%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 12px at 0 50%,transparent 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,transparent 97%,#000) right/51% 100% no-repeat}
+  .brand .hbtns #sharebtn::before{width:88px;font-size:32px}
+}
+@media (max-width:700px){
+  body .brand .hbtns #sharebtn{min-height:56px!important;padding:0 8px 0 clamp(42px,12.5vw,52px)!important;font-size:clamp(13px,4.4vw,17px)!important;-webkit-mask:radial-gradient(circle 8px at 0 50%,transparent 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 50%,transparent 97%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 8px at 0 50%,transparent 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 50%,transparent 97%,#000) right/51% 100% no-repeat}
+  body .brand .hbtns #sharebtn::before{width:clamp(32px,10.5vw,44px);font-size:clamp(17px,5.2vw,22px)}
+}
+/* v196 戒慎恐懼：螺絲掉了要鎖緊 */
+#warn .wfs{position:absolute;top:-12vh;left:var(--x);width:var(--w);aspect-ratio:24/44;z-index:1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2044%27%3E%3Crect%20x%3D%271%27%20y%3D%271%27%20width%3D%2722%27%20height%3D%279%27%20rx%3D%273%27%20fill%3D%27%23E0C85C%27%20stroke%3D%27%236E1B25%27%20stroke-width%3D%271.6%27%2F%3E%3Cpath%20d%3D%27M12%203.2v4.6%27%20stroke%3D%27%236E1B25%27%20stroke-width%3D%271.8%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M6%2010h12v26l-6%207-6-7z%27%20fill%3D%27%23C9CED6%27%20stroke%3D%27%236E1B25%27%20stroke-width%3D%271.6%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M6%2016l12%203M6%2022l12%203M6%2028l12%203M6%2034l10%202%27%20stroke%3D%27%236E1B25%27%20stroke-width%3D%271.4%27%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;opacity:0}
+#warn.on .wfs{animation:wfall var(--t) linear var(--d) infinite}
+@keyframes wfall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:1;transform:translateY(122vh) rotate(var(--r))}}
+#warn .wst{display:grid;justify-items:center;width:100%}
+#warn .wst>*{grid-area:1/1}
+#warn.on .ws{animation:wrise .5s ease-out 7.2s forwards}
+@keyframes wsout{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-24px) scale(.9)}}
+#warn .wcm{display:flex;flex-direction:column;align-items:center;align-self:center;gap:min(1.8vh,16px);width:100%;opacity:0;pointer-events:none}
+#warn.on .wcm{animation:wrise .5s ease-out 2.95s forwards,wsout .45s ease-in 6.9s forwards}
+#warn .wpl{display:flex;align-items:center;gap:.6em;background:#B91C2B;color:#FFF6DA;border:3px solid #FFF6DA;border-radius:8px;padding:.3em .9em;font:900 min(clamp(20px,5.4vw,34px),3.3vh)/1.1 var(--serif);letter-spacing:.06em;box-shadow:0 0 0 3px #B91C2B,0 .15em .5em rgba(0,0,0,.5)}
+#warn .wsi{flex:0 0 auto;width:1.15em;height:1.15em;border-radius:50%;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2040%2040%27%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2720%27%20r%3D%2717%27%20fill%3D%27%23E0C85C%27%20stroke%3D%27%236E1B25%27%20stroke-width%3D%272.6%27%2F%3E%3Cpath%20d%3D%27M20%208v24M8%2020h24%27%20stroke%3D%27%236E1B25%27%20stroke-width%3D%274.2%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") center/contain no-repeat}
+#warn .wpl .wsi{width:.85em;height:.85em}
+#warn.on .wpl .wsi{animation:wspin .6s ease-out forwards 3.05s}
+#warn .wk4{display:grid;grid-template-columns:1fr 1fr;gap:min(1.6vh,12px) 12px;width:min(100%,520px)}
+@media (min-width:700px){#warn .wk4{grid-template-columns:repeat(4,auto);width:auto}}
+#warn .wk{position:relative;display:flex;align-items:center;gap:.5em;background:#FFF8E6;color:#1B1B18;border:2px solid #1B1B18;border-radius:8px;padding:.45em .7em;font:900 min(clamp(15px,4.2vw,22px),2.7vh)/1.15 var(--serif);opacity:0;transform:scale(.4)}
+#warn.on .wk{animation:wpop .42s cubic-bezier(.2,1.4,.4,1) forwards calc(3.15s + var(--i)*.5s)}
+#warn.on .wk .wsi{animation:wspin .6s cubic-bezier(.3,.7,.4,1) forwards calc(3.4s + var(--i)*.5s)}
+#warn .wk::after{content:"✓";position:absolute;right:-.45em;top:-.55em;width:1.35em;height:1.35em;border-radius:50%;background:#2E9B47;color:#fff;font:900 .8em/1.35em var(--sans,"Noto Sans TC",sans-serif);text-align:center;border:2px solid #fff;transform:scale(0)}
+#warn.on .wk::after{animation:wpop .3s cubic-bezier(.2,1.5,.4,1) forwards calc(4s + var(--i)*.5s)}
+#warn .wcl{color:#FFF6DA;font:800 min(clamp(16px,4.4vw,26px),3vh) var(--sans,"Noto Sans TC",sans-serif);text-align:center;opacity:0;transform:translateY(24px)}
+#warn.on .wcl{animation:wrise .5s ease-out 5.85s forwards}
+@keyframes wspin{from{transform:rotate(0)}to{transform:rotate(540deg)}}
+@media (prefers-reduced-motion:reduce){#warn .wcm,#warn .wfs{display:none}}
 </style>
 <script>/* v172: switch the Google Fonts fallbacks on only after the self-hosted subsets have loaded, so their slices are fetched just for characters the subsets lack */
 (function(){function on(id,spec){var l=document.getElementById(id);if(!l)return;var go=function(){l.media='all'};if(document.fonts&&document.fonts.load){document.fonts.load(spec).then(go,go);setTimeout(go,4000)}else go()}on('gf-serif','900 20px "YLSerif"');on('gf-hand','400 20px "YLHand"')})();</script>
@@ -1931,7 +1973,7 @@ html,body{overflow-x:clip}
 var CATS={
   traffic:{n:'交通',c:'#E0C85C'},industry:{n:'產業',c:'#D99A5B'},agri:{n:'農業',c:'#B9CC74'},
   sea:{n:'海洋漁業',c:'#7FC4C0'},tour:{n:'觀光文化運動',c:'#F2A6C4'},env:{n:'環境治水韌性',c:'#8FCFA5'},
-  care:{n:'長者醫療社福',c:'#F3D9A4'},kids:{n:'托育教育',c:'#F29C8A'},ind:{n:'原住民族',c:'#C9A27A'},safe:{n:'安全生活',c:'#B9B2D6'},vision:{n:'施政理念',c:'#8FA3B8'}
+  care:{n:'長者醫療社福',c:'#F3D9A4'},newres:{n:'新住民',c:'#D8A7A0'},kids:{n:'托育教育',c:'#F29C8A'},women:{n:'女力',c:'#C98BC4'},youth:{n:'青年',c:'#8DB6E0'},ind:{n:'原住民族',c:'#C9A27A'},safe:{n:'安全生活',c:'#B9B2D6'},vision:{n:'施政理念',c:'#8FA3B8'}
 };
 var TOWNS=[
   {id:'toucheng',n:'頭城鎮',g:'溪北',lab:[121.823,24.858]},
@@ -1998,7 +2040,7 @@ var POL=[
  tw:['toucheng','jiaoxi','wujie'],rd:['t62','n5','hsr'],pl:['liz'],src:[]},
 {id:'T02',c:'traffic',t:'三接五轉：五大轉運站與三種縣內接駁',d:"2025/12/24、2026/10/21",
  s:'以頭城烏石港、礁溪、宜蘭、羅東、蘇澳五大轉運站為樞紐，整合 YouBike、小黃公車、彈性公車三種接駁，讓遊客與居民從高鐵站到各鄉鎮。',
- b:["五處為頭城烏石港、礁溪、宜蘭、羅東、蘇澳（2025/12/24 專訪提到「可能要有轉運站」）。", "增加公車班次，推動「小黃公車」，讓遊客從高鐵宜蘭站前往各鄉鎮。", "五轉：交通政見記者會「大眾接駁．三接五轉」，推動完善頭城烏石港、礁溪、宜蘭、羅東及蘇澳五大轉運站，對接城際與縣內交通。", "三接：整合 YouBike、小黃公車及彈性公車三種縣內接駁系統，從轉運站接到目的地，補足最後一哩路。", "小黃公車彈性接駁：整體公車系統依時段和周間、周末分流，兼顧通學、就醫與觀光。", "目標是「一日生活圈」，避免宜蘭只成為一日遊的過境地。"],
+ b:["五轉：交通政見記者會「大眾接駁．三接五轉」，推動完善頭城烏石港、礁溪、宜蘭、羅東及蘇澳五大轉運站，對接城際與縣內交通。", "三接：整合 YouBike、小黃公車及彈性公車三種縣內接駁系統，從轉運站接到目的地，補足最後一哩路。", "增加公車班次並推動「小黃公車」彈性接駁：依時段與平日、假日分流，讓遊客從高鐵宜蘭站前往各鄉鎮，也兼顧通學與就醫。"],
  tw:['toucheng','jiaoxi','yilan','luodong','suao'],rd:['tra','t9'],pl:['wushi','jiaoxi_c','yilan_c','luodong_c','suao_c'],src:[]},
 {id:'T03',c:'traffic',t:'四縱六橫：串聯大動脈，疏通微血管',d:"交通政見記者會",
  s:'四縱：國道5號及側車道（191線）、台9線、台2線、台2庚延伸線。六橫：宜6線、宜蘭A聯絡道、宜蘭B聯絡道、二結聯絡道、羅東聯絡道、冬山聯絡道。',
@@ -2006,16 +2048,16 @@ var POL=[
  tw:'all',rd:['t2','n5','t9'],pl:[],src:[]},
 {id:'T04',c:'traffic',t:'綠色運輸整合：規劃綠色友善交通示範區',d:"2026/7/8",
  s:'高鐵特區規劃為綠色友善交通示範區，加上 YouBike、TPASS 加碼與友善步行。',
- b:["加碼補助 TPASS（同青年政見）。", "高鐵特區規劃為綠色友善交通的示範區。", "YouBike 共享路網：在轉運站與人口密集區佈建站點，完善縣內通行便利。", "世界自行車日：未來五大轉運站（頭城烏石港、礁溪、宜蘭、羅東、蘇澳）全面整合 YouBike 系統，出站就能無縫轉乘共享單車，用智慧綠色交通接駁最後一哩路。", "通學步道延伸：優化校園周邊動線並拓寬人行道，打造學童與長輩安心行走的步行環境。", "建置數位系統，終結 TPASS「宜蘭方案」與「雙北方案」雙卡不便，預留對接 YouBike、婦幼補助、青年及身障服務。"],
+ b:["加碼補助 TPASS（同青年政見）。", "高鐵特區規劃為綠色友善交通的示範區。", "YouBike 共享路網：在轉運站與人口密集區佈建站點，完善縣內通行便利。", "通學步道延伸：優化校園周邊動線並拓寬人行道，打造學童與長輩安心行走的步行環境。", "建置數位系統，終結 TPASS「宜蘭方案」與「雙北方案」雙卡不便，預留對接 YouBike、婦幼補助、青年及身障服務。"],
  tw:'all',rd:['tra'],pl:[],src:[],},
-{id:'T05',c:'traffic',t:'鐵路高架化向北延伸至頭城、礁溪',d:"2026/5/21、2026/6/4",
- s:'爭取在宜蘭到羅東之外，把台鐵高架化延伸到頭城、礁溪，並進一步推動捷運化。',
+{id:'T05',c:'traffic',t:'爭取鐵路高架化向北延伸至頭城、礁溪',d:"2026/5/21、2026/6/4",
+ s:'爭取在宜蘭到羅東之外，把台鐵高架化延伸到頭城、礁溪。',
  b:[],
  tw:['toucheng','jiaoxi'],rd:['tra'],pl:['toucheng_c','jiaoxi_c'],src:[],},
 {id:'T07',c:'traffic',t:'高鐵延伸：高鐵特區規劃',d:"2026/7/23、2026/7/29",
- s:'高鐵不只是經過宜蘭，要先規劃接駁，並保障特定區居民權益。',
- b:["提前準備四件事：公共運輸與接駁系統、產業與人才布局、守護農地環境避免無序開發、把人潮轉化為地方創生與產業升級。"],
- tw:['zhuangwei','yilan'],rd:['hsr'],pl:['zhuang2','hsr'],src:[]},
+ s:'全長約 60.6 公里，最快 2029 年動工，預計 2037 年底通車；先規劃接駁，並保障特定區居民權益。',
+ b:["提前準備四件事：公共運輸與接駁系統、產業與人才布局、守護農地環境避免無序開發、把人潮轉化為地方創生與產業升級。", "新增宜蘭 1 站，站址在縣政中心南側約 350 公尺，與台鐵宜蘭新站共構。", "頭城、礁溪、壯圍不設站，平原段以高架通過。", "特定區約 420 公頃，都市計畫仍在審查。"],
+ tw:['toucheng','jiaoxi','zhuangwei','yilan'],rd:['hsr'],pl:['zhuang2','hsr'],src:[]},
 /* ---------- 產業人才 ---------- */
 {id:'I01',c:'industry',t:'產業：北宜雙心計畫',d:"2026/9/23 發布",
  s:'北宜雙心計畫，融入北北基宜首都黃金廊帶。',
@@ -2035,7 +2077,7 @@ var POL=[
  t:"從源頭預防毒駕",
  d:"2026/6/6、2026/6/26",
  s:"除了加重處罰，更要從源頭預防，建立跨局處預防體系。",
- b:["主張：「毒駕零容忍」，支持政府反毒措施、共同打擊犯罪，目標是實現無毒、安全健康的宜蘭。", "科技聯防精準打擊：全面配發第一線唾液快篩試劑，結合交通處科技執法，強力掃蕩新興毒品。", "大眾運輸安全把關：全面落實公共服務駕駛的定期毒篩，守護縣民通勤安全。", "跨局處築安全防護網：嚴查電子菸、落實高風險個案追蹤與校園防毒教育。", "毒駕不只是交通問題，而是教育、衛政、社政、警政與司法共同面對的社會問題。", "地方要建立預防體系：校園反毒教育、心理健康支持、高風險族群關懷、跨局處合作（衛生、環保、社福）。"],
+ b:["「毒駕零容忍」，支持政府反毒措施、共同打擊犯罪，目標是實現無毒、安全健康的宜蘭。", "科技聯防精準打擊：全面配發第一線唾液快篩試劑，結合交通處科技執法，強力掃蕩新興毒品。", "大眾運輸安全把關：全面落實公共服務駕駛的定期毒篩，守護縣民通勤安全。", "跨局處築安全防護網：嚴查電子菸、落實高風險個案追蹤與校園防毒教育。", "毒駕不只是交通問題，而是教育、衛政、社政、警政與司法共同面對的社會問題。", "地方要建立預防體系：校園反毒教育、心理健康支持、高風險族群關懷、跨局處合作。"],
  tw:'all',
  rd:[],
  pl:[],
@@ -2046,7 +2088,7 @@ var POL=[
  tw:'all',lt:['yuanshan'],rd:[],pl:[],src:[]},
 {id:'G03',c:'safe',t:'消防保障：增加人力、非消防勤務委外、義消保險',d:"119 消防節",
  s:'一定會做消防員的後盾，和大家一起守護這座城市。',
- b:["協調增加宜蘭消防人力。", "非消防勤務（例如抓蛇業務等）全面委外專業單位，讓消防員專心執行消防與救護。", "提高義消人員的意外保險與協勤費用。"],
+ b:["爭取增加宜蘭消防人力。", "非消防勤務（例如抓蛇業務等）全面委外專業單位，讓消防員專心執行消防與救護。", "提高義消人員的意外保險與協勤費用。"],
  tw:'all',rd:[],pl:[],src:[]},
 {id:'G04',c:'traffic',t:"交通安全：簽署人本交通承諾書，朝零死亡願景邁進",d:"2026/7/8 簽署",
  s:"簽署下一代人本交通促進會的五項承諾：實體人行道、通學安全區、道路空間改善時程、偏鄉兒少通勤、人本軌道建設。",
@@ -2096,7 +2138,7 @@ var POL=[
 /* ---------- 觀光文化 ---------- */
 {id:'C01',c:'tour',t:'觀光立縣 2.0：讓世界走進宜蘭，把時間留給山海',d:"2026/8/3 發布",
  s:'四季運動與雪山麓徑兩個新品牌，三大觀光圈，目標每年千萬人次。',
- b:["打破大小月、打破一日來回。", "捨棄零散景點思維，用「面→點→線」建構旅遊路網，延長停留時間並帶動平日人潮。"],
+ b:["打破觀光淡旺季、打破一日來回觀光。", "捨棄零散景點思維，用「點線面」建構旅遊路網，延長停留時間並帶動平日人潮。"],
  tw:'all',lt:['toucheng','nanao','suao','yuanshan','datong','luodong','yilan','dongshan'],rd:['t2'],pl:['taiping','lin','oldcity'],src:[]},
 {id:'C02',
  c:'tour',
@@ -2156,7 +2198,7 @@ var POL=[
  tw:'all',rd:[],pl:[],src:[],
  src:[]},
 {id:'N01',
- c:'care',
+ c:'newres',
  t:"宜蘭新美力：新住民四大面向",
  d:"2026/1/11 發布",
  s:"從補助到培力，讓新住民成為公共事務的共同決策者。",
@@ -2176,13 +2218,8 @@ var POL=[
  rd:[],
  pl:[],
  src:[]},
-{id:'W05',c:'care',t:'勞工五大行動計畫',d:"2026/5/1 發布",
- s:'勞工活動中心、得標廠商員工薪資納入公共工程採購評分、職人獎、中高齡 AI 職訓、健檢補助。',
- b:["興建勞工活動中心，提供休憩、進修甚至住宿空間，回應勞工團體長期的需求。", "公共工程採購納入薪資評分機制：縣府公共工程標案把「得標廠商員工的薪資狀況」列入評分項目，引導得標廠商提升員工待遇。", "擴大辦理百工百業職人獎。", "中高齡職訓優化：辦理 AI 實務課程，提升再就業競爭力。", "加碼健檢補助 3,000 元：針對輪班、夜間工作與長工時勞工。"],
- tw:'all',rd:[],pl:[],src:[],
- src:[]},
 /* ---------- 托育教育 ---------- */
-{id:'K01',c:'kids',t:'女力新宜蘭，幸福不缺席',d:"2026/3/6 發布",
+{id:'K01',c:'women',t:'女力新宜蘭，幸福不缺席',d:"2026/3/6 發布",
  s:'生育津貼 3 萬、凍卵與篩檢補助、平權內閣、托育量能倍增。',
  b:["津貼升級：生育津貼每胎由 2 萬元提高到 3 萬元。", "凍卵補助：25 至 39 歲女性終身一次 3 萬元（含保存費）。", "孕婦重大風險篩檢：懷孕 12 週內免費做一次 SMA 或子癇前症篩檢。", "平權內閣：增加女性入閣。", "育兒倍增：盤點閒置公共空間廣設社區托育據點；新建社會住宅強制設置「公設民營托嬰中心」；補助保母專業責任保險、提高教保員薪資；假日臨托由 2 處親子館擴增到 12 鄉鎮市並延長到晚間。"],
  tw:'all',lt:['luodong'],rd:[],pl:[],src:[],
@@ -2196,7 +2233,7 @@ var POL=[
  s:'照顧學生、教師、家長三個面向。',
  b:["學生：分年補足國小平板缺口、成立「宜蘭 AI 與 STEAM 教育中心」；建構「宜蘭學」與一校一亮點；推動務實雙語；六大特色技職學群。", "教師：成立行政減量小組、導入 AI 校務系統；規劃「教師法律與輔導管教支持系統」，提供諮詢與校安事件 SOP；提高清掃補助，由清潔團隊打掃校園；因應少子化推動小班精緻教育與小校轉型；全面檢討幼兒園師生比。", "家長：延續免學費與教科書補助；補助學校更新保溫設備（每校約 15 萬）、優先選用在地有機食材；偏鄉與高需求地區增設公幼與非營利幼兒園；整合 0–6 歲托育、幼教與早療；增加特教助理員與心理師；新住民家庭語言銜接與課後扶助。"],
  tw:'all',rd:[],pl:[],src:[]},
-{id:'K04',c:'kids',t:'青年宜蘭，四箭齊發',d:"2026/3/18 發布",
+{id:'K04',c:'youth',t:'青年宜蘭，四箭齊發',d:"2026/3/18 發布",
  s:'四大主張：安居、創業、就業、參與。設青年發展處、補貼 TPASS、興建 400 戶青年婚育宅、共創學院與數位遊牧。',
  b:["青年參與：把運動處改制為「運動暨青年發展處」；強化青年事務委員會的實質決策權；落實青年提案預算；增加縣府青年主管比例。", "補貼 TPASS：城際月票（雙北通勤）由 1,800 元降到 1,500 元；縣內月票由 750 元降到 500 元。", "居住正義：推動《青年宅自治條例》，在縣政中心興建 400 戶青年住宅與婚育宅，設托嬰托育中心。", "創意基地：成立「宜蘭共創學院」；在頭城建立「數位衝浪者中心」，推動數位遊牧與辦公度假。", "青年數位安全網計畫：協助遭遇數位詐騙、霸凌、深偽影像的青年，協助心理諮商、法律服務、管理數位資產與個人數位履歷。", "空間活化：把閒置校舍、機堡、營舍改成青年交流與共創場域。"],
  tw:['yilan','toucheng'],lt:[],rd:[],pl:['cityhall','toucheng_c'],src:[],
@@ -2228,10 +2265,6 @@ var POL=[
  b:["分年徵收核心私有地：針對保育與滯洪價值最高的成興大池與小池，縣府啟動分年徵收，在兼顧縣府財政的前提下逐步進行，給予地主實質且公平的補償，由公部門長期保護核心棲地。", "友善農業與生態補貼：徵收範圍外的土地，輔導農民轉型友善或有機農業，並爭取專案「生態獎勵金」，或比照休耕補貼標準給付，保障農民收入。", "重新檢討保護與管理機制：依土地利用、生態調查與治水需求的變化，從濕地保育、治水防洪、土地正義三個角度通盤檢討，精準界定核心保育區，合理調整非核心區的管理措施，讓其餘農地恢復合理利用。", "長期願景：把 52 甲濕地發展成國際級的濕地生態教育園區，並開拓宜蘭綠色旅遊。"],
  tw:['wujie'],rd:[],pl:['wu52'],src:[]},
 /* ---------- background: existing plans ---------- */
-{id:'B01',bg:1,c:'traffic',t:'高鐵延伸宜蘭',d:"2026/7/28",
- s:'全長約 60.6 公里，最快 2029 年動工，預計 2037 年底通車。',
- b:["新增宜蘭 1 站，站址在縣政中心南側約 350 公尺，與台鐵宜蘭新站共構。", "頭城、礁溪、壯圍不設站，平原段以高架通過。", "特定區約 420 公頃，都市計畫仍在審查。"],
- tw:['toucheng','jiaoxi','zhuangwei','yilan'],rd:['hsr'],pl:['hsr'],src:[],},
 ];
 var PBY={};POL.forEach(function(p){PBY[p.id]=p});
 
@@ -2436,13 +2469,13 @@ function renderLabels(){
 
 var KN={
  T01:[['1高2快','高鐵＋北宜快＋蘇花快']],
- T02:[['3接','YouBike＋小黃＋彈性公車'],['5轉','大轉運站']],T03:[['4縱6橫','道路骨架']],
+ T02:[['3接','YouBike＋小黃＋彈性公車'],['五大','轉運站']],T03:[['4縱6橫','道路骨架']],
  T05:[['頭城＋礁溪','高架化北延']],
  I01:[['4大','科技聚落串聯'],['18分鐘','北宜距離']],
  A01:[['95%','首次投保補助'],['2,000公頃','有機面積']],
  C01:[['千萬人次','每年目標'],['3圈','三大觀光圈']],
  C02:[['8鄉鎮','串聯'],['2條','溪北、溪南路線'],['4年','踏查定線'],['第8條','國家綠道']],
- S01:[['2,137km²','管轄海域'],['4大','面向']],S03:[['21公里','山海漁鐵'],['5處','漁村與車站']],K05:[['12鄉鎮','增設寵物公園'],['偏鄉巡迴','三合一服務']],K06:[['60元','每餐補助']],
+ S01:[['成立','海洋發展辦公室'],['4大','面向']],S03:[['21公里','山海漁鐵'],['5處','漁村與車站']],K05:[['12鄉鎮','增設寵物公園'],['偏鄉巡迴','三合一服務']],K06:[['60元','每餐補助']],
  C03:[['5大綱領','文化治縣'],['60多座','博物館串聯']],
  C05:[['40座','三山國王廟']],
  E01:[['300座','微型森林']],
@@ -2451,7 +2484,7 @@ var KN={
  W01:[['12,000點','每年'],['多元使用','可跨越累積']],
  W02:[['3萬','每胎生育津貼'],['全額','弱勢健保免費']],
  N01:[['4大面向','決策、權益、助學、溯根'],['10萬','溯根補助上限']],
- W05:[['3,000元','健檢補助'],['興建','勞工活動中心']],I05:[['3,000元','健檢補助'],['興建','勞工活動中心']],
+ I05:[['3,000元','健檢補助'],['興建','勞工活動中心']],
  K01:[['3萬','凍卵補助'],['倍增','0–2歲托育'],['12鄉鎮','假日臨托']],
  K02:[['100所','學校照明體檢'],['12歲以下','免門票'],['8年','藏書倍增']],
  K03:[['15萬','每校午餐保溫設備'],['教師減壓','行政減量、AI 校務系統']],
@@ -2483,11 +2516,11 @@ var AUD=[
  {id:'a_baby',k:'age',n:'幼兒家庭（0–6 歲）',need:'孩子小時候常生病，掛號費一次次累積；0–2 歲公共托育只占同齡人口約 6%，公托候補名單常有兩位數；有 0–6 歲孩子的家庭，約 38% 最需要假日與夜間臨托。',pol:['W02','K01','K02','K06','K03']},
  {id:'a_student',k:'age',n:'國中小學生與家長',need:'國小學生視力不良率 55.23%；全縣校均藏書約 1.4 萬冊；午餐要熱、要好吃；偏鄉與無車家庭的上下學接送是難題。',pol:['K02','K06','K03','C07','T04','T08','G04']},
  {id:'a_youth',k:'age',n:'青年（約 18–39 歲）',need:'長期低薪、機會不足，青年人口向大台北外流；老屋比例高、購屋成家困難；創業資源分散。',pol:['K04','K07','I01','I03','I04','T04','C02','X03','X04','X07']},
- {id:'a_adult',k:'age',n:'壯年（約 40–64 歲）',need:'雪隧假日塞車、大眾運輸班次不足、停車位不足；薪資偏低、產業單一；極端降雨的淹水風險。',pol:['T01','T04','T05','W05','E02','E03','I01','X01','X09','X12']},
+ {id:'a_adult',k:'age',n:'壯年（約 40–64 歲）',need:'雪隧假日塞車、大眾運輸班次不足、停車位不足；薪資偏低、產業單一；極端降雨的淹水風險。',pol:['T01','T04','T05','I05','E02','E03','I01','X01','X09','X12']},
  {id:'a_senior',k:'age',n:'長者（65 歲以上）',need:'宜蘭已進入超高齡社會（65 歲以上超過兩成）；全國已有 15 縣市有敬老卡點數，宜蘭為 0；帶狀疱疹疫苗價格高；頭城醫療資源不足。',pol:['W01','W02','W03','C07','T04','W04','T08','X04','X06','X08','G04']},
  {id:'j_farmer',k:'job',n:'農民',need:'宜蘭稻作一年只收成一次，颱風來前常得搶收，稻穀品質下降還可能被折價；宜蘭在迎風面，天災常讓一年心血歸零。',pol:['A01','A02','E02','E05','C05','X05','X06','X07','X08','X10','X13']},
  {id:'j_fisher',k:'job',n:'漁民',need:'漁民老化、老舊漁船難退場；漁港與養殖區設施需要升級；漁獲需要冷鏈與品牌才賣得出好價。',pol:['S01','S02','S03','S04','X07','X10','X11']},
- {id:'j_worker',k:'job',n:'勞工（含輪班、夜間）',need:'輪班、夜間、長工時的異常工作負荷容易引發疾病與職災；中高齡勞工需要職訓與再就業；基層薪資偏低。',pol:['W05','T04','W02','I01']},
+ {id:'j_worker',k:'job',n:'勞工（含輪班、夜間）',need:'輪班、夜間、長工時的異常工作負荷容易引發疾病與職災；中高齡勞工需要職訓與再就業；基層薪資偏低。',pol:['I05','T04','W02','I01']},
  {id:'j_teacher',k:'job',n:'教師與教保員',need:'行政與評鑑負擔重；學生突發情緒與校園安全需要標準流程；少子化下小校要轉型；教保員薪資約 3.5 萬、人手吃緊。',pol:['K03','K01']},
  {id:'j_startup',k:'job',n:'創業者與青創',need:'創業資源分散、新型態商業模式（如社會企業）法規不明、青創商品缺乏品牌與穩定市場。',pol:['K04','K07','I01','C03','X04','X07','X10']},
  {id:'j_tour',k:'job',n:'旅宿、餐飲與觀光業',need:'旅客停留短、季節落差明顯；抵達後缺少交通接駁的「最後一哩路」；熱門地區假日塞車。',pol:['C01','C02','C08','C09','S03','T02','T01','X02','X04','X05','X06','X07','X08','X09','X10','X11','X12','X13']},
@@ -2497,7 +2530,7 @@ var AUD=[
  {id:'j_indig',k:'job',n:'原住民族',need:'部落反映道路橋梁安全、治山防洪、農產運輸、高山農業灌溉；開發要有族人知情同意；青年返鄉就業與長者醫療資源不足。',pol:['D01','W02','X06','X08']},
  {id:'j_hakka',k:'job',n:'客家族群',need:'客語（尤其詔安腔）師資與使用者逐漸流失；宜蘭不在客委會客家文化重點發展區，影響補助。',pol:['C05','X02','X05']},
  {id:'j_newres',k:'job',n:'新住民',need:'新住民約 9,716 人；需要進入決策、法律與財稅諮詢、子女助學與文化交流的支持。',pol:['N01']},
- {id:'j_women',k:'job',n:'女性與母親',need:'婦女調查中，最大的困擾是自身健康問題（41.6%）、薪資偏低（35.4%）；最需要免費婦女健檢（66.9%）與臨托服務。',pol:['K01','W02','K04','W05']},
+ {id:'j_women',k:'job',n:'女性與母親',need:'婦女調查中，最大的困擾是自身健康問題（41.6%）、薪資偏低（35.4%）；最需要免費婦女健檢（66.9%）與臨托服務。',pol:['K01','W02','K04','I05']},
  {id:'j_pet',k:'job',n:'毛孩飼主',need:'全縣只有員山、冬山兩處寵物公園；夜間獸醫量能不足，急診常得跑到台北。',pol:['K05']},
  {id:'j_shop',k:'job',n:'在地商家',need:'商家需要穩定客源；長輩的消費若留在縣內，才能拉動商圈與夜經濟。',pol:['W01','C01','C07','I04','X01','X03','X09','X11']}
 ];
@@ -2513,13 +2546,17 @@ function audHTML(q){
 function audFor(pid){return AUD.filter(function(a){return a.pol.indexOf(pid)>-1})}
 
 /* ================= panel ================= */
+function knBox(k){var m=/^([+\d,.]+)([^\d+,.%][^\d]*)$/.exec(k[0]);
+  if(m){var w=m[1].length*.5+m[2].length*.45,fs=Math.max(18,Math.min(34,Math.floor(88/Math.max(1,w))));
+    return '<div><b style="font-size:'+fs+'px">'+esc(m[1])+'<small>'+esc(m[2])+'</small></b><span>'+esc(k[1])+'</span></div>'}
+  return '<div><b style="font-size:'+numSize(k[0],34,88)+'px">'+esc(k[0])+'</b><span>'+esc(k[1])+'</span></div>'}
 function cardHTML(p,open){
   var c=CATS[p.c];
   var h='<article class="pc" style="--cc:'+(p.bg?'#9FB8DA':c.c)+'"><header><span class="dot" style="background:'+c.c+'"></span><span>'+esc(c.n)+'</span>';
   h+=p.bg?'':'<span class="badge">林國漳提出</span>';
   if(p.v===0)h+='<span class="badge v0" title="細節尚待確認">待確認</span>';
   h+='</header><h4>'+esc(p.t)+'</h4><p>'+esc(p.s)+'</p>';
-  if(KN[p.id])h+='<div class="kn">'+KN[p.id].map(function(k){return '<div><b style="font-size:'+numSize(k[0],34,88)+'px">'+esc(k[0])+'</b><span>'+esc(k[1])+'</span></div>'}).join('')+'</div>';
+  if(KN[p.id])h+='<div class="kn">'+KN[p.id].map(function(k){return knBox(k)}).join('')+'</div>';
   if(p.b.length)h+='<ul class="pb">'+p.b.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>';
   h+=vrelHTML(p.id);
   if(!p.bg)h+='<button class="go alt" type="button" data-pcard="'+p.id+'">存成圖卡</button>';
@@ -3163,7 +3200,7 @@ var VID=[
  ['898764006518212','宜蘭勁水大縣章：防洪、水質、水資源',24000,'pol',['E02']],
  ['990908996768181','拜會蘇澳鎮公所：追蹤災後復原、務實治水',55000,'walk',['E02']],
  ['834439972546769','冬山定安宮：扛轎初體驗',75000,'faith',['C03']],
- ['1719720789399197','勞工五大行動計畫',18000,'pol',['W05']],
+ ['1719720789399197','勞工五大行動計畫',18000,'pol',['I05']],
 ['1147511071769056','宜中校友後援會與律師後援會籌備會啟動',16000,'club',[],'h'],
  ['1154277460074751','《開漳宜蘭》老宅美食：馬桂爺爺咖哩',79000,'kai',[]],
  ['1418428490028282','《開漳宜蘭》屬於我們的記憶：花生捲冰淇淋',18000,'kai',[]],
@@ -3942,7 +3979,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/6 第 195 版';
+var BUILD='11/6 第 196 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -4088,6 +4125,8 @@ function daysLeft(){var m=/[?&]pd=(\d{4})(\d\d)(\d\d)/.exec(location.search),now
 })();
 
 var WARNT=null;
+function warnScrews(){var h='',i;for(i=0;i<12;i++)h+='<i class="wfs" style="--x:'+(3+Math.random()*90).toFixed(1)+'%;--w:'+(16+Math.random()*18).toFixed(0)+'px;--t:'+(2.1+Math.random()*1.6).toFixed(2)+'s;--d:'+(Math.random()*4.5).toFixed(2)+'s;--r:'+(Math.random()*700-350).toFixed(0)+'deg"></i>';return h}
+function warnCommittee(){return '<div class="wcm"><div class="wpl"><i class="wsi"></i><b>戒慎恐懼協會</b><i class="wsi"></i></div><div class="wk4">'+['迴避挑釁','擴散真相','理性爭取支持','出門投票'].map(function(t,k){return '<div class="wk" style="--i:'+k+'"><i class="wsi"></i><span>'+t+'</span></div>'}).join('')+'</div><div class="wcl">螺絲掉了，要鎖緊</div></div>'}
 var SFXC=null,PURET=null;
 function sfxCtx(){var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;if(!SFXC||SFXC.state==='closed'){try{SFXC=new AC()}catch(e){return null}}if(SFXC.state==='suspended'){try{SFXC.resume()}catch(e){}}return SFXC}
 function pureSfx(off){var ctx=sfxCtx();if(!ctx)return;var master=ctx.createGain();master.gain.value=.6;master.connect(ctx.destination);var t0=ctx.currentTime+(off||0)+.05;
@@ -4119,28 +4158,31 @@ function warnSfx(){
     var len=ctx.sampleRate*.07|0,b=ctx.createBuffer(1,len,ctx.sampleRate),d=b.getChannelData(0);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);var n=ctx.createBufferSource();n.buffer=b;var lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=900;var ng=ctx.createGain();ng.gain.value=vol*.5;n.connect(lp);lp.connect(ng);ng.connect(master);n.start(t)}
   function tone(t,f,dur,vol,type){var o=ctx.createOscillator(),g=ctx.createGain();o.type=type||'square';o.frequency.value=f;g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.02)}
   var dr=ctx.createOscillator(),dg=ctx.createGain(),lp2=ctx.createBiquadFilter(),tr=ctx.createOscillator(),tg=ctx.createGain();
-  dr.type='sawtooth';dr.frequency.value=55;lp2.type='lowpass';lp2.frequency.value=170;dg.gain.setValueAtTime(0,t0);dg.gain.linearRampToValueAtTime(.14,t0+.9);tr.frequency.value=5.5;tg.gain.value=.06;tr.connect(tg);tg.connect(dg.gain);dr.connect(lp2);lp2.connect(dg);dg.connect(master);dr.start(t0);tr.start(t0);live.push(dr,tr);
-  var si=ctx.createOscillator(),sg=ctx.createGain();si.type='triangle';si.frequency.setValueAtTime(220,t0);for(var k=0;k<7;k++){si.frequency.linearRampToValueAtTime(330,t0+.9+k*1.6);si.frequency.linearRampToValueAtTime(220,t0+1.7+k*1.6)}sg.gain.setValueAtTime(0,t0);sg.gain.linearRampToValueAtTime(.03,t0+1.1);si.connect(sg);sg.connect(master);si.start(t0);live.push(si);
+  dr.type='sawtooth';dr.frequency.value=55;lp2.type='lowpass';lp2.frequency.value=170;dg.gain.setValueAtTime(0,t0);dg.gain.linearRampToValueAtTime(.14,t0+.9);dg.gain.linearRampToValueAtTime(0,t0+12);tr.frequency.value=5.5;tg.gain.value=.06;tr.connect(tg);tg.connect(dg.gain);dr.connect(lp2);lp2.connect(dg);dg.connect(master);dr.start(t0);tr.start(t0);live.push(dr,tr);
+  var si=ctx.createOscillator(),sg=ctx.createGain();si.type='triangle';si.frequency.setValueAtTime(220,t0);for(var k=0;k<7;k++){si.frequency.linearRampToValueAtTime(330,t0+.9+k*1.6);si.frequency.linearRampToValueAtTime(220,t0+1.7+k*1.6)}sg.gain.setValueAtTime(0,t0);sg.gain.linearRampToValueAtTime(.03,t0+1.1);sg.gain.linearRampToValueAtTime(0,t0+11);si.connect(sg);sg.connect(master);si.start(t0);live.push(si);
   [.41,.65,.89,1.13].forEach(function(d){thud(t0+d,160,42,.42,.9)});
   for(var i=0;i<16;i++)tone(t0+1.4+Math.pow(i/16,1.6)*1.1,1400,.03,.1);
   tone(t0+2.52,880,.5,.22,'sine');tone(t0+2.52,1320,.6,.1,'sine');
   [2.56,2.72,2.88].forEach(function(d){var o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.setValueAtTime(700,t0+d);o.frequency.exponentialRampToValueAtTime(320,t0+d+.1);g.gain.setValueAtTime(.28,t0+d);g.gain.exponentialRampToValueAtTime(.001,t0+d+.12);o.connect(g);g.connect(master);o.start(t0+d);o.stop(t0+d+.15)});
-  thud(t0+3.66,110,30,.6,1.1);tone(t0+3.66,660,.9,.16,'sine');
-  WSFX={ctx:ctx,stop:function(){try{var t=ctx.currentTime;master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(0,t+.35)}catch(e){}setTimeout(function(){live.forEach(function(o){try{o.stop()}catch(e){}});try{master.disconnect()}catch(e){}},420)}};
+  thud(t0+7.91,110,30,.6,1.1);tone(t0+7.91,660,.9,.16,'sine');
+  [.9,1.35,1.7,2.15,2.6,3.0].forEach(function(d,i){tone(t0+d,2300+i*170,.05,.06,'triangle')});
+  for(var rk=0;rk<4;rk++){var rt=t0+3.4+rk*.5;for(var rj=0;rj<5;rj++)tone(rt+rj*.1,1700+rj*60,.03,.09,'square');tone(rt+.62,1320,.35,.12,'sine')}
+  tone(t0+5.9,880,.7,.16,'sine');tone(t0+5.9,1320,.9,.1,'sine');
+    WSFX={ctx:ctx,stop:function(){try{var t=ctx.currentTime;master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(0,t+.35)}catch(e){}setTimeout(function(){live.forEach(function(o){try{o.stop()}catch(e){}});try{master.disconnect()}catch(e){}},420)}};
   return WSFX;
 }
 function warnEsc(e){if(e.key==='Escape')warnOff()}
 function warnOff(){var w=document.getElementById('warn');if(!w)return;clearTimeout(WARNT);if(WSFX&&WSFX.stop){WSFX.stop();WSFX=null}w.classList.remove('on');setTimeout(function(){if(w.parentNode)w.parentNode.removeChild(w)},400);document.removeEventListener('keydown',warnEsc)}
 function warnOn(){if(document.getElementById('warn'))return;var w=document.createElement('div');w.id='warn';w.setAttribute('role','dialog');w.setAttribute('aria-label','戒慎恐懼，距離投票日倒數');
-  var d=daysLeft(),h='<div class="bk"></div><div class="bk b2"></div><div class="wbox"><div class="wt">'+'戒慎恐懼'.split('').map(function(c,k){return '<span style="--i:'+k+'">'+c+'</span>'}).join('')+'</div>';
+  var d=daysLeft(),h='<div class="bk"></div><div class="bk b2"></div>'+warnScrews()+'<div class="wbox"><div class="wt">'+'戒慎恐懼'.split('').map(function(c,k){return '<span style="--i:'+k+'">'+c+'</span>'}).join('')+'</div>';
   if(d>1)h+='<div class="wd">距離投票日<b id="wdn">'+d+'</b>天</div>';
   h+='<div class="wl">'+(d>1?'11/28 星期六，一定要去投票':(d===1?'明天就是投票日，一定要去投票':(d===0?'今天就是投票日，現在就去投票':'謝謝宜蘭鄉親')))+'</div>';
   if(d>=0)h+='<div class="wc">'+['身分證','印章','投票通知單'].map(function(t,k){return '<i style="--i:'+k+'">'+t+'</i>'}).join('')+'</div>';
-  h+='<div class="ws"><div class="wsc"><div class="bg"><span class="bl">圈選欄</span><span class="bc wsx"><i class="wsk"></i><i class="wsh"></i></span><span class="bl">號次</span><span class="bc bn"><b>1</b></span><span class="bl">姓名</span><span class="bc bm">林國漳</span><span class="bl">相片</span><span class="bc bp"><img src="photos/ballot.jpg" alt=""></span><span class="bl">推薦之政黨</span><span class="bc bq">民主進步黨推薦</span></div><div class="bt">宜蘭縣縣長選舉選舉票</div></div></div></div>';
+  h+='<div class="wst"><div class="ws"><div class="wsc"><div class="bg"><span class="bl">圈選欄</span><span class="bc wsx"><i class="wsk"></i><i class="wsh"></i></span><span class="bl">號次</span><span class="bc bn"><b>1</b></span><span class="bl">姓名</span><span class="bc bm">林國漳</span><span class="bl">相片</span><span class="bc bp"><img src="photos/ballot.jpg" alt=""></span><span class="bl">推薦之政黨</span><span class="bc bq">民主進步黨推薦</span></div><div class="bt">宜蘭縣縣長選舉選舉票</div></div></div>'+warnCommittee()+'</div></div>';
   w.innerHTML=h;w.onclick=warnOff;document.body.appendChild(w);try{warnSfx()}catch(e){}try{if(navigator.vibrate)navigator.vibrate([50,190,50,190,50,190,80])}catch(e){}
   requestAnimationFrame(function(){w.classList.add('on')});
   var n=document.getElementById('wdn');if(n&&d>1&&!matchMedia('(prefers-reduced-motion:reduce)').matches){var s0=d+40,t0=0;n.textContent=s0;setTimeout(function(){function tick(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1100),e=1-Math.pow(1-p,3);n.textContent=Math.round(s0-(s0-d)*e);if(p<1&&document.getElementById('warn'))requestAnimationFrame(tick)}requestAnimationFrame(tick)},1400)}
-  clearTimeout(WARNT);WARNT=setTimeout(warnOff,9000);document.addEventListener('keydown',warnEsc)}
+  clearTimeout(WARNT);WARNT=setTimeout(warnOff,14500);document.addEventListener('keydown',warnEsc)}
 (function(){var s=document.querySelector('.brand .sticker');if(!s)return;s.setAttribute('role','button');s.setAttribute('tabindex','0');s.setAttribute('aria-label','距離投票日，點一下看提醒');
   s.addEventListener('click',function(){warnOn()});s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();warnOn()}})})();
 function countdown(){var d=daysLeft();$('#cd').textContent=d>1?d+' 天':(d===1?'明天見':(d===0?'今天見':'已投票'))}
