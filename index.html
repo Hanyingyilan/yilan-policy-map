@@ -1928,6 +1928,9 @@ html,body{overflow-x:clip}
 #warn.on .wcl{animation:wrise .5s ease-out 5.85s forwards}
 @keyframes wspin{from{transform:rotate(0)}to{transform:rotate(540deg)}}
 @media (prefers-reduced-motion:reduce){#warn .wcm,#warn .wfs{display:none}}
+
+/* v200 專輯曲目展開時直接列出完整條列 */
+.trkd .trkb{margin:6px 0 2px;padding-left:1.2em;font-size:15px;line-height:1.6}.trkd .trkb li{margin:5px 0}
 </style>
 <script>/* v172: switch the Google Fonts fallbacks on only after the self-hosted subsets have loaded, so their slices are fetched just for characters the subsets lack */
 (function(){function on(id,spec){var l=document.getElementById(id);if(!l)return;var go=function(){l.media='all'};if(document.fonts&&document.fonts.load){document.fonts.load(spec).then(go,go);setTimeout(go,4000)}else go()}on('gf-serif','900 20px "YLSerif"');on('gf-hand','400 20px "YLHand"')})();</script>
@@ -2737,7 +2740,7 @@ function albOpen(b){
   var info=albInfo(b),cs=getComputedStyle(b),g=function(n,d){return (cs.getPropertyValue(n)||d).trim()};
   var cbg=g('--cbg','#8A7560'),c1=g('--c1','#fff'),c2=g('--c2','#fff'),cfr=g('--cfr','#fff'),sel=b.getAttribute('aria-pressed')==='true';
   var sb=info.kind==='t'?((ICONS[info.id]||[])[1]||''):'';
-  var tr=info.tr.map(function(p,i){return '<li><button type="button" class="trk" data-trkt="'+p.id+'" aria-expanded="false"><b>'+(i<9?'0':'')+(i+1)+'</b><span>'+esc(p.t)+'</span></button><div class="trkd" hidden><p>'+esc(p.s||'')+'</p><div class="trka"><button type="button" class="albv-b sm pri" data-trk="'+p.id+'">看完整金曲</button>'+(p.bg?'':'<button type="button" class="albv-b sm" data-trkcard="'+p.id+'">存成圖卡</button>')+'</div></div></li>'}).join('')||'<li class="none">這張專輯目前沒有曲目</li>';
+  var tr=info.tr.map(function(p,i){return '<li><button type="button" class="trk" data-trkt="'+p.id+'" aria-expanded="'+(info.tr.length===1?'true':'false')+'"><b>'+(i<9?'0':'')+(i+1)+'</b><span>'+esc(p.t)+'</span></button><div class="trkd"'+(info.tr.length===1?'':' hidden')+'><p>'+esc(p.s||'')+'</p>'+((p.b&&p.b.length)?'<ul class="trkb">'+p.b.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')+'<div class="trka"><button type="button" class="albv-b sm pri" data-trk="'+p.id+'">看完整金曲</button>'+(p.bg?'':'<button type="button" class="albv-b sm" data-trkcard="'+p.id+'">存成圖卡</button>')+'</div></div></li>'}).join('')||'<li class="none">這張專輯目前沒有曲目</li>';
   ALBFROM=b;
   ALBV.innerHTML='<div class="albv-bg" data-albx></div><div class="albv-box" role="dialog" aria-modal="true" aria-label="'+esc(info.name)+'專輯">'+
    '<div class="albv-stage"><div class="albv-disc">'+discSVG(info.name,'#A63A35,#6E1B25','#E0C85C','#F6EFD8')+'</div>'+
@@ -3986,7 +3989,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/6 第 199 版';
+var BUILD='11/6 第 200 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
