@@ -2499,7 +2499,7 @@ var KN={
  K03:[['15萬','每校午餐保溫設備'],['教師減壓','行政減量、AI 校務系統']],
  K04:[['400戶','青年婚育宅']]
 };
-var WALL=[['W01','12,000點','敬老卡每年額度'],['A01','2,000公頃','有機農業面積'],['E01','300座','微型森林'],['K04','400戶','縣政中心青年婚育宅'],['E02','75%','污水接管率目標'],['C01','千萬人次','觀光每年目標'],['W02','3萬元','每胎生育津貼'],['C02','8鄉鎮','雪山麓徑串聯']];
+var WALL=[['W01','12,000點','敬老卡每年額度'],['A01','2,000公頃','有機農業面積'],['E01','300座','微型森林'],['K04','400戶','縣政中心青年婚育宅'],['E02','8萬戶','8年新增污水接管'],['C01','千萬人次','觀光每年目標'],['W02','3萬元','每胎生育津貼'],['C02','8鄉鎮','雪山麓徑串聯']];
 var TOURS=[
  {id:null,t:'走一趟宜蘭',x:'從北到南，看每個鄉鎮會推動什麼。'},
  {id:'toucheng',t:'頭城：海洋與數位衝浪',x:'烏石港海洋計畫、數位衝浪者中心、評估設置醫院，鐵路高架化往北延伸。'},
@@ -2517,7 +2517,7 @@ var TOURS=[
  {id:null,t:'回到全縣',x:'點任何鄉鎮、道路或圖釘，都能看到完整金曲。'}
 ];
 
-var WCAP={'縣政中心青年婚育宅':['縣政中心','青年婚育宅']};function wallCap(s){var l=WCAP[s];return l?l.map(esc).join('<br>'):esc(s)}
+var WCAP={'縣政中心青年婚育宅':['縣政中心','青年婚育宅'],'8年新增污水接管':['8年新增','污水接管']};function wallCap(s){var l=WCAP[s];return l?l.map(esc).join('<br>'):esc(s)}
 function wallNum(s){var m=/^([\d,.%]+)(.*)$/.exec(s),n=m?m[1]:'',u=m?m[2]:s,w=0;for(var i=0;i<n.length;i++)w+=n[i]===','||n[i]==='.'?.3:n[i]==='%'?.85:.58;var f=n?Math.floor(Math.min(27,58/Math.max(w,1))):0;return '<b>'+(n?'<i class="wn" style="font-size:'+f+'cqw">'+esc(n)+'</i>':'')+'<i class="wu"'+(n?'':' style="font-size:16cqw"')+'>'+esc(u)+'</i></b>'}
 function numSize(s,max,avail){var w=0;for(var i=0;i<s.length;i++)w+=s.charCodeAt(i)>255?1:0.5;return Math.max(18,Math.min(max,Math.floor(avail/Math.max(1,w))))}
 
