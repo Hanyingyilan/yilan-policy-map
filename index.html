@@ -1931,6 +1931,16 @@ html,body{overflow-x:clip}
 
 /* v200 專輯曲目展開時直接列出完整條列 */
 .trkd .trkb{margin:6px 0 2px;padding-left:1.2em;font-size:15px;line-height:1.6}.trkd .trkb li{margin:5px 0}
+
+/* v210 感謝頁（投票日 18:00 後）、夜總會閃爍提醒 */
+html.thx,html.thx body{overflow:hidden!important;height:100%}
+html.thx body>*:not(#club){display:none!important}
+#club[data-thx],#club[data-thx].on{background:#140c0d;cursor:default}
+#club .cwarn{position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:6;width:max-content;max-width:calc(100vw - 32px);text-align:center;background:rgba(27,27,24,.7);color:#F3E3A0;border-radius:999px;padding:6px 14px;font:500 14px/1.4 var(--sans,"Noto Sans TC",sans-serif);opacity:0;transition:opacity .6s 1.2s;pointer-events:none}
+#club.lit .cwarn{opacity:1}
+#club:not(.lit) .cwarn,#club:not(.lit) .cfoot{transition:opacity .4s 0s!important;opacity:0}
+#club .cfoot{position:absolute;left:50%;bottom:calc(2vh + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:6;background:rgba(27,27,24,.82);color:#F3E3A0;border:1.5px solid rgba(243,227,160,.6);border-radius:999px;padding:8px 18px;font:700 15px var(--sans,"Noto Sans TC",sans-serif);white-space:nowrap;opacity:0;transition:opacity .6s 1.5s;pointer-events:none}
+#club.lit .cfoot{opacity:1}
 </style>
 <script>/* v172: switch the Google Fonts fallbacks on only after the self-hosted subsets have loaded, so their slices are fetched just for characters the subsets lack */
 (function(){function on(id,spec){var l=document.getElementById(id);if(!l)return;var go=function(){l.media='all'};if(document.fonts&&document.fonts.load){document.fonts.load(spec).then(go,go);setTimeout(go,4000)}else go()}on('gf-serif','900 20px "YLSerif"');on('gf-hand','400 20px "YLHand"')})();</script>
@@ -3748,7 +3758,7 @@ function drawFortuneImg(p,no,total,day){
   // footer band
   c.fillStyle=INK;c.fillRect(0,H-132,W,132);c.fillStyle=GOLD;c.fillRect(0,H-136,W,4);
   c.fillStyle=GOLD;c.font='900 42px '+CV_S;c.fillText('宜蘭縣長候選人 ①林國漳',100,H-70);
-  c.fillStyle='rgba(255,246,218,.8)';c.font='600 24px '+CV_F;c.fillText('籤詩為創作，政見為候選人承諾',100,H-30);
+  c.fillStyle='rgba(255,246,218,.8)';c.font='600 24px '+CV_F;c.fillText('籤詩為創作',100,H-30);
   
   return cv;
 }
@@ -3994,7 +4004,7 @@ function drawWallCard(){
   return cv;
 }
 function openWallCard(){openImg(drawWallCard(),'宜蘭大歌廳排行榜｜宜蘭大歌廳①次看全部',(SHARE_BASE?SHARE_BASE+SQ:location.href.split('#')[0]),'宜蘭大歌廳-排行榜.png')}
-var BUILD='11/7 第 208 版';
+var BUILD='11/7 第 210 版';
 $('#mego').onclick=function(){albClose();openPersona()};
 $('#mecard').onclick=function(){albClose();openCard()};
 $('#mecl').onclick=function(){albClose();PS.jobs={};PS.towns={};panel()};
@@ -4049,39 +4059,40 @@ function nightNow(){var h=new Date().getHours();return h>=23||h<5}
 function openCold(){coldCard(coldToday(),(nightNow()?'深夜一冷　':'今日一冷　')+dayLabel(),'再來一則')}
 /* v175 宜蘭濃度: the fourth play tile. Twelve yes/no questions about living in Yilan, a percentage, a share card. Nothing is stored. */
 var BLOODQ=[
- ['下毛毛雨不撐傘，照樣出門。',1],
- ['去台北叫「出去」，回宜蘭叫「轉來」。',1],
- ['聽到宜蘭腔會覺得怪，自己一句都不會講。',0],
- ['「酸酸軟軟」用台語講，尾音自然會帶「ㄨㄧ」。',1],
- ['有自己的蔥油餅愛店。',1],
- ['回宜蘭只會走國五，北宜公路和濱海公路一次都沒走過。',0],
- ['卜肉、糕渣、鴨賞，都吃過。',1],
- ['洗澡會講「sé-hûn-su」。',1],
- ['下雨天單手騎機車或腳踏車，另一手撐傘，練過。',1],
- ['講話會用「勁」，像「勁好吃」。',1],
- ['國五塞車只能乖乖排隊，不知道有別條路可以繞。',0],
- ['蘇澳冷泉，從來沒泡過。',0],
- ['看到龜山島會有一股莫名的感動。',1],
- ['去過童玩節。',1],
- ['以為宜蘭只有礁溪溫泉，其他地方都沒去過。',0],
- ['聽到「宜蘭囝仔」四個字，心裡會熱一下。',1],
- ['有自己喜歡吃的肉羹、麻醬麵、餛飩麵店。',1],
- ['送過外縣市朋友奶凍捲。',1],
- ['吃過西滷肉。',1],
- ['花生捲冰淇淋沒吃過，也不知道裡面要加香菜。',0],
- ['在外縣市讀書時，參加過蘭友會之類的同鄉社團。',1],
- ['溪北人覺得去溪南比去台北遠，溪南人覺得去溪北比去台北遠。',1],
- ['有人說要去「宜蘭大病院」，知道是哪一間。',1],
- ['假日休閒會去釣魚。',1],
- ['〈丟丟銅仔〉不用看歌詞就會唱，小時候就會了。',1],
- ['家裡有一台以上的除濕機。',1],
- ['不喜歡一直下雨，但沒下雨又覺得不太對勁。',1]
+ ['下毛毛雨不撐傘，照樣出門。',1,'rain'],
+ ['去台北叫「出去」，回宜蘭叫「轉來」。',1,'lang'],
+ ['聽到宜蘭腔會覺得怪，自己一句都不會講。',0,'lang0'],
+ ['「酸酸軟軟」用台語講，尾音自然會帶「ㄨㄧ」。',1,'lang'],
+ ['有自己的蔥油餅愛店。',1,'food'],
+ ['回宜蘭只會走國五，北宜公路和濱海公路一次都沒走過。',0,'road'],
+ ['卜肉、糕渣、鴨賞，都吃過。',1,'food'],
+ ['洗澡會講「sé-hûn-su」。',1,'lang'],
+ ['下雨天單手騎機車或腳踏車，另一手撐傘，練過。',1,'rain'],
+ ['講話會用「勁」，像「勁好吃」。',1,'lang'],
+ ['國五塞車只能乖乖排隊，不知道有別條路可以繞。',0,'road'],
+ ['蘇澳冷泉，從來沒泡過。',0,'place0'],
+ ['看到龜山島會有一股莫名的感動。',1,'place'],
+ ['去過童玩節。',1,'place'],
+ ['以為宜蘭只有礁溪溫泉，其他地方都沒去過。',0,'place0'],
+ ['聽到「宜蘭囝仔」四個字，心裡會熱一下。',1,'heart'],
+ ['有自己喜歡吃的肉羹、麻醬麵、餛飩麵店。',1,'food'],
+ ['送過外縣市朋友奶凍捲。',1,'food'],
+ ['吃過西滷肉。',1,'food'],
+ ['花生捲冰淇淋沒吃過，也不知道裡面要加香菜。',0,'food0'],
+ ['在外縣市讀書時，參加過蘭友會之類的同鄉社團。',1,'heart'],
+ ['覺得溪北到溪南，比去台北還遠。',1,'life'],
+ ['有人說要去「宜蘭大病院」，知道是哪一間。',1,'life'],
+ ['假日休閒會去釣魚。',1,'place'],
+ ['〈丟丟銅仔〉不用看歌詞就會唱，小時候就會了。',1,'heart'],
+ ['家裡有一台以上的除濕機。',1,'rain'],
+ ['不喜歡一直下雨，但沒下雨又覺得不太對勁。',1,'rain']
 ];
-var BLOODT=[[90,'純正宜蘭血統','血液裡流的是蘭陽平原的雨水。'],[70,'宜蘭腔已經很重','講話的尾音騙不了人。'],[45,'半個宜蘭人','再住幾年就滿了。'],[20,'宜蘭準住民','濃度正在上升中。'],[0,'宜蘭觀光客','多來幾次，濃度就會變高。']];
+var BLOODT=[[90,'純正宜蘭血統','血液裡流的是蘭陽平原的雨水。'],[70,'宜蘭腔已經很重','講話的尾音騙不了人。'],[45,'半個宜蘭人','再住幾年就滿了。'],[20,'宜蘭準住民','濃度正在上升中。'],[0,'新宜蘭人','住久了，濃度自然會變高。']];
 var BL={i:0,s:0};
 function bloodTier(p){for(var i=0;i<BLOODT.length;i++)if(p>=BLOODT[i][0])return BLOODT[i];return BLOODT[BLOODT.length-1]}
 function bloodPick(a,k){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a.slice(0,k)}
-function openBlood(){var pos=[],rev=[];BLOODQ.forEach(function(q){(q[1]?pos:rev).push(q)});BL={i:0,s:0,q:bloodPick(bloodPick(pos,5).concat(bloodPick(rev,3)),8)};bloodQ()}
+function bloodPickCat(a,k){a=bloodPick(a,a.length);var u={},o=[];a.forEach(function(q){if(o.length<k&&!u[q[2]]){u[q[2]]=1;o.push(q)}});a.forEach(function(q){if(o.length<k&&o.indexOf(q)<0)o.push(q)});return o}
+function openBlood(){var pos=[],rev=[];BLOODQ.forEach(function(q){(q[1]?pos:rev).push(q)});BL={i:0,s:0,q:bloodPick(bloodPickCat(pos,5).concat(bloodPickCat(rev,3)),8)};bloodQ()}
 function bloodQ(){
   var n=BL.q.length,i=BL.i;
   var h='<div class="coldc bldc"><div class="coldh"><span class="nw">血液裡的</span><span class="nw">宜蘭濃度</span><span class="bldn">'+(i+1)+'／'+n+'</span></div>'+
@@ -4221,10 +4232,10 @@ function clubAudio(){if(!CLUBA){CLUBA=new Audio('music/chusheng.mp3');CLUBA.prel
 function clubFade(to,ms,done){clearInterval(CLUBFT);var a=CLUBA;if(!a){if(done)done();return}var from=a.volume,t0=Date.now();CLUBFT=setInterval(function(){var k=Math.min(1,(Date.now()-t0)/ms);try{a.volume=from+(to-from)*k}catch(e){}if(k>=1){clearInterval(CLUBFT);if(done)done()}},50)}
 function clubPrime(){if(!clubAllowed())return;if(MP.a&&MP.a.src&&!MP.a.paused)return;var a=clubAudio();try{a.pause();a.currentTime=0;a.volume=0;var p=a.play();if(p&&p.catch)p.catch(function(){})}catch(e){}}
 function clubStop(){if(!CLUBA||CLUBA.paused)return;clubFade(0,700,function(){try{CLUBA.pause()}catch(e){}})}
-function clubOn(force){
+function clubOn(force,thx){
   if(!force&&!clubAllowed())return;
   if(document.getElementById('club'))return;
-  if(!(MP.a&&MP.a.src&&!MP.a.paused)){var ca=clubAudio();if(ca.paused){try{ca.currentTime=0;ca.volume=0;var cp=ca.play();if(cp&&cp.catch)cp.catch(function(){})}catch(e){}}clubFade(1,900)}
+  if(!thx&&!(MP.a&&MP.a.src&&!MP.a.paused)){var ca=clubAudio();if(ca.paused){try{ca.currentTime=0;ca.volume=0;var cp=ca.play();if(cp&&cp.catch)cp.catch(function(){})}catch(e){}}clubFade(1,900)}
   var c=document.createElement('div');c.id='club';c.setAttribute('aria-hidden','true');
   var W=innerWidth,m=W<700,h='',i,cols=['#F3E3A0','#FFFFFF','#FFB0A4','#9FE8FF','#E0C85C','#F7A8E8'];
   var nb=m?7:11;
@@ -4254,19 +4265,25 @@ function clubOn(force){
     if((m?ri<1:ri<2)&&k%2===1)h+='<span class="fg" style="--fc:'+['#E8413C','#39B54A','#29ABE2','#FFD24D','#F06292'][si%5]+';left:'+(+lx+w/innerWidth*55).toFixed(1)+'%;bottom:'+(+bt+6)+'%;--h:'+(m?150+Math.random()*70:180+Math.random()*80).toFixed(0)+'px;--dl:'+dl+'s;--t:'+(.8+Math.random()*.7).toFixed(2)+'s;z-index:'+(r[4]+1)+'"></span>';
     h+='<img class="sk" alt="" src="stickers/'+STK[si%STK.length]+'.webp" style="left:'+lx+'%;bottom:'+bt+'%;--w:'+w.toFixed(0)+'px;--dl:'+dl+'s;--t:'+(.65+Math.random()*.6).toFixed(2)+'s;z-index:'+r[4]+'">'}});
   h+='</div>';
-  h+='<div class="ct">'+[['宜蘭製造',.75,3.3],['全民縣長',3.5,6.05],['照顧全民',6.25,999]].map(function(wd){return '<span class="cw" style="--o:'+wd[1]+'s;--x:'+wd[2]+'s">'+wd[0].split('').map(function(ch,k){return '<span style="--i:'+k+'">'+ch+'</span>'}).join('')+'</span>'}).join('')+[[-14,-30],[104,-26],[-8,96],[108,92],[46,-46],[50,112],[-24,40],[118,42]].map(function(p,k){return '<i class="ctsp" style="--x:'+p[0]+'%;--y:'+p[1]+'%;--t:'+(1.1+(k%3)*.35).toFixed(2)+'s;--d:'+(1.6+k*.23).toFixed(2)+'s"></i>'}).join('')+'</div><button type="button" class="cnx">以後不要再放</button>';
-  c.innerHTML=h;c.onclick=clubOff;document.body.appendChild(c);
-  c.querySelector('.cnx').onclick=function(e){e.stopPropagation();clubSet(false);clubOff();if(typeof toast==='function')toast('已關掉燈光秀，可在「邀請朋友」裡再打開')};
-  requestAnimationFrame(function(){c.classList.add('on');setTimeout(function(){c.classList.add('lit')},650)});
-  clearTimeout(CLUBT);CLUBT=setTimeout(clubOff,10500);
+  h+='<div class="ct">'+(thx?[['謝謝大家',.75,999]]:[['宜蘭製造',.75,3.3],['全民縣長',3.5,6.05],['照顧全民',6.25,999]]).map(function(wd){return '<span class="cw" style="--o:'+wd[1]+'s;--x:'+wd[2]+'s">'+wd[0].split('').map(function(ch,k){return '<span style="--i:'+k+'">'+ch+'</span>'}).join('')+'</span>'}).join('')+[[-14,-30],[104,-26],[-8,96],[108,92],[46,-46],[50,112],[-24,40],[118,42]].map(function(p,k){return '<i class="ctsp" style="--x:'+p[0]+'%;--y:'+p[1]+'%;--t:'+(1.1+(k%3)*.35).toFixed(2)+'s;--d:'+(1.6+k*.23).toFixed(2)+'s"></i>'}).join('')+'</div>'+(thx?'<div class="cfoot">宜蘭縣長候選人　①林國漳</div>':'<div class="cwarn">燈光會閃爍，不舒服請點一下畫面關閉</div><button type="button" class="cnx">以後不要再放</button>');
+  c.innerHTML=h;if(thx){c.setAttribute('data-thx','1');c.setAttribute('role','dialog');c.setAttribute('aria-label','謝謝大家');c.removeAttribute('aria-hidden')}else c.onclick=clubOff;document.body.appendChild(c);
+  if(!thx)c.querySelector('.cnx').onclick=function(e){e.stopPropagation();clubSet(false);clubOff();if(typeof toast==='function')toast('已關掉燈光秀，可在「邀請朋友」裡再打開')};
+  setTimeout(function(){c.classList.add('on');setTimeout(function(){c.classList.add('lit')},650)},40);
+  clearTimeout(CLUBT);if(!thx)CLUBT=setTimeout(clubOff,10500);
 }
-function clubOff(){var c=document.getElementById('club');if(!c)return;clearTimeout(CLUBT);clubStop();c.classList.remove('lit');c.classList.remove('on');setTimeout(function(){if(c.parentNode)c.parentNode.removeChild(c)},700)}
+function clubOff(){var c=document.getElementById('club');if(!c||c.hasAttribute('data-thx'))return;clearTimeout(CLUBT);clubStop();c.classList.remove('lit');c.classList.remove('on');setTimeout(function(){if(c.parentNode)c.parentNode.removeChild(c)},700)}
 function clubLater(){CLUBP=Date.now();clubOn()}
 document.addEventListener('visibilitychange',function(){
   if(document.hidden){if(document.getElementById('club')){clubOff();CLUBP=Date.now()}}
   else if(CLUBP&&Date.now()-CLUBP<180000){CLUBP=0;setTimeout(clubOn,500)}
 });
 if(/[?&]club=1/.test(location.search))setTimeout(function(){clubOn(true)},1500);
+var THXT=Date.UTC(2026,10,28,10,0,0);
+function thxOn(){var o=document.getElementById('club');if(o&&o.hasAttribute('data-thx'))return;if(o)o.remove();document.documentElement.classList.add('thx');try{if(MP.a)MP.a.pause()}catch(e){}clubOn(true,true)}
+function thxCheck(){if(Date.now()>=THXT||/[?&]thx=1/.test(location.search))thxOn()}
+setTimeout(thxCheck,800);
+if(Date.now()<THXT)setTimeout(thxCheck,Math.min(THXT-Date.now()+500,2000000000));
+document.addEventListener('visibilitychange',function(){if(!document.hidden)thxCheck()});
 document.addEventListener('click',function(e){var a=e.target.closest('a[href^="https://line.me/"],#cardshare,.vcp,#shcopy');if(!a)return;if(a.classList.contains('line')&&a.closest('#sharebox'))setTimeout(closeShare,300);clubPrime();setTimeout(clubLater,450)},true);
 function discoSync(){var b=document.querySelector('.brand');if(b)b.classList.toggle('discoon',!!(MP.a&&MP.a.src&&!MP.a.paused))}
 function discoBurst(){var d=document.querySelector('.disco'),bm=document.querySelector('.dbeams');if(!d||!bm||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;var br=bm.getBoundingClientRect(),r=d.getBoundingClientRect(),cx=r.left-br.left+r.width/2,cy=r.top-br.top+r.height*.66,cl=['#E0C85C','#FFF6DA','#A63A35','#fff','#F3E3A0'];for(var i=0;i<34;i++){var e=document.createElement('i');e.className='cf';e.style.cssText='left:'+cx+'px;top:'+cy+'px;background:'+cl[i%5]+';width:'+(6+Math.random()*7)+'px;height:'+(8+Math.random()*10)+'px';bm.appendChild(e);var an=Math.random()*Math.PI*2,dist=90+Math.random()*260;e.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+Math.cos(an)*dist+'px,'+(Math.sin(an)*dist+90)+'px) rotate('+(Math.random()*720-360)+'deg)',opacity:0}],{duration:1300+Math.random()*900,easing:'cubic-bezier(.2,.7,.3,1)'}).onfinish=(function(x){return function(){x.remove()}})(e)}}
